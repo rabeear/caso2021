@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
-    <children>
-        <Button fx:id="button" layoutX="126" layoutY="90" onAction="#handleButtonAction" text="Click Me!" />
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Accordion layoutX="48.0" layoutY="61.0" />
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
+   <children>
+      <HBox layoutY="1.0" prefHeight="500.0" prefWidth="800.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="480.0" prefWidth="280.0" spacing="20.0">
+               <children>
+                  <Text id="inicioSesion" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar sesión" textAlignment="CENTER" wrappingWidth="227.205078125">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Yu Gothic Light" size="40.0" />
+                     </font>
+                  </Text>
+                  <TextField promptText="Usuario" />
+                  <PasswordField promptText="Contraseña" />
+                  <VBox alignment="TOP_CENTER" prefHeight="142.0" prefWidth="250.0" spacing="30.0">
+                     <children>
+                        <CheckBox mnemonicParsing="false" text="Recuerdame" />
+                        <Button id="botonInicio" mnemonicParsing="false" prefHeight="55.0" prefWidth="60.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="103.0" prefWidth="250.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" styleClass="botonLetras" text="Crear cuenta" underline="true" />
+                        <Button mnemonicParsing="false" styleClass="botonLetras" text="Contraseña olvidada?" underline="true" />
+                     </children>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <Pane id="imagenPrincipal" prefHeight="500.0" prefWidth="500.0" />
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
