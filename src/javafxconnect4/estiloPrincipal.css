@@ -12,7 +12,9 @@ and open the template in the editor.
 .botonLetras {
     box-shadow: none !important;
     outline: none;
+    -fx-background-color: none;
 }
+
 
     /*
         Cambios en boton principal para iniciar sesion
@@ -20,7 +22,7 @@ and open the template in the editor.
             (Comprobar si funciona)
     */
 #botonInicio {
-    -fx-background-image: url('file:C:/Users/belen/Documents/Informatica/Segundoi/TRABAJO_IPC/JavaFxConnect4/src/imagenes/flecha.png');
+    -fx-background-image: url('../imagenes/flecha.png');
     -fx-background-size: 50px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -28,10 +30,9 @@ and open the template in the editor.
 }
 
 #imagenPrincipal {
-    -fx-background-image: url('file:C:/Users/belen/Documents/Informatica/Segundoi/TRABAJO_IPC/JavaFxConnect4/src/imagenes/fondo1.jpg');
+    -fx-background-image: url('../imagenes/fondo1.jpg');
 }
 
 #inicioSesion {
     font-size: 40px;
-    border: 1px;
 }
