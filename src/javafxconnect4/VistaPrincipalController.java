@@ -5,7 +5,7 @@
  */
 package javafxconnect4;
 
-
+import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,11 +15,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import model.Connect4;
+import model.Player;
 
 /**
  *
@@ -33,25 +37,41 @@ public class VistaPrincipalController implements Initializable {
     private Button btnNewAcc;
     @FXML
     private Button btnPasswd;
+    @FXML
+    private TextField user;
+    @FXML
+    private PasswordField passwd;
+
     private Stage stagePrincipal;
-    
+    @FXML
+    private Label incorrecto;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
-    private void autentificacionClick(ActionEvent event) {
-        System.out.println("Prueba"); //si que funciona :D
+    private void autentificacionClick(ActionEvent event) throws Connect4DAOException {
+        Connect4 connect4 = Connect4.getSingletonConnect4(); // Necesario para usar la libreria.
+        Player login = connect4.loginPlayer(user.getText(), passwd.getText());
+        if (login == null) {
+            incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
+        } else if (!incorrecto.getText().equals("")) {
+            incorrecto.setText("");
+            // Abrir ventada del juego.
+        }
     }
-    
+
     @FXML
-    private void cambioColorBoton(MouseEvent event) { /* cambio de color en los botones al pasar por encima(Ni idea de como hacerlo de momento)*/
-        
-    } 
-    
+    private void cambioColorBoton(MouseEvent event) {
+        /* cambio de color en los botones al pasar por encima(Ni idea de como hacerlo de momento)*/
+
+    }
+
     @FXML
-    private void passwdOlvidada(ActionEvent event) { /*Cambio a ventana de password olvidada*/
+    private void passwdOlvidada(ActionEvent event) {
+        /*Cambio a ventana de password olvidada*/
         try {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
@@ -68,7 +88,7 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     private void irCrearCuenta(ActionEvent event) {
-            try {
+        try {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
             Parent root = cargador.load();
@@ -81,13 +101,9 @@ public class VistaPrincipalController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-            
-           
     }
-    
+
     public void initStage(Stage stage) {
         stagePrincipal = stage;
     }
-    
-    
 }
