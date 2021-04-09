@@ -28,13 +28,13 @@
                   <VBox alignment="TOP_CENTER" prefHeight="142.0" prefWidth="250.0" spacing="30.0">
                      <children>
                         <CheckBox mnemonicParsing="false" text="Recuerdame" />
-                        <Button id="botonInicio" mnemonicParsing="false" prefHeight="55.0" prefWidth="60.0" />
+                        <Button id="botonInicio" fx:id="botonIniciar" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="55.0" prefWidth="60.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="103.0" prefWidth="250.0" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" styleClass="botonLetras" text="Crear cuenta" underline="true" />
-                        <Button mnemonicParsing="false" styleClass="botonLetras" text="Contraseña olvidada?" underline="true" />
+                        <Button fx:id="btnNewAcc" mnemonicParsing="false" onAction="#irCrearCuenta" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="Crear cuenta" underline="true" />
+                        <Button fx:id="btnPasswd" mnemonicParsing="false" onAction="#passwdOlvidada" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="Contraseña olvidada?" underline="true" />
                      </children>
                   </VBox>
                </children>
