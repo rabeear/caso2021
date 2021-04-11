@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
    <children>
       <HBox layoutY="1.0" prefHeight="500.0" prefWidth="800.0">
          <children>
@@ -17,14 +21,15 @@
                <children>
                   <Text id="inicioSesion" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar sesión" textAlignment="CENTER" wrappingWidth="227.205078125">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Yu Gothic Light" size="40.0" />
                      </font>
                   </Text>
-                  <TextField promptText="Usuario" />
-                  <PasswordField promptText="Contraseña" />
+                  <Label fx:id="incorrecto" alignment="CENTER" prefHeight="17.0" prefWidth="266.0" textFill="#f20000" />
+                  <TextField fx:id="user" promptText="Usuario" />
+                  <PasswordField fx:id="passwd" promptText="Contraseña" />
                   <VBox alignment="TOP_CENTER" prefHeight="142.0" prefWidth="250.0" spacing="30.0">
                      <children>
                         <CheckBox mnemonicParsing="false" text="Recuerdame" />

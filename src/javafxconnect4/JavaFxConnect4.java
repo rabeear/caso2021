@@ -5,6 +5,10 @@
  */
 package javafxconnect4;
 
+import DBAccess.Connect4DAOException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,13 +20,13 @@ import javafx.stage.Stage;
  * @author belen
  */
 public class JavaFxConnect4 extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("VistaPrincipal.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -33,6 +37,4 @@ public class JavaFxConnect4 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
-    // prueba
 }

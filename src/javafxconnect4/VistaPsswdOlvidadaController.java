@@ -28,29 +28,32 @@ public class VistaPsswdOlvidadaController implements Initializable {
     private Button btnEvniar;
     @FXML
     private Button btnCancelar;
-    
+
     private Stage actualPasswd;
-    public void initStage(Stage stage) { /*Iniciador para usar en el cambio de ventana*/
+
+    public void initStage(Stage stage) {
+        /*Iniciador para usar en el cambio de ventana*/
         actualPasswd = stage;
         actualPasswd.setTitle("Recuperación de contraseña");
     }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void enviarCorreo(ActionEvent event) {/*No se si se usara como tal asi que de momento nada*/
     }
 
     @FXML
-    private void opcionCancelar(ActionEvent event) { /*Cierra ventana actual*/
-        Node miNodo = (Node)event.getSource();
+    private void opcionCancelar(ActionEvent event) {
+        /*Cierra ventana actual*/
+        Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
         System.out.println("Cerrando PSSWDOlvidada...");
     }
-    
 }

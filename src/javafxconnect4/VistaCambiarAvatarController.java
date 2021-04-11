@@ -19,16 +19,16 @@ import javafx.stage.Stage;
 public class VistaCambiarAvatarController implements Initializable {
 
     private Stage stageAvatar;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     void initStage(Stage stage) {
-        stageAvatar = stage;    
+        stageAvatar = stage;
     }
-    
 }

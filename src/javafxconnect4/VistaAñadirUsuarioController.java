@@ -28,16 +28,18 @@ public class VistaAñadirUsuarioController implements Initializable {
     private Button btnAvatar;
     private Stage stageActual;
     private Scene escenaPrincipal;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
-    private void clickAvatar(ActionEvent event) { /*llevar a zona de cambio de avatar*/
+    private void clickAvatar(ActionEvent event) {
+        /*llevar a zona de cambio de avatar*/
         try {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiarAvatar.fxml"));
@@ -51,10 +53,9 @@ public class VistaAñadirUsuarioController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     public void initStage(Stage stage) {
         stageActual = stage;
         escenaPrincipal = stage.getScene();
     }
-    
 }
