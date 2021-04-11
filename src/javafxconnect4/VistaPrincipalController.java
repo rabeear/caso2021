@@ -6,6 +6,7 @@
 package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -52,14 +53,18 @@ public class VistaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void autentificacionClick(ActionEvent event) throws Connect4DAOException {
+    private void autentificacionClick(ActionEvent event) throws Connect4DAOException{
         Connect4 connect4 = Connect4.getSingletonConnect4(); // Necesario para usar la libreria.
-        Player login = connect4.loginPlayer(user.getText(), passwd.getText());
-        if (login == null) {
+        if (!connect4.exitsNickName(user.getText())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
-        } else if (!incorrecto.getText().equals("")) {
-            incorrecto.setText("");
-            // Abrir ventada del juego.
+        } else {
+            Player login = connect4.getPlayer(user.getText());
+            if (!login.getPassword().equals(passwd.getText())) {
+                incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
+            } else if (!incorrecto.getText().equals("")) {
+                incorrecto.setText("");
+                // Abrir ventada del juego.
+            }
         }
     }
 
