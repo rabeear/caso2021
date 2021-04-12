@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -46,6 +47,8 @@ public class VistaPrincipalController implements Initializable {
     private Stage stagePrincipal;
     @FXML
     private Label incorrecto;
+    @FXML
+    private CheckBox checkRecuerdame;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,7 +72,8 @@ public class VistaPrincipalController implements Initializable {
                     AnchorPane root = (AnchorPane) cargador.load();
                     
                     VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-                    ventana2.initStage(stagePrincipal);
+                    ventana2.initStage(stagePrincipal, user.getText(),passwd.getText());
+                    ventana2.nombreUsuario.setText(user.getText());
                     Scene scene = new Scene(root, 800,500);
                     stagePrincipal.setScene(scene);
                     stagePrincipal.show();
@@ -122,5 +126,14 @@ public class VistaPrincipalController implements Initializable {
 
     public void initStage(Stage stage) {
         stagePrincipal = stage;
+    }
+
+    @FXML
+    private void clickRecuerdo(ActionEvent event) {
+        if (checkRecuerdame.isSelected()) {
+            //función recuerdame
+        } else {
+            
+        }
     }
 }

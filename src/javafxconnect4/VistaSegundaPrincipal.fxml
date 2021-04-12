@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
@@ -8,11 +9,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafxconnect4.VistaSegundaPrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaSegundaPrincipalController">
     <stylesheets>
         <URL value="@dentroJuego.css" />
     </stylesheets>
    <children>
-      <Text layoutX="267.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRUEBA" wrappingWidth="66.205078125" />
+      <Pane layoutY="3.0" prefHeight="500.0" prefWidth="500.0" />
+      <VBox alignment="CENTER" layoutX="500.0" layoutY="3.0" prefHeight="500.0" prefWidth="300.0" spacing="30.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </padding>
+         <children>
+            <Label fx:id="nombreUsuario" textAlignment="CENTER">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="36.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="74.0" prefWidth="260.0" />
+            <Button fx:id="btnUnJugador" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="UN JUGADOR" />
+            <Button fx:id="btnDosJugadores" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="DOS JUGADORES" />
+            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="RANKING(?)" />
+            <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: none;" text="cerrar sesión" underline="true" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
