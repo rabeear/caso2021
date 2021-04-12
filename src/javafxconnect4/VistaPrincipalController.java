@@ -62,8 +62,20 @@ public class VistaPrincipalController implements Initializable {
             if (!login.getPassword().equals(passwd.getText())) {
                 incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
             } else if (!incorrecto.getText().equals("")) {
-                incorrecto.setText("");
+                incorrecto.setText("funciona");
                 // Abrir ventada del juego.
+                try{
+                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
+                    AnchorPane root = (AnchorPane) cargador.load();
+                    
+                    VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
+                    ventana2.initStage(stagePrincipal);
+                    Scene scene = new Scene(root, 800,500);
+                    stagePrincipal.setScene(scene);
+                    stagePrincipal.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

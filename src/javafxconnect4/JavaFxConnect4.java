@@ -20,13 +20,16 @@ import javafx.stage.Stage;
  * @author belen
  */
 public class JavaFxConnect4 extends Application {
-
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("VistaPrincipal.fxml"));
-
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
+        Parent root = cargador.load();
         Scene scene = new Scene(root);
-
+        stage.setScene(scene);
+        
+        VistaPrincipalController controladorPrincipal = cargador.<VistaPrincipalController>getController();
+        controladorPrincipal.initStage(stage);
         stage.setScene(scene);
         stage.show();
     }

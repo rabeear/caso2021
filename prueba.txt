@@ -1,0 +1,12 @@
+===================
+ PLAYERS IN DB 
+===================
+nickName= nickName
+password= miPassword
+email= prueba@email.com
+birthdate= 2021-04-11
+points= 20
+avatar =yes
+
+===================
+ ROUNDS IN DB 
