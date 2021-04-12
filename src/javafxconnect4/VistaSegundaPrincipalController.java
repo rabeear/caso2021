@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -52,12 +53,8 @@ public class VistaSegundaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clickCerrarSesion(ActionEvent event) throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
-        Player actual = connect4.loginPlayer(user, password);
-        
-        
-        
+    private void clickCerrarSesion(ActionEvent event) {
+        actualStage.setScene(escenaActual);
     }
     
 }

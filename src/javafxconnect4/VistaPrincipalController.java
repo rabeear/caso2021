@@ -49,7 +49,7 @@ public class VistaPrincipalController implements Initializable {
     private Label incorrecto;
     @FXML
     private CheckBox checkRecuerdame;
-
+    private Scene escenaActual;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -126,6 +126,7 @@ public class VistaPrincipalController implements Initializable {
 
     public void initStage(Stage stage) {
         stagePrincipal = stage;
+        escenaActual = stage.getScene();
     }
 
     @FXML
