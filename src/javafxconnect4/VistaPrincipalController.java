@@ -51,13 +51,14 @@ public class VistaPrincipalController implements Initializable {
     @FXML
     private CheckBox checkRecuerdame;
     private Scene escenaActual;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
     @FXML
-    private void autentificacionClick(ActionEvent event) throws Connect4DAOException{
+    private void autentificacionClick(ActionEvent event) throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4(); // Necesario para usar la libreria.
         if (!connect4.exitsNickName(user.getText())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
@@ -65,17 +66,18 @@ public class VistaPrincipalController implements Initializable {
             Player login = connect4.getPlayer(user.getText());
             if (!login.getPassword().equals(passwd.getText())) {
                 incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
-            } else if (!incorrecto.getText().equals("")) {
-                incorrecto.setText("funciona");
-                // Abrir ventada del juego.
-                try{
+            } else {
+                if (!incorrecto.getText().equals("")) {
+                    incorrecto.setText("");
+                }
+                try {
                     FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
                     HBox root = (HBox) cargador.load();
-                    
+
                     VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-                    ventana2.initStage(stagePrincipal, user.getText(),passwd.getText());
+                    ventana2.initStage(stagePrincipal, user.getText(), passwd.getText());
                     ventana2.nombreUsuario.setText(user.getText());
-                    Scene scene = new Scene(root, 800,500);
+                    Scene scene = new Scene(root, 800, 500);
                     stagePrincipal.setScene(scene);
                     stagePrincipal.show();
                 } catch (Exception e) {
@@ -135,7 +137,7 @@ public class VistaPrincipalController implements Initializable {
         if (checkRecuerdame.isSelected()) {
             //función recuerdame
         } else {
-            
+
         }
     }
 }
