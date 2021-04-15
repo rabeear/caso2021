@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -8,10 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaSegundaPrincipalController">
+<HBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaSegundaPrincipalController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="500.0" />
+      <Pane id="imagenPantallaPrincipal" prefHeight="500.0" prefWidth="500.0" stylesheets="@dentroJuego.css" />
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="300.0" spacing="30.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" />
@@ -23,7 +27,7 @@
                </font>
             </Label>
             <Pane prefHeight="74.0" prefWidth="260.0" />
-            <Button fx:id="btnUnJugador" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="UN JUGADOR" />
+            <Button fx:id="btnUnJugador" mnemonicParsing="false" onAction="#clickJuagarPVE" prefHeight="39.0" prefWidth="170.0" text="UN JUGADOR" />
             <Button fx:id="btnDosJugadores" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="DOS JUGADORES" />
             <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="RANKING(?)" />
             <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: none;" text="cerrar sesión" underline="true" />
