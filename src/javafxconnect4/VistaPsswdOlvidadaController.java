@@ -37,6 +37,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
         /*Iniciador para usar en el cambio de ventana*/
         actualPasswd = stage;
         actualPasswd.setTitle("Recuperación de contraseña");
+        actualPasswd.setResizable(false);
     }
 
     /**
