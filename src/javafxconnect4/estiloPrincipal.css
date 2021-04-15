@@ -23,7 +23,7 @@ and open the template in the editor.
     */
 #botonInicio {
     -fx-background-image: url('../imagenes/flecha.png');
-    -fx-background-size: 50px;
+    -fx-background-size: 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-color: none;

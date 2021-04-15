@@ -22,6 +22,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
@@ -69,7 +70,7 @@ public class VistaPrincipalController implements Initializable {
                 // Abrir ventada del juego.
                 try{
                     FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
-                    AnchorPane root = (AnchorPane) cargador.load();
+                    HBox root = (HBox) cargador.load();
                     
                     VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
                     ventana2.initStage(stagePrincipal, user.getText(),passwd.getText());
