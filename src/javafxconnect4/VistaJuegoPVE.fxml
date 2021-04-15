@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,5 +10,75 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaJuegoPVEController"/>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaJuegoPVEController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="550.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="250.0" spacing="15.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TURNO DE" wrappingWidth="131.205078125">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="24.0" />
+               </font>
+            </Text>
+            <Label text="ORDENADOR" textFill="#3800ff">
+               <font>
+                  <Font name="Yu Gothic Medium" size="24.0" />
+               </font>
+            </Label>
+            <Line endX="100.0" startX="-100.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TU" textAlignment="CENTER" wrappingWidth="160.205078125">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="24.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PUNTUACIÓN" wrappingWidth="160.205078125">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="24.0" />
+               </font>
+            </Text>
+            <Label text="0">
+               <font>
+                  <Font name="Yu Gothic UI Bold" size="32.0" />
+               </font>
+            </Label>
+            <Line endX="100.0" startX="-100.0" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+               <children>
+                  <Button fx:id="btnReinicio" mnemonicParsing="false" onAction="#clickReinicio" prefHeight="39.0" prefWidth="190.0" text="REINICIAR PARTIDA" />
+                  <Button fx:id="btnReinicio" mnemonicParsing="false" onAction="#clickSalirPartida" prefHeight="39.0" prefWidth="190.0" text="ACABAR PARTIDA" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <HBox prefHeight="500.0" prefWidth="550.0">
+         <children>
+            <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" stylesheets="@dentroJuego.css">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </HBox>
+   </children>
+</Pane>

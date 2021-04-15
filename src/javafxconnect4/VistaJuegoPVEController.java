@@ -7,8 +7,11 @@ package javafxconnect4;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.Player;
 
@@ -22,6 +25,9 @@ public class VistaJuegoPVEController implements Initializable {
     private Stage stageJuegoPVE;
     private Scene escenaJuegoPVE;
     private Player jugadorActual;
+    private boolean turno = true; //True -> Player / False -> Ordenador
+    @FXML
+    private Button btnReinicio;
     /**
      * Initializes the controller class.
      */
@@ -34,5 +40,20 @@ public class VistaJuegoPVEController implements Initializable {
         stageJuegoPVE = stage;
         escenaJuegoPVE = stage.getScene();
         jugadorActual = seleccion;
+    }
+
+    @FXML
+    private void clickSalirPartida(ActionEvent event) {
+        stageJuegoPVE.setScene(escenaJuegoPVE);
+    }
+
+    @FXML
+    private void clickReinicio(ActionEvent event) {
+        
+    }
+    
+    private boolean switcherTurno() {
+        turno = !turno;
+        return turno;
     }
 }
