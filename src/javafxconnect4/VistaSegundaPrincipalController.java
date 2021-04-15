@@ -26,6 +26,7 @@ import model.Player;
  * @author belen
  */
 public class VistaSegundaPrincipalController implements Initializable {
+
     private Stage actualStage;
     private Scene escenaActual;
     @FXML
@@ -37,13 +38,14 @@ public class VistaSegundaPrincipalController implements Initializable {
     private String user, password;
     @FXML
     public Label nombreUsuario;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     void initStage(Stage stage, String usr, String passwd) {
         actualStage = stage;
@@ -56,5 +58,5 @@ public class VistaSegundaPrincipalController implements Initializable {
     private void clickCerrarSesion(ActionEvent event) {
         actualStage.setScene(escenaActual);
     }
-    
+
 }

@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox alignment="TOP_CENTER" prefHeight="375.0" prefWidth="650.0" spacing="15.0" stylesheets="@vistapsswdolvidada.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPsswdOlvidadaController">
+<VBox alignment="CENTER" prefHeight="333.0" prefWidth="650.0" spacing="15.0" stylesheets="@vistapsswdolvidada.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPsswdOlvidadaController">
    <children>
-      <Pane prefHeight="154.0" prefWidth="650.0">
+      <Pane prefHeight="122.0" prefWidth="650.0">
          <children>
-            <Pane id="imagenPasswd" layoutX="241.0" prefHeight="153.0" prefWidth="168.0" />
+            <Pane id="imagenPasswd" layoutX="245.0" prefHeight="120.0" prefWidth="142.0" />
          </children>
       </Pane>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aquí irá un texto sobre el tema de perder contraseñas que hay que pensar :D asdasdadasdasdasdasdasdasdadasdasdasdasd" textAlignment="CENTER" wrappingWidth="647.205078125" />
-      <HBox alignment="CENTER" prefHeight="69.0" prefWidth="650.0" spacing="10.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su correo electrónico y nombre de usuario y le envíaremos un código de seguridad." textAlignment="CENTER" wrappingWidth="647.205078125">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <GridPane alignment="CENTER" prefHeight="70.0" prefWidth="559.0" vgap="10.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="319.66668701171875" minWidth="10.0" prefWidth="210.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="429.6666259765625" minWidth="10.0" prefWidth="340.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label prefHeight="27.0" prefWidth="157.0" text="Introduce el correo:" />
-            <TextField fx:id="campoCorreo" prefHeight="39.0" prefWidth="448.0" />
+            <Label prefHeight="25.0" prefWidth="120.0" text="Correo electrónico:" />
+            <TextField fx:id="campoCorreo" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" />
+            <Label prefHeight="25.0" prefWidth="120.0" text="Nombre de ususario:" GridPane.rowIndex="1" />
+            <TextField fx:id="campoUser" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="650.0" spacing="50.0">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" />
+         </VBox.margin>
+      </GridPane>
+      <HBox alignment="CENTER" prefHeight="83.0" prefWidth="650.0" spacing="50.0">
          <children>
-            <Button fx:id="btnEvniar" mnemonicParsing="false" onAction="#enviarCorreo" prefHeight="39.0" prefWidth="100.0" text="Enviar" />
-            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#opcionCancelar" prefHeight="39.0" prefWidth="100.0" text="Cancelar" />
+            <Button fx:id="btnEvniar" mnemonicParsing="false" onAction="#enviarCorreo" prefHeight="30.0" prefWidth="95.0" text="Enviar" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#opcionCancelar" prefHeight="30.0" prefWidth="95.0" text="Cancelar" />
          </children>
       </HBox>
    </children>

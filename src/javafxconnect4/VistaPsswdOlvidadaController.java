@@ -30,6 +30,8 @@ public class VistaPsswdOlvidadaController implements Initializable {
     private Button btnCancelar;
 
     private Stage actualPasswd;
+    @FXML
+    private TextField campoUser;
 
     public void initStage(Stage stage) {
         /*Iniciador para usar en el cambio de ventana*/
@@ -46,7 +48,8 @@ public class VistaPsswdOlvidadaController implements Initializable {
     }
 
     @FXML
-    private void enviarCorreo(ActionEvent event) {/*No se si se usara como tal asi que de momento nada*/
+    private void enviarCorreo(ActionEvent event) {
+        /*No se si se usara como tal asi que de momento nada*/
     }
 
     @FXML
