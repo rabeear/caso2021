@@ -7,14 +7,21 @@ package javafxconnect4;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Player;
-
 /**
  * FXML Controller class
  *
@@ -25,9 +32,16 @@ public class VistaJuegoPVEController implements Initializable {
     private Stage stageJuegoPVE;
     private Scene escenaJuegoPVE;
     private Player jugadorActual;
-    private boolean turno = true; //True -> Player / False -> Ordenador
+    private static boolean turno = true; //True -> Player / False -> Ordenador
+    private MatrizDeTablero tableroIniciado;
     @FXML
     private Button btnReinicio;
+    @FXML
+    private GridPane tableroGrid;
+    @FXML
+    private Label indicadorPruebas;
+    @FXML
+    private Label labelJugador;
     /**
      * Initializes the controller class.
      */
@@ -40,6 +54,7 @@ public class VistaJuegoPVEController implements Initializable {
         stageJuegoPVE = stage;
         escenaJuegoPVE = stage.getScene();
         jugadorActual = seleccion;
+        tableroIniciado = new MatrizDeTablero();
     }
 
     @FXML
@@ -49,11 +64,107 @@ public class VistaJuegoPVEController implements Initializable {
 
     @FXML
     private void clickReinicio(ActionEvent event) {
+        tableroIniciado.clear();
         
     }
     
     private boolean switcherTurno() {
         turno = !turno;
         return turno;
+    }
+
+    @FXML
+    private void clickJugar(MouseEvent event) throws InterruptedException {
+        //Crear ficha (Objeto (nodo) Circulo);
+            Circle ficha = new Circle();
+        
+            //Cordenadas del click
+            int posicionX = posicionarX((int) event.getX());
+            int posicionY = tableroIniciado.ultimaFicha(posicionX);
+            indicadorPruebas.setText(posicionX + "," + posicionY);
+            tableroIniciado.setNumero(posicionX, posicionY, turno);
+            //switcherTurno();
+            
+            // ejemplo para pintar de rojo -> ficha.setFill(javafx.scene.paint.Color.RED);
+            ficha.setFill(javafx.scene.paint.Color.RED);
+            ficha.setRadius(20);
+            ficha.setVisible(true);
+            
+            tableroGrid.add(ficha, posicionX,6 - posicionY);
+            Thread.sleep(500);
+            switcherTurno();
+            juegaMaquina();
+            
+    }
+    
+    //Saber que columna se clica, de 0 a 7;
+    private int posicionarX(int x) {
+        int max, min, res, medida;
+        Bounds tamaño = tamañoGrid();
+        max = (int) tamaño.getMaxX();
+        min = (int) tamaño.getMinX();
+        if (min < 0) { min = 0; }
+        medida = (max - min) / 8; //cuanto mide cada columna
+        
+        //saber donde esta el click:
+        if (x < 4*medida) { //si X esta por debajo de la mitad
+            if (x < 2*medida) {
+                if (x < medida) {
+                    return 0;
+                } else { return 1; }
+            } if (x < 3*medida) {
+                return 2;
+            } else { return 3; }
+        } else {
+            if (x > 6*medida) {
+                if (x > 7*medida) {
+                    return 7;
+                } else { return 6; }
+            } else {
+                if (x < 5*medida) {
+                    return 4;
+                } else {
+                    return 5;
+                }
+            }
+        }
+    }
+    //Saber en que Y se tiene que posicionar el nodo circulo nuevo;
+    private int fichasEnColumna(int col) {
+        int max, min, res, media;
+        return 0;
+    }
+    //obtener tamaño del gridTablero;
+    private Bounds tamañoGrid() {
+        Bounds tamaño = tableroGrid.getBoundsInLocal();
+        return tamaño;
+    }
+    
+    /*Saber que hay en cada celda del grid si das X (columna) / Y (fila);
+    private Node obtenerNodo(int x, int y, GridPane grid) {
+        Node res = null;
+        ObservableList<Node> childrens = grid.getChildren();
+
+    for (Node node : childrens) {
+        if(GridPane.getRowIndex(node) == y && GridPane.getColumnIndex(node) == x) {
+            res = node;
+            break;
+        }
+    }
+        return res;
+    }*/
+    //Turno de la máquina
+    private void juegaMaquina() {
+        int x = (int)(Math.random()*7);
+        int y = tableroIniciado.ultimaFicha(x);;
+        tableroIniciado.setNumero(x, y, turno);
+        Circle ficha = new Circle();
+        
+        ficha.setFill(javafx.scene.paint.Color.YELLOW);
+        ficha.setRadius(20);
+        ficha.setVisible(true);
+            
+        tableroGrid.add(ficha, x, 6 - y);
+        switcherTurno();
     }
 }
