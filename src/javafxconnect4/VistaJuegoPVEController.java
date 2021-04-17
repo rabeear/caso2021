@@ -42,6 +42,8 @@ public class VistaJuegoPVEController implements Initializable {
     private Label indicadorPruebas;
     @FXML
     private Label labelJugador;
+    @FXML
+    private Label labelPuntuacion;
     /**
      * Initializes the controller class.
      */
@@ -55,6 +57,7 @@ public class VistaJuegoPVEController implements Initializable {
         escenaJuegoPVE = stage.getScene();
         jugadorActual = seleccion;
         tableroIniciado = new MatrizDeTablero();
+        labelJugador.setText(jugadorActual.getNickName());
     }
 
     @FXML
@@ -65,7 +68,9 @@ public class VistaJuegoPVEController implements Initializable {
     @FXML
     private void clickReinicio(ActionEvent event) {
         tableroIniciado.clear();
-        
+        Node node = tableroGrid.getChildren().get(0);
+        tableroGrid.getChildren().clear();
+        tableroGrid.getChildren().add(0,node);
     }
     
     private boolean switcherTurno() {
@@ -93,6 +98,11 @@ public class VistaJuegoPVEController implements Initializable {
             tableroGrid.add(ficha, posicionX,6 - posicionY);
             Thread.sleep(500);
             switcherTurno();
+            if (tableroIniciado.comprobacionJuego()) {
+                int n = Integer.parseInt(labelPuntuacion.getText()) + 20;
+                labelPuntuacion.setText("" + n);
+                indicadorPruebas.setText("Se ganó"); // cambiar por autoreinicio o alerta + 2 botones con reinicio o salir.
+            }
             juegaMaquina();
             
     }
@@ -140,19 +150,7 @@ public class VistaJuegoPVEController implements Initializable {
         return tamaño;
     }
     
-    /*Saber que hay en cada celda del grid si das X (columna) / Y (fila);
-    private Node obtenerNodo(int x, int y, GridPane grid) {
-        Node res = null;
-        ObservableList<Node> childrens = grid.getChildren();
-
-    for (Node node : childrens) {
-        if(GridPane.getRowIndex(node) == y && GridPane.getColumnIndex(node) == x) {
-            res = node;
-            break;
-        }
-    }
-        return res;
-    }*/
+    
     //Turno de la máquina
     private void juegaMaquina() {
         int x = (int)(Math.random()*7);

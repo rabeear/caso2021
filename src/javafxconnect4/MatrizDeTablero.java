@@ -49,4 +49,62 @@ public class MatrizDeTablero {
             }
         }
     }
-}
+    
+    public boolean linea() {
+        for (int j=0;j<7;j++) { //j es la Y, las filas
+            for (int i = 0;i<=4;i++) {
+                if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i+1][j] && 
+                        matrizPrincipal[i+1][j] == matrizPrincipal[i + 2][j] &&
+                        matrizPrincipal[i +2][j] == matrizPrincipal[i + 3][j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+            
+        }
+    
+    public boolean columna() {
+        for (int i=0;i<8;i++) { //j es la Y, las filas
+            for (int j = 0;j<=3;j++) {
+                if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i][j+1] && 
+                        matrizPrincipal[i][j+1] == matrizPrincipal[i][j + 2] &&
+                        matrizPrincipal[i][j + 2] == matrizPrincipal[i][j + 3]) {
+                    return true;
+                }
+            }
+        
+         }
+        return false;
+        }
+    
+    public boolean diagonal() {
+        boolean res = false;
+        for (int i=0;i<=4;i++) { //j es la Y, las filas
+            for (int j = 0;j<=3;j++) {
+                if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i+1][j+1] && 
+                        matrizPrincipal[i+1][j+1] == matrizPrincipal[i + 2][j + 2] &&
+                        matrizPrincipal[i + 2][j + 2] == matrizPrincipal[i + 3][j + 3]) {
+                    res = true;
+                    break;
+                }
+            }
+        }
+        for (int i = 7;i>=3;i--) {
+            for (int j=6;j>=3;j--) {
+                if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i-1][j-1] && 
+                        matrizPrincipal[i-1][j-1] == matrizPrincipal[i - 2][j - 2] &&
+                        matrizPrincipal[i - 2][j - 2] == matrizPrincipal[i - 3][j - 3]) {
+                    res = true;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+    
+    public boolean comprobacionJuego() {
+        return this.columna() || this.linea() || this.diagonal();
+    }
+    }
+

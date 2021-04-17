@@ -35,7 +35,7 @@
                   <Font name="Yu Gothic UI Light" size="24.0" />
                </font>
             </Text>
-            <Label text="0">
+            <Label fx:id="labelPuntuacion" text="0">
                <font>
                   <Font name="Yu Gothic UI Bold" size="32.0" />
                </font>
