@@ -5,7 +5,9 @@
  */
 package javafxconnect4;
 
+import DBAccess.Connect4DAOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,12 +17,16 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.Connect4;
 import model.Player;
 /**
  * FXML Controller class
@@ -79,7 +85,7 @@ public class VistaJuegoPVEController implements Initializable {
     }
 
     @FXML
-    private void clickJugar(MouseEvent event) throws InterruptedException {
+    private void clickJugar(MouseEvent event) throws InterruptedException, Connect4DAOException {
         //Crear ficha (Objeto (nodo) Circulo);
             Circle ficha = new Circle();
         
@@ -101,15 +107,23 @@ public class VistaJuegoPVEController implements Initializable {
             if (tableroIniciado.comprobacionJuego()) {
                 int n = Integer.parseInt(labelPuntuacion.getText()) + 20;
                 labelPuntuacion.setText("" + n);
-                indicadorPruebas.setText("Se ganó"); // cambiar por autoreinicio o alerta + 2 botones con reinicio o salir.
+                indicadorPruebas.setText("Gana " + jugadorActual.getNickName()); // cambiar por autoreinicio o alerta + 2 botones con reinicio o salir.
+                alertaVictoria(turno);
             }
+            labelJugador.setText("ordenador");
             juegaMaquina();
+            labelJugador.setText(jugadorActual.getNickName());
+            if (tableroIniciado.comprobacionJuego()) {
+                indicadorPruebas.setText("Gana ordenador");
+                alertaVictoria(turno);
+            }
+            switcherTurno();
             
     }
     
     //Saber que columna se clica, de 0 a 7;
     private int posicionarX(int x) {
-        int max, min, res, medida;
+        int max, min, medida;
         Bounds tamaño = tamañoGrid();
         max = (int) tamaño.getMaxX();
         min = (int) tamaño.getMinX();
@@ -163,6 +177,43 @@ public class VistaJuegoPVEController implements Initializable {
         ficha.setVisible(true);
             
         tableroGrid.add(ficha, x, 6 - y);
-        switcherTurno();
+    }
+    
+    public void alertaVictoria(boolean victoria) throws Connect4DAOException {
+        Alert alerta = new Alert(AlertType.CONFIRMATION);
+        if (victoria) {
+            alerta.setTitle("Victoria!");
+            alerta.setHeaderText("Has ganado!");
+            alerta.setContentText("Quieres volver a jugar?");
+            } else {
+            alerta.setTitle("Derrota");
+            alerta.setHeaderText("Has perdido...");
+            alerta.setContentText("Quieres volver a jugar?");
+            }
+        
+            Optional<ButtonType> resultado = alerta.showAndWait();
+            if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+                System.out.println("SEGUIR \n JUGANDO");
+                tableroIniciado.clear();
+                sumaPuntos();
+                
+            Node node = tableroGrid.getChildren().get(0);
+            tableroGrid.getChildren().clear();
+            tableroGrid.getChildren().add(0,node);
+            } else {
+                System.out.println("SALIR");
+                stageJuegoPVE.setScene(escenaJuegoPVE);
+                sumaPuntos();
+            }
+        }
+    
+    //suma los puntos que haya en el label puntos y limpia
+    public void sumaPuntos() throws Connect4DAOException {
+        Connect4 connect4 = Connect4.getSingletonConnect4();
+        int puntos = Integer.parseInt(labelPuntuacion.getText());
+        
+        jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
+        jugadorActual.plusPoints(puntos);
+        labelPuntuacion.setText("0");
     }
 }
