@@ -9,6 +9,7 @@ import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +20,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -42,12 +45,12 @@ public class VistaPrincipalController implements Initializable {
     private TextField user;
     @FXML
     private PasswordField passwd;
-
-    private Stage stagePrincipal;
     @FXML
     private Label incorrecto;
     @FXML
     private CheckBox checkRecuerdame;
+
+    private Stage stagePrincipal;
     private Scene escenaActual;
 
     @Override
@@ -57,6 +60,17 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     private void autentificacionClick(ActionEvent event) throws Connect4DAOException {
+        autentificacion();
+    }
+
+    @FXML
+    private void autentificacionEnter(KeyEvent event) throws Connect4DAOException {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            autentificacion();
+        }
+    }
+
+    private void autentificacion() throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4(); // Necesario para usar la libreria.
         if (!connect4.exitsNickName(user.getText())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");

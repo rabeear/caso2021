@@ -25,8 +25,8 @@
                </font>
             </Text>
             <Label fx:id="incorrecto" alignment="CENTER" prefHeight="17.0" prefWidth="266.0" textFill="#f20000" />
-            <TextField fx:id="user" promptText="Usuario" />
-            <PasswordField fx:id="passwd" promptText="Contraseña" />
+            <TextField fx:id="user" onKeyPressed="#autentificacionEnter" promptText="Usuario" />
+            <PasswordField fx:id="passwd" onKeyPressed="#autentificacionEnter" promptText="Contraseña" />
             <VBox alignment="TOP_CENTER" prefHeight="142.0" prefWidth="250.0" spacing="30.0">
                <children>
                   <CheckBox fx:id="checkRecuerdame" mnemonicParsing="false" onAction="#clickRecuerdo" text="Recuérdame" />
