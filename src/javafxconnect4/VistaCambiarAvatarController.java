@@ -8,13 +8,12 @@ package javafxconnect4;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author belen
+ * @author Rafa BA, Raquel RR
  */
 public class VistaCambiarAvatarController implements Initializable {
 

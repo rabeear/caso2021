@@ -16,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Connect4;
 import model.Player;
@@ -24,7 +23,7 @@ import model.Player;
 /**
  * FXML Controller class
  *
- * @author belen
+ * @author Rafa BA, Raquel RR
  */
 public class VistaSegundaPrincipalController implements Initializable {
 
@@ -64,15 +63,15 @@ public class VistaSegundaPrincipalController implements Initializable {
     private void clickJuagarPVE(ActionEvent event) throws Connect4DAOException {
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
-            
-                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVE.fxml"));
-                    Pane root = (Pane) cargador.load();
-                    Player actualPlayer = connect4.getPlayer(user);
-                    VistaJuegoPVEController ventanaJuegoPVE = cargador.<VistaJuegoPVEController>getController();
-                    ventanaJuegoPVE.initStage(actualStage,actualPlayer);
-                    Scene scene = new Scene(root, 800, 500);
-                    actualStage.setScene(scene);
-                    actualStage.show();
+
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVE.fxml"));
+            Pane root = (Pane) cargador.load();
+            Player actualPlayer = connect4.getPlayer(user);
+            VistaJuegoPVEController ventanaJuegoPVE = cargador.<VistaJuegoPVEController>getController();
+            ventanaJuegoPVE.initStage(actualStage, actualPlayer);
+            Scene scene = new Scene(root, 800, 500);
+            actualStage.setScene(scene);
+            actualStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

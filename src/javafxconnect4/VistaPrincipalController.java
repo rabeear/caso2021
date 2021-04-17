@@ -6,7 +6,6 @@
 package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,7 +28,7 @@ import model.Player;
 
 /**
  *
- * @author belen
+ * @author Rafa BA, Raquel RR
  */
 public class VistaPrincipalController implements Initializable {
 

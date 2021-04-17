@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author belen
+ * @author Rafa BA, Raquel RR
  */
 public class VistaAñadirUsuarioController implements Initializable {
 

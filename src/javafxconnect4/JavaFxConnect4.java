@@ -5,10 +5,6 @@
  */
 package javafxconnect4;
 
-import DBAccess.Connect4DAOException;
-import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,17 +13,17 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author belen
+ * @author Rafa BA, Raquel RR
  */
 public class JavaFxConnect4 extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
         Parent root = cargador.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        
+
         VistaPrincipalController controladorPrincipal = cargador.<VistaPrincipalController>getController();
         controladorPrincipal.initStage(stage);
         stage.setScene(scene);
