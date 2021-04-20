@@ -55,8 +55,6 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     }    
     
     public void initStage(Stage stage, Player player) throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
-        connect4.registerPlayer("test2", "email", "test2", LocalDate.MIN, 0); // crea usuario test2 para pruebas
         actualStage = stage;
         escenaActual = stage.getScene();
         player1 = player;
