@@ -66,6 +66,7 @@ public class VistaJuegoPVEController implements Initializable {
         jugadorActual = seleccion;
         tableroIniciado = new MatrizDeTablero();
         labelJugador.setText(jugadorActual.getNickName());
+        labelPuntuacion.setText(""+jugadorActual.getPoints());
     }
 
     @FXML
@@ -216,10 +217,10 @@ public class VistaJuegoPVEController implements Initializable {
     //suma los puntos que haya en el label puntos y limpia
     public void sumaPuntos() throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        int puntos = Integer.parseInt(labelPuntuacion.getText());
+        int puntos = 20;
 
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
         jugadorActual.plusPoints(puntos);
-        labelPuntuacion.setText("0");
+        labelPuntuacion.setText(""+jugadorActual.getPoints());
     }
 }

@@ -28,7 +28,7 @@
             </Label>
             <Pane prefHeight="74.0" prefWidth="260.0" />
             <Button fx:id="btnUnJugador" mnemonicParsing="false" onAction="#clickJuagarPVE" prefHeight="39.0" prefWidth="170.0" text="UN JUGADOR" />
-            <Button fx:id="btnDosJugadores" mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="DOS JUGADORES" />
+            <Button fx:id="btnDosJugadores" mnemonicParsing="false" onAction="#clickJugarPVP" prefHeight="39.0" prefWidth="170.0" text="DOS JUGADORES" />
             <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="RANKING(?)" />
             <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: none;" text="cerrar sesión" underline="true" />
          </children>

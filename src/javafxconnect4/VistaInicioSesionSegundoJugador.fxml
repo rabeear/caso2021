@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaInicioSesionSegundoJugadorController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="20.0">
+         <children>
+            <Text fx:id="labelJ1" strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 1">
+               <font>
+                  <Font name="Yu Gothic Regular" size="30.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="163.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
+            <Line endX="100.0" startX="-100.0" />
+            <Label fx:id="userJ1" text="User1">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="30.0" />
+               </font>
+            </Label>
+            <Line endX="100.0" startX="-100.0" />
+            <Label fx:id="pointsJ1" text="Points1">
+               <font>
+                  <Font name="Yu Gothic Medium" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Line endY="150.0" startY="-150.0" />
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 2">
+               <font>
+                  <Font name="Yu Gothic Regular" size="30.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="400.0" spacing="50.0">
+               <children>
+                  <Label text="Usuario" />
+                  <TextField fx:id="userCuadro" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="400.0" spacing="20.0">
+               <children>
+                  <Label text="Contraseña" />
+                  <PasswordField fx:id="psswdCuadro" />
+               </children>
+            </HBox>
+            <Label fx:id="labelIndicador" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#clickInicioJ2" text="IniciarSesion" />
+            <Button mnemonicParsing="false" onAction="#cancelarInicio" text="Cancelar" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
