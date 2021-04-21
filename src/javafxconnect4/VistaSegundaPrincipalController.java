@@ -95,5 +95,4 @@ public class VistaSegundaPrincipalController implements Initializable {
             e.printStackTrace();
         }
     }
-
 }

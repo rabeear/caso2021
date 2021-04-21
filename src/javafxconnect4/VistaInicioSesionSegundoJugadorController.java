@@ -7,7 +7,6 @@ package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -73,7 +72,6 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
             if (loginTest.getPassword().equals(psswdCuadro.getText()) && loginTest != player1) {
                 player2 = loginTest;
                 try {
-
                     FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
                     Pane root = (Pane) cargador.load();
                     VistaJuegoPVPController ventanaIni = cargador.<VistaJuegoPVPController>getController();

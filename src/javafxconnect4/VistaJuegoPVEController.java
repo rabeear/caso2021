@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -40,7 +39,6 @@ public class VistaJuegoPVEController implements Initializable {
     private Player jugadorActual;
     private static boolean turno = true; // True -> Player / False -> Ordenador
     private MatrizDeTablero tableroIniciado;
-
     @FXML
     private Button btnReinicio;
     @FXML
@@ -66,7 +64,7 @@ public class VistaJuegoPVEController implements Initializable {
         jugadorActual = seleccion;
         tableroIniciado = new MatrizDeTablero();
         labelJugador.setText(jugadorActual.getNickName());
-        labelPuntuacion.setText(""+jugadorActual.getPoints());
+        labelPuntuacion.setText("" + jugadorActual.getPoints());
     }
 
     @FXML
@@ -89,10 +87,10 @@ public class VistaJuegoPVEController implements Initializable {
 
     @FXML
     private void clickJugar(MouseEvent event) throws InterruptedException, Connect4DAOException {
-        //Crear ficha (Objeto (nodo) Circulo);
+        // Crear ficha (Objeto (nodo) Circulo).
         Circle ficha = new Circle();
 
-        //Cordenadas del click
+        // Cordenadas del click.
         int posicionX = posicionarX((int) event.getX());
         int posicionY = tableroIniciado.ultimaFicha(posicionX);
         indicadorPruebas.setText(posicionX + "," + posicionY);
@@ -127,7 +125,7 @@ public class VistaJuegoPVEController implements Initializable {
         switcherTurno();
     }
 
-    //Saber que columna se clica, de 0 a 7;
+    // Saber que columna se clica, de 0 a 7.
     private int posicionarX(int x) {
         int max, min, medida;
         Bounds tamaño = tamañoGrid();
@@ -136,19 +134,12 @@ public class VistaJuegoPVEController implements Initializable {
         if (min < 0) {
             min = 0;
         }
-        medida = (max - min) / 8; //cuanto mide cada columna
+        medida = (max - min) / 8; // Cuanto mide cada columna.
 
-        //saber donde esta el click:
-        if (x < 4 * medida) { //si X esta por debajo de la mitad
+        // Saber donde esta el click.
+        if (x < 4 * medida) { // si X esta por debajo de la mitad.
             if (x < 2 * medida) {
                 return (x < medida) ? 0 : 1;
-                /*
-                if (x < medida) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-                 */
             }
             return (x < 3 * medida) ? 2 : 3;
         } else {
@@ -160,13 +151,13 @@ public class VistaJuegoPVEController implements Initializable {
         }
     }
 
-    //Saber en que Y se tiene que posicionar el nodo circulo nuevo;
+    // Saber en que Y se tiene que posicionar el nodo circulo nuevo.
     private int fichasEnColumna(int col) {
         int max, min, res, media;
         return 0;
     }
 
-    //obtener tamaño del gridTablero;
+    // Obtener tamaño del gridTablero.
     private Bounds tamañoGrid() {
         Bounds tamaño = tableroGrid.getBoundsInLocal();
         return tamaño;
@@ -221,6 +212,6 @@ public class VistaJuegoPVEController implements Initializable {
 
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
         jugadorActual.plusPoints(puntos);
-        labelPuntuacion.setText(""+jugadorActual.getPoints());
+        labelPuntuacion.setText("" + jugadorActual.getPoints());
     }
 }
