@@ -8,6 +8,7 @@ package javafxconnect4;
 import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -51,16 +54,21 @@ public class VistaCodigoRecuperacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Generamos un númeo de 6 cifras aleatorio para que sea el código de recuperación.
-        int min = 100000;
-        int max = 999999;
+        enviarButton.disableProperty().bind(Bindings.or(
+                Bindings.createBooleanBinding(() -> {
+                    return codigo.getText().split(" ").length == 0;
+                }, codigo.textProperty()),
+                Bindings.isEmpty(codigo.textProperty())));
+        // Generamos un númeo de 4 cifras aleatorio para que sea el código de recuperación.
+        int min = 1000;
+        int max = 9999;
         int random = (int) Math.floor(Math.random() * (max - min + 1) + min);
         textoCodigo.setText(random + "");
     }
 
     @FXML
     private void mostrarContraseña(ActionEvent event) throws Connect4DAOException {
-        if (!codigo.getText().equals(textoCodigo.getText())) { // Comprobamos que el código sea el correcto.
+        if (!codigo.getText().equals(textoCodigo.getText())) { // Comprobamos que el código introducido sea el correcto.
             incorrecto.setText("Código de recuperación incorrecto.");
         } else {
             if (!incorrecto.getText().equals("")) {
@@ -74,21 +82,17 @@ public class VistaCodigoRecuperacionController implements Initializable {
             String[] playerString = player.toString().split("\n");
             passwrd = playerString[1].split(" ")[1];
             System.out.println(passwrd);
-            // Abrimos ventana con la contraseña solicitada.
+            // Abrimos ventana con la contraseña solicitada usando un diálogo de información.
             try {
-                Stage actual = new Stage();
-                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaContraseña.fxml"));
-                Parent root = cargador.load();
-                System.out.println(passwrd);
-                cargador.<VistaContraseñaController>getController().initStage(actual, passwrd);
-                System.out.println(passwrd);
-                Scene escena = new Scene(root, 275, 190);
-                actual.setScene(escena);
-                actual.initModality(Modality.APPLICATION_MODAL);
-                actual.show();
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Contraseña");
+                alert.setHeaderText("Su contraseña");
+                alert.setContentText(passwrd);
                 // Cerramos ventana actual.
                 Node miNodo = (Node) event.getSource();
                 miNodo.getScene().getWindow().hide();
+                // Mostramos diálogo.
+                alert.showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
             }

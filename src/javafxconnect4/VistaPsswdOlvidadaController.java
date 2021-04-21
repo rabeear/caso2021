@@ -43,13 +43,6 @@ public class VistaPsswdOlvidadaController implements Initializable {
 
     private Stage actualPasswd;
 
-    public void initStage(Stage stage) {
-        /*Iniciador para usar en el cambio de ventana*/
-        actualPasswd = stage;
-        actualPasswd.setTitle("Recuperación de contraseña");
-        actualPasswd.setResizable(false);
-    }
-
     /**
      * Initializes the controller class.
      */
@@ -100,5 +93,12 @@ public class VistaPsswdOlvidadaController implements Initializable {
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
         System.out.println("Cerrando PSSWDOlvidada...");
+    }
+
+    public void initStage(Stage stage) {
+        /*Iniciador para usar en el cambio de ventana*/
+        actualPasswd = stage;
+        actualPasswd.setTitle("Recuperación de contraseña");
+        actualPasswd.setResizable(false);
     }
 }

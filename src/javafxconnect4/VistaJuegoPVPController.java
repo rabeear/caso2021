@@ -23,7 +23,7 @@ import model.Player;
 /**
  * FXML Controller class
  *
- * @author belen
+ * @author Rafa BA, Raquel RR
  */
 public class VistaJuegoPVPController implements Initializable {
 
