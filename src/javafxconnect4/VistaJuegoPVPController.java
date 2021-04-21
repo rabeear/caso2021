@@ -7,6 +7,7 @@ package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,6 +28,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Connect4;
 import model.Player;
+import model.Round;
 
 /**
  * FXML Controller class
@@ -52,7 +54,7 @@ public class VistaJuegoPVPController implements Initializable {
     private Scene escenaActual;
     private Player j1, j2;
     private static boolean turno = true; //Controlar el turno, true -> j1, false -> j2
-
+    private Round partida;
     /**
      * Initializes the controller class.
      */
@@ -71,8 +73,9 @@ public class VistaJuegoPVPController implements Initializable {
 
     @FXML
     private void clickJugar(MouseEvent event) throws InterruptedException, Connect4DAOException {
+        Connect4 connect4 = Connect4.getSingletonConnect4();
         Circle ficha = new Circle();
-        
+        LocalDateTime t = LocalDateTime.now();
         int posicionX = posicionarX((int) event.getX());
         int posicionY = tableroIniciado.ultimaFicha(posicionX);
         // indicadorPruebas.setText(posicionX + "," + posicionY);
@@ -91,6 +94,7 @@ public class VistaJuegoPVPController implements Initializable {
             if (tableroIniciado.comprobacionJuego()) {
                 int n = Integer.parseInt(labelPuntuacion.getText()) + 50;
                 labelPuntuacion.setText("" + n);
+                partida = connect4.regiterRound(t, j1, j2);
                 alertaVictoria(true);
             return; // Salir de la función.
             }
@@ -107,6 +111,8 @@ public class VistaJuegoPVPController implements Initializable {
             if (tableroIniciado.comprobacionJuego()) {
                 int n = Integer.parseInt(labelPuntuacion2.getText()) + 50;
                 labelPuntuacion2.setText("" + n);
+                partida = connect4.regiterRound(t, j1, j2);
+                connect4.setPointsAlone(posicionY);
                 alertaVictoria(false);
                 return; // Salir de la función.
             }
