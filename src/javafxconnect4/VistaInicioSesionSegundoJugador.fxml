@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaInicioSesionSegundoJugadorController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaInicioSesionSegundoJugadorController">
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="20.0">
          <children>
@@ -27,40 +32,63 @@
                </font>
             </Label>
             <Line endX="100.0" startX="-100.0" />
-            <Label fx:id="pointsJ1" text="Points1">
-               <font>
-                  <Font name="Yu Gothic Medium" size="30.0" />
-               </font>
-            </Label>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="400.0" spacing="30.0">
+               <children>
+                  <Label text="Puntos totales:">
+                     <font>
+                        <Font name="Yu Gothic Medium" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="pointsJ1" text="Points1">
+                     <font>
+                        <Font name="Yu Gothic Medium" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </VBox>
       <Line endY="150.0" startY="-150.0" />
-      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="10.0">
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="400.0" spacing="10.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 2">
                <font>
                   <Font name="Yu Gothic Regular" size="30.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="57.0" />
+               </VBox.margin>
             </Text>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="400.0" spacing="50.0">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="275.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="147.33331298828125" minWidth="10.0" prefWidth="84.6666259765625" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="229.6666259765625" minWidth="10.0" prefWidth="190.3333740234375" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
                   <Label text="Usuario" />
-                  <TextField fx:id="userCuadro" />
+                  <TextField fx:id="userCuadro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <PasswordField fx:id="psswdCuadro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Contraseña" GridPane.rowIndex="1" />
                </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="400.0" spacing="20.0">
-               <children>
-                  <Label text="Contraseña" />
-                  <PasswordField fx:id="psswdCuadro" />
-               </children>
-            </HBox>
-            <Label fx:id="labelIndicador" textFill="RED">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </GridPane>
+            <Label fx:id="labelIndicador" prefHeight="27.0" prefWidth="323.0" textFill="RED">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#clickInicioJ2" text="IniciarSesion" />
-            <Button mnemonicParsing="false" onAction="#cancelarInicio" text="Cancelar" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickInicioJ2" text="Iniciar Sesion" />
+                  <Button mnemonicParsing="false" onAction="#cancelarInicio" text="Cancelar" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

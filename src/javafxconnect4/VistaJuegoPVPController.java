@@ -37,18 +37,20 @@ public class VistaJuegoPVPController implements Initializable {
     private Button btnReinicio;
     @FXML
     private GridPane tableroGrid;
+    @FXML
+    private Label labelPuntuacion2;
+
     private Stage stageActual;
     private Scene escenaActual;
     private Player j1, j2;
-    @FXML
-    private Label labelPuntuacion2;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void clickReinicio(ActionEvent event) {
@@ -68,18 +70,17 @@ public class VistaJuegoPVPController implements Initializable {
     @FXML
     private void clickSalir(ActionEvent event) {
         try {
-                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
-                    HBox root = (HBox) cargador.load();
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
+            HBox root = (HBox) cargador.load();
 
-                    VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-                    ventana2.initStage(stageActual, j1.getNickName(), j1.getPassword());
-                    ventana2.nombreUsuario.setText(j1.getNickName());
-                    Scene scene = new Scene(root, 800, 500);
-                    stageActual.setScene(scene);
-                    stageActual.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
+            ventana2.initStage(stageActual, j1.getNickName(), j1.getPassword());
+            ventana2.nombreUsuario.setText(j1.getNickName());
+            Scene scene = new Scene(root, 800, 500);
+            stageActual.setScene(scene);
+            stageActual.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
 }

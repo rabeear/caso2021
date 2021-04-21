@@ -43,24 +43,25 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
 
     private Stage actualStage;
     private Scene escenaActual;
-    private Player player1,player2;
+    private Player player1, player2;
     @FXML
     private Label labelIndicador;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     public void initStage(Stage stage, Player player) throws Connect4DAOException {
         actualStage = stage;
         escenaActual = stage.getScene();
         player1 = player;
         userJ1.setText(player.getNickName());
-        pointsJ1.setText(""+player.getPoints());
-        
+        pointsJ1.setText("" + player.getPoints());
+
     }
 
     @FXML
@@ -68,22 +69,22 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
         Connect4 connect4 = Connect4.getSingletonConnect4();
         try {
             Player loginTest = connect4.getPlayer(userCuadro.getText());
-        
-        if (loginTest.getPassword().equals(psswdCuadro.getText()) && loginTest != player1) {
-            player2 = loginTest;
-            try {
-                
-                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
-                Pane root = (Pane) cargador.load();
-                VistaJuegoPVPController ventanaIni = cargador.<VistaJuegoPVPController>getController();
-                ventanaIni.initStage(actualStage, player1,player2);
-                Scene scene = new Scene(root, 800, 500);
-                actualStage.setScene(scene);
-                actualStage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            if (loginTest.getPassword().equals(psswdCuadro.getText()) && loginTest != player1) {
+                player2 = loginTest;
+                try {
+
+                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
+                    Pane root = (Pane) cargador.load();
+                    VistaJuegoPVPController ventanaIni = cargador.<VistaJuegoPVPController>getController();
+                    ventanaIni.initStage(actualStage, player1, player2);
+                    Scene scene = new Scene(root, 800, 500);
+                    actualStage.setScene(scene);
+                    actualStage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }
         } catch (Exception e) {
             labelIndicador.setText("Usuario o contraseña incorrecto");
         }
@@ -93,7 +94,4 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     private void cancelarInicio(ActionEvent event) {
         actualStage.setScene(escenaActual);
     }
-    
-    
-    
 }
