@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -13,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaJuegoPVEController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaJuegoPVEController">
    <children>
       <VBox alignment="CENTER" layoutX="550.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="250.0" spacing="15.0">
          <children>
@@ -48,6 +54,7 @@
                <children>
                   <Label fx:id="indicadorPruebas" prefHeight="27.0" prefWidth="202.0" />
                   <Button fx:id="btnReinicio" mnemonicParsing="false" onAction="#clickReinicio" prefHeight="39.0" prefWidth="190.0" text="REINICIAR PARTIDA" />
+                  <Button mnemonicParsing="false" onAction="#clickSalirPartida" prefHeight="39.0" prefWidth="190.0" text="SALIR" />
                </children>
             </VBox>
          </children>
@@ -55,9 +62,9 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
-      <HBox prefHeight="500.0" prefWidth="550.0">
+      <HBox alignment="CENTER" prefHeight="500.0" prefWidth="550.0">
          <children>
-            <GridPane fx:id="tableroGrid" alignment="CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickJugar" prefHeight="500.0" prefWidth="550.0" stylesheets="@dentroJuego.css">
+            <GridPane fx:id="tableroGrid" alignment="CENTER" gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickJugar" prefHeight="500.0" prefWidth="550.0" stylesheets="@dentroJuego.css">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
