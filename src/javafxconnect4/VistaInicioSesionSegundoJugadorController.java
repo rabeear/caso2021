@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -45,6 +46,8 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     private Player player1, player2;
     @FXML
     private Label labelIndicador;
+    @FXML
+    private ImageView imagenJ1;
 
     /**
      * Initializes the controller class.
@@ -55,11 +58,14 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     }
 
     public void initStage(Stage stage, Player player) throws Connect4DAOException {
+        Connect4 connect4 = Connect4.getSingletonConnect4();
         actualStage = stage;
         escenaActual = stage.getScene();
         player1 = player;
+        imagenJ1.imageProperty().setValue(player1.getAvatar());
         userJ1.setText(player.getNickName());
         pointsJ1.setText("" + player.getPoints());
+        
 
     }
 
