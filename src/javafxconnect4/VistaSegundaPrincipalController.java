@@ -57,7 +57,17 @@ public class VistaSegundaPrincipalController implements Initializable {
 
     @FXML
     private void clickCerrarSesion(ActionEvent event) {
-        actualStage.setScene(escenaActual);
+        try {
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
+            HBox root = (HBox) cargador.load();
+            VistaPrincipalController ventanaIni = cargador.<VistaPrincipalController>getController();
+            ventanaIni.initStage(actualStage);
+            Scene scene = new Scene(root, 800, 500);
+            actualStage.setScene(scene);
+            actualStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
