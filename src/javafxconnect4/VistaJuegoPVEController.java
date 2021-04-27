@@ -76,13 +76,21 @@ public class VistaJuegoPVEController implements Initializable {
     @FXML
     private void clickReinicio(ActionEvent event) {
         tableroIniciado.clear();
-        Node node = tableroGrid.getChildren().get(0);
         tableroGrid.getChildren().clear();
-        tableroGrid.getChildren().add(0, node);
+        añadirCirculos();
     }
 
     private void añadirCirculos() {
         // añadir todos los circulos blancos.
+        for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
+            for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
+                Circle circulo = new Circle();
+                circulo.setFill(javafx.scene.paint.Color.WHITE);
+                circulo.setRadius(31);
+                circulo.setVisible(true);
+                tableroGrid.add(circulo, c, r);
+            }
+        }
     }
 
     private boolean switcherTurno() {
