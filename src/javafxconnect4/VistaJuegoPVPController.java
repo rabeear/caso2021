@@ -85,7 +85,7 @@ public class VistaJuegoPVPController implements Initializable {
         if (turno) { // Jugador 1.
             labelJugador.setText(j1.getNickName());
             ficha.setFill(javafx.scene.paint.Color.RED);
-            ficha.setRadius(20);
+            ficha.setRadius(32);
             ficha.setVisible(true);
 
             tableroGrid.add(ficha, posicionX, 6 - posicionY);
@@ -101,7 +101,7 @@ public class VistaJuegoPVPController implements Initializable {
             }
         } else {
             ficha.setFill(javafx.scene.paint.Color.YELLOW);
-            ficha.setRadius(20);
+            ficha.setRadius(32);
             ficha.setVisible(true);
 
             tableroGrid.add(ficha, posicionX, 6 - posicionY);

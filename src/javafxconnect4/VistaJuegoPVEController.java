@@ -34,11 +34,6 @@ import model.Player;
  */
 public class VistaJuegoPVEController implements Initializable {
 
-    private Stage stageJuegoPVE;
-    private Scene escenaJuegoPVE;
-    private Player jugadorActual;
-    private static boolean turno = true; // True -> Player / False -> Ordenador
-    private MatrizDeTablero tableroIniciado;
     @FXML
     private Button btnReinicio;
     @FXML
@@ -49,6 +44,12 @@ public class VistaJuegoPVEController implements Initializable {
     private Label labelJugador;
     @FXML
     private Label labelPuntuacion;
+
+    private Stage stageJuegoPVE;
+    private Scene escenaJuegoPVE;
+    private Player jugadorActual;
+    private static boolean turno = true; // True -> Player / False -> Ordenador
+    private MatrizDeTablero tableroIniciado;
 
     /**
      * Initializes the controller class.
@@ -80,6 +81,10 @@ public class VistaJuegoPVEController implements Initializable {
         tableroGrid.getChildren().add(0, node);
     }
 
+    private void añadirCirculos() {
+        // añadir todos los circulos blancos.
+    }
+
     private boolean switcherTurno() {
         turno = !turno;
         return turno;
@@ -98,7 +103,7 @@ public class VistaJuegoPVEController implements Initializable {
 
         // Ejemplo para pintar de rojo -> ficha.setFill(javafx.scene.paint.Color.RED);
         ficha.setFill(javafx.scene.paint.Color.RED);
-        ficha.setRadius(20);
+        ficha.setRadius(32);
         ficha.setVisible(true);
 
         tableroGrid.add(ficha, posicionX, 6 - posicionY);
@@ -163,7 +168,7 @@ public class VistaJuegoPVEController implements Initializable {
         return tamaño;
     }
 
-    //Turno de la máquina
+    // Turno de la máquina.
     private void juegaMaquina() {
         int x = (int) (Math.random() * 7);
         int y = tableroIniciado.ultimaFicha(x);;
@@ -171,22 +176,21 @@ public class VistaJuegoPVEController implements Initializable {
         Circle ficha = new Circle();
 
         ficha.setFill(javafx.scene.paint.Color.YELLOW);
-        ficha.setRadius(20);
+        ficha.setRadius(32);
         ficha.setVisible(true);
-
         tableroGrid.add(ficha, x, 6 - y);
     }
 
     public void alertaVictoria(boolean victoria) throws Connect4DAOException {
         Alert alerta = new Alert(AlertType.CONFIRMATION);
         if (victoria) {
-            alerta.setTitle("Victoria!");
-            alerta.setHeaderText("Has ganado!");
-            alerta.setContentText("Quieres volver a jugar?");
+            alerta.setTitle("¡Victoria!");
+            alerta.setHeaderText("¡Has ganado!");
+            alerta.setContentText("¿Quieres volver a jugar?");
         } else {
             alerta.setTitle("Derrota");
             alerta.setHeaderText("Has perdido...");
-            alerta.setContentText("Quieres volver a jugar?");
+            alerta.setContentText("¿Quieres volver a jugar?");
         }
 
         Optional<ButtonType> resultado = alerta.showAndWait();
@@ -205,7 +209,7 @@ public class VistaJuegoPVEController implements Initializable {
         }
     }
 
-    //suma los puntos que haya en el label puntos y limpia
+    // Suma los puntos que haya en el label puntos y limpia.
     public void sumaPuntos() throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         int puntos = 20;
