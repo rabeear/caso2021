@@ -36,8 +36,6 @@ public class VistaCodigoRecuperacionController implements Initializable {
     @FXML
     private Button enviarButton;
     @FXML
-    private Button cancelarButton;
-    @FXML
     private Label incorrecto;
 
     private Stage codigoRecu;

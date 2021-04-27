@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -28,7 +29,6 @@ import model.Player;
  */
 public class VistaSegundaPrincipalController implements Initializable {
 
-    private Stage actualStage;
     private Scene escenaActual;
     @FXML
     private Button btnUnJugador;
@@ -36,9 +36,13 @@ public class VistaSegundaPrincipalController implements Initializable {
     private Button btnDosJugadores;
     @FXML
     private Button btnCerrarSesion;
-    private String user, password;
     @FXML
     public Label nombreUsuario;
+    @FXML
+    private ImageView foto;
+
+    private Stage actualStage;
+    private String user, password;
 
     /**
      * Initializes the controller class.
@@ -48,17 +52,19 @@ public class VistaSegundaPrincipalController implements Initializable {
         // TODO
     }
 
-    void initStage(Stage stage, String usr, String passwd) {
+    void initStage(Stage stage, String usr, String passwd) throws Connect4DAOException {
         actualStage = stage;
         escenaActual = stage.getScene();
         user = usr;
         password = passwd;
+        Connect4 connect4 = Connect4.getSingletonConnect4();
+        foto.imageProperty().setValue(connect4.getPlayer(user).getAvatar());
     }
 
     @FXML
     private void clickCerrarSesion(ActionEvent event) {
         try {
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
             HBox root = (HBox) cargador.load();
             VistaPrincipalController ventanaIni = cargador.<VistaPrincipalController>getController();
             ventanaIni.initStage(actualStage);

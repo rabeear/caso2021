@@ -8,15 +8,19 @@ package javafxconnect4;
 import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -40,14 +44,16 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     private TextField userCuadro;
     @FXML
     private PasswordField psswdCuadro;
+    @FXML
+    private ImageView imagenJ1;
+    @FXML
+    private Label incorrecto;
 
     private Stage actualStage;
     private Scene escenaActual;
     private Player player1, player2;
     @FXML
-    private Label labelIndicador;
-    @FXML
-    private ImageView imagenJ1;
+    private Button iniciarButton;
 
     /**
      * Initializes the controller class.
@@ -55,6 +61,13 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        iniciarButton.disableProperty().bind(Bindings.or(
+                Bindings.createBooleanBinding(() -> {
+                    return userCuadro.getText().split(" ").length == 0
+                            && psswdCuadro.getText().split(" ").length == 0;
+                }, userCuadro.textProperty(), psswdCuadro.textProperty()),
+                Bindings.or(Bindings.isEmpty(userCuadro.textProperty()),
+                        Bindings.isEmpty(psswdCuadro.textProperty()))));
     }
 
     public void initStage(Stage stage, Player player) throws Connect4DAOException {
@@ -65,18 +78,33 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
         imagenJ1.imageProperty().setValue(player1.getAvatar());
         userJ1.setText(player.getNickName());
         pointsJ1.setText("" + player.getPoints());
-        
-
     }
 
     @FXML
     private void clickInicioJ2(ActionEvent event) throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
-        try {
-            Player loginTest = connect4.getPlayer(userCuadro.getText());
+        inicioJ2();
+    }
 
-            if (loginTest.getPassword().equals(psswdCuadro.getText()) && loginTest != player1) {
-                player2 = loginTest;
+    @FXML
+    private void enterInicioJ2(KeyEvent event) throws Connect4DAOException {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            inicioJ2();
+        }
+    }
+
+    private void inicioJ2() throws Connect4DAOException {
+        Connect4 connect4 = Connect4.getSingletonConnect4();
+        if (!connect4.exitsNickName(userCuadro.getText())) {
+            incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
+        } else {
+            Player login = connect4.getPlayer(userCuadro.getText());
+            if (!login.getPassword().equals(psswdCuadro.getText())) {
+                incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
+            } else {
+                if (!incorrecto.getText().equals("")) {
+                    incorrecto.setText("");
+                }
+                player2 = login;
                 try {
                     FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
                     Pane root = (Pane) cargador.load();
@@ -89,8 +117,6 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
                     e.printStackTrace();
                 }
             }
-        } catch (Exception e) {
-            labelIndicador.setText("Usuario o contraseña incorrecto");
         }
     }
 

@@ -55,6 +55,7 @@ public class VistaJuegoPVPController implements Initializable {
     private Player j1, j2;
     private static boolean turno = true; //Controlar el turno, true -> j1, false -> j2
     private Round partida;
+
     /**
      * Initializes the controller class.
      */
@@ -80,13 +81,13 @@ public class VistaJuegoPVPController implements Initializable {
         int posicionY = tableroIniciado.ultimaFicha(posicionX);
         // indicadorPruebas.setText(posicionX + "," + posicionY);
         tableroIniciado.setNumero(posicionX, posicionY, turno);
-        
-        if (turno) { //jugador 1;
+
+        if (turno) { // Jugador 1.
             labelJugador.setText(j1.getNickName());
             ficha.setFill(javafx.scene.paint.Color.RED);
             ficha.setRadius(20);
             ficha.setVisible(true);
-            
+
             tableroGrid.add(ficha, posicionX, 6 - posicionY);
             Thread.sleep(500);
             switcherTurno();
@@ -96,14 +97,13 @@ public class VistaJuegoPVPController implements Initializable {
                 labelPuntuacion.setText("" + n);
                 partida = connect4.regiterRound(t, j1, j2);
                 alertaVictoria(true);
-            return; // Salir de la función.
+                return; // Salir de la función.
             }
         } else {
-            
             ficha.setFill(javafx.scene.paint.Color.YELLOW);
             ficha.setRadius(20);
             ficha.setVisible(true);
-            
+
             tableroGrid.add(ficha, posicionX, 6 - posicionY);
             Thread.sleep(500);
             switcherTurno();
@@ -116,7 +116,7 @@ public class VistaJuegoPVPController implements Initializable {
                 alertaVictoria(false);
                 return; // Salir de la función.
             }
-            }
+        }
     }
 
     void initStage(Stage actualStage, Player player1, Player player2) {
@@ -124,8 +124,8 @@ public class VistaJuegoPVPController implements Initializable {
         escenaActual = actualStage.getScene();
         j1 = player1;
         j2 = player2;
-        labelPuntuacion.setText(""+j1.getPoints());
-        labelPuntuacion2.setText(""+j2.getPoints());
+        labelPuntuacion.setText("" + j1.getPoints());
+        labelPuntuacion2.setText("" + j2.getPoints());
         labelJugador.setText(j1.getNickName());
         tableroIniciado = new MatrizDeTablero();
     }
@@ -146,7 +146,7 @@ public class VistaJuegoPVPController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     private int posicionarX(int x) {
         int max, min, medida;
         Bounds tamaño = tamañoGrid();
@@ -161,13 +161,6 @@ public class VistaJuegoPVPController implements Initializable {
         if (x < 4 * medida) { //si X esta por debajo de la mitad
             if (x < 2 * medida) {
                 return (x < medida) ? 0 : 1;
-                /*
-                if (x < medida) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-                 */
             }
             return (x < 3 * medida) ? 2 : 3;
         } else {
@@ -178,24 +171,24 @@ public class VistaJuegoPVPController implements Initializable {
             }
         }
     }
-    
+
     private Bounds tamañoGrid() {
         Bounds tamaño = tableroGrid.getBoundsInLocal();
         return tamaño;
     }
-    
+
     public void alertaVictoria(boolean victoria) throws Connect4DAOException {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
         Player j;
         if (victoria) {
-            alerta.setTitle("Ha ganado "+j1.getNickName()+"!!");
-            alerta.setHeaderText("ENORABUENA:)");
-            alerta.setContentText("Quieres volver a jugar?");
+            alerta.setTitle("¡Ha ganado " + j1.getNickName() + "!");
+            alerta.setHeaderText("¡ENORABUENA!");
+            alerta.setContentText("¿Queréis volver a jugar?");
             j = j1;
         } else {
-            alerta.setTitle("Ha ganado "+j2.getNickName()+"!!");
-            alerta.setHeaderText("ENORABUENA:)");
-            alerta.setContentText("Quieres volver a jugar?");
+            alerta.setTitle("¡Ha ganado " + j2.getNickName() + "!");
+            alerta.setHeaderText("¡ENORABUENA!");
+            alerta.setContentText("¿Queréis volver a jugar?");
             j = j2;
         }
 
@@ -214,7 +207,7 @@ public class VistaJuegoPVPController implements Initializable {
             sumaPuntos(j);
         }
     }
-    
+
     public void sumaPuntos(Player jugadorActual) throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         int puntos = 50;
@@ -222,12 +215,12 @@ public class VistaJuegoPVPController implements Initializable {
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
         jugadorActual.plusPoints(puntos);
         if (jugadorActual.equals(j1)) {
-            labelPuntuacion.setText(""+jugadorActual.getPoints());
+            labelPuntuacion.setText("" + jugadorActual.getPoints());
         } else {
-            labelPuntuacion.setText(""+jugadorActual.getPoints());
-        } 
+            labelPuntuacion.setText("" + jugadorActual.getPoints());
+        }
     }
-    
+
     private boolean switcherTurno() {
         turno = !turno;
         return turno;
