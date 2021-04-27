@@ -9,6 +9,10 @@ import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Connect4;
 import model.Player;
 
@@ -39,8 +44,6 @@ public class VistaJuegoPVEController implements Initializable {
     @FXML
     private GridPane tableroGrid;
     @FXML
-    private Label indicadorPruebas;
-    @FXML
     private Label labelJugador;
     @FXML
     private Label labelPuntuacion;
@@ -50,6 +53,8 @@ public class VistaJuegoPVEController implements Initializable {
     private Player jugadorActual;
     private static boolean turno = true; // True -> Player / False -> Ordenador
     private MatrizDeTablero tableroIniciado;
+    private final double TRANSLATE_Y = 68.5;
+    private final double TRANSLATE_X = 66;
 
     /**
      * Initializes the controller class.
@@ -100,28 +105,15 @@ public class VistaJuegoPVEController implements Initializable {
 
     @FXML
     private void clickJugar(MouseEvent event) throws InterruptedException, Connect4DAOException {
-        // Crear ficha (Objeto (nodo) Circulo).
-        Circle ficha = new Circle();
+        ponerFichaR(event);
 
-        // Cordenadas del click.
-        int posicionX = posicionarX((int) event.getX());
-        int posicionY = tableroIniciado.ultimaFicha(posicionX);
-        indicadorPruebas.setText(posicionX + "," + posicionY);
-        tableroIniciado.setNumero(posicionX, posicionY, turno);
-
-        // Ejemplo para pintar de rojo -> ficha.setFill(javafx.scene.paint.Color.RED);
-        ficha.setFill(javafx.scene.paint.Color.RED);
-        ficha.setRadius(32);
-        ficha.setVisible(true);
-
-        tableroGrid.add(ficha, posicionX, 6 - posicionY);
-        Thread.sleep(500);
+        // Aquí falta añadir algo para que la máquqina espere un poco a hacer
+        // su movimiento que no sea un sleep porque si no la animación de la ficha roja no funciona.
         switcherTurno();
 
         if (tableroIniciado.comprobacionJuego()) {
             int n = Integer.parseInt(labelPuntuacion.getText()) + 20;
             labelPuntuacion.setText("" + n);
-            indicadorPruebas.setText("Gana " + jugadorActual.getNickName()); // Cambiar por autoreinicio o alerta + 2 botones con reinicio o salir.
             alertaVictoria(true);
             return; // Salir de la función.
         }
@@ -131,11 +123,48 @@ public class VistaJuegoPVEController implements Initializable {
         labelJugador.setText(jugadorActual.getNickName());
 
         if (tableroIniciado.comprobacionJuego()) {
-            indicadorPruebas.setText("Gana ordenador");
             alertaVictoria(false);
             return; // Salir de la función.
         }
         switcherTurno();
+    }
+
+    // Turno de la máquina.
+    private void juegaMaquina() {
+        int x = (int) (Math.random() * 7);
+        int y = tableroIniciado.ultimaFicha(x);
+        tableroIniciado.setNumero(x, y, turno);
+        Circle ficha = new Circle();
+
+        ficha.setFill(javafx.scene.paint.Color.YELLOW);
+        ficha.setRadius(32);
+        ficha.setVisible(true);
+
+        tableroGrid.getChildren().add(ficha);
+        ficha.setTranslateX(TRANSLATE_X * x);
+        TranslateTransition animation = new TranslateTransition(Duration.seconds(0.5), ficha);
+        animation.setToY(TRANSLATE_Y * (6 - y));
+        animation.play();
+    }
+
+    private void ponerFichaR(MouseEvent event) throws InterruptedException {
+        // Crear ficha (Objeto (nodo) Circulo).
+        Circle ficha = new Circle();
+
+        // Cordenadas del click.
+        int posicionX = posicionarX((int) event.getX());
+        int posicionY = tableroIniciado.ultimaFicha(posicionX);
+        tableroIniciado.setNumero(posicionX, posicionY, turno);
+
+        ficha.setFill(javafx.scene.paint.Color.RED);
+        ficha.setRadius(32);
+        ficha.setVisible(true);
+
+        tableroGrid.getChildren().add(ficha);
+        ficha.setTranslateX(TRANSLATE_X * posicionX);
+        TranslateTransition animation = new TranslateTransition(Duration.seconds(0.5), ficha);
+        animation.setToY(TRANSLATE_Y * (6 - posicionY));
+        animation.play();
     }
 
     // Saber que columna se clica, de 0 a 7.
@@ -164,29 +193,10 @@ public class VistaJuegoPVEController implements Initializable {
         }
     }
 
-    // Saber en que Y se tiene que posicionar el nodo circulo nuevo.
-    private int fichasEnColumna(int col) {
-        int max, min, res, media;
-        return 0;
-    }
-
     // Obtener tamaño del gridTablero.
     private Bounds tamañoGrid() {
         Bounds tamaño = tableroGrid.getBoundsInLocal();
         return tamaño;
-    }
-
-    // Turno de la máquina.
-    private void juegaMaquina() {
-        int x = (int) (Math.random() * 7);
-        int y = tableroIniciado.ultimaFicha(x);;
-        tableroIniciado.setNumero(x, y, turno);
-        Circle ficha = new Circle();
-
-        ficha.setFill(javafx.scene.paint.Color.YELLOW);
-        ficha.setRadius(32);
-        ficha.setVisible(true);
-        tableroGrid.add(ficha, x, 6 - y);
     }
 
     public void alertaVictoria(boolean victoria) throws Connect4DAOException {

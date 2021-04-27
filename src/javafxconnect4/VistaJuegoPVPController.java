@@ -167,10 +167,10 @@ public class VistaJuegoPVPController implements Initializable {
         if (min < 0) {
             min = 0;
         }
-        medida = (max - min) / 8; //cuanto mide cada columna
+        medida = (max - min) / 8; // Cuánto mide cada columna.
 
-        //saber donde esta el click:
-        if (x < 4 * medida) { //si X esta por debajo de la mitad
+        // Saber donde esta el click.
+        if (x < 4 * medida) { // Si X esta por debajo de la mitad.
             if (x < 2 * medida) {
                 return (x < medida) ? 0 : 1;
             }
