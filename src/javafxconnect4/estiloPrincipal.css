@@ -31,8 +31,14 @@ and open the template in the editor.
 
 #imagenPrincipal {
     -fx-background-image: url('../imagenes/fondo1.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: absolute;
 }
 
 #inicioSesion {
     font-size: 40px;
+}
+
+.fondoPrin {
+    
 }

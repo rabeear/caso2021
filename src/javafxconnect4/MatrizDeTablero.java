@@ -90,7 +90,7 @@ public class MatrizDeTablero {
                     break;
                 }
             }
-        }
+        } 
         for (int i = 7; i >= 3; i--) {
             for (int j = 6; j >= 3; j--) {
                 if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i - 1][j - 1]
@@ -101,7 +101,18 @@ public class MatrizDeTablero {
                 }
             }
         }
+        for (int j = 6; j >= 3; j--) { //j es la Y, las filas
+            for (int i = 0; i <= 4; i++) {
+                if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i + 1][j - 1]
+                        && matrizPrincipal[i + 1][j - 1] == matrizPrincipal[i + 2][j - 2]
+                        && matrizPrincipal[i + 2][j - 2] == matrizPrincipal[i + 3][j - 3]) {
+                    res = true;
+                    break;
+                }
+            }
+        } 
         return res;
+        
     }
 
     public boolean comprobacionJuego() {
