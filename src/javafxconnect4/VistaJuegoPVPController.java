@@ -57,6 +57,7 @@ public class VistaJuegoPVPController implements Initializable {
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
     private final int RADIUS = 32;
+    private final int PUNTOS = 50;
 
     /**
      * Initializes the controller class.
@@ -79,6 +80,7 @@ public class VistaJuegoPVPController implements Initializable {
 
     @FXML
     private void clickSalir(ActionEvent event) {
+        turno = true;
         try {
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
             HBox root = (HBox) cargador.load();
@@ -120,44 +122,50 @@ public class VistaJuegoPVPController implements Initializable {
     }
 
     @FXML
-    private void clickJugar(MouseEvent event) throws InterruptedException, Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
-        Circle ficha = new Circle();
-        LocalDateTime t = LocalDateTime.now();
+    private void clickJugar(MouseEvent event) throws Connect4DAOException {
+        Circle ficha = fichaActual();
+        // Obtenemos coordenadas del click
         int posicionX = posicionarX((int) event.getX());
         int posicionY = tableroIniciado.ultimaFicha(posicionX);
-        tableroIniciado.setNumero(posicionX, posicionY, turno);
 
-        ficha.setRadius(RADIUS);
-        ficha.setVisible(true);
+        // Añadimos la ficha a la matriz tablero.
+        tableroIniciado.setNumero(posicionX, posicionY, turno);
 
         if (turno) { // Jugador 1.
             labelJugador.setText(j1.getNickName());
-            ficha.setFill(javafx.scene.paint.Color.RED);
-
-            animation(ficha, posicionX, posicionY);
-            switcherTurno();
             labelJugador.setText(j2.getNickName());
-            if (tableroIniciado.comprobacionJuego()) {
-                int n = Integer.parseInt(labelPuntuacion.getText()) + 50;
-                labelPuntuacion.setText("" + n);
-                connect4.regiterRound(t, j1, j2);
-                alertaVictoria(true);
-            }
         } else {
-            ficha.setFill(javafx.scene.paint.Color.YELLOW);
-
-            animation(ficha, posicionX, posicionY);
-            switcherTurno();
             labelJugador.setText(j1.getNickName());
-            if (tableroIniciado.comprobacionJuego()) {
-                int n = Integer.parseInt(labelPuntuacion2.getText()) + 50;
-                labelPuntuacion2.setText("" + n);
-                connect4.regiterRound(t, j1, j2);
-                connect4.setPointsAlone(posicionY);
-                alertaVictoria(false);
-            }
         }
+        animation(ficha, posicionX, posicionY);
+        boolean finPartida = comprobacion();
+        if (!finPartida) {
+            switcherTurno();
+        }
+    }
+
+    private boolean comprobacion() throws Connect4DAOException {
+        if (tableroIniciado.comprobacionJuego()) {
+            LocalDateTime time = LocalDateTime.now();
+            Connect4 connect4 = Connect4.getSingletonConnect4();
+            int n;
+
+            if (turno) {
+                n = Integer.parseInt(labelPuntuacion.getText()) + PUNTOS;
+                labelPuntuacion.setText("" + n);
+            } else {
+                n = Integer.parseInt(labelPuntuacion2.getText()) + PUNTOS;
+                labelPuntuacion2.setText("" + n);
+            }
+            // connect4.setPointsAlone(posicionY); Hay qu comprobar para qué es esto.
+            connect4.regiterRound(time, j1, j2);
+            alertaVictoria(turno);
+            return true;
+        } else if (tableroIniciado.empate()) {
+            alertaEmpate();
+            return true;
+        }
+        return false;
     }
 
     private Circle fichaActual() {
@@ -170,10 +178,6 @@ public class VistaJuegoPVPController implements Initializable {
         ficha.setRadius(RADIUS);
         ficha.setVisible(true);
         return ficha;
-    }
-
-    private void ponerFichas(int posX, int posY) throws InterruptedException {
-        tableroIniciado.setNumero(posX, posY, turno);
     }
 
     private void animation(Circle ficha, int posicionX, int posicionY) {
@@ -233,12 +237,11 @@ public class VistaJuegoPVPController implements Initializable {
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             System.out.println("SEGUIR \n JUGANDO");
-            tableroIniciado.clear();
             sumaPuntos(j);
 
-            Node node = tableroGrid.getChildren().get(0);
             tableroGrid.getChildren().clear();
-            tableroGrid.getChildren().add(0, node);
+            tableroIniciado.clear();
+            añadirCirculos();
         } else {
             System.out.println("SALIR");
             stageActual.setScene(escenaActual);
