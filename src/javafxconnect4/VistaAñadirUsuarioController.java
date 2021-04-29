@@ -5,6 +5,7 @@
  */
 package javafxconnect4;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -49,8 +50,7 @@ public class VistaAñadirUsuarioController implements Initializable {
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);
             actual.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
         }
     }
 

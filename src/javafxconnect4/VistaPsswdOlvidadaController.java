@@ -6,6 +6,7 @@
 package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
@@ -32,8 +33,6 @@ public class VistaPsswdOlvidadaController implements Initializable {
 
     @FXML
     private TextField campoCorreo;
-    @FXML
-    private Button btnCancelar;
     @FXML
     private TextField campoUser;
     @FXML
@@ -81,8 +80,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
                 Node miNodo = (Node) event.getSource();
                 miNodo.getScene().getWindow().hide();
                 System.out.println("Cerrando PSSWDOlvidada...");
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (IOException e) {
             }
         }
     }

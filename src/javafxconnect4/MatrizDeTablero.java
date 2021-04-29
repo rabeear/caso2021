@@ -118,6 +118,12 @@ public class MatrizDeTablero {
         return this.columna() || this.linea() || this.diagonal();
     }
 
+    /**
+     * Comprobamos si lacolumna esta llena.
+     *
+     * @param columna
+     * @return
+     */
     public boolean columnaLlena(int columna) {
         return !(matrizPrincipal[columna][ROW - 1] == -1);
     }

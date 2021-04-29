@@ -6,6 +6,7 @@
 package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -29,20 +30,14 @@ import model.Player;
  */
 public class VistaSegundaPrincipalController implements Initializable {
 
-    private Scene escenaActual;
-    @FXML
-    private Button btnUnJugador;
-    @FXML
-    private Button btnDosJugadores;
-    @FXML
-    private Button btnCerrarSesion;
     @FXML
     public Label nombreUsuario;
     @FXML
     private ImageView foto;
 
     private Stage actualStage;
-    private String user, password;
+    private String user;
+    private Scene escenaActual;
 
     /**
      * Initializes the controller class.
@@ -56,7 +51,6 @@ public class VistaSegundaPrincipalController implements Initializable {
         actualStage = stage;
         escenaActual = stage.getScene();
         user = usr;
-        password = passwd;
         Connect4 connect4 = Connect4.getSingletonConnect4();
         foto.imageProperty().setValue(connect4.getPlayer(user).getAvatar());
     }
@@ -71,8 +65,7 @@ public class VistaSegundaPrincipalController implements Initializable {
             Scene scene = new Scene(root, 800, 500);
             actualStage.setScene(scene);
             actualStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
         }
     }
 
@@ -89,8 +82,7 @@ public class VistaSegundaPrincipalController implements Initializable {
             Scene scene = new Scene(root, 800, 500);
             actualStage.setScene(scene);
             actualStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Connect4DAOException | IOException e) {
         }
     }
 
@@ -107,8 +99,7 @@ public class VistaSegundaPrincipalController implements Initializable {
             Scene scene = new Scene(root, 800, 500);
             actualStage.setScene(scene);
             actualStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Connect4DAOException | IOException e) {
         }
     }
 }

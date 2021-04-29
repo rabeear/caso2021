@@ -26,10 +26,10 @@
                </VBox.margin>
             </Label>
             <ImageView fx:id="foto" fitHeight="122.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="btnUnJugador" mnemonicParsing="false" onAction="#clickJuagarPVE" prefHeight="39.0" prefWidth="170.0" text="UN JUGADOR" />
-            <Button fx:id="btnDosJugadores" mnemonicParsing="false" onAction="#clickJugarPVP" prefHeight="39.0" prefWidth="170.0" text="DOS JUGADORES" />
+            <Button mnemonicParsing="false" onAction="#clickJuagarPVE" prefHeight="39.0" prefWidth="170.0" text="UN JUGADOR" />
+            <Button mnemonicParsing="false" onAction="#clickJugarPVP" prefHeight="39.0" prefWidth="170.0" text="DOS JUGADORES" />
             <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="RANKING(?)" visible="false" />
-            <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: none;" text="cerrar sesión" underline="true" />
+            <Button mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="39.0" prefWidth="170.0" style="-fx-background-color: none;" text="cerrar sesión" underline="true" />
          </children>
       </VBox>
    </children>

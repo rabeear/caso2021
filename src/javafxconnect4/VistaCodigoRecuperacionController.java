@@ -88,7 +88,6 @@ public class VistaCodigoRecuperacionController implements Initializable {
                 // Mostramos diálogo.
                 alert.showAndWait();
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }

@@ -51,7 +51,7 @@
       <HBox alignment="CENTER" prefHeight="68.0" prefWidth="650.0" spacing="50.0">
          <children>
             <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#enviarCorreo" prefHeight="30.0" prefWidth="95.0" text="Enviar" />
-            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#opcionCancelar" prefHeight="30.0" prefWidth="95.0" text="Cancelar" />
+            <Button mnemonicParsing="false" onAction="#opcionCancelar" prefHeight="30.0" prefWidth="95.0" text="Cancelar" />
          </children>
       </HBox>
    </children>

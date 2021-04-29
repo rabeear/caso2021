@@ -6,6 +6,7 @@
 package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
@@ -22,7 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Connect4;
 import model.Player;
@@ -34,8 +34,6 @@ import model.Player;
  */
 public class VistaInicioSesionSegundoJugadorController implements Initializable {
 
-    @FXML
-    private Text labelJ1;
     @FXML
     private Label userJ1;
     @FXML
@@ -70,8 +68,7 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
                         Bindings.isEmpty(psswdCuadro.textProperty()))));
     }
 
-    public void initStage(Stage stage, Player player) throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
+    public void initStage(Stage stage, Player player) {
         actualStage = stage;
         escenaActual = stage.getScene();
         player1 = player;
@@ -113,8 +110,7 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
                     Scene scene = new Scene(root, 800, 500);
                     actualStage.setScene(scene);
                     actualStage.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (IOException e) {
                 }
             }
         }

@@ -47,7 +47,7 @@
             <Line endX="100.0" startX="-100.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                <children>
-                  <Button fx:id="btnReinicio" mnemonicParsing="false" onAction="#clickReinicio" prefHeight="39.0" prefWidth="190.0" text="REINICIAR PARTIDA" />
+                  <Button mnemonicParsing="false" onAction="#clickReinicio" prefHeight="39.0" prefWidth="190.0" text="REINICIAR PARTIDA" />
                   <Button mnemonicParsing="false" onAction="#clickSalirPartida" prefHeight="39.0" prefWidth="190.0" text="SALIR" />
                </children>
             </VBox>

@@ -37,8 +37,6 @@ import model.Player;
 public class VistaJuegoPVEController implements Initializable {
 
     @FXML
-    private Button btnReinicio;
-    @FXML
     private GridPane tableroGrid;
     @FXML
     private Label labelJugador;
@@ -87,7 +85,7 @@ public class VistaJuegoPVEController implements Initializable {
     }
 
     private void añadirCirculos() {
-        // añadir todos los circulos blancos.
+        // Añadir todos los circulos blancos.
         for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
             for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
                 Circle circulo = new Circle();

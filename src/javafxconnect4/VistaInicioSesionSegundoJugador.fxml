@@ -19,7 +19,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="20.0">
          <children>
-            <Text fx:id="labelJ1" strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 1">
                <font>
                   <Font name="Yu Gothic Regular" size="30.0" />
                </font>

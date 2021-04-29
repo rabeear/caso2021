@@ -6,6 +6,7 @@
 package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -30,7 +31,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Connect4;
 import model.Player;
-import model.Round;
 
 /**
  * FXML Controller class
@@ -44,10 +44,6 @@ public class VistaJuegoPVPController implements Initializable {
     @FXML
     private Label labelPuntuacion;
     @FXML
-    private Label indicadorPruebas;
-    @FXML
-    private Button btnReinicio;
-    @FXML
     private GridPane tableroGrid;
     @FXML
     private Label labelPuntuacion2;
@@ -57,7 +53,6 @@ public class VistaJuegoPVPController implements Initializable {
     private Scene escenaActual;
     private Player j1, j2;
     private static boolean turno = true; //Controlar el turno, true -> j1, false -> j2
-    private Round partida;
     private final double TRANSLATE_Y = 68.5;
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
@@ -69,90 +64,6 @@ public class VistaJuegoPVPController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-
-    @FXML
-    private void clickReinicio(ActionEvent event) {
-        tableroIniciado.clear();
-        tableroGrid.getChildren().clear();
-        añadirCirculos();
-        turno = true;
-    }
-
-    private void añadirCirculos() {
-        // Añadir todos los circulos blancos.
-        for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
-            for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
-                Circle circulo = new Circle();
-                circulo.setFill(javafx.scene.paint.Color.WHITE);
-                circulo.setRadius(RADIUS - 1);
-                circulo.setVisible(true);
-                tableroGrid.add(circulo, c, r);
-            }
-        }
-    }
-
-    @FXML
-    private void clickJugar(MouseEvent event) throws InterruptedException, Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
-        Circle ficha = new Circle();
-        LocalDateTime t = LocalDateTime.now();
-        int posicionX = posicionarX((int) event.getX());
-        int posicionY = tableroIniciado.ultimaFicha(posicionX);
-        tableroIniciado.setNumero(posicionX, posicionY, turno);
-
-        ficha.setRadius(RADIUS);
-        ficha.setVisible(true);
-
-        if (turno) { // Jugador 1.
-            labelJugador.setText(j1.getNickName());
-            ficha.setFill(javafx.scene.paint.Color.RED);
-
-            animation(ficha, posicionX, posicionY);
-            switcherTurno();
-            labelJugador.setText(j2.getNickName());
-            if (tableroIniciado.comprobacionJuego()) {
-                int n = Integer.parseInt(labelPuntuacion.getText()) + 50;
-                labelPuntuacion.setText("" + n);
-                partida = connect4.regiterRound(t, j1, j2);
-                alertaVictoria(true);
-                return; // Salir de la función.
-            }
-        } else {
-            ficha.setFill(javafx.scene.paint.Color.YELLOW);
-
-            animation(ficha, posicionX, posicionY);
-            switcherTurno();
-            labelJugador.setText(j1.getNickName());
-            if (tableroIniciado.comprobacionJuego()) {
-                int n = Integer.parseInt(labelPuntuacion2.getText()) + 50;
-                labelPuntuacion2.setText("" + n);
-                partida = connect4.regiterRound(t, j1, j2);
-                connect4.setPointsAlone(posicionY);
-                alertaVictoria(false);
-                return; // Salir de la función.
-            }
-        }
-    }
-
-    private Circle fichaActual() {
-        Circle ficha = new Circle();
-        if (turno) {
-            ficha.setFill(javafx.scene.paint.Color.RED);
-        } else {
-            ficha.setFill(javafx.scene.paint.Color.YELLOW);
-        }
-        ficha.setRadius(RADIUS);
-        ficha.setVisible(true);
-        return ficha;
-    }
-
-    private void animation(Circle ficha, int posicionX, int posicionY) {
-        tableroGrid.getChildren().add(ficha);
-        ficha.setTranslateX(TRANSLATE_X * posicionX);
-        TranslateTransition animation = new TranslateTransition(Duration.seconds(0.5), ficha);
-        animation.setToY(TRANSLATE_Y * (6 - posicionY));
-        animation.play();
     }
 
     public void initStage(Stage actualStage, Player player1, Player player2) {
@@ -178,9 +89,99 @@ public class VistaJuegoPVPController implements Initializable {
             Scene scene = new Scene(root, 800, 500);
             stageActual.setScene(scene);
             stageActual.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Connect4DAOException | IOException e) {
         }
+    }
+
+    @FXML
+    private void clickReinicio(ActionEvent event) {
+        tableroIniciado.clear();
+        tableroGrid.getChildren().clear();
+        añadirCirculos();
+        turno = true;
+    }
+
+    private void añadirCirculos() {
+        // Añadir todos los circulos blancos.
+        for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
+            for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
+                Circle circulo = new Circle();
+                circulo.setFill(javafx.scene.paint.Color.WHITE);
+                circulo.setRadius(RADIUS - 1);
+                circulo.setVisible(true);
+                tableroGrid.add(circulo, c, r);
+            }
+        }
+    }
+
+    private boolean switcherTurno() {
+        turno = !turno;
+        return turno;
+    }
+
+    @FXML
+    private void clickJugar(MouseEvent event) throws InterruptedException, Connect4DAOException {
+        Connect4 connect4 = Connect4.getSingletonConnect4();
+        Circle ficha = new Circle();
+        LocalDateTime t = LocalDateTime.now();
+        int posicionX = posicionarX((int) event.getX());
+        int posicionY = tableroIniciado.ultimaFicha(posicionX);
+        tableroIniciado.setNumero(posicionX, posicionY, turno);
+
+        ficha.setRadius(RADIUS);
+        ficha.setVisible(true);
+
+        if (turno) { // Jugador 1.
+            labelJugador.setText(j1.getNickName());
+            ficha.setFill(javafx.scene.paint.Color.RED);
+
+            animation(ficha, posicionX, posicionY);
+            switcherTurno();
+            labelJugador.setText(j2.getNickName());
+            if (tableroIniciado.comprobacionJuego()) {
+                int n = Integer.parseInt(labelPuntuacion.getText()) + 50;
+                labelPuntuacion.setText("" + n);
+                connect4.regiterRound(t, j1, j2);
+                alertaVictoria(true);
+            }
+        } else {
+            ficha.setFill(javafx.scene.paint.Color.YELLOW);
+
+            animation(ficha, posicionX, posicionY);
+            switcherTurno();
+            labelJugador.setText(j1.getNickName());
+            if (tableroIniciado.comprobacionJuego()) {
+                int n = Integer.parseInt(labelPuntuacion2.getText()) + 50;
+                labelPuntuacion2.setText("" + n);
+                connect4.regiterRound(t, j1, j2);
+                connect4.setPointsAlone(posicionY);
+                alertaVictoria(false);
+            }
+        }
+    }
+
+    private Circle fichaActual() {
+        Circle ficha = new Circle();
+        if (turno) {
+            ficha.setFill(javafx.scene.paint.Color.RED);
+        } else {
+            ficha.setFill(javafx.scene.paint.Color.YELLOW);
+        }
+        ficha.setRadius(RADIUS);
+        ficha.setVisible(true);
+        return ficha;
+    }
+
+    private void ponerFichas(int posX, int posY) throws InterruptedException {
+        tableroIniciado.setNumero(posX, posY, turno);
+    }
+
+    private void animation(Circle ficha, int posicionX, int posicionY) {
+        tableroGrid.getChildren().add(ficha);
+        ficha.setTranslateX(TRANSLATE_X * posicionX);
+        TranslateTransition animation = new TranslateTransition(Duration.seconds(0.5), ficha);
+        animation.setToY(TRANSLATE_Y * (6 - posicionY));
+        animation.play();
     }
 
     private int posicionarX(int x) {
@@ -208,6 +209,7 @@ public class VistaJuegoPVPController implements Initializable {
         }
     }
 
+    // Obtener tamaño del gridTablero.
     private Bounds tamañoGrid() {
         Bounds tamaño = tableroGrid.getBoundsInLocal();
         return tamaño;
@@ -245,6 +247,25 @@ public class VistaJuegoPVPController implements Initializable {
         turno = true;
     }
 
+    private void alertaEmpate() throws Connect4DAOException {
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle("¡Empate!");
+        alerta.setHeaderText("¡Habéis empatado!");
+        alerta.setContentText("¿Quieres volver a jugar?");
+        Optional<ButtonType> resultado = alerta.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            System.out.println("SEGUIR \n JUGANDO");
+
+            tableroIniciado.clear();
+            tableroGrid.getChildren().clear();
+            añadirCirculos();
+        } else {
+            System.out.println("SALIR");
+            stageActual.setScene(escenaActual);
+        }
+        turno = true;
+    }
+
     public void sumaPuntos(Player jugadorActual) throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         int puntos = 50;
@@ -256,10 +277,5 @@ public class VistaJuegoPVPController implements Initializable {
         } else {
             labelPuntuacion.setText("" + jugadorActual.getPoints());
         }
-    }
-
-    private boolean switcherTurno() {
-        turno = !turno;
-        return turno;
     }
 }

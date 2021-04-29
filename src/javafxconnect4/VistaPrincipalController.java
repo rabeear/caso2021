@@ -6,6 +6,7 @@
 package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -35,19 +36,11 @@ import model.Player;
 public class VistaPrincipalController implements Initializable {
 
     @FXML
-    private Button botonIniciar;
-    @FXML
-    private Button btnNewAcc;
-    @FXML
-    private Button btnPasswd;
-    @FXML
     private TextField user;
     @FXML
     private PasswordField passwd;
     @FXML
     private Label incorrecto;
-    @FXML
-    private CheckBox checkRecuerdame;
 
     private Stage stagePrincipal;
     private Scene escenaActual;
@@ -91,17 +84,10 @@ public class VistaPrincipalController implements Initializable {
                     Scene scene = new Scene(root, 800, 500);
                     stagePrincipal.setScene(scene);
                     stagePrincipal.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Connect4DAOException | IOException e) {
                 }
             }
         }
-    }
-
-    @FXML
-    private void cambioColorBoton(MouseEvent event) {
-        /* cambio de color en los botones al pasar por encima(Ni idea de como hacerlo de momento)*/
-
     }
 
     @FXML
@@ -116,8 +102,7 @@ public class VistaPrincipalController implements Initializable {
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);
             actual.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
         }
     }
 
@@ -133,8 +118,7 @@ public class VistaPrincipalController implements Initializable {
             actual.initModality(Modality.APPLICATION_MODAL);
             actual.show();
             stagePrincipal.hide();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
         }
     }
 
@@ -144,11 +128,6 @@ public class VistaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clickRecuerdo(ActionEvent event) {
-        if (checkRecuerdame.isSelected()) {
-            //función recuerdame
-        } else {
-
-        }
+    private void cambioColorBoton(MouseEvent event) {
     }
 }

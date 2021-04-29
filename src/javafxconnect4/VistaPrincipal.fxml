@@ -26,11 +26,11 @@
             <Label fx:id="incorrecto" alignment="CENTER" prefHeight="17.0" prefWidth="266.0" textFill="#f20000" />
             <TextField fx:id="user" onKeyPressed="#autentificacionEnter" promptText="Usuario" />
             <PasswordField fx:id="passwd" onKeyPressed="#autentificacionEnter" promptText="Contraseña" />
-            <Button id="botonInicio" fx:id="botonIniciar" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="72.0" prefWidth="60.0" />
+            <Button id="botonInicio" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="72.0" prefWidth="60.0" />
             <VBox alignment="CENTER" prefHeight="103.0" prefWidth="250.0" spacing="10.0">
                <children>
-                  <Button fx:id="btnNewAcc" mnemonicParsing="false" onAction="#irCrearCuenta" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="Crear cuenta" underline="true" />
-                  <Button fx:id="btnPasswd" mnemonicParsing="false" onAction="#passwdOlvidada" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="¿Contraseña olvidada?" underline="true" />
+                  <Button mnemonicParsing="false" onAction="#irCrearCuenta" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="Crear cuenta" underline="true" />
+                  <Button mnemonicParsing="false" onAction="#passwdOlvidada" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="¿Contraseña olvidada?" underline="true" />
                </children>
             </VBox>
          </children>
