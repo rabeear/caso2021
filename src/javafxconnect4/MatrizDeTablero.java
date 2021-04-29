@@ -12,12 +12,14 @@ package javafxconnect4;
 public class MatrizDeTablero {
 
     private int[][] matrizPrincipal;
+    private final int COL = 8;
+    private final int ROW = 7;
 
-    //se va a llenar con 0 y 1, 0 para el usuario y 1 para el ordenador. null cuando no haya nada
+    // Se va a llenar con 0 y 1, 0 para el usuario y 1 para el ordenador. -1 cuando no haya nada.
     public MatrizDeTablero() {
-        matrizPrincipal = new int[8][7];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 7; j++) {
+        matrizPrincipal = new int[COL][ROW];
+        for (int i = 0; i < COL; i++) {
+            for (int j = 0; j < ROW; j++) {
                 matrizPrincipal[i][j] = -1;
             }
         }
@@ -37,22 +39,22 @@ public class MatrizDeTablero {
 
     public int ultimaFicha(int x) {
         int res = 0;
-        while (res < 7 && matrizPrincipal[x][res] != -1) {
+        while (res < ROW && matrizPrincipal[x][res] != -1) {
             res += 1;
         }
         return res;
     }
 
     public void clear() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < COL; i++) {
+            for (int j = 0; j < ROW; j++) {
                 matrizPrincipal[i][j] = -1;
             }
         }
     }
 
     public boolean linea() {
-        for (int j = 0; j < 7; j++) { //j es la Y, las filas
+        for (int j = 0; j < ROW; j++) { //j es la Y, las filas
             for (int i = 0; i <= 4; i++) {
                 if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i + 1][j]
                         && matrizPrincipal[i + 1][j] == matrizPrincipal[i + 2][j]
@@ -65,7 +67,7 @@ public class MatrizDeTablero {
     }
 
     public boolean columna() {
-        for (int i = 0; i < 8; i++) { //j es la Y, las filas
+        for (int i = 0; i < COL; i++) { //j es la Y, las filas
             for (int j = 0; j <= 3; j++) {
                 if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i][j + 1]
                         && matrizPrincipal[i][j + 1] == matrizPrincipal[i][j + 2]
@@ -104,5 +106,18 @@ public class MatrizDeTablero {
 
     public boolean comprobacionJuego() {
         return this.columna() || this.linea() || this.diagonal();
+    }
+
+    public boolean columnaLlena(int columna) {
+        return !(matrizPrincipal[columna][ROW - 1] == -1);
+    }
+
+    public boolean empate() {
+        for (int i = 0; i < COL; i++) {
+            if (!columnaLlena(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

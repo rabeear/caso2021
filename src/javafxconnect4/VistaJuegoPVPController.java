@@ -10,6 +10,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Connect4;
 import model.Player;
 import model.Round;
@@ -55,6 +57,8 @@ public class VistaJuegoPVPController implements Initializable {
     private Player j1, j2;
     private static boolean turno = true; //Controlar el turno, true -> j1, false -> j2
     private Round partida;
+    private final double TRANSLATE_Y = 68.5;
+    private final double TRANSLATE_X = 66;
 
     /**
      * Initializes the controller class.
@@ -94,14 +98,14 @@ public class VistaJuegoPVPController implements Initializable {
         // indicadorPruebas.setText(posicionX + "," + posicionY);
         tableroIniciado.setNumero(posicionX, posicionY, turno);
 
+        ficha.setRadius(32);
+        ficha.setVisible(true);
+
         if (turno) { // Jugador 1.
             labelJugador.setText(j1.getNickName());
             ficha.setFill(javafx.scene.paint.Color.RED);
-            ficha.setRadius(32);
-            ficha.setVisible(true);
 
-            tableroGrid.add(ficha, posicionX, 6 - posicionY);
-            Thread.sleep(500);
+            animation(ficha, posicionX, posicionY);
             switcherTurno();
             labelJugador.setText(j2.getNickName());
             if (tableroIniciado.comprobacionJuego()) {
@@ -113,11 +117,8 @@ public class VistaJuegoPVPController implements Initializable {
             }
         } else {
             ficha.setFill(javafx.scene.paint.Color.YELLOW);
-            ficha.setRadius(32);
-            ficha.setVisible(true);
 
-            tableroGrid.add(ficha, posicionX, 6 - posicionY);
-            Thread.sleep(500);
+            animation(ficha, posicionX, posicionY);
             switcherTurno();
             labelJugador.setText(j1.getNickName());
             if (tableroIniciado.comprobacionJuego()) {
@@ -131,7 +132,15 @@ public class VistaJuegoPVPController implements Initializable {
         }
     }
 
-    void initStage(Stage actualStage, Player player1, Player player2) {
+    private void animation(Circle ficha, int posicionX, int posicionY) {
+        tableroGrid.getChildren().add(ficha);
+        ficha.setTranslateX(TRANSLATE_X * posicionX);
+        TranslateTransition animation = new TranslateTransition(Duration.seconds(0.5), ficha);
+        animation.setToY(TRANSLATE_Y * (6 - posicionY));
+        animation.play();
+    }
+
+    public void initStage(Stage actualStage, Player player1, Player player2) {
         stageActual = actualStage;
         escenaActual = actualStage.getScene();
         j1 = player1;
