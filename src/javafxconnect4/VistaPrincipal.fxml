@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -17,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="500.0" prefWidth="800.0" styleClass="fondoPrin" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
+<HBox prefHeight="500.0" prefWidth="800.0" styleClass="fondoPrin" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="480.0" prefWidth="280.0" spacing="20.0" HBox.hgrow="SOMETIMES">
          <children>
@@ -32,12 +26,7 @@
             <Label fx:id="incorrecto" alignment="CENTER" prefHeight="17.0" prefWidth="266.0" textFill="#f20000" />
             <TextField fx:id="user" onKeyPressed="#autentificacionEnter" promptText="Usuario" />
             <PasswordField fx:id="passwd" onKeyPressed="#autentificacionEnter" promptText="Contraseña" />
-            <VBox alignment="TOP_CENTER" prefHeight="142.0" prefWidth="250.0" spacing="30.0">
-               <children>
-                  <CheckBox fx:id="checkRecuerdame" mnemonicParsing="false" onAction="#clickRecuerdo" text="Recuérdame" />
-                  <Button id="botonInicio" fx:id="botonIniciar" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="72.0" prefWidth="60.0" />
-               </children>
-            </VBox>
+            <Button id="botonInicio" fx:id="botonIniciar" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="72.0" prefWidth="60.0" />
             <VBox alignment="CENTER" prefHeight="103.0" prefWidth="250.0" spacing="10.0">
                <children>
                   <Button fx:id="btnNewAcc" mnemonicParsing="false" onAction="#irCrearCuenta" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="Crear cuenta" underline="true" />

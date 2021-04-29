@@ -7,6 +7,7 @@ package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
@@ -51,7 +52,8 @@ public class VistaJuegoPVEController implements Initializable {
     private MatrizDeTablero tableroIniciado;
     private final double TRANSLATE_Y = 68.5;
     private final double TRANSLATE_X = 66;
-    private final int COL = 7;
+    private final int COL = 8;
+    private final int RADIUS = 32;
 
     /**
      * Initializes the controller class.
@@ -90,7 +92,7 @@ public class VistaJuegoPVEController implements Initializable {
             for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
                 Circle circulo = new Circle();
                 circulo.setFill(javafx.scene.paint.Color.WHITE);
-                circulo.setRadius(31);
+                circulo.setRadius(RADIUS - 1);
                 circulo.setVisible(true);
                 tableroGrid.add(circulo, c, r);
             }
@@ -114,6 +116,7 @@ public class VistaJuegoPVEController implements Initializable {
         switcherTurno();
 
         if (tableroIniciado.comprobacionJuego()) {
+            // falta registrar la partida.
             int n = Integer.parseInt(labelPuntuacion.getText()) + 20;
             labelPuntuacion.setText("" + n);
             alertaVictoria(true);
@@ -148,7 +151,7 @@ public class VistaJuegoPVEController implements Initializable {
         } else {
             ficha.setFill(javafx.scene.paint.Color.YELLOW);
         }
-        ficha.setRadius(32);
+        ficha.setRadius(RADIUS);
         ficha.setVisible(true);
         return ficha;
     }
@@ -157,7 +160,7 @@ public class VistaJuegoPVEController implements Initializable {
     private int[] juegaMaquina() {
         int x;
         do {
-            x = (int) (Math.random() * (COL + 1));
+            x = (int) (Math.random() * COL);
         } while (tableroIniciado.columnaLlena(x));
         int y = tableroIniciado.ultimaFicha(x);
 
@@ -187,10 +190,10 @@ public class VistaJuegoPVEController implements Initializable {
         if (min < 0) {
             min = 0;
         }
-        medida = (max - min) / 8; // Cuanto mide cada columna.
+        medida = (max - min) / COL; // Cuanto mide cada columna.
 
         // Saber donde esta el click.
-        if (x < 4 * medida) { // si X esta por debajo de la mitad.
+        if (x < 4 * medida) { // Si X esta por debajo de la mitad.
             if (x < 2 * medida) {
                 return (x < medida) ? 0 : 1;
             }

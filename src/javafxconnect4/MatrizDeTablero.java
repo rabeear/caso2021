@@ -90,7 +90,7 @@ public class MatrizDeTablero {
                     break;
                 }
             }
-        } 
+        }
         for (int i = 7; i >= 3; i--) {
             for (int j = 6; j >= 3; j--) {
                 if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i - 1][j - 1]
@@ -110,9 +110,8 @@ public class MatrizDeTablero {
                     break;
                 }
             }
-        } 
+        }
         return res;
-        
     }
 
     public boolean comprobacionJuego() {

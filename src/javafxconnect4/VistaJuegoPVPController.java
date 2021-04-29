@@ -51,6 +51,7 @@ public class VistaJuegoPVPController implements Initializable {
     private GridPane tableroGrid;
     @FXML
     private Label labelPuntuacion2;
+
     private MatrizDeTablero tableroIniciado;
     private Stage stageActual;
     private Scene escenaActual;
@@ -59,6 +60,8 @@ public class VistaJuegoPVPController implements Initializable {
     private Round partida;
     private final double TRANSLATE_Y = 68.5;
     private final double TRANSLATE_X = 66;
+    private final int COL = 8;
+    private final int RADIUS = 32;
 
     /**
      * Initializes the controller class.
@@ -73,15 +76,16 @@ public class VistaJuegoPVPController implements Initializable {
         tableroIniciado.clear();
         tableroGrid.getChildren().clear();
         añadirCirculos();
+        turno = true;
     }
 
     private void añadirCirculos() {
-        // añadir todos los circulos blancos.
+        // Añadir todos los circulos blancos.
         for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
             for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
                 Circle circulo = new Circle();
                 circulo.setFill(javafx.scene.paint.Color.WHITE);
-                circulo.setRadius(31);
+                circulo.setRadius(RADIUS - 1);
                 circulo.setVisible(true);
                 tableroGrid.add(circulo, c, r);
             }
@@ -95,10 +99,9 @@ public class VistaJuegoPVPController implements Initializable {
         LocalDateTime t = LocalDateTime.now();
         int posicionX = posicionarX((int) event.getX());
         int posicionY = tableroIniciado.ultimaFicha(posicionX);
-        // indicadorPruebas.setText(posicionX + "," + posicionY);
         tableroIniciado.setNumero(posicionX, posicionY, turno);
 
-        ficha.setRadius(32);
+        ficha.setRadius(RADIUS);
         ficha.setVisible(true);
 
         if (turno) { // Jugador 1.
@@ -130,6 +133,18 @@ public class VistaJuegoPVPController implements Initializable {
                 return; // Salir de la función.
             }
         }
+    }
+
+    private Circle fichaActual() {
+        Circle ficha = new Circle();
+        if (turno) {
+            ficha.setFill(javafx.scene.paint.Color.RED);
+        } else {
+            ficha.setFill(javafx.scene.paint.Color.YELLOW);
+        }
+        ficha.setRadius(RADIUS);
+        ficha.setVisible(true);
+        return ficha;
     }
 
     private void animation(Circle ficha, int posicionX, int posicionY) {
@@ -176,7 +191,7 @@ public class VistaJuegoPVPController implements Initializable {
         if (min < 0) {
             min = 0;
         }
-        medida = (max - min) / 8; // Cuánto mide cada columna.
+        medida = (max - min) / COL; // Cuánto mide cada columna.
 
         // Saber donde esta el click.
         if (x < 4 * medida) { // Si X esta por debajo de la mitad.
@@ -227,6 +242,7 @@ public class VistaJuegoPVPController implements Initializable {
             stageActual.setScene(escenaActual);
             sumaPuntos(j);
         }
+        turno = true;
     }
 
     public void sumaPuntos(Player jugadorActual) throws Connect4DAOException {
