@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -47,7 +46,15 @@ public class VistaSegundaPrincipalController implements Initializable {
         // TODO
     }
 
-    void initStage(Stage stage, String usr, String passwd) throws Connect4DAOException {
+    /**
+     * Iniciador para usar en el cambio de ventana.
+     *
+     * @param stage
+     * @param usr
+     * @param passwd
+     * @throws Connect4DAOException
+     */
+    public void initStage(Stage stage, String usr, String passwd) throws Connect4DAOException {
         actualStage = stage;
         escenaActual = stage.getScene();
         user = usr;
@@ -73,7 +80,6 @@ public class VistaSegundaPrincipalController implements Initializable {
     private void clickJuagarPVE(ActionEvent event) throws Connect4DAOException {
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
-
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVE.fxml"));
             Pane root = (Pane) cargador.load();
             Player actualPlayer = connect4.getPlayer(user);
@@ -90,7 +96,6 @@ public class VistaSegundaPrincipalController implements Initializable {
     private void clickJugarPVP(ActionEvent event) throws Connect4DAOException {
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
-
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaInicioSesionSegundoJugador.fxml"));
             HBox root = (HBox) cargador.load();
             Player actualPlayer = connect4.getPlayer(user);

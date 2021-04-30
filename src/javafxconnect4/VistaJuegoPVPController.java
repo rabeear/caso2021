@@ -17,10 +17,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -67,6 +65,13 @@ public class VistaJuegoPVPController implements Initializable {
         // TODO
     }
 
+    /**
+     * Iniciador para usar en el cambio de ventana.
+     *
+     * @param actualStage
+     * @param player1
+     * @param player2
+     */
     public void initStage(Stage actualStage, Player player1, Player player2) {
         stageActual = actualStage;
         escenaActual = actualStage.getScene();
@@ -97,10 +102,12 @@ public class VistaJuegoPVPController implements Initializable {
 
     @FXML
     private void clickReinicio(ActionEvent event) {
+        // Limpiamos ambos tableros y añadimos los circulos blancos a la vista.
         tableroIniciado.clear();
         tableroGrid.getChildren().clear();
         añadirCirculos();
         turno = true;
+        labelJugador.setText(j1.getNickName());
     }
 
     private void añadirCirculos() {
@@ -132,19 +139,25 @@ public class VistaJuegoPVPController implements Initializable {
         tableroIniciado.setNumero(posicionX, posicionY, turno);
 
         if (turno) { // Jugador 1.
-            labelJugador.setText(j1.getNickName());
             labelJugador.setText(j2.getNickName());
-        } else {
+        } else { // Jugador 2.
             labelJugador.setText(j1.getNickName());
         }
+
+        // Animamos la ficha.
         animation(ficha, posicionX, posicionY);
+
+        // Comprobamos si ha ganado alguien.
         boolean finPartida = comprobacion();
+
+        // Si no ha ganado nadie cambiamos de turno.
         if (!finPartida) {
             switcherTurno();
         }
     }
 
     private boolean comprobacion() throws Connect4DAOException {
+        // Comprobación de si alguien ha ganado.
         if (tableroIniciado.comprobacionJuego()) {
             LocalDateTime time = LocalDateTime.now();
             Connect4 connect4 = Connect4.getSingletonConnect4();
@@ -157,7 +170,6 @@ public class VistaJuegoPVPController implements Initializable {
                 n = Integer.parseInt(labelPuntuacion2.getText()) + PUNTOS;
                 labelPuntuacion2.setText("" + n);
             }
-            // connect4.setPointsAlone(posicionY); Hay qu comprobar para qué es esto.
             connect4.regiterRound(time, j1, j2);
             alertaVictoria(turno);
             return true;
@@ -169,6 +181,7 @@ public class VistaJuegoPVPController implements Initializable {
     }
 
     private Circle fichaActual() {
+        // Creamos la ficha dependiendo del turno.
         Circle ficha = new Circle();
         if (turno) {
             ficha.setFill(javafx.scene.paint.Color.RED);
@@ -189,6 +202,7 @@ public class VistaJuegoPVPController implements Initializable {
     }
 
     private int posicionarX(int x) {
+        // Saber que columna se clica, de 0 a 7.
         int max, min, medida;
         Bounds tamaño = tamañoGrid();
         max = (int) tamaño.getMaxX();
@@ -213,8 +227,8 @@ public class VistaJuegoPVPController implements Initializable {
         }
     }
 
-    // Obtener tamaño del gridTablero.
     private Bounds tamañoGrid() {
+        // Obtener tamaño del gridTablero.
         Bounds tamaño = tableroGrid.getBoundsInLocal();
         return tamaño;
     }
@@ -236,14 +250,13 @@ public class VistaJuegoPVPController implements Initializable {
 
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            System.out.println("SEGUIR \n JUGANDO");
             sumaPuntos(j);
 
             tableroGrid.getChildren().clear();
             tableroIniciado.clear();
             añadirCirculos();
+            labelJugador.setText(j1.getNickName());
         } else {
-            System.out.println("SALIR");
             stageActual.setScene(escenaActual);
             sumaPuntos(j);
         }
@@ -257,13 +270,11 @@ public class VistaJuegoPVPController implements Initializable {
         alerta.setContentText("¿Quieres volver a jugar?");
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            System.out.println("SEGUIR \n JUGANDO");
-
             tableroIniciado.clear();
             tableroGrid.getChildren().clear();
             añadirCirculos();
+            labelJugador.setText(j1.getNickName());
         } else {
-            System.out.println("SALIR");
             stageActual.setScene(escenaActual);
         }
         turno = true;
@@ -271,14 +282,13 @@ public class VistaJuegoPVPController implements Initializable {
 
     public void sumaPuntos(Player jugadorActual) throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        int puntos = 50;
 
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
-        jugadorActual.plusPoints(puntos);
+        jugadorActual.plusPoints(PUNTOS);
         if (jugadorActual.equals(j1)) {
             labelPuntuacion.setText("" + jugadorActual.getPoints());
         } else {
-            labelPuntuacion.setText("" + jugadorActual.getPoints());
+            labelPuntuacion2.setText("" + jugadorActual.getPoints());
         }
     }
 }

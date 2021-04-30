@@ -29,8 +29,8 @@
             <Button id="botonInicio" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="72.0" prefWidth="60.0" />
             <VBox alignment="CENTER" prefHeight="103.0" prefWidth="250.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#irCrearCuenta" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="Crear cuenta" underline="true" />
-                  <Button mnemonicParsing="false" onAction="#passwdOlvidada" onMouseEntered="#cambioColorBoton" styleClass="botonLetras" text="¿Contraseña olvidada?" underline="true" />
+                  <Button mnemonicParsing="false" onAction="#irCrearCuenta" styleClass="botonLetras" text="Crear cuenta" underline="true" />
+                  <Button mnemonicParsing="false" onAction="#passwdOlvidada" styleClass="botonLetras" text="¿Contraseña olvidada?" underline="true" />
                </children>
             </VBox>
          </children>

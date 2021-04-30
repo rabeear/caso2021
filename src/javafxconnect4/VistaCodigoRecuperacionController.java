@@ -48,6 +48,7 @@ public class VistaCodigoRecuperacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Si no hay nada escrito en ambos campos o son espacios desabilitamos el botón de enviar.
         enviarButton.disableProperty().bind(Bindings.or(
                 Bindings.createBooleanBinding(() -> {
                     return codigo.getText().split(" ").length == 0;
@@ -62,9 +63,11 @@ public class VistaCodigoRecuperacionController implements Initializable {
 
     @FXML
     private void mostrarContraseña(ActionEvent event) throws Connect4DAOException {
-        if (!codigo.getText().equals(textoCodigo.getText())) { // Comprobamos que el código introducido sea el correcto.
+        // Comprobamos que el código introducido sea el correcto.
+        if (!codigo.getText().equals(textoCodigo.getText())) {
             incorrecto.setText("Código de recuperación incorrecto.");
         } else {
+            // Limpiamos la etiqueta si tiene algo escrito.
             if (!incorrecto.getText().equals("")) {
                 incorrecto.setText("");
             }
@@ -100,8 +103,14 @@ public class VistaCodigoRecuperacionController implements Initializable {
         ventanaAnt.show();
     }
 
+    /**
+     * Iniciador para usar en el cambio de ventana.
+     *
+     * @param stage
+     * @param usuario
+     * @param ant
+     */
     public void initStage(Stage stage, String usuario, Stage ant) {
-        /*Iniciador para usar en el cambio de ventana*/
         codigoRecu = stage;
         codigoRecu.setTitle("Código de recuperación");
         codigoRecu.setResizable(false);

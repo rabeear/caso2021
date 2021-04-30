@@ -68,6 +68,12 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
                         Bindings.isEmpty(psswdCuadro.textProperty()))));
     }
 
+    /**
+     * Iniciador para usar en el cambio de ventana.
+     *
+     * @param stage
+     * @param player
+     */
     public void initStage(Stage stage, Player player) {
         actualStage = stage;
         escenaActual = stage.getScene();
@@ -91,17 +97,21 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
 
     private void inicioJ2() throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
+        // Comprobamos si el nombrede usuario introducido existe.
         if (!connect4.exitsNickName(userCuadro.getText())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
         } else {
             Player login = connect4.getPlayer(userCuadro.getText());
+            // Comprobamos si la contraseña es correcta.
             if (!login.getPassword().equals(psswdCuadro.getText())) {
                 incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
             } else {
+                // Limpiamos la etiqueta si hay algo escrito.
                 if (!incorrecto.getText().equals("")) {
                     incorrecto.setText("");
                 }
                 player2 = login;
+                // Cargamos la ventana del juego.
                 try {
                     FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
                     Pane root = (Pane) cargador.load();

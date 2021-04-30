@@ -11,11 +11,11 @@ package javafxconnect4;
  */
 public class MatrizDeTablero {
 
-    private int[][] matrizPrincipal;
+    private final int[][] matrizPrincipal;
     private final int COL = 8;
     private final int ROW = 7;
 
-    // Se va a llenar con 0 y 1, 0 para el usuario y 1 para el ordenador. -1 cuando no haya nada.
+    // Método constructor para llenar con 0 para el usuario, 1 para el ordenador / otro usuario y -1 cuando no haya nada.
     public MatrizDeTablero() {
         matrizPrincipal = new int[COL][ROW];
         for (int i = 0; i < COL; i++) {
@@ -27,9 +27,9 @@ public class MatrizDeTablero {
 
     public void setNumero(int x, int y, boolean jugador) {
         if (jugador) {
-            matrizPrincipal[x][y] = 0; //usuario
+            matrizPrincipal[x][y] = 0; // usuario1
         } else {
-            matrizPrincipal[x][y] = 1; //máquina
+            matrizPrincipal[x][y] = 1; // máquina/usuario2
         }
     }
 
@@ -81,7 +81,7 @@ public class MatrizDeTablero {
 
     public boolean diagonal() {
         boolean res = false;
-        for (int i = 0; i <= 4; i++) { //j es la Y, las filas
+        for (int i = 0; i <= 4; i++) {
             for (int j = 0; j <= 3; j++) {
                 if (matrizPrincipal[i][j] != -1 && matrizPrincipal[i][j] == matrizPrincipal[i + 1][j + 1]
                         && matrizPrincipal[i + 1][j + 1] == matrizPrincipal[i + 2][j + 2]

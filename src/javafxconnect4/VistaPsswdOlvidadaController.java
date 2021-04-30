@@ -79,7 +79,6 @@ public class VistaPsswdOlvidadaController implements Initializable {
                 /*Cierra ventana actual*/
                 Node miNodo = (Node) event.getSource();
                 miNodo.getScene().getWindow().hide();
-                System.out.println("Cerrando PSSWDOlvidada...");
             } catch (IOException e) {
             }
         }
@@ -87,14 +86,17 @@ public class VistaPsswdOlvidadaController implements Initializable {
 
     @FXML
     private void opcionCancelar(ActionEvent event) {
-        /*Cierra ventana actual*/
+        // Cierra ventana actual
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
-        System.out.println("Cerrando PSSWDOlvidada...");
     }
 
+    /**
+     * Iniciador para usar en el cambio de ventana
+     *
+     * @param stage
+     */
     public void initStage(Stage stage) {
-        /*Iniciador para usar en el cambio de ventana*/
         actualPasswd = stage;
         actualPasswd.setTitle("Recuperación de contraseña");
         actualPasswd.setResizable(false);

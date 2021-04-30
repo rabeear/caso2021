@@ -7,7 +7,6 @@ package javafxconnect4;
 
 import DBAccess.Connect4DAOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
@@ -18,7 +17,6 @@ import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -52,6 +50,7 @@ public class VistaJuegoPVEController implements Initializable {
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
     private final int RADIUS = 32;
+    private final int PUNTOS = 20;
 
     /**
      * Initializes the controller class.
@@ -61,6 +60,12 @@ public class VistaJuegoPVEController implements Initializable {
         // TODO
     }
 
+    /**
+     * Iniciador para usar en el cambio de ventana.
+     *
+     * @param stage
+     * @param seleccion
+     */
     public void initStage(Stage stage, Player seleccion) {
         stageJuegoPVE = stage;
         escenaJuegoPVE = stage.getScene();
@@ -78,6 +83,7 @@ public class VistaJuegoPVEController implements Initializable {
 
     @FXML
     private void clickReinicio(ActionEvent event) {
+        // Limpiamos ambos tableros y añadimos los circulos blancos a la vista.
         tableroIniciado.clear();
         tableroGrid.getChildren().clear();
         añadirCirculos();
@@ -107,28 +113,31 @@ public class VistaJuegoPVEController implements Initializable {
         // Cordenadas del click.
         int posX = posicionarX((int) event.getX());
         int posY = tableroIniciado.ultimaFicha(posX);
-
         ponerFichas(posX, posY);
+
         TranslateTransition animation = animation(fichaActual(), posX, posY);
 
         switcherTurno();
 
         if (tableroIniciado.comprobacionJuego()) {
             // falta registrar la partida.
-            int n = Integer.parseInt(labelPuntuacion.getText()) + 20;
+            int n = Integer.parseInt(labelPuntuacion.getText()) + PUNTOS;
             labelPuntuacion.setText("" + n);
             alertaVictoria(true);
             return; // Salir de la función.
         } else if (tableroIniciado.empate()) {
             alertaEmpate();
+            return; // Salir de la función.
         }
 
         labelJugador.setText("ordenador");
-        int[] coord = juegaMaquina();
-        ponerFichas(coord[0], coord[1]);
+        int[] pos = juegaMaquina();
+        ponerFichas(pos[0], pos[1]);
         Circle ficha = fichaActual();
+
+        // Una vez haya terminado la animación del jugador, hacemos la animación de la máquina.
         animation.setOnFinished((e) -> {
-            animation(ficha, coord[0], coord[1]);
+            animation(ficha, pos[0], pos[1]);
         });
 
         labelJugador.setText(jugadorActual.getNickName());
@@ -137,12 +146,13 @@ public class VistaJuegoPVEController implements Initializable {
             return; // Salir de la función.
         } else if (tableroIniciado.empate()) {
             alertaEmpate();
-            return;
+            return; // Salir de la función.
         }
         switcherTurno();
     }
 
     private Circle fichaActual() {
+        // Creamos la ficha dependiendo del turno.
         Circle ficha = new Circle();
         if (turno) {
             ficha.setFill(javafx.scene.paint.Color.RED);
@@ -156,14 +166,14 @@ public class VistaJuegoPVEController implements Initializable {
 
     // Turno de la máquina.
     private int[] juegaMaquina() {
-        int x;
+        int posX;
+        // Comprobamos que la columna no esté llena.
         do {
-            x = (int) (Math.random() * COL);
-        } while (tableroIniciado.columnaLlena(x));
-        int y = tableroIniciado.ultimaFicha(x);
+            posX = (int) (Math.random() * COL);
+        } while (tableroIniciado.columnaLlena(posX));
+        int posY = tableroIniciado.ultimaFicha(posX);
 
-        int[] coord = new int[]{x, y};
-        return coord;
+        return new int[]{posX, posY};
     }
 
     private void ponerFichas(int posX, int posY) throws InterruptedException {
@@ -179,8 +189,8 @@ public class VistaJuegoPVEController implements Initializable {
         return animation;
     }
 
-    // Saber que columna se clica, de 0 a 7.
     private int posicionarX(int x) {
+        // Saber que columna se clica, de 0 a 7.
         int max, min, medida;
         Bounds tamaño = tamañoGrid();
         max = (int) tamaño.getMaxX();
@@ -188,14 +198,15 @@ public class VistaJuegoPVEController implements Initializable {
         if (min < 0) {
             min = 0;
         }
-        medida = (max - min) / COL; // Cuanto mide cada columna.
+        medida = (max - min) / COL; // Cuánto mide cada columna.
 
         // Saber donde esta el click.
         if (x < 4 * medida) { // Si X esta por debajo de la mitad.
             if (x < 2 * medida) {
                 return (x < medida) ? 0 : 1;
+            } else {
+                return (x < 3 * medida) ? 2 : 3;
             }
-            return (x < 3 * medida) ? 2 : 3;
         } else {
             if (x > 6 * medida) {
                 return (x > 7 * medida) ? 7 : 6;
@@ -205,8 +216,8 @@ public class VistaJuegoPVEController implements Initializable {
         }
     }
 
-    // Obtener tamaño del gridTablero.
     private Bounds tamañoGrid() {
+        // Obtener tamaño del gridTablero.
         Bounds tamaño = tableroGrid.getBoundsInLocal();
         return tamaño;
     }
@@ -225,14 +236,12 @@ public class VistaJuegoPVEController implements Initializable {
 
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            System.out.println("SEGUIR \n JUGANDO");
             sumaPuntos();
 
             tableroIniciado.clear();
             tableroGrid.getChildren().clear();
             añadirCirculos();
         } else {
-            System.out.println("SALIR");
             stageJuegoPVE.setScene(escenaJuegoPVE);
             sumaPuntos();
         }
@@ -246,25 +255,24 @@ public class VistaJuegoPVEController implements Initializable {
         alerta.setContentText("¿Quieres volver a jugar?");
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            System.out.println("SEGUIR \n JUGANDO");
-
             tableroIniciado.clear();
             tableroGrid.getChildren().clear();
             añadirCirculos();
         } else {
-            System.out.println("SALIR");
             stageJuegoPVE.setScene(escenaJuegoPVE);
         }
         turno = true;
     }
 
-    // Suma los puntos que haya en el label puntos y limpia.
+    /**
+     * Suma los puntos que haya en la etiqueta y la limpia.
+     *
+     * @throws Connect4DAOException
+     */
     public void sumaPuntos() throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        int puntos = 20;
-
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
-        jugadorActual.plusPoints(puntos);
+        jugadorActual.plusPoints(PUNTOS);
         labelPuntuacion.setText("" + jugadorActual.getPoints());
     }
 }

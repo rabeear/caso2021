@@ -15,14 +15,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -57,17 +54,20 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     private void autentificacionEnter(KeyEvent event) throws Connect4DAOException {
+        // Para poder iniciar sesión pulsando enter.
         if (event.getCode().equals(KeyCode.ENTER)) {
             autentificacion();
         }
     }
 
     private void autentificacion() throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4(); // Necesario para usar la libreria.
+        Connect4 connect4 = Connect4.getSingletonConnect4();
+        // Comprobamos que exista el nombre de usuario introducido.
         if (!connect4.exitsNickName(user.getText())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
         } else {
             Player login = connect4.getPlayer(user.getText());
+            // Comprobamos que la contraseña sea correcta.
             if (!login.getPassword().equals(passwd.getText())) {
                 incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
             } else {
@@ -77,7 +77,6 @@ public class VistaPrincipalController implements Initializable {
                 try {
                     FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
                     HBox root = (HBox) cargador.load();
-
                     VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
                     ventana2.initStage(stagePrincipal, user.getText(), passwd.getText());
                     ventana2.nombreUsuario.setText(user.getText());
@@ -92,7 +91,7 @@ public class VistaPrincipalController implements Initializable {
 
     @FXML
     private void passwdOlvidada(ActionEvent event) {
-        /*Cambio a ventana de password olvidada*/
+        // Cambio a ventana de password olvidada.
         try {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
@@ -122,12 +121,13 @@ public class VistaPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * Iniciador para usar en el cambio de ventana.
+     *
+     * @param stage
+     */
     public void initStage(Stage stage) {
         stagePrincipal = stage;
         escenaActual = stage.getScene();
-    }
-
-    @FXML
-    private void cambioColorBoton(MouseEvent event) {
     }
 }
