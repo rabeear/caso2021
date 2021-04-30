@@ -30,9 +30,9 @@ and open the template in the editor.
 }
 
 #imagenPrincipal {
-    -fx-background-image: url('../imagenes/fondo1.jpg');
+    -fx-background-image: url('../imagenes/prueba.png');
     -fx-background-repeat: no-repeat;
-    -fx-background-position: absolute;
+    -fx-background-position: center;
 }
 
 #inicioSesion {
