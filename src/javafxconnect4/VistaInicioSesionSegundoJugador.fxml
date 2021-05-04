@@ -15,20 +15,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaInicioSesionSegundoJugadorController">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@estiloLogin2.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaInicioSesionSegundoJugadorController">
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="20.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 1">
                <font>
-                  <Font name="Yu Gothic Regular" size="30.0" />
+                  <Font name="HP Simplified" size="40.0" />
                </font>
             </Text>
             <ImageView fx:id="imagenJ1" fitHeight="163.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
             <Line endX="100.0" startX="-100.0" />
             <Label fx:id="userJ1" text="User1">
                <font>
-                  <Font name="Yu Gothic UI Light" size="30.0" />
+                  <Font name="HP Simplified Light" size="30.0" />
                </font>
             </Label>
             <Line endX="100.0" startX="-100.0" />
@@ -36,27 +36,27 @@
                <children>
                   <Label text="Puntos totales:">
                      <font>
-                        <Font name="Yu Gothic Medium" size="25.0" />
+                        <Font name="HP Simplified" size="25.0" />
                      </font>
                   </Label>
                   <Label fx:id="pointsJ1" text="Points1">
                      <font>
-                        <Font name="Yu Gothic Medium" size="25.0" />
+                        <Font name="HP Simplified" size="25.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
          </children>
       </VBox>
-      <Line endY="150.0" startY="-150.0" />
+      <Line endY="150.0" startX="1.7928931713104248" startY="-267.41864013671875" />
       <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="400.0" spacing="10.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 2">
                <font>
-                  <Font name="Yu Gothic Regular" size="30.0" />
+                  <Font name="HP Simplified" size="40.0" />
                </font>
                <VBox.margin>
-                  <Insets top="57.0" />
+                  <Insets top="50.0" />
                </VBox.margin>
             </Text>
             <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="275.0">
@@ -69,20 +69,35 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Usuario" />
+                  <Label text="Usuario:">
+                     <font>
+                        <Font name="HP Simplified Light" size="13.0" />
+                     </font></Label>
                   <TextField fx:id="userCuadro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#enterInicioJ2" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" />
                   <PasswordField fx:id="psswdCuadro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#enterInicioJ2" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Contraseña" GridPane.rowIndex="1" />
+                  <Label text="Contraseña:" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="HP Simplified Light" size="13.0" />
+                     </font></Label>
                </children>
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </GridPane>
-            <Label fx:id="incorrecto" alignment="CENTER" prefHeight="27.0" prefWidth="323.0" textFill="RED" />
+            <Label fx:id="incorrecto" alignment="CENTER" prefHeight="27.0" prefWidth="323.0" textFill="RED">
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font></Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button fx:id="iniciarButton" mnemonicParsing="false" onAction="#clickInicioJ2" text="Iniciar Sesion" />
-                  <Button mnemonicParsing="false" onAction="#cancelarInicio" text="Cancelar" />
+                  <Button fx:id="iniciarButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickInicioJ2" prefHeight="30.0" text="Iniciar Sesion">
+                     <font>
+                        <Font name="HP Simplified" size="12.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#cancelarInicio" prefHeight="30.0" text="Cancelar">
+                     <font>
+                        <Font name="HP Simplified" size="12.0" />
+                     </font></Button>
                </children>
             </HBox>
          </children>

@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaCodigoRecuperacionController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="410.0" stylesheets="@estiloCodigoRec.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaCodigoRecuperacionController">
     <children>
         <Label contentDisplay="CENTER" text="CÓDIGO DE RECUPERACIÓN" textAlignment="CENTER">
             <font>
-                <Font name="System Bold" size="22.0" />
+                <Font name="HP Simplified Bold" size="25.0" />
             </font>
             <VBox.margin>
-                <Insets top="10.0" />
+                <Insets top="20.0" />
             </VBox.margin>
         </Label>
-        <Label fx:id="textoCodigo">
+        <Label fx:id="textoCodigo" alignment="CENTER" prefHeight="30.0" prefWidth="175.0" text="4567" textAlignment="CENTER">
             <font>
-                <Font size="20.0" />
+                <Font name="HP Simplified" size="22.0" />
             </font>
             <VBox.margin>
                 <Insets bottom="10.0" top="15.0" />
@@ -33,8 +33,11 @@
                     <HBox.margin>
                         <Insets right="10.0" />
                     </HBox.margin>
+               <font>
+                  <Font name="HP Simplified Light" size="13.0" />
+               </font>
                 </Label>
-                <TextField fx:id="codigo" />
+                <TextField fx:id="codigo" promptText="Código" />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="68.0" prefWidth="412.0">
@@ -43,8 +46,14 @@
                     <HBox.margin>
                         <Insets right="20.0" />
                     </HBox.margin>
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+                <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font></Button>
             </children>
         </HBox>
     </children>

@@ -13,17 +13,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="333.0" prefWidth="650.0" spacing="10.0" stylesheets="@vistapsswdolvidada.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPsswdOlvidadaController">
+<VBox alignment="CENTER" prefHeight="333.0" prefWidth="471.0" spacing="5.0" stylesheets="@vistapsswdolvidada.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPsswdOlvidadaController">
    <children>
-      <Pane prefHeight="122.0" prefWidth="650.0">
+      <Pane prefHeight="113.0" prefWidth="562.0">
          <children>
-            <Pane id="imagenPasswd" layoutX="245.0" prefHeight="120.0" prefWidth="142.0" />
+            <Pane id="imagenPasswd" layoutX="163.0" layoutY="-3.0" prefHeight="101.0" prefWidth="145.0" />
          </children>
+         <VBox.margin>
+            <Insets bottom="5.0" top="10.0" />
+         </VBox.margin>
       </Pane>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su correo electrónico y nombre de usuario y le envíaremos un código de seguridad." textAlignment="CENTER" wrappingWidth="647.205078125">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su correo electrónico y nombre de usuario y le envíaremos un código de seguridad." textAlignment="CENTER" wrappingWidth="309.205078125">
          <font>
-            <Font size="14.0" />
-         </font></Text>
+            <Font name="HP Simplified" size="14.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin></Text>
       <GridPane alignment="CENTER" prefHeight="84.0" prefWidth="550.0" vgap="10.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="319.66668701171875" minWidth="10.0" prefWidth="210.0" />
@@ -34,24 +40,39 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="25.0" prefWidth="120.0" text="Correo electrónico:" />
-            <TextField fx:id="campoCorreo" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" />
-            <Label prefHeight="25.0" prefWidth="120.0" text="Nombre de ususario:" GridPane.rowIndex="1" />
-            <TextField fx:id="campoUser" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefHeight="25.0" prefWidth="120.0" text="Correo electrónico:">
+               <font>
+                  <Font name="HP Simplified Light" size="12.0" />
+               </font></Label>
+            <TextField fx:id="campoCorreo" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="245.0" GridPane.columnIndex="1" />
+            <Label prefHeight="25.0" prefWidth="120.0" text="Nombre de ususario:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="HP Simplified Light" size="12.0" />
+               </font></Label>
+            <TextField fx:id="campoUser" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="245.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <VBox.margin>
-            <Insets left="50.0" right="50.0" />
+            <Insets left="50.0" right="50.0" top="10.0" />
          </VBox.margin>
       </GridPane>
       <Label fx:id="incorrecto" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="464.0" textFill="RED">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
+         <font>
+            <Font name="HP Simplified" size="12.0" />
+         </font>
       </Label>
-      <HBox alignment="CENTER" prefHeight="68.0" prefWidth="650.0" spacing="50.0">
+      <HBox alignment="CENTER" prefHeight="74.0" prefWidth="471.0" spacing="50.0">
          <children>
-            <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#enviarCorreo" prefHeight="30.0" prefWidth="95.0" text="Enviar" />
-            <Button mnemonicParsing="false" onAction="#opcionCancelar" prefHeight="30.0" prefWidth="95.0" text="Cancelar" />
+            <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#enviarCorreo" prefHeight="30.0" prefWidth="95.0" text="Enviar">
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#opcionCancelar" prefHeight="30.0" prefWidth="95.0" text="Cancelar">
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font></Button>
          </children>
       </HBox>
    </children>
