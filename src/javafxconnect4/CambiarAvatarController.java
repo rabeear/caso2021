@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaCambiarAvatarController implements Initializable {
+public class CambiarAvatarController implements Initializable {
 
     private Stage stageAvatar;
 

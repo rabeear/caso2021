@@ -30,7 +30,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaPrincipalController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField user;
@@ -75,9 +75,9 @@ public class VistaPrincipalController implements Initializable {
                     incorrecto.setText("");
                 }
                 try {
-                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
+                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
                     HBox root = (HBox) cargador.load();
-                    VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
+                    PrincipalController ventana2 = cargador.<PrincipalController>getController();
                     ventana2.initStage(stagePrincipal, user.getText(), passwd.getText());
                     ventana2.nombreUsuario.setText(user.getText());
                     Scene scene = new Scene(root, 800, 500);
@@ -96,7 +96,7 @@ public class VistaPrincipalController implements Initializable {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
             Parent root = cargador.load();
-            cargador.<VistaPsswdOlvidadaController>getController().initStage(actual);
+            cargador.<PsswdOlvidadaController>getController().initStage(actual);
             Scene escena = new Scene(root, 650, 375);
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);
@@ -109,9 +109,9 @@ public class VistaPrincipalController implements Initializable {
     private void irCrearCuenta(ActionEvent event) {
         try {
             Stage actual = new Stage();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaRegistro.fxml"));
             Parent root = cargador.load();
-            cargador.<VistaAñadirUsuarioController>getController().initStage(actual);
+            cargador.<RegistroController>getController().initStage(actual);
             Scene escena = new Scene(root, 800, 500);
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);

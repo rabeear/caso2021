@@ -27,7 +27,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaSegundaPrincipalController implements Initializable {
+public class PrincipalController implements Initializable {
 
     @FXML
     public Label nombreUsuario;
@@ -65,9 +65,9 @@ public class VistaSegundaPrincipalController implements Initializable {
     @FXML
     private void clickCerrarSesion(ActionEvent event) {
         try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaLogin.fxml"));
             HBox root = (HBox) cargador.load();
-            VistaPrincipalController ventanaIni = cargador.<VistaPrincipalController>getController();
+            LoginController ventanaIni = cargador.<LoginController>getController();
             ventanaIni.initStage(actualStage);
             Scene scene = new Scene(root, 800, 500);
             actualStage.setScene(scene);
@@ -80,10 +80,10 @@ public class VistaSegundaPrincipalController implements Initializable {
     private void clickJuagarPVE(ActionEvent event) throws Connect4DAOException {
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVE.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPVE.fxml"));
             Pane root = (Pane) cargador.load();
             Player actualPlayer = connect4.getPlayer(user);
-            VistaJuegoPVEController ventanaJuegoPVE = cargador.<VistaJuegoPVEController>getController();
+            PVEController ventanaJuegoPVE = cargador.<PVEController>getController();
             ventanaJuegoPVE.initStage(actualStage, actualPlayer);
             Scene scene = new Scene(root, 800, 500);
             actualStage.setScene(scene);
@@ -96,10 +96,10 @@ public class VistaSegundaPrincipalController implements Initializable {
     private void clickJugarPVP(ActionEvent event) throws Connect4DAOException {
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaInicioSesionSegundoJugador.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundoLogin.fxml"));
             HBox root = (HBox) cargador.load();
             Player actualPlayer = connect4.getPlayer(user);
-            VistaInicioSesionSegundoJugadorController ventanaIni = cargador.<VistaInicioSesionSegundoJugadorController>getController();
+            SegundoLoginController ventanaIni = cargador.<SegundoLoginController>getController();
             ventanaIni.initStage(actualStage, actualPlayer);
             Scene scene = new Scene(root, 800, 500);
             actualStage.setScene(scene);

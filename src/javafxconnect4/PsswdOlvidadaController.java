@@ -29,7 +29,7 @@ import model.Connect4;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaPsswdOlvidadaController implements Initializable {
+public class PsswdOlvidadaController implements Initializable {
 
     @FXML
     private TextField campoCorreo;
@@ -71,7 +71,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
                 Stage actual = new Stage();
                 FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
                 Parent root = cargador.load();
-                cargador.<VistaCodigoRecuperacionController>getController().initStage(actual, campoUser.getText(), actualPasswd);
+                cargador.<CodRecuperacionController>getController().initStage(actual, campoUser.getText(), actualPasswd);
                 Scene escena = new Scene(root, 410, 225);
                 actual.setScene(escena);
                 actual.initModality(Modality.APPLICATION_MODAL);

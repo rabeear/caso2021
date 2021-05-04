@@ -27,7 +27,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaCodigoRecuperacionController implements Initializable {
+public class CodRecuperacionController implements Initializable {
 
     @FXML
     private Label textoCodigo;
