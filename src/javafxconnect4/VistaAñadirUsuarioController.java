@@ -40,7 +40,7 @@ public class VistaAñadirUsuarioController implements Initializable {
 
     @FXML
     private void clickAvatar(ActionEvent event) {
-        /*llevar a zona de cambio de avatar*/
+        // Llevar a zona de cambio de avatar.
         try {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiarAvatar.fxml"));
@@ -54,6 +54,11 @@ public class VistaAñadirUsuarioController implements Initializable {
         }
     }
 
+    /**
+     * Iniciador para usar en el cambio de ventana.
+     *
+     * @param stage
+     */
     public void initStage(Stage stage) {
         stageActual = stage;
         escenaPrincipal = stage.getScene();

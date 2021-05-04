@@ -3,81 +3,72 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 
-<GridPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
-  <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+<VBox alignment="CENTER" prefHeight="528.0" prefWidth="339.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="339.0" spacing="30.0" GridPane.columnSpan="2" GridPane.rowSpan="7">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRO" wrappingWidth="172.205078125">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <font>
-                  <Font name="Yu Gothic UI Light" size="40.0" />
-               </font>
-            </Text>
-            <Button fx:id="btnAvatar" mnemonicParsing="false" onAction="#clickAvatar" prefHeight="179.0" prefWidth="190.0" />
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario:" />
-                        <Label prefHeight="27.0" prefWidth="154.0" />
-                     </children>
-                     <VBox.margin>
-                        <Insets left="30.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Avatar:" />
-                        <Label text="default" />
-                     </children>
-                     <VBox.margin>
-                        <Insets left="30.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:" />
-                        <Label prefHeight="27.0" prefWidth="176.0" />
-                     </children>
-                     <VBox.margin>
-                        <Insets left="30.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRO" textAlignment="CENTER" wrappingWidth="221.205078125">
+         <VBox.margin>
+            <Insets bottom="10.0" top="20.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Yu Gothic UI Light" size="40.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnAvatar" mnemonicParsing="false" onAction="#clickAvatar" prefHeight="140.0" prefWidth="140.0" />
+      <Label prefHeight="17.0" prefWidth="395.0" text="Nombre de usuario:">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </TextField>
+      <Label prefHeight="17.0" prefWidth="381.0" text="Contraseña:">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </TextField>
+      <Label prefHeight="17.0" prefWidth="385.0" text="Confirme contraseña:">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </TextField>
+      <Label prefHeight="17.0" prefWidth="399.0" text="Correo:">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </TextField>
+      <Label prefHeight="17.0" prefWidth="406.0" text="Fecha de nacimiento:">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </Label>
+      <TextField>
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </VBox.margin>
+      </TextField>
    </children>
-</GridPane>
+</VBox>
