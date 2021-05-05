@@ -1,0 +1,12 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+#imagenPantallaPrincipal { 
+    -fx-background-image: url('../imagenes/prueba.png'); /*hay que cambiarlo porque es feo, pero por tener algo*/
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    
+}
+
+

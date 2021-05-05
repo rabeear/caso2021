@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author Rafa BA, Raquel RR
  */
-public class RegistroController implements Initializable {
+public class VistaAñadirUsuarioController implements Initializable {
 
     @FXML
     private Button btnAvatar;
@@ -45,7 +45,7 @@ public class RegistroController implements Initializable {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiarAvatar.fxml"));
             Parent root = cargador.load();
-            cargador.<CambiarAvatarController>getController().initStage(actual);
+            cargador.<VistaCambiarAvatarController>getController().initStage(actual);
             Scene escena = new Scene(root, 650, 375);
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);

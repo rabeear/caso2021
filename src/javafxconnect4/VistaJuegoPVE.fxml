@@ -58,7 +58,7 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="500.0" prefWidth="550.0">
          <children>
-            <GridPane fx:id="tableroGrid" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickJugar" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: blue;">
+            <GridPane fx:id="tableroGrid" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickJugar" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: blue;" stylesheets="@dentroJuego.css">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

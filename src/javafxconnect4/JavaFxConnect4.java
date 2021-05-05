@@ -19,16 +19,16 @@ import model.Connect4;
  *
  * @author Rafa BA, Raquel RR
  */
-public class AppConnect4 extends Application {
+public class JavaFxConnect4 extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaLogin.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
         Parent root = cargador.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
-        LoginController controladorPrincipal = cargador.<LoginController>getController();
+        VistaPrincipalController controladorPrincipal = cargador.<VistaPrincipalController>getController();
         controladorPrincipal.initStage(stage);
         stage.setScene(scene);
         stage.setMinHeight(480);
@@ -46,7 +46,7 @@ public class AppConnect4 extends Application {
             connect4.removeAllData();
             connect4.createDemoData(3, 1, 2);
         } catch (Connect4DAOException ex) {
-            Logger.getLogger(AppConnect4.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JavaFxConnect4.class.getName()).log(Level.SEVERE, null, ex);
         }
         launch(args);
     }

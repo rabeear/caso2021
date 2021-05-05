@@ -32,7 +32,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class SegundoLoginController implements Initializable {
+public class VistaInicioSesionSegundoJugadorController implements Initializable {
 
     @FXML
     private Label userJ1;
@@ -113,9 +113,9 @@ public class SegundoLoginController implements Initializable {
                 player2 = login;
                 // Cargamos la ventana del juego.
                 try {
-                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPVP.fxml"));
+                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
                     Pane root = (Pane) cargador.load();
-                    PVPController ventanaIni = cargador.<PVPController>getController();
+                    VistaJuegoPVPController ventanaIni = cargador.<VistaJuegoPVPController>getController();
                     ventanaIni.initStage(actualStage, player1, player2);
                     Scene scene = new Scene(root, 800, 500);
                     actualStage.setScene(scene);

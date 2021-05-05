@@ -18,10 +18,3 @@
     -fx-border-color: black;
     -fx-border-radius: 5px;
 }
-
-.button:hover {
-    -fx-background-color: #92d3ed;
-    -fx-background-radius: 5px;
-    -fx-border-color: black;
-    -fx-border-radius: 5px;
-}
