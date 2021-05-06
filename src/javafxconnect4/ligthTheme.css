@@ -9,18 +9,20 @@ and open the template in the editor.
 */
 
 .root {
+    -fx-clr-primary: #51b8e1;
+    -fx-clr-secondary: #92d3ed;
     -fx-background-color: skyblue;
 }
 
 .button {
-    -fx-background-color: #51b8e1;
+    -fx-background-color: -fx-clr-primary;
     -fx-background-radius: 5px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
 }
 
 .button:hover {
-    -fx-background-color: #92d3ed;
+    -fx-background-color: -fx-clr-secondary;
     -fx-background-radius: 5px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
@@ -28,4 +30,26 @@ and open the template in the editor.
 
 .text-field {
     -fx-border-color: black;
+}
+
+#imagenPantallaPrincipal {
+    -fx-background-image: url('../imagenes/prueba.png');
+    -fx-background-size: 110%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#imagenPasswd { /*imagen candado*/
+    -fx-background-image: url('../imagenes/candado.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 100%;
+}
+
+#botonInicio {
+    -fx-background-image: url('../imagenes/flecha.png');
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: none;
+    -fx-border-color: none;
 }

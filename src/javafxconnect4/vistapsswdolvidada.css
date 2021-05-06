@@ -1,9 +1,0 @@
-/*
- * Empty Stylesheet file.
- */
-
-#imagenPasswd { /*imagen candado*/
-    -fx-background-image: url('../imagenes/candado.png');
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: 100%;
-}
