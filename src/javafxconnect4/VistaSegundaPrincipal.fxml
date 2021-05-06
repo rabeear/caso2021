@@ -16,7 +16,7 @@
          <HBox.margin>
             <Insets bottom="20.0" top="20.0" />
          </HBox.margin></Pane>
-      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="300.0" spacing="30.0">
+      <VBox alignment="CENTER" prefHeight="556.0" prefWidth="300.0" spacing="30.0">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" />
          </padding>
@@ -30,24 +30,29 @@
                </VBox.margin>
             </Label>
             <ImageView fx:id="foto" fitHeight="122.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" />
-            <Button mnemonicParsing="false" onAction="#clickJuagarPVE" prefHeight="39.0" prefWidth="170.0" text="UN JUGADOR">
+            <Button mnemonicParsing="false" onAction="#editarPerfil" prefHeight="35.0" prefWidth="150.0" text="EDITAR PERFIL">
+               <font>
+                  <Font name="HP Simplified Light" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#jugar" prefHeight="35.0" prefWidth="150.0" text="JUGAR">
+               <font>
+                  <Font name="HP Simplified Light" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#verRanking" prefHeight="35.0" prefWidth="150.0" text="RANKING">
                <font>
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#clickJugarPVP" prefHeight="39.0" prefWidth="170.0" text="DOS JUGADORES">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="30.0" prefWidth="110.0" text="Cerrar sesión">
                <font>
-                  <Font name="HP Simplified Light" size="12.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="170.0" text="RANKING" />
-            <Button mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="33.0" prefWidth="122.0" text="Cerrar sesión">
-               <font>
-                  <Font name="HP Simplified" size="15.0" />
+                  <Font name="HP Simplified" size="14.0" />
                </font></Button>
          </children>
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@dentroJuego.css" />
       <URL value="@ligthTheme.css" />
+      <URL value="@dentroJuego.css" />
    </stylesheets>
 </HBox>

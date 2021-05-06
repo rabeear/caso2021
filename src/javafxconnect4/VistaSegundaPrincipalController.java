@@ -13,14 +13,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Connect4;
-import model.Player;
 
 /**
  * FXML Controller class
@@ -63,48 +63,34 @@ public class VistaSegundaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void clickCerrarSesion(ActionEvent event) {
-        try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
-            HBox root = (HBox) cargador.load();
-            VistaPrincipalController ventanaIni = cargador.<VistaPrincipalController>getController();
-            ventanaIni.initStage(actualStage);
-            Scene scene = new Scene(root, 800, 500);
-            actualStage.setScene(scene);
-            actualStage.show();
-        } catch (IOException e) {
-        }
+    private void clickCerrarSesion(ActionEvent event) throws IOException {
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
+        HBox root = (HBox) cargador.load();
+        VistaPrincipalController ventanaIni = cargador.<VistaPrincipalController>getController();
+        ventanaIni.initStage(actualStage);
+        Scene scene = new Scene(root, 800, 500);
+        actualStage.setScene(scene);
+        actualStage.show();
     }
 
     @FXML
-    private void clickJuagarPVE(ActionEvent event) throws Connect4DAOException {
-        try {
-            Connect4 connect4 = Connect4.getSingletonConnect4();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVE.fxml"));
-            Pane root = (Pane) cargador.load();
-            Player actualPlayer = connect4.getPlayer(user);
-            VistaJuegoPVEController ventanaJuegoPVE = cargador.<VistaJuegoPVEController>getController();
-            ventanaJuegoPVE.initStage(actualStage, actualPlayer);
-            Scene scene = new Scene(root, 800, 500);
-            actualStage.setScene(scene);
-            actualStage.show();
-        } catch (Connect4DAOException | IOException e) {
-        }
+    private void jugar(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJugar.fxml"));
+        Parent root = cargador.load();
+        cargador.<VistaJugarController>getController().initStage(actualStage, user);
+        Scene escena = new Scene(root, 420, 145);
+        actual.setScene(escena);
+        actual.show();
+        Node miNodo = (Node) event.getSource();
+        miNodo.getScene().getWindow().hide();
     }
 
     @FXML
-    private void clickJugarPVP(ActionEvent event) throws Connect4DAOException {
-        try {
-            Connect4 connect4 = Connect4.getSingletonConnect4();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaInicioSesionSegundoJugador.fxml"));
-            HBox root = (HBox) cargador.load();
-            Player actualPlayer = connect4.getPlayer(user);
-            VistaInicioSesionSegundoJugadorController ventanaIni = cargador.<VistaInicioSesionSegundoJugadorController>getController();
-            ventanaIni.initStage(actualStage, actualPlayer);
-            Scene scene = new Scene(root, 800, 500);
-            actualStage.setScene(scene);
-            actualStage.show();
-        } catch (Connect4DAOException | IOException e) {
-        }
+    private void editarPerfil(ActionEvent event) {
+    }
+
+    @FXML
+    private void verRanking(ActionEvent event) {
     }
 }
