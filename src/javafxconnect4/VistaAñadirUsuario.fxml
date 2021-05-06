@@ -2,73 +2,103 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox alignment="CENTER" prefHeight="528.0" prefWidth="339.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
+<VBox alignment="TOP_CENTER" prefHeight="605.0" prefWidth="340.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="REGISTRO" textAlignment="CENTER" wrappingWidth="221.205078125">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREA TU CUENTA" textAlignment="CENTER" wrappingWidth="309.205078125">
          <VBox.margin>
-            <Insets bottom="10.0" top="20.0" />
+            <Insets top="5.0" />
          </VBox.margin>
          <font>
-            <Font name="Yu Gothic UI Light" size="40.0" />
+            <Font name="HP Simplified" size="40.0" />
          </font>
       </Text>
-      <Button fx:id="btnAvatar" mnemonicParsing="false" onAction="#clickAvatar" prefHeight="140.0" prefWidth="140.0" />
-      <Label prefHeight="17.0" prefWidth="395.0" text="Nombre de usuario:">
+      <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Si lo desea puede añadir una foto de perfil." textAlignment="CENTER" wrappingWidth="226.11199951171875">
+         <font>
+            <Font name="HP Simplified Light" size="12.0" />
+         </font>
          <VBox.margin>
-            <Insets left="20.0" right="20.0" />
+            <Insets />
          </VBox.margin>
+      </Text>
+      <Button mnemonicParsing="false" onAction="#clickAvatar" prefHeight="38.0" prefWidth="140.0" text="Añadir foto de perfil">
+         <VBox.margin>
+            <Insets bottom="10.0" top="5.0" />
+         </VBox.margin></Button>
+      <Label fx:id="hayFoto" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="275.0" textAlignment="CENTER">
+         <font>
+            <Font name="HP Simplified Light" size="12.0" />
+         </font>
       </Label>
-      <TextField>
+      <TextField fx:id="user" promptText="Nombre de usuario">
          <VBox.margin>
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
+         <font>
+            <Font name="HP Simplified Italic" size="12.0" />
+         </font>
       </TextField>
-      <Label prefHeight="17.0" prefWidth="381.0" text="Contraseña:">
+      <Label fx:id="userError" prefHeight="17.0" prefWidth="299.0" textAlignment="CENTER" textFill="#eb0000">
+         <font>
+            <Font name="HP Simplified" size="12.0" />
+         </font></Label>
+      <TextField fx:id="psswd" promptText="Contraseña">
          <VBox.margin>
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
-      </Label>
-      <TextField>
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
+         <font>
+            <Font name="HP Simplified Italic" size="12.0" />
+         </font>
       </TextField>
-      <Label prefHeight="17.0" prefWidth="385.0" text="Confirme contraseña:">
+      <Label fx:id="psswdError" prefHeight="17.0" prefWidth="298.0" textAlignment="CENTER" textFill="#eb0000">
+         <font>
+            <Font name="HP Simplified" size="12.0" />
+         </font></Label>
+      <TextField fx:id="psswd2" promptText="Confirme contraseña">
          <VBox.margin>
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
-      </Label>
-      <TextField>
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
+         <font>
+            <Font name="HP Simplified Italic" size="12.0" />
+         </font>
       </TextField>
-      <Label prefHeight="17.0" prefWidth="399.0" text="Correo:">
+      <Label fx:id="psswd2Error" prefHeight="17.0" prefWidth="296.0" textAlignment="CENTER" textFill="#eb0000">
+         <font>
+            <Font name="HP Simplified" size="12.0" />
+         </font></Label>
+      <TextField fx:id="email" promptText="Correo">
          <VBox.margin>
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
-      </Label>
-      <TextField>
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
+         <font>
+            <Font name="HP Simplified Italic" size="12.0" />
+         </font>
       </TextField>
-      <Label prefHeight="17.0" prefWidth="406.0" text="Fecha de nacimiento:">
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
-      </Label>
-      <TextField>
-         <VBox.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" />
-         </VBox.margin>
-      </TextField>
+      <Label fx:id="emailError" prefHeight="17.0" prefWidth="279.0" textFill="RED">
+         <font>
+            <Font name="HP Simplified" size="12.0" />
+         </font></Label>
+      <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de nacimiento:" wrappingWidth="277.1770935058594">
+         <font>
+            <Font name="HP Simplified Light" size="12.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="date" prefHeight="25.0" prefWidth="279.0" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+         <children>
+            <Button fx:id="regButton" mnemonicParsing="false" onAction="#registrar" text="Registrarse" />
+            <Button mnemonicParsing="false" onAction="#cancelar" prefWidth="75.0" text="Cancelar" />
+         </children>
+      </HBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </VBox>

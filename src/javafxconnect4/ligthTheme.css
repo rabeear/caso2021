@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /*
-    Created on : 4 may. 2021, 18:40:27
+    Created on : 6 may. 2021, 14:32:13
     Author     : Raquel
 */
 
@@ -17,4 +17,15 @@ and open the template in the editor.
     -fx-background-radius: 5px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #92d3ed;
+    -fx-background-radius: 5px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+}
+
+.text-field {
+    -fx-border-color: black;
 }

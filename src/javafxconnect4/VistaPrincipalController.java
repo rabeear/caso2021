@@ -111,8 +111,8 @@ public class VistaPrincipalController implements Initializable {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
             Parent root = cargador.load();
-            cargador.<VistaAñadirUsuarioController>getController().initStage(actual);
-            Scene escena = new Scene(root, 800, 500);
+            cargador.<VistaAñadirUsuarioController>getController().initStage(actual, stagePrincipal);
+            Scene escena = new Scene(root, 340, 605);
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);
             actual.show();
