@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class VistaRankingController implements Initializable {
     @FXML
     private TableView<Player> tabla;
     @FXML
-    private TableColumn<Player, String> avatarCol;
+    private TableColumn<Player, Image> avatarCol;
     @FXML
     private TableColumn<Player, String> playerCol;
     @FXML
@@ -60,20 +61,21 @@ public class VistaRankingController implements Initializable {
     }
 
     private void hacerTabla(ArrayList ranking) {
-        playerCol.setCellValueFactory(new PropertyValueFactory<Player, String>("nickName"));
-        // avatarCol.setCellValueFactory((cellData) -> cellData.getValue().getAvatar());
-        avatarCol.setCellFactory(columna -> {
-            return new TableCell<Player, String>() {
-                private ImageView view = new ImageView();
+        playerCol.setCellValueFactory(new PropertyValueFactory<>("nickName"));
+        avatarCol.setCellValueFactory((cellData) -> new SimpleObjectProperty<Image>(cellData.getValue().getAvatar()));
+        avatarCol.setCellFactory((columna) -> {
+            return new TableCell<Player, Image>() {
+                private final ImageView view = new ImageView();
 
                 @Override
-                protected void updateItem(String item, boolean empty) {
+                protected void updateItem(Image item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item == null || empty) {
                         setGraphic(null);
                     } else {
-                        Image image = new Image(VistaRankingController.class.getResourceAsStream(item), 40, 40, true, true);
-                        view.setImage(image);
+                        view.setFitHeight(50);
+                        view.setFitWidth(50);
+                        view.setImage(item);
                         setGraphic(view);
                     }
                 }
