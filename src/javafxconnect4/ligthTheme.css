@@ -14,22 +14,28 @@ and open the template in the editor.
     -fx-background-color: skyblue;
 }
 
-.button {
+.button, .toggle-button {
     -fx-background-color: -fx-clr-primary;
     -fx-background-radius: 5px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
 }
 
-.button:hover {
+.button:hover, .toggle-button:hover {
     -fx-background-color: -fx-clr-secondary;
     -fx-background-radius: 5px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
 }
 
+/* .toggle-button:armed {} */
+
 .text-field {
     -fx-border-color: black;
+}
+
+.table-view {
+
 }
 
 #imagenPantallaPrincipal {

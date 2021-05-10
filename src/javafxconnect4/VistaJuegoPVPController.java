@@ -91,7 +91,7 @@ public class VistaJuegoPVPController implements Initializable {
             HBox root = (HBox) cargador.load();
 
             VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-            ventana2.initStage(stageActual, j1.getNickName(), j1.getPassword());
+            ventana2.initStage(stageActual, j1.getNickName());
             ventana2.nombreUsuario.setText(j1.getNickName());
             Scene scene = new Scene(root, 800, 500);
             stageActual.setScene(scene);

@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaSegundaPrincipalController">
+<HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaSegundaPrincipalController">
    <children>
-      <Pane id="imagenPantallaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="500.0" stylesheets="@dentroJuego.css">
+      <Pane id="imagenPantallaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="500.0">
          <HBox.margin>
             <Insets bottom="20.0" top="20.0" />
          </HBox.margin></Pane>
@@ -30,20 +32,41 @@
                </VBox.margin>
             </Label>
             <ImageView fx:id="foto" fitHeight="122.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" />
-            <Button mnemonicParsing="false" onAction="#editarPerfil" prefHeight="35.0" prefWidth="150.0" text="EDITAR PERFIL">
-               <font>
-                  <Font name="HP Simplified Light" size="12.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#jugar" prefHeight="35.0" prefWidth="150.0" text="JUGAR">
-               <font>
-                  <Font name="HP Simplified Light" size="12.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#verRanking" prefHeight="35.0" prefWidth="150.0" text="RANKING">
-               <font>
-                  <Font name="HP Simplified Light" size="12.0" />
-               </font></Button>
+            <GridPane alignment="CENTER" hgap="15.0" vgap="15.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#editarPerfil" prefHeight="35.0" prefWidth="150.0" text="EDITAR PERFIL">
+                     <font>
+                        <Font name="HP Simplified Light" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#jugar" prefHeight="35.0" prefWidth="150.0" text="JUGAR" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="HP Simplified Light" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#verRanking" prefHeight="35.0" prefWidth="150.0" text="RANKING" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="HP Simplified Light" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#verHistorial" prefHeight="35.0" prefWidth="150.0" text="HISTORIAL" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="HP Simplified Light" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </GridPane>
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickCerrarSesion" prefHeight="30.0" prefWidth="110.0" text="Cerrar sesión">
                <font>
                   <Font name="HP Simplified" size="14.0" />
@@ -51,8 +74,4 @@
          </children>
       </VBox>
    </children>
-   <stylesheets>
-      <URL value="@ligthTheme.css" />
-      <URL value="@dentroJuego.css" />
-   </stylesheets>
 </HBox>

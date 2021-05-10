@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
 
@@ -36,7 +37,6 @@ public class VistaSegundaPrincipalController implements Initializable {
 
     private Stage actualStage;
     private String user;
-    private Scene escenaActual;
 
     /**
      * Initializes the controller class.
@@ -51,12 +51,10 @@ public class VistaSegundaPrincipalController implements Initializable {
      *
      * @param stage
      * @param usr
-     * @param passwd
      * @throws Connect4DAOException
      */
-    public void initStage(Stage stage, String usr, String passwd) throws Connect4DAOException {
+    public void initStage(Stage stage, String usr) throws Connect4DAOException {
         actualStage = stage;
-        escenaActual = stage.getScene();
         user = usr;
         Connect4 connect4 = Connect4.getSingletonConnect4();
         foto.imageProperty().setValue(connect4.getPlayer(user).getAvatar());
@@ -91,6 +89,28 @@ public class VistaSegundaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void verRanking(ActionEvent event) {
+    private void verRanking(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaRanking.fxml"));
+        Parent root = cargador.load();
+        Scene escena = new Scene(root, 345, 400);
+        actual.setResizable(false);
+        actual.setScene(escena);
+        actual.setTitle("Ranking");
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.show();
+    }
+
+    @FXML
+    private void verHistorial(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaHistorial.fxml"));
+        Parent root = cargador.load();
+        Scene escena = new Scene(root);
+        actual.setResizable(false);
+        actual.setScene(escena);
+        actual.setTitle("Historial");
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.show();
     }
 }

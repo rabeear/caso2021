@@ -60,7 +60,6 @@ public class VistaAñadirUsuarioController implements Initializable {
 
     private Stage stageActual;
     private Scene escenaPrincipal;
-    private Stage anterior;
 
     /**
      * Initializes the controller class.
@@ -117,12 +116,10 @@ public class VistaAñadirUsuarioController implements Initializable {
      * Iniciador para usar en el cambio de ventana.
      *
      * @param stage: ventana actual
-     * @param ant: ventana anterior
      */
-    public void initStage(Stage stage, Stage ant) {
+    public void initStage(Stage stage) {
         stageActual = stage;
         escenaPrincipal = stage.getScene();
-        anterior = ant;
     }
 
     @FXML
@@ -149,11 +146,11 @@ public class VistaAñadirUsuarioController implements Initializable {
         }
         // Si no ha habido ningún error en los datos introducidos, entonces registramos al jugador.
         if (registrar) {
+            // Falta añadir foto elegida o por defecto.
             connect4.registerPlayer(user.getText(), email.getText(), psswd.getText(), date.getValue(), 0);
             // Cerramos la ventana y volvemos a enseñar la anteior.
             Node miNodo = (Node) event.getSource();
             miNodo.getScene().getWindow().hide();
-            anterior.show();
         }
     }
 
@@ -162,6 +159,5 @@ public class VistaAñadirUsuarioController implements Initializable {
         // Cerramos la ventana y volvemos a enseñar la anteior.
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
-        anterior.show();
     }
 }

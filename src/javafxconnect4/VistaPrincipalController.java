@@ -48,19 +48,19 @@ public class VistaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void autentificacionClick(ActionEvent event) throws Connect4DAOException {
+    private void autentificacionClick(ActionEvent event) throws Connect4DAOException, IOException {
         autentificacion();
     }
 
     @FXML
-    private void autentificacionEnter(KeyEvent event) throws Connect4DAOException {
+    private void autentificacionEnter(KeyEvent event) throws Connect4DAOException, IOException {
         // Para poder iniciar sesión pulsando enter.
         if (event.getCode().equals(KeyCode.ENTER)) {
             autentificacion();
         }
     }
 
-    private void autentificacion() throws Connect4DAOException {
+    private void autentificacion() throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         // Comprobamos que exista el nombre de usuario introducido.
         if (!connect4.exitsNickName(user.getText())) {
@@ -74,51 +74,43 @@ public class VistaPrincipalController implements Initializable {
                 if (!incorrecto.getText().equals("")) {
                     incorrecto.setText("");
                 }
-                try {
-                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
-                    HBox root = (HBox) cargador.load();
-                    VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-                    ventana2.initStage(stagePrincipal, user.getText(), passwd.getText());
-                    ventana2.nombreUsuario.setText(user.getText());
-                    Scene scene = new Scene(root, 800, 500);
-                    stagePrincipal.setScene(scene);
-                    stagePrincipal.show();
-                } catch (Connect4DAOException | IOException e) {
-                }
+                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
+                HBox root = (HBox) cargador.load();
+                VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
+                ventana2.initStage(stagePrincipal, user.getText());
+                ventana2.nombreUsuario.setText(user.getText());
+                Scene scene = new Scene(root, 800, 500);
+                stagePrincipal.setScene(scene);
+                stagePrincipal.setTitle("Conecta4");
+                stagePrincipal.show();
             }
         }
     }
 
     @FXML
-    private void passwdOlvidada(ActionEvent event) {
+    private void passwdOlvidada(ActionEvent event) throws IOException {
         // Cambio a ventana de password olvidada.
-        try {
-            Stage actual = new Stage();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
-            Parent root = cargador.load();
-            cargador.<VistaPsswdOlvidadaController>getController().initStage(actual);
-            Scene escena = new Scene(root, 650, 375);
-            actual.setScene(escena);
-            actual.initModality(Modality.APPLICATION_MODAL);
-            actual.show();
-        } catch (IOException e) {
-        }
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
+        Parent root = cargador.load();
+        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual);
+        Scene escena = new Scene(root, 650, 375);
+        actual.setScene(escena);
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.show();
     }
 
     @FXML
-    private void irCrearCuenta(ActionEvent event) {
-        try {
-            Stage actual = new Stage();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
-            Parent root = cargador.load();
-            cargador.<VistaAñadirUsuarioController>getController().initStage(actual, stagePrincipal);
-            Scene escena = new Scene(root, 340, 605);
-            actual.setScene(escena);
-            actual.initModality(Modality.APPLICATION_MODAL);
-            actual.show();
-            stagePrincipal.hide();
-        } catch (IOException e) {
-        }
+    private void irCrearCuenta(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
+        Parent root = cargador.load();
+        cargador.<VistaAñadirUsuarioController>getController().initStage(actual);
+        Scene escena = new Scene(root, 340, 605);
+        actual.setScene(escena);
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.setTitle("Registro");
+        actual.show();
     }
 
     /**
