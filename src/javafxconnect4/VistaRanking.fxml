@@ -13,12 +13,12 @@
     <children>
       <HBox alignment="BOTTOM_LEFT" prefHeight="18.0" prefWidth="325.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="27.0" prefWidth="59.0" text="Atrás">
+            <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="25.0" prefWidth="60.0" text="Atrás">
                <font>
                   <Font name="HP Simplified Light" size="12.0" />
                </font>
             </Button>
-              <TextField promptText="Buscar..." HBox.hgrow="ALWAYS">
+              <TextField fx:id="jugador" promptText="Buscar..." HBox.hgrow="ALWAYS">
                   <font>
                       <Font name="HP Simplified Light" size="12.0" />
                   </font>

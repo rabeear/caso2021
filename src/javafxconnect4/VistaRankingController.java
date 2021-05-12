@@ -14,6 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,25 +46,45 @@ public class VistaRankingController implements Initializable {
     private TableColumn<Player, String> playerCol;
     @FXML
     private TableColumn<Player, Integer> pointCol;
+    @FXML
+    private TextField jugador;
 
     private ArrayList ranking;
+    private final ObservableList<Player> dataList = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
             ranking = connect4.getConnect4Ranking();
-            hacerTabla(ranking);
         } catch (Connect4DAOException ex) {
             Logger.getLogger(VistaRankingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        dataList.addAll(ranking);
+        hacerTabla();
+        FilteredList<Player> filteredData = new FilteredList<>(dataList, b -> true);
+        jugador.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(player -> {
+                // Si el la barra de búsqueda está vacía, ostrar todo el ranking.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Comparamos el texto introducido en la barra de búsqueda con los nombres de los jugadores.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                return player.getNickName().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+        SortedList<Player> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tabla.comparatorProperty());
+        tabla.setItems(sortedData);
     }
 
-    private void hacerTabla(ArrayList ranking) {
+    private void hacerTabla() {
         playerCol.setCellValueFactory(new PropertyValueFactory<>("nickName"));
         avatarCol.setCellValueFactory((cellData) -> new SimpleObjectProperty<Image>(cellData.getValue().getAvatar()));
         avatarCol.setCellFactory((columna) -> {
@@ -73,7 +97,7 @@ public class VistaRankingController implements Initializable {
                     if (item == null || empty) {
                         setGraphic(null);
                     } else {
-                        view.setFitHeight(50);
+                        view.setFitHeight(60);
                         view.setFitWidth(50);
                         view.setImage(item);
                         setGraphic(view);
@@ -82,7 +106,7 @@ public class VistaRankingController implements Initializable {
             };
         });
         pointCol.setCellValueFactory(new PropertyValueFactory<>("points"));
-        tabla.setItems(FXCollections.observableArrayList(ranking));
+        tabla.setItems(dataList);
     }
 
     @FXML
