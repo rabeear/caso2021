@@ -106,6 +106,7 @@ public class VistaSegundaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaHistorial.fxml"));
         Parent root = cargador.load();
+        cargador.<VistaHistorialController>getController().initStage(user);
         Scene escena = new Scene(root);
         actual.setResizable(false);
         actual.setScene(escena);
