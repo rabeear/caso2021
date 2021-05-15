@@ -57,6 +57,7 @@ public class VistaRankingController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Obtenemos la lista con el ranking.
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
             ranking = connect4.getConnect4Ranking();
@@ -64,18 +65,18 @@ public class VistaRankingController implements Initializable {
             Logger.getLogger(VistaRankingController.class.getName()).log(Level.SEVERE, null, ex);
         }
         dataList.addAll(ranking);
+        // Rellenamos la tabla con dicha lista.
         hacerTabla();
         FilteredList<Player> filteredData = new FilteredList<>(dataList, b -> true);
         jugador.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(player -> {
-                // Si el la barra de búsqueda está vacía, ostrar todo el ranking.
+                // Si el la barra de búsqueda está vacía, mostrar todo el ranking.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
                 // Comparamos el texto introducido en la barra de búsqueda con los nombres de los jugadores.
                 String lowerCaseFilter = newValue.toLowerCase();
-
                 return player.getNickName().toLowerCase().contains(lowerCaseFilter);
             });
         });

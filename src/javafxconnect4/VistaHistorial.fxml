@@ -32,23 +32,23 @@
                     </rowConstraints>
                     <children>
                         <Label text="Fecha inicio:" />
-                        <DatePicker prefWidth="200.0" GridPane.columnIndex="1" />
-                        <DatePicker prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="inicio" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <DatePicker fx:id="fin" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Fecha fin:" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>
                 <Label text="Jugador:" />
                 <TextField fx:id="jugador" />
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Buscar" />
+                <Button fx:id="buscarButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Buscar" />
             </children>
         </HBox>
     </top>
     <center>
         <TableView fx:id="tabla" prefHeight="407.0" prefWidth="417.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn prefWidth="116.0" text="Fecha" />
-                <TableColumn prefWidth="140.0" text="Ganador" />
-                <TableColumn minWidth="9.66668701171875" prefWidth="140.0" text="Perdedor" />
+                <TableColumn fx:id="fechaCol" prefWidth="118.0" text="Fecha" />
+                <TableColumn fx:id="ganadorCol" prefWidth="130.0" text="Ganador" />
+                <TableColumn fx:id="perdedorCol" minWidth="9.66668701171875" prefWidth="130.0" text="Perdedor" />
             </columns>
             <BorderPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -58,7 +58,7 @@
     <left>
         <VBox alignment="CENTER" prefHeight="390.0" prefWidth="183.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
-                <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" text="Partidas realizadas en el sistema" textAlignment="CENTER" wrapText="true">
+                <ToggleButton fx:id="partidasButton" mnemonicParsing="false" onAction="#tablaPartidas" prefHeight="50.0" prefWidth="160.0" text="Partidas realizadas en el sistema" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>
@@ -66,27 +66,27 @@
                         <ToggleGroup fx:id="botones" />
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" text="Partidas realizadas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
+                <ToggleButton fx:id="realizadasButton" mnemonicParsing="false" onAction="#tablaRealizadas" prefHeight="50.0" prefWidth="160.0" text="Partidas realizadas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
                     <font>
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>
                 </ToggleButton>
-                <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" text="Partidas ganadas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
+                <ToggleButton fx:id="ganadasButton" mnemonicParsing="false" onAction="#tablaGanadas" prefHeight="50.0" prefWidth="160.0" text="Partidas ganadas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
                     <font>
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>
                 </ToggleButton>
-                <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" text="Partidas perdidas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
+                <ToggleButton fx:id="perdidasButton" mnemonicParsing="false" onAction="#tablaPerdidas" prefHeight="50.0" prefWidth="160.0" text="Partidas perdidas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
                     <font>
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>
                 </ToggleButton>
-                <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" text="Nº partidas realizadas en el sistema" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
+                <ToggleButton fx:id="numPartidasButton" mnemonicParsing="false" onAction="#graficaPartidas" prefHeight="50.0" prefWidth="160.0" text="Nº partidas realizadas en el sistema" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
                     <font>
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>
                 </ToggleButton>
-                <ToggleButton mnemonicParsing="false" prefHeight="50.0" prefWidth="160.0" text="Nº partidas ganadas/perdidas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
+                <ToggleButton fx:id="numPartidas" mnemonicParsing="false" onAction="#graficaJugador" prefHeight="50.0" prefWidth="160.0" text="Nº partidas ganadas/perdidas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
                     <font>
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>

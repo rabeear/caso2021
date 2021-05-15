@@ -27,9 +27,9 @@
       </HBox>
       <TableView fx:id="tabla" prefHeight="343.0" prefWidth="452.0">
         <columns>
-            <TableColumn fx:id="avatarCol" prefWidth="91.6666259765625" text="Avatar" />
-          <TableColumn fx:id="playerCol" prefWidth="151.3333740234375" text="Jugador" />
-          <TableColumn fx:id="pointCol" prefWidth="81.33331298828125" text="Puntuación" />
+            <TableColumn fx:id="avatarCol" prefWidth="55.0" text="Avatar" />
+          <TableColumn fx:id="playerCol" prefWidth="177.0" text="Jugador" />
+          <TableColumn fx:id="pointCol" prefWidth="93.33331298828125" text="Puntuación" />
         </columns>
       </TableView>
     </children>

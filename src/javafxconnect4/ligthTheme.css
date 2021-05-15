@@ -28,7 +28,9 @@ and open the template in the editor.
     -fx-border-radius: 5px;
 }
 
-/* .toggle-button:armed {} */
+.toggle-button:selected {
+    -fx-background-color: #2196c4;
+}
 
 .text-field {
     -fx-border-color: black;
@@ -36,6 +38,10 @@ and open the template in the editor.
 
 .table-view {
 
+}
+
+.table-cell {
+    -fx-alignment: CENTER;
 }
 
 #imagenPantallaPrincipal {
