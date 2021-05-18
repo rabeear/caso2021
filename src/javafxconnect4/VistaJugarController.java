@@ -28,7 +28,7 @@ import model.Player;
  */
 public class VistaJugarController implements Initializable {
 
-    private Stage actualStage;
+    private Stage ventanaInicio;
     private String user;
 
     /**
@@ -40,7 +40,7 @@ public class VistaJugarController implements Initializable {
     }
 
     public void initStage(Stage actual, String usuario) {
-        actualStage = actual;
+        ventanaInicio = actual;
         user = usuario;
     }
 
@@ -51,10 +51,10 @@ public class VistaJugarController implements Initializable {
         Pane root = (Pane) cargador.load();
         Player actualPlayer = connect4.getPlayer(user);
         VistaJuegoPVEController ventanaJuegoPVE = cargador.<VistaJuegoPVEController>getController();
-        ventanaJuegoPVE.initStage(actualStage, actualPlayer);
+        ventanaJuegoPVE.initStage(ventanaInicio, actualPlayer);
         Scene scene = new Scene(root, 800, 500);
-        actualStage.setScene(scene);
-        actualStage.show();
+        ventanaInicio.setScene(scene);
+        ventanaInicio.show();
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
     }
@@ -66,16 +66,17 @@ public class VistaJugarController implements Initializable {
         HBox root = (HBox) cargador.load();
         Player actualPlayer = connect4.getPlayer(user);
         VistaInicioSesionSegundoJugadorController ventanaIni = cargador.<VistaInicioSesionSegundoJugadorController>getController();
-        ventanaIni.initStage(actualStage, actualPlayer);
+        ventanaIni.initStage(ventanaInicio, actualPlayer);
         Scene scene = new Scene(root, 800, 500);
-        actualStage.setScene(scene);
-        actualStage.show();
+        ventanaInicio.setScene(scene);
+        ventanaInicio.show();
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
-        // Falta implementarlo
+        Node miNodo = (Node) event.getSource();
+        ((Stage) miNodo.getScene().getWindow()).close();
     }
 }

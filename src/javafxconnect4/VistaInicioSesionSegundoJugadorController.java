@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,7 +23,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Connect4;
 import model.Player;
@@ -114,7 +114,7 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
                 // Cargamos la ventana del juego.
                 try {
                     FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
-                    Pane root = (Pane) cargador.load();
+                    Parent root = cargador.load();
                     VistaJuegoPVPController ventanaIni = cargador.<VistaJuegoPVPController>getController();
                     ventanaIni.initStage(actualStage, player1, player2);
                     Scene scene = new Scene(root, 800, 500);

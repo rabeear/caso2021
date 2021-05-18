@@ -17,13 +17,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -88,7 +88,7 @@ public class VistaJuegoPVPController implements Initializable {
         turno = true;
         try {
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
-            HBox root = (HBox) cargador.load();
+            Parent root = cargador.load();
 
             VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
             ventana2.initStage(stageActual, j1.getNickName());

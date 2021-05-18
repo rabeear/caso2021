@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.Connect4;
 import model.Player;
 
@@ -114,6 +115,6 @@ public class VistaRankingController implements Initializable {
     private void cerrar(ActionEvent event) throws IOException, Connect4DAOException {
         // Cierra ventana actual
         Node miNodo = (Node) event.getSource();
-        miNodo.getScene().getWindow().hide();
+        ((Stage) miNodo.getScene().getWindow()).close();
     }
 }

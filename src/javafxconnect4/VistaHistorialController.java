@@ -21,8 +21,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -33,6 +37,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import model.Connect4;
+import model.DayRank;
 import model.Round;
 
 /**
@@ -65,8 +70,6 @@ public class VistaHistorialController implements Initializable {
     @FXML
     private ToggleGroup botones;
     @FXML
-    private ToggleButton numPartidas;
-    @FXML
     private ToggleButton partidasButton;
     @FXML
     private ToggleButton realizadasButton;
@@ -77,8 +80,6 @@ public class VistaHistorialController implements Initializable {
     @FXML
     private ToggleButton numPartidasButton;
 
-    private CategoryAxis xAxis = new CategoryAxis();
-    private NumberAxis yAxis = new NumberAxis();
     private Connect4 connect4;
     private final ObservableList<Round> dataList = FXCollections.observableArrayList();
     private String user;
@@ -124,7 +125,7 @@ public class VistaHistorialController implements Initializable {
     /**
      * Iniciador para usar en el cambio de ventana.
      *
-     * @param usr
+     * @param usr: nombre del usuario que ha iniciado sesión.
      */
     public void initStage(String usr) {
         user = usr;
@@ -143,6 +144,9 @@ public class VistaHistorialController implements Initializable {
 
     @FXML
     private void tablaPartidas(ActionEvent event) {
+        if (!borderPane.getCenter().equals(tabla)) {
+            borderPane.setCenter(tabla);
+        }
         TreeMap<LocalDate, List<Round>> roundsPerDay = connect4.getRoundsPerDay();
         dataList.clear();
         jugador.setDisable(true);
@@ -157,6 +161,9 @@ public class VistaHistorialController implements Initializable {
 
     @FXML
     private void tablaRealizadas(ActionEvent event) {
+        if (!borderPane.getCenter().equals(tabla)) {
+            borderPane.setCenter(tabla);
+        }
         jugador.setDisable(false);
         jugador.setText(user);
         if (!connect4.exitsNickName(jugador.getText())) {
@@ -172,6 +179,9 @@ public class VistaHistorialController implements Initializable {
 
     @FXML
     private void tablaGanadas(ActionEvent event) {
+        if (!borderPane.getCenter().equals(tabla)) {
+            borderPane.setCenter(tabla);
+        }
         jugador.setDisable(false);
         jugador.setText(user);
         if (!connect4.exitsNickName(jugador.getText())) {
@@ -187,6 +197,9 @@ public class VistaHistorialController implements Initializable {
 
     @FXML
     private void tablaPerdidas(ActionEvent event) {
+        if (!borderPane.getCenter().equals(tabla)) {
+            borderPane.setCenter(tabla);
+        }
         jugador.setDisable(false);
         jugador.setText(user);
         if (!connect4.exitsNickName(jugador.getText())) {
@@ -202,9 +215,48 @@ public class VistaHistorialController implements Initializable {
 
     @FXML
     private void graficaPartidas(ActionEvent event) {
+        jugador.setDisable(true);
+        TreeMap<LocalDate, Integer> numPartidas = connect4.getRoundCountsPerDay();
+        CategoryAxis yAxis = new CategoryAxis();
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setLabel("Fecha");
+        yAxis.setLabel("Número partidas");
+
+        ObservableList<XYChart.Data<String, Number>> lineChartData
+                = FXCollections.observableArrayList();
+        /* esto no funciona.
+        numPartidas.subMap(inicio.getValue(), fin.getValue().plusDays(1)).forEach(
+                (LocalDate date, int rounds) -> {
+                    lineChartData.add(new XYChart.Data(date.toString(), rounds));
+                });
+         */
+        // Rellenar la serie con la ObservableList creada anteriormente.
+        XYChart.Series serie = new XYChart.Series(lineChartData);
+
+        LineChart<Number, String> grafica = new LineChart<>(xAxis, yAxis);
+        grafica.setTitle("Nº partidas totales");
+        grafica.getData().add(serie);
+        borderPane.setCenter(grafica);
+
     }
 
     @FXML
     private void graficaJugador(ActionEvent event) {
+        jugador.setDisable(false);
+        jugador.setText(user);
+        TreeMap<LocalDate, DayRank> dataPlayer = connect4.getDayRanksPlayer(connect4.getPlayer(user));
+        CategoryAxis yAxis = new CategoryAxis();
+        NumberAxis xAxis = new NumberAxis();
+
+        // Gráfica de barras apiladas con las partidas ganadas y perdidas de cada día.
+        StackedBarChart<Number, Number> partidas;
+
+        // Gráfica de barras con el nº de jugadores diferentes a los que se ha
+        // enfrentado el jugador cada día.
+        BarChart<Number, String> jugadores = new BarChart<>(xAxis, yAxis);
+    }
+
+    @FXML
+    private void buscar(ActionEvent event) {
     }
 }

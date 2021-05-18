@@ -33,7 +33,7 @@ public class JavaFxConnect4 extends Application {
         stage.setScene(scene);
         stage.setMinHeight(480);
         stage.setMinWidth(635);
-        stage.setTitle("Inicio Sesión");
+        stage.setTitle("Conecta4");
         stage.show();
     }
 

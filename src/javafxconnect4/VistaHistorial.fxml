@@ -48,7 +48,7 @@
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Label>
                 <TextField fx:id="jugador" />
-                <Button fx:id="buscarButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Buscar">
+                <Button fx:id="buscarButton" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="68.0" text="Buscar">
                <font>
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Button>
@@ -99,7 +99,7 @@
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="numPartidas" mnemonicParsing="false" onAction="#graficaJugador" prefHeight="50.0" prefWidth="160.0" text="Nº partidas ganadas/perdidas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
+                <ToggleButton fx:id="numJugadorButton" mnemonicParsing="false" onAction="#graficaJugador" prefHeight="50.0" prefWidth="160.0" text="Nº partidas ganadas/perdidas" textAlignment="CENTER" toggleGroup="$botones" wrapText="true">
                     <font>
                         <Font name="HP Simplified Light" size="12.0" />
                     </font>

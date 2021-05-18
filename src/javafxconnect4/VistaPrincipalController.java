@@ -20,7 +20,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
@@ -40,7 +39,6 @@ public class VistaPrincipalController implements Initializable {
     private Label incorrecto;
 
     private Stage stagePrincipal;
-    private Scene escenaActual;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,7 +73,7 @@ public class VistaPrincipalController implements Initializable {
                     incorrecto.setText("");
                 }
                 FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
-                HBox root = (HBox) cargador.load();
+                Parent root = cargador.load();
                 VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
                 ventana2.initStage(stagePrincipal, user.getText());
                 ventana2.nombreUsuario.setText(user.getText());
@@ -96,6 +94,8 @@ public class VistaPrincipalController implements Initializable {
         cargador.<VistaPsswdOlvidadaController>getController().initStage(actual);
         Scene escena = new Scene(root, 650, 375);
         actual.setScene(escena);
+        actual.setTitle("Recuperación de contraseña");
+        actual.setResizable(false);
         actual.initModality(Modality.APPLICATION_MODAL);
         actual.show();
     }
@@ -120,6 +120,5 @@ public class VistaPrincipalController implements Initializable {
      */
     public void initStage(Stage stage) {
         stagePrincipal = stage;
-        escenaActual = stage.getScene();
     }
 }

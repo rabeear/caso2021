@@ -38,7 +38,6 @@ public class VistaCodigoRecuperacionController implements Initializable {
     @FXML
     private Label incorrecto;
 
-    private Stage codigoRecu;
     private Stage ventanaAnt;
     private String user;
     private String passwrd;
@@ -87,7 +86,7 @@ public class VistaCodigoRecuperacionController implements Initializable {
                 alert.setContentText(passwrd);
                 // Cerramos ventana actual.
                 Node miNodo = (Node) event.getSource();
-                miNodo.getScene().getWindow().hide();
+                ((Stage) miNodo.getScene().getWindow()).close();
                 // Mostramos diálogo.
                 alert.showAndWait();
             } catch (Exception e) {
@@ -99,21 +98,17 @@ public class VistaCodigoRecuperacionController implements Initializable {
     private void cancelar(ActionEvent event) {
         // Cerramos la ventana y volvemos a enseñar la anteior.
         Node miNodo = (Node) event.getSource();
-        miNodo.getScene().getWindow().hide();
+        ((Stage) miNodo.getScene().getWindow()).close();
         ventanaAnt.show();
     }
 
     /**
      * Iniciador para usar en el cambio de ventana.
      *
-     * @param stage
      * @param usuario
      * @param ant
      */
-    public void initStage(Stage stage, String usuario, Stage ant) {
-        codigoRecu = stage;
-        codigoRecu.setTitle("Código de recuperación");
-        codigoRecu.setResizable(false);
+    public void initStage(String usuario, Stage ant) {
         user = usuario;
         ventanaAnt = ant;
     }

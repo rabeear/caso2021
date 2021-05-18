@@ -63,7 +63,7 @@ public class VistaSegundaPrincipalController implements Initializable {
     @FXML
     private void clickCerrarSesion(ActionEvent event) throws IOException {
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
-        HBox root = (HBox) cargador.load();
+        Parent root = cargador.load();
         VistaPrincipalController ventanaIni = cargador.<VistaPrincipalController>getController();
         ventanaIni.initStage(actualStage);
         Scene scene = new Scene(root, 800, 500);
@@ -77,11 +77,12 @@ public class VistaSegundaPrincipalController implements Initializable {
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJugar.fxml"));
         Parent root = cargador.load();
         cargador.<VistaJugarController>getController().initStage(actualStage, user);
-        Scene escena = new Scene(root, 420, 145);
+        Scene escena = new Scene(root, 420, 190);
         actual.setScene(escena);
+        actual.setTitle("Oponente");
+        actual.setResizable(false);
+        actual.initModality(Modality.APPLICATION_MODAL);
         actual.show();
-        Node miNodo = (Node) event.getSource();
-        miNodo.getScene().getWindow().hide();
     }
 
     @FXML

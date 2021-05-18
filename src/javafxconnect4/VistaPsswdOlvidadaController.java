@@ -40,7 +40,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
     @FXML
     private Button btnEnviar;
 
-    private Stage actualPasswd;
+    private Stage ventanaActual;
 
     /**
      * Initializes the controller class.
@@ -71,24 +71,18 @@ public class VistaPsswdOlvidadaController implements Initializable {
                 Stage actual = new Stage();
                 FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
                 Parent root = cargador.load();
-                cargador.<VistaCodigoRecuperacionController>getController().initStage(actual, campoUser.getText(), actualPasswd);
+                cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual);
                 Scene escena = new Scene(root, 410, 225);
                 actual.setScene(escena);
+                actual.setTitle("Código de recuperación");
+                actual.setResizable(false);
                 actual.initModality(Modality.APPLICATION_MODAL);
                 actual.show();
                 /*Cierra ventana actual*/
-                Node miNodo = (Node) event.getSource();
-                miNodo.getScene().getWindow().hide();
+                cerrar(null);
             } catch (IOException e) {
             }
         }
-    }
-
-    @FXML
-    private void opcionCancelar(ActionEvent event) {
-        // Cierra ventana actual
-        Node miNodo = (Node) event.getSource();
-        miNodo.getScene().getWindow().hide();
     }
 
     /**
@@ -97,8 +91,13 @@ public class VistaPsswdOlvidadaController implements Initializable {
      * @param stage
      */
     public void initStage(Stage stage) {
-        actualPasswd = stage;
-        actualPasswd.setTitle("Recuperación de contraseña");
-        actualPasswd.setResizable(false);
+        ventanaActual = stage;
+    }
+
+    @FXML
+    private void cerrar(ActionEvent event) {
+        // Cierra ventana actual
+        Node miNodo = (Node) event.getSource();
+        ((Stage) miNodo.getScene().getWindow()).close();
     }
 }
