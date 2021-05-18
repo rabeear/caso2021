@@ -86,7 +86,17 @@ public class VistaSegundaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void editarPerfil(ActionEvent event) {
+    private void editarPerfil(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
+        Parent root = cargador.load();
+        cargador.<VistaEditarPerfilController>getController().initStage(actual);
+        Scene escena = new Scene(root, 600, 400);
+        actual.setScene(escena);
+        actual.setTitle("Editar perfil");
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.show();
+        actualStage.hide();
     }
 
     @FXML
