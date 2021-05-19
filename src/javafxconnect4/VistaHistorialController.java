@@ -106,12 +106,12 @@ public class VistaHistorialController implements Initializable {
                 setDisable(item.isBefore(iniMinDate) || item.isAfter(iniMaxDate));
             }
         });
-        // Esto hay que cambiarlo para que no se pueda elegir una fecha anterior a la de incio.
+        // Para que no se pueda elegir una fecha anterior a la de incio.
         fin.setDayCellFactory(date -> new DateCell() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
-                setDisable(item.isAfter(iniMaxDate) || item.isBefore(iniMinDate));
+                setDisable(item.isAfter(iniMaxDate) || item.isBefore(inicio.getValue()));
             }
         });
         // Iniciamos la vista enseñando todas las partidas registradas en el sistema.
@@ -172,6 +172,19 @@ public class VistaHistorialController implements Initializable {
         ArrayList<Round> roundsPlayer = connect4.getRoundsPlayer(connect4.getPlayer(jugador.getText()));
         dataList.clear();
         // Falta que coja solo las rondas en el intervalo de tiempo requerido.
+        int indiceIni;
+        int indiceFin;
+        if (roundsPlayer.get(0).getLocalDate().compareTo(inicio.getValue()) > 0) {
+            indiceIni = 0;
+        }
+        if (roundsPlayer.get(roundsPlayer.size() - 1).getLocalDate().compareTo(inicio.getValue()) < 0) {
+            indiceFin = roundsPlayer.size() - 1;
+        }
+
+        roundsPlayer.forEach((Round partida) -> {
+
+        });
+
         dataList.addAll(roundsPlayer);
         rellenarCol();
         tabla.setItems(dataList);

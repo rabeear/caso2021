@@ -79,7 +79,8 @@ public class VistaPsswdOlvidadaController implements Initializable {
                 actual.initModality(Modality.APPLICATION_MODAL);
                 actual.show();
                 /*Cierra ventana actual*/
-                cerrar(null);
+                Node miNodo = (Node) event.getSource();
+                miNodo.getScene().getWindow().hide();
             } catch (IOException e) {
             }
         }

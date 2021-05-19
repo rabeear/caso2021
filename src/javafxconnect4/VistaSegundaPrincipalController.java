@@ -96,7 +96,6 @@ public class VistaSegundaPrincipalController implements Initializable {
         actual.setTitle("Editar perfil");
         actual.initModality(Modality.APPLICATION_MODAL);
         actual.show();
-        actualStage.hide();
     }
 
     @FXML

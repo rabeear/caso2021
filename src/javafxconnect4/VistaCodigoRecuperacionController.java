@@ -89,6 +89,7 @@ public class VistaCodigoRecuperacionController implements Initializable {
                 ((Stage) miNodo.getScene().getWindow()).close();
                 // Mostramos diálogo.
                 alert.showAndWait();
+                ventanaAnt.close();
             } catch (Exception e) {
             }
         }
