@@ -65,3 +65,38 @@ and open the template in the editor.
     -fx-background-color: none;
     -fx-border-color: none;
 }
+
+#img1 {
+    -fx-background-image: url('../avatars/avatar1.png');
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100%;
+}
+
+#img2 {
+    -fx-background-image: url('../avatars/avatar2.png');
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-fills: true;
+}
+
+#img3 {
+    -fx-background-image: url('../avatars/avatar3.png');
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-fills: true;
+}
+
+#img4 {
+    -fx-background-image: url('../avatars/avatar4.png');
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-fills: true;
+}
+
+#img5 {
+    -fx-background-image: url('../avatars/default.png');
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-fills: true;
+}
