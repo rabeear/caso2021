@@ -9,6 +9,7 @@ import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,10 +40,20 @@ public class VistaPrincipalController implements Initializable {
     private Label incorrecto;
 
     private Stage stagePrincipal;
+    private final SimpleObjectProperty<Theme> currentTheme = new SimpleObjectProperty<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // añadir listener para el togglebutton del theme.
+    }
+
+    /**
+     * Devuelve el modo de visualización actual.
+     *
+     * @return Tema actual de la aplicación.
+     */
+    public SimpleObjectProperty<Theme> getTheme() {
+        return currentTheme;
     }
 
     @FXML

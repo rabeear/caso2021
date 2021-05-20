@@ -66,10 +66,13 @@
             <BorderPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </BorderPane.margin>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
         </TableView>
     </center>
     <left>
-        <VBox alignment="CENTER" prefHeight="390.0" prefWidth="183.0" spacing="10.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="427.0" prefWidth="154.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <ToggleButton fx:id="partidasButton" mnemonicParsing="false" onAction="#tablaPartidas" prefHeight="50.0" prefWidth="160.0" text="Partidas realizadas en el sistema" textAlignment="CENTER" wrapText="true">
                     <font>

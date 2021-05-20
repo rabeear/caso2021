@@ -8,6 +8,7 @@ package javafxconnect4;
 import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import model.Connect4;
 import model.DayRank;
+import model.Player;
 import model.Round;
 
 /**
@@ -114,6 +116,17 @@ public class VistaHistorialController implements Initializable {
                 setDisable(item.isAfter(iniMaxDate) || item.isBefore(inicio.getValue()));
             }
         });
+
+        // Indicamos cómo queremos que se muestren los datos en las tablas.
+        fechaCol.setCellValueFactory((cellData)
+                -> new SimpleObjectProperty<String>(cellData.getValue().getLocalDate().toString()));
+        horaCol.setCellValueFactory((cellData) -> new SimpleObjectProperty<String>(
+                cellData.getValue().getTimeStamp().toLocalTime().truncatedTo(ChronoUnit.SECONDS).toString()));
+        ganadorCol.setCellValueFactory((cellData)
+                -> new SimpleObjectProperty<String>(cellData.getValue().getWinner().getNickName()));
+        perdedorCol.setCellValueFactory((cellData)
+                -> new SimpleObjectProperty<String>(cellData.getValue().getLoser().getNickName()));
+
         // Iniciamos la vista enseñando todas las partidas registradas en el sistema.
         partidasButton.setSelected(true);
         fin.setValue(LocalDate.now());
@@ -131,17 +144,6 @@ public class VistaHistorialController implements Initializable {
         user = usr;
     }
 
-    private void rellenarCol() {
-        fechaCol.setCellValueFactory((cellData)
-                -> new SimpleObjectProperty<String>(cellData.getValue().getLocalDate().toString()));
-        horaCol.setCellValueFactory((cellData) -> new SimpleObjectProperty<String>(
-                cellData.getValue().getTimeStamp().toLocalTime().truncatedTo(ChronoUnit.SECONDS).toString()));
-        ganadorCol.setCellValueFactory((cellData)
-                -> new SimpleObjectProperty<String>(cellData.getValue().getWinner().getNickName()));
-        perdedorCol.setCellValueFactory((cellData)
-                -> new SimpleObjectProperty<String>(cellData.getValue().getLoser().getNickName()));
-    }
-
     @FXML
     private void tablaPartidas(ActionEvent event) {
         if (!borderPane.getCenter().equals(tabla)) {
@@ -155,7 +157,6 @@ public class VistaHistorialController implements Initializable {
                 (LocalDate date, List<Round> rounds) -> {
                     dataList.addAll(rounds);
                 });
-        rellenarCol();
         tabla.setItems(dataList);
     }
 
@@ -167,26 +168,34 @@ public class VistaHistorialController implements Initializable {
         jugador.setDisable(false);
         jugador.setText(user);
         if (!connect4.exitsNickName(jugador.getText())) {
-            // Error jugador no existente.
+            // Error jugador no existente (Enseñar alerta ERROR)
         }
         ArrayList<Round> roundsPlayer = connect4.getRoundsPlayer(connect4.getPlayer(jugador.getText()));
         dataList.clear();
-        // Falta que coja solo las rondas en el intervalo de tiempo requerido.
-        int indiceIni;
-        int indiceFin;
-        if (roundsPlayer.get(0).getLocalDate().compareTo(inicio.getValue()) > 0) {
-            indiceIni = 0;
+
+        // Cojemos solo los datos en el intervalo de tiempo requerido.
+        int indiceIni = 0;
+        int indiceFin = roundsPlayer.size() - 1;
+
+        if (roundsPlayer.get(0).getLocalDate().compareTo(inicio.getValue()) < 0) {
+            for (Round ronda : roundsPlayer) {
+                if (ronda.getLocalDate().compareTo(inicio.getValue()) >= 0) {
+                    indiceIni = roundsPlayer.indexOf(ronda);
+                    break;
+                }
+            }
         }
-        if (roundsPlayer.get(roundsPlayer.size() - 1).getLocalDate().compareTo(inicio.getValue()) < 0) {
-            indiceFin = roundsPlayer.size() - 1;
+
+        if (roundsPlayer.get(roundsPlayer.size() - 1).getLocalDate().compareTo(fin.getValue()) > 0) {
+            for (Round ronda : roundsPlayer) {
+                if (ronda.getLocalDate().compareTo(fin.getValue()) >= 0) {
+                    indiceFin = roundsPlayer.indexOf(ronda);
+                    break;
+                }
+            }
         }
 
-        roundsPlayer.forEach((Round partida) -> {
-
-        });
-
-        dataList.addAll(roundsPlayer);
-        rellenarCol();
+        dataList.addAll(roundsPlayer.subList(indiceIni, indiceFin));
         tabla.setItems(dataList);
     }
 
@@ -204,7 +213,6 @@ public class VistaHistorialController implements Initializable {
         dataList.clear();
         // Falta que coja solo las rondas en el intervalo de tiempo requerido.
         dataList.addAll(roundsPlayer);
-        rellenarCol();
         tabla.setItems(dataList);
     }
 
@@ -222,7 +230,6 @@ public class VistaHistorialController implements Initializable {
         dataList.clear();
         // Falta que coja solo las rondas en el intervalo de tiempo requerido.
         dataList.addAll(roundsPlayer);
-        rellenarCol();
         tabla.setItems(dataList);
     }
 
@@ -230,23 +237,22 @@ public class VistaHistorialController implements Initializable {
     private void graficaPartidas(ActionEvent event) {
         jugador.setDisable(true);
         TreeMap<LocalDate, Integer> numPartidas = connect4.getRoundCountsPerDay();
-        CategoryAxis yAxis = new CategoryAxis();
-        NumberAxis xAxis = new NumberAxis();
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Fecha");
         yAxis.setLabel("Número partidas");
 
         ObservableList<XYChart.Data<String, Number>> lineChartData
                 = FXCollections.observableArrayList();
-        /* esto no funciona.
         numPartidas.subMap(inicio.getValue(), fin.getValue().plusDays(1)).forEach(
-                (LocalDate date, int rounds) -> {
+                (date, rounds) -> {
                     lineChartData.add(new XYChart.Data(date.toString(), rounds));
                 });
-         */
+
         // Rellenar la serie con la ObservableList creada anteriormente.
         XYChart.Series serie = new XYChart.Series(lineChartData);
 
-        LineChart<Number, String> grafica = new LineChart<>(xAxis, yAxis);
+        LineChart<String, Number> grafica = new LineChart<>(xAxis, yAxis);
         grafica.setTitle("Nº partidas totales");
         grafica.getData().add(serie);
         borderPane.setCenter(grafica);
