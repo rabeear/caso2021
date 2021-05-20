@@ -125,19 +125,19 @@ public class VistaCambiarController implements Initializable {
         
         switch (numeroDeFoto) {
             case 1:
-                img = "../avatars/avatar1.png";
+                img = "/avatars/avatar1.png";
                 break;
             case 2:
-                img = "../avatars/avatar2.png";
+                img = "/avatars/avatar2.png";
                 break;
             case 3:
-                img = "../avatars/avatar3.png";
+                img = "/avatars/avatar3.png";
                 break;
             case 4:
-                img = "../avatars/avatar4.png";
+                img = "/avatars/avatar4.png";
                 break;
             case 5:
-                img = "../avatars/default.png";
+                img = "/avatars/default.png";
                 break;
             default:
                 break;

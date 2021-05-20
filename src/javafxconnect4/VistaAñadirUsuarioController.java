@@ -23,6 +23,9 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
@@ -60,7 +63,11 @@ public class VistaAñadirUsuarioController implements Initializable {
 
     private Stage stageActual;
     private Scene escenaPrincipal;
-    private String auxiliarFoto;
+    private Image auxiliarFoto;
+    @FXML
+    private ImageView imagenAvatar;
+    @FXML
+    private Text labelFoto;
 
     /**
      * Initializes the controller class.
@@ -122,6 +129,9 @@ public class VistaAñadirUsuarioController implements Initializable {
     public void initStage(Stage stage) {
         stageActual = stage;
         escenaPrincipal = stage.getScene();
+        Image avatar = new Image("/avatars/default.png");
+        auxiliarFoto = avatar;
+        imagenAvatar.imageProperty().setValue(avatar);
     }
 
     @FXML
@@ -149,7 +159,7 @@ public class VistaAñadirUsuarioController implements Initializable {
         // Si no ha habido ningún error en los datos introducidos, entonces registramos al jugador.
         if (registrar) {
             // Falta añadir foto elegida o por defecto.
-            connect4.registerPlayer(user.getText(), email.getText(), psswd.getText(), date.getValue(), 0);
+            connect4.registerPlayer(user.getText(), email.getText(), psswd.getText(),auxiliarFoto ,date.getValue(), 0);
             // Cerramos la ventana y volvemos a enseñar la anteior.
             Node miNodo = (Node) event.getSource();
             miNodo.getScene().getWindow().hide();
@@ -166,7 +176,9 @@ public class VistaAñadirUsuarioController implements Initializable {
     void initStage(Stage stage, String foto) { //enProceso
      stageActual = stage;
      escenaPrincipal = stage.getScene();
-     auxiliarFoto = foto;
+     Image avatar = new Image(foto);
+     auxiliarFoto = avatar;
+     imagenAvatar.imageProperty().setValue(avatar);
      
     }
 }
