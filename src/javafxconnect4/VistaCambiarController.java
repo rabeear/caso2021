@@ -46,9 +46,9 @@ public class VistaCambiarController implements Initializable {
         if (anterior) {
             devolver(event, 1);
         } else {
-            img = new Image("../avatars/avatar1.png");
+            img = new Image("/avatars/avatar1.png");
             player.setAvatar(img);
-            clickCancelar(event);
+            volver();
         }
     }
 
@@ -57,9 +57,9 @@ public class VistaCambiarController implements Initializable {
         if (anterior) {
             devolver(event, 2);
         } else {
-            img = new Image("../avatars/avatar2.png");
+            img = new Image("/avatars/avatar2.png");
             player.setAvatar(img);
-            clickCancelar(event);
+            volver();
         }
     }
 
@@ -68,9 +68,9 @@ public class VistaCambiarController implements Initializable {
         if (anterior) {
             devolver(event, 3);
         } else {
-            img = new Image("../avatars/avatar3.png");
+            img = new Image("/avatars/avatar3.png");
             player.setAvatar(img);
-            clickCancelar(event);
+            volver();
         }
     }
 
@@ -79,9 +79,9 @@ public class VistaCambiarController implements Initializable {
         if (anterior) {
             devolver(event, 4);
         } else {
-            img = new Image("../avatars/avatar4.png");
+            img = new Image("/avatars/avatar4.png");
             player.setAvatar(img);
-            clickCancelar(event);
+            volver();
         }
     }
 
@@ -90,9 +90,9 @@ public class VistaCambiarController implements Initializable {
         if (anterior) {
             devolver(event, 5);
         } else {
-            img = new Image("../avatars/default.png");
+            img = new Image("/avatars/default.png");
             player.setAvatar(img);
-            clickCancelar(event);
+            volver();
         }
     }
 
