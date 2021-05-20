@@ -86,16 +86,17 @@ public class VistaSegundaPrincipalController implements Initializable {
     }
 
     @FXML
-    private void editarPerfil(ActionEvent event) throws IOException {
+    private void editarPerfil(ActionEvent event) throws IOException, Connect4DAOException {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaEditarPerfilController>getController().initStage(actual);
+        cargador.<VistaEditarPerfilController>getController().initStage(actual, user);
         Scene escena = new Scene(root, 600, 400);
         actual.setScene(escena);
         actual.setTitle("Editar perfil");
         actual.initModality(Modality.APPLICATION_MODAL);
         actual.show();
+        actualStage.close();
     }
 
     @FXML
