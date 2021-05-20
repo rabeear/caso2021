@@ -5,6 +5,7 @@
  */
 package javafxconnect4;
 
+import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Player;
 
@@ -29,6 +31,7 @@ public class VistaCambiarController implements Initializable {
     private Stage actualStage;
     private Scene actualScene;
     private Player player;
+    Image img;
     private boolean anterior; //Si true vistaAñadirUser / false -> VistaEditarPerfil
     /**
      * Initializes the controller class.
@@ -39,47 +42,57 @@ public class VistaCambiarController implements Initializable {
     }    
 
     @FXML
-    private void clickImg1(ActionEvent event) throws IOException {
+    private void clickImg1(ActionEvent event) throws IOException, Connect4DAOException {
         if (anterior) {
             devolver(event, 1);
         } else {
-            
+            img = new Image("../avatars/avatar1.png");
+            player.setAvatar(img);
+            clickCancelar(event);
         }
     }
 
     @FXML
-    private void clickImg2(ActionEvent event) throws IOException {
+    private void clickImg2(ActionEvent event) throws IOException, Connect4DAOException {
         if (anterior) {
             devolver(event, 2);
         } else {
-            
+            img = new Image("../avatars/avatar2.png");
+            player.setAvatar(img);
+            clickCancelar(event);
         }
     }
 
     @FXML
-    private void clickImg3(ActionEvent event) throws IOException {
+    private void clickImg3(ActionEvent event) throws IOException, Connect4DAOException {
         if (anterior) {
             devolver(event, 3);
         } else {
-            
+            img = new Image("../avatars/avatar3.png");
+            player.setAvatar(img);
+            clickCancelar(event);
         }
     }
 
     @FXML
-    private void clickImg4(ActionEvent event) throws IOException {
+    private void clickImg4(ActionEvent event) throws IOException, Connect4DAOException {
         if (anterior) {
             devolver(event, 4);
         } else {
-            
+            img = new Image("../avatars/avatar4.png");
+            player.setAvatar(img);
+            clickCancelar(event);
         }
     }
 
     @FXML
-    private void clickImg5(ActionEvent event) throws IOException {
+    private void clickImg5(ActionEvent event) throws IOException, Connect4DAOException {
         if (anterior) {
             devolver(event, 5);
         } else {
-            
+            img = new Image("../avatars/default.png");
+            player.setAvatar(img);
+            clickCancelar(event);
         }
     }
 
@@ -94,12 +107,14 @@ public class VistaCambiarController implements Initializable {
         actualScene = actual.getScene();
         player = j1;
         anterior = false;
+        actualStage.setResizable(false);
     }
 
     void initStage(Stage actual) {
         actualStage = actual;
         actualScene = actual.getScene();
         anterior = true;
+        actualStage.setResizable(false);
     }
     
     void devolver(ActionEvent event, int numeroDeFoto) throws IOException {
@@ -131,7 +146,20 @@ public class VistaCambiarController implements Initializable {
         Scene escena = new Scene(root);
         actual.setScene(escena);
         actual.show();
+        
         actualStage.close();
     }
     
+    void volver() throws IOException, Connect4DAOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
+        Parent root = cargador.load();
+        cargador.<VistaEditarPerfilController>getController().initStage(actual, player.getNickName());
+        Scene escena = new Scene(root);
+        actual.setScene(escena);
+        actual.show();
+        
+        actualStage.close();
+        
+    }
 }

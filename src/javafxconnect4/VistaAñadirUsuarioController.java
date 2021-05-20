@@ -167,5 +167,6 @@ public class VistaAñadirUsuarioController implements Initializable {
      stageActual = stage;
      escenaPrincipal = stage.getScene();
      auxiliarFoto = foto;
+     
     }
 }
