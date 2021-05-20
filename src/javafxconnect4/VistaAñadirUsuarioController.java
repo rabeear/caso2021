@@ -60,6 +60,7 @@ public class VistaAñadirUsuarioController implements Initializable {
 
     private Stage stageActual;
     private Scene escenaPrincipal;
+    private String auxiliarFoto;
 
     /**
      * Initializes the controller class.
@@ -101,13 +102,14 @@ public class VistaAñadirUsuarioController implements Initializable {
         // Llevar a zona de cambio de avatar.
         try {
             Stage actual = new Stage();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiarAvatar.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
             Parent root = cargador.load();
-            cargador.<VistaCambiarAvatarController>getController().initStage(actual);
+            cargador.<VistaCambiarController>getController().initStage(actual);
             Scene escena = new Scene(root, 650, 375);
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);
-            actual.show();
+            actual.showAndWait();
+            stageActual.close();
         } catch (IOException e) {
         }
     }
@@ -159,5 +161,11 @@ public class VistaAñadirUsuarioController implements Initializable {
         // Cerramos la ventana y volvemos a enseñar la anteior.
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
+    }
+    
+    void initStage(Stage stage, String foto) { //enProceso
+     stageActual = stage;
+     escenaPrincipal = stage.getScene();
+     auxiliarFoto = foto;
     }
 }

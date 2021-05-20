@@ -51,7 +51,13 @@ public class VistaEditarPerfilController implements Initializable {
     }    
 
     @FXML
-    private void clickCambiar(ActionEvent event) {
+    private void clickCambiar(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
+        Parent root = cargador.load();
+        cargador.<VistaCambiarController>getController().initStage(actual, player);
+        
+        
     }
 
     @FXML
