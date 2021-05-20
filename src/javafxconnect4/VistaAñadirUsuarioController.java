@@ -173,7 +173,7 @@ public class VistaAñadirUsuarioController implements Initializable {
         miNodo.getScene().getWindow().hide();
     }
     
-    void initStage(Stage stage, String foto) { //enProceso
+    void initStage(Stage stage, String foto) { 
      stageActual = stage;
      escenaPrincipal = stage.getScene();
      Image avatar = new Image(foto);
