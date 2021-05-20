@@ -9,12 +9,14 @@ import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -41,6 +43,10 @@ public class VistaEditarPerfilController implements Initializable {
     @FXML
     private TextField cuadroMail;
     private Player player;
+    @FXML
+    private Button btnConfirmar;
+    @FXML
+    private Label labelError;
 
     /**
      * Initializes the controller class.
@@ -48,6 +54,9 @@ public class VistaEditarPerfilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        BooleanBinding noDatos = cuadroPswd.textProperty().isEmpty().and(cuadroMail.textProperty().isEmpty());
+        
+        btnConfirmar.disableProperty().bind(noDatos);
     }    
 
     @FXML
@@ -65,7 +74,26 @@ public class VistaEditarPerfilController implements Initializable {
     }
 
     @FXML
-    private void clickConfirmar(ActionEvent event) {
+    private void clickConfirmar(ActionEvent event) throws Connect4DAOException {
+        boolean pswd = false;
+        Connect4 connect4 = Connect4.getSingletonConnect4();
+        
+        if (!cuadroPswd.getText().isEmpty()) {
+            if (Player.checkPassword(cuadroPswd.getText())) {
+                player.setPassword(cuadroPswd.getText());
+            } else { 
+                labelError.setText("Contraseña no valida!");
+                pswd = true;
+            }
+        }
+        if (!cuadroMail.getText().isEmpty()) {
+            if (Player.checkEmail(cuadroMail.getText())) {
+                player.setEmail(cuadroMail.getText());
+            } else {
+                if (pswd) labelError.setText("Contraseña y correo no validos!");
+                else labelError.setText("Correo no valido!");
+            }
+        }
     }
 
     @FXML
@@ -90,5 +118,7 @@ public class VistaEditarPerfilController implements Initializable {
         labelUsuario.setText(user);
         player = connect4.getPlayer(user);
         imgAvatar.imageProperty().setValue(player.getAvatar());
+        cuadroPswd.setPromptText(player.getPassword());
+        cuadroMail.setPromptText(player.getEmail());
     }
 }
