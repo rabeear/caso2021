@@ -23,7 +23,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" />
          </padding>
          <children>
-            <Label fx:id="nombreUsuario" alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="226.0" textAlignment="CENTER">
+            <Label fx:id="nombreUsuario" alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="226.0" styleClass="text-id" textAlignment="CENTER">
                <font>
                   <Font name="HP Simplified" size="36.0" />
                </font>

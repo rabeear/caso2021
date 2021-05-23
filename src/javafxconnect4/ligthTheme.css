@@ -9,10 +9,10 @@ and open the template in the editor.
 */
 
 .root {
-    -fx-clr-primary: #51b8e1;
-    -fx-clr-secondary: #92d3ed;
-    -fx-clr-tertiary: #2196c4;
-    -fx-background-color: skyblue;
+    -fx-clr-primary: #bfbfbf;
+    -fx-clr-secondary: #d9d9d9;
+    -fx-clr-tertiary: #999999;
+    -fx-background-color: #f2f2f2;
 }
 
 .text-id {
@@ -24,6 +24,7 @@ and open the template in the editor.
     -fx-background-radius: 5px;
     -fx-border-color: black;
     -fx-border-radius: 5px;
+    -fx-text-fill: black;
 }
 
 .button:hover, .toggle-button:hover {

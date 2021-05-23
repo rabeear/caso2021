@@ -13,7 +13,7 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="340.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREA TU CUENTA" textAlignment="CENTER" wrappingWidth="309.205078125">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="CREA TU CUENTA" textAlignment="CENTER" wrappingWidth="309.205078125">
          <VBox.margin>
             <Insets top="5.0" />
          </VBox.margin>
@@ -26,7 +26,7 @@
             <ImageView fx:id="imagenAvatar" fitHeight="116.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Text fx:id="labelFoto" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Si lo desea puede añadir una foto de perfil." textAlignment="CENTER" wrappingWidth="149.44537353515625">
+                  <Text fx:id="labelFoto" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Si lo desea puede añadir una foto de perfil." textAlignment="CENTER" wrappingWidth="149.44537353515625">
                      <font>
                         <Font name="HP Simplified Light" size="12.0" />
                      </font>
@@ -96,7 +96,7 @@
          <font>
             <Font name="HP Simplified" size="12.0" />
          </font></Label>
-      <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de nacimiento:" wrappingWidth="277.1770935058594">
+      <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Fecha de nacimiento:" wrappingWidth="277.1770935058594">
          <font>
             <Font name="HP Simplified Light" size="12.0" />
          </font>

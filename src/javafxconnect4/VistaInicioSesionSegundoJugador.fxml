@@ -19,14 +19,14 @@
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="400.0" spacing="20.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="JUGADOR 1">
                <font>
                   <Font name="HP Simplified" size="40.0" />
                </font>
             </Text>
             <ImageView fx:id="imagenJ1" fitHeight="163.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
             <Line endX="100.0" startX="-100.0" />
-            <Label fx:id="userJ1" text="User1">
+            <Label fx:id="userJ1" styleClass="text-id" text="User1">
                <font>
                   <Font name="HP Simplified Light" size="30.0" />
                </font>
@@ -34,12 +34,12 @@
             <Line endX="100.0" startX="-100.0" />
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="400.0" spacing="30.0">
                <children>
-                  <Label text="Puntos totales:">
+                  <Label styleClass="text-id" text="Puntos totales:">
                      <font>
                         <Font name="HP Simplified" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="pointsJ1" text="Points1">
+                  <Label fx:id="pointsJ1" styleClass="text-id" text="Points1">
                      <font>
                         <Font name="HP Simplified" size="25.0" />
                      </font>
@@ -51,7 +51,7 @@
       <Line endY="150.0" startX="1.7928931713104248" startY="-267.41864013671875" />
       <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="400.0" spacing="10.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="JUGADOR 2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="JUGADOR 2">
                <font>
                   <Font name="HP Simplified" size="40.0" />
                </font>
@@ -69,13 +69,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Usuario:">
+                  <Label styleClass="text-id" text="Usuario:">
                      <font>
                         <Font name="HP Simplified Light" size="13.0" />
                      </font></Label>
                   <TextField fx:id="userCuadro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#enterInicioJ2" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" />
                   <PasswordField fx:id="psswdCuadro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#enterInicioJ2" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Contraseña:" GridPane.rowIndex="1">
+                  <Label styleClass="text-id" text="Contraseña:" GridPane.rowIndex="1">
                      <font>
                         <Font name="HP Simplified Light" size="13.0" />
                      </font></Label>

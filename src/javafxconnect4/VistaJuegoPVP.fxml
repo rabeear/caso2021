@@ -18,38 +18,33 @@
    <children>
       <VBox alignment="CENTER" layoutX="550.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="250.0" spacing="15.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TURNO DE" textAlignment="CENTER" wrappingWidth="131.205078125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="TURNO DE" textAlignment="CENTER" wrappingWidth="131.205078125">
                <font>
-                  <Font name="Yu Gothic UI Light" size="24.0" />
+                  <Font name="HP Simplified" size="24.0" />
                </font>
             </Text>
-            <Label fx:id="labelJugador" alignment="CENTER" prefHeight="30.0" prefWidth="202.0" textAlignment="CENTER" textFill="#3800ff">
+            <Label fx:id="labelJugador" alignment="CENTER" prefHeight="30.0" prefWidth="202.0" styleClass="text-id" textAlignment="CENTER" textFill="#3800ff">
                <font>
-                  <Font name="Yu Gothic Medium" size="24.0" />
+                  <Font name="HP Simplified Light" size="30.0" />
                </font>
             </Label>
             <Line endX="100.0" startX="-100.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TU" textAlignment="CENTER" wrappingWidth="160.205078125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="TU PUNTUACIÓN" textAlignment="CENTER" wrappingWidth="160.205078125">
                <font>
-                  <Font name="Yu Gothic UI Light" size="24.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PUNTUACIÓN" textAlignment="CENTER" wrappingWidth="160.205078125">
-               <font>
-                  <Font name="Yu Gothic UI Light" size="24.0" />
+                  <Font name="HP Simplified" size="24.0" />
                </font>
             </Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Label fx:id="labelPuntuacion" text="0">
+                  <Label fx:id="labelPuntuacion" styleClass="text-id" text="0">
                      <font>
-                        <Font size="30.0" />
+                        <Font name="HP Simplified Light" size="30.0" />
                      </font>
                   </Label>
                   <Line endY="25.0" startY="-25.0" />
-                  <Label fx:id="labelPuntuacion2" text="0">
+                  <Label fx:id="labelPuntuacion2" styleClass="text-id" text="0">
                      <font>
-                        <Font size="30.0" />
+                        <Font name="HP Simplified Light" size="30.0" />
                      </font>
                   </Label>
                </children>
@@ -57,8 +52,14 @@
             <Line endX="100.0" startX="-100.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#clickReinicio" prefHeight="39.0" prefWidth="190.0" text="REINICIAR PARTIDA" />
-                  <Button mnemonicParsing="false" onAction="#clickSalir" prefHeight="39.0" prefWidth="190.0" text="SALIR" />
+                  <Button mnemonicParsing="false" onAction="#clickReinicio" prefHeight="39.0" prefWidth="190.0" text="REINICIAR PARTIDA">
+                     <font>
+                        <Font name="HP Simplified" size="12.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#clickSalir" prefHeight="39.0" prefWidth="190.0" text="SALIR">
+                     <font>
+                        <Font name="HP Simplified" size="12.0" />
+                     </font></Button>
                </children>
             </VBox>
          </children>

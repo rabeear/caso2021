@@ -10,7 +10,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="410.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaCodigoRecuperacionController">
     <children>
-        <Label contentDisplay="CENTER" text="CÓDIGO DE RECUPERACIÓN" textAlignment="CENTER">
+        <Label contentDisplay="CENTER" styleClass="text-id" text="CÓDIGO DE RECUPERACIÓN" textAlignment="CENTER">
             <font>
                 <Font name="HP Simplified Bold" size="25.0" />
             </font>
@@ -18,7 +18,7 @@
                 <Insets top="20.0" />
             </VBox.margin>
         </Label>
-        <Label fx:id="textoCodigo" alignment="CENTER" prefHeight="30.0" prefWidth="175.0" text="4567" textAlignment="CENTER">
+        <Label fx:id="textoCodigo" alignment="CENTER" prefHeight="30.0" prefWidth="175.0" styleClass="text-id" text="4567" textAlignment="CENTER">
             <font>
                 <Font name="HP Simplified" size="22.0" />
             </font>
@@ -29,7 +29,7 @@
       <Label fx:id="incorrecto" textFill="RED" />
         <HBox alignment="CENTER" prefHeight="61.0" prefWidth="412.0">
             <children>
-                <Label prefHeight="34.0" prefWidth="146.0" text="Introduzca el código de recuperación" textAlignment="CENTER" wrapText="true">
+                <Label prefHeight="34.0" prefWidth="146.0" styleClass="text-id" text="Introduzca el código de recuperación" textAlignment="CENTER" wrapText="true">
                     <HBox.margin>
                         <Insets right="10.0" />
                     </HBox.margin>

@@ -23,7 +23,7 @@
             <Insets bottom="5.0" top="10.0" />
          </VBox.margin>
       </Pane>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su correo electrónico y nombre de usuario y le envíaremos un código de seguridad." textAlignment="CENTER" wrappingWidth="309.205078125">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Introduzca su correo electrónico y nombre de usuario y le envíaremos un código de seguridad." textAlignment="CENTER" wrappingWidth="309.205078125">
          <font>
             <Font name="HP Simplified" size="14.0" />
          </font>
@@ -40,12 +40,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="25.0" prefWidth="120.0" text="Correo electrónico:">
+            <Label prefHeight="25.0" prefWidth="120.0" styleClass="text-id" text="Correo electrónico:">
                <font>
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Label>
             <TextField fx:id="campoCorreo" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="245.0" GridPane.columnIndex="1" />
-            <Label prefHeight="25.0" prefWidth="120.0" text="Nombre de ususario:" GridPane.rowIndex="1">
+            <Label prefHeight="25.0" prefWidth="120.0" styleClass="text-id" text="Nombre de ususario:" GridPane.rowIndex="1">
                <font>
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Label>
@@ -67,11 +67,11 @@
          <children>
             <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#enviarCorreo" prefHeight="30.0" prefWidth="95.0" text="Enviar">
                <font>
-                  <Font name="HP Simplified" size="12.0" />
+                  <Font name="HP Simplified" size="13.0" />
                </font></Button>
             <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="30.0" prefWidth="95.0" text="Cancelar">
                <font>
-                  <Font name="HP Simplified" size="12.0" />
+                  <Font name="HP Simplified" size="13.0" />
                </font></Button>
          </children>
       </HBox>

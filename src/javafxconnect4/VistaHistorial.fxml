@@ -31,19 +31,19 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Fecha inicio:">
+                        <Label styleClass="text-id" text="Fecha inicio:">
                      <font>
                         <Font name="HP Simplified Light" size="12.0" />
                      </font></Label>
                         <DatePicker fx:id="inicio" prefWidth="200.0" GridPane.columnIndex="1" />
                         <DatePicker fx:id="fin" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Fecha fin:" GridPane.rowIndex="1">
+                        <Label styleClass="text-id" text="Fecha fin:" GridPane.rowIndex="1">
                      <font>
                         <Font name="HP Simplified Light" size="12.0" />
                      </font></Label>
                     </children>
                 </GridPane>
-                <Label text="Jugador:">
+                <Label styleClass="text-id" text="Jugador:">
                <font>
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Label>

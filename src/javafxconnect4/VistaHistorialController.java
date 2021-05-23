@@ -317,7 +317,6 @@ public class VistaHistorialController implements Initializable {
         yAxisPartidas.setLabel("Número partidas");
         StackedBarChart<String, Number> partidas = new StackedBarChart<>(xAxisPartidas, yAxisPartidas);
 
-        // algo esta falando
         XYChart.Series serieGanadas = new XYChart.Series(numGanadas);
         serieGanadas.setName("Partidas ganadas");
 
