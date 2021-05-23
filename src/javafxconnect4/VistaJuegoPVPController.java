@@ -11,6 +11,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,14 +57,18 @@ public class VistaJuegoPVPController implements Initializable {
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
     private final int RADIUS = 32;
-    private final int PUNTOS = 50;
+    private Connect4 connect4;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            connect4 = Connect4.getSingletonConnect4();
+        } catch (Connect4DAOException ex) {
+            Logger.getLogger(VistaJuegoPVEController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -160,14 +166,13 @@ public class VistaJuegoPVPController implements Initializable {
         // Comprobación de si alguien ha ganado.
         if (tableroIniciado.comprobacionJuego()) {
             LocalDateTime time = LocalDateTime.now();
-            Connect4 connect4 = Connect4.getSingletonConnect4();
             int n;
 
             if (turno) {
-                n = Integer.parseInt(labelPuntuacion.getText()) + PUNTOS;
+                n = Integer.parseInt(labelPuntuacion.getText()) + connect4.getPointsRound();
                 labelPuntuacion.setText("" + n);
             } else {
-                n = Integer.parseInt(labelPuntuacion2.getText()) + PUNTOS;
+                n = Integer.parseInt(labelPuntuacion2.getText()) + connect4.getPointsRound();
                 labelPuntuacion2.setText("" + n);
             }
             connect4.regiterRound(time, j1, j2);
@@ -281,10 +286,8 @@ public class VistaJuegoPVPController implements Initializable {
     }
 
     public void sumaPuntos(Player jugadorActual) throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
-
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
-        jugadorActual.plusPoints(PUNTOS);
+        jugadorActual.plusPoints(connect4.getPointsRound());
         if (jugadorActual.equals(j1)) {
             labelPuntuacion.setText("" + jugadorActual.getPoints());
         } else {

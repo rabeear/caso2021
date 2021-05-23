@@ -11,8 +11,11 @@ import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -73,22 +76,18 @@ public class VistaCodigoRecuperacionController implements Initializable {
             // Guardamos la contraseña del usuario
             Connect4 connect4 = Connect4.getSingletonConnect4();
             Player player = connect4.getPlayer(user);
-            // Pasamos a String los datos del jugador y lo dividimos por espacios en un array,
-            // de esa manera la contraseña estará en el índice 1 de dicho array.
-            String[] playerString = player.toString().split("\n");
-            passwrd = playerString[1].split(" ")[1];
-            System.out.println(passwrd);
             // Abrimos ventana con la contraseña solicitada usando un diálogo de información.
             try {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Contraseña");
                 alert.setHeaderText("Su contraseña");
-                alert.setContentText(passwrd);
+                alert.setContentText(player.getPassword());
                 // Cerramos ventana actual.
                 Node miNodo = (Node) event.getSource();
                 ((Stage) miNodo.getScene().getWindow()).close();
                 // Mostramos diálogo.
                 alert.showAndWait();
+
                 ventanaAnt.close();
             } catch (Exception e) {
             }

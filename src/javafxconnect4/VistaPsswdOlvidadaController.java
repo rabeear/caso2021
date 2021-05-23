@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
+import model.Player;
 
 /**
  * FXML Controller class
@@ -63,25 +64,30 @@ public class VistaPsswdOlvidadaController implements Initializable {
         if (!connect4.exitsNickName(campoUser.getText())) {
             incorrecto.setText("Nombre de usuario incorrecto.");
         } else {
-            if (!incorrecto.getText().equals("")) {
-                incorrecto.setText("");
-            }
-            /*Cambio a ventana de password olvidada*/
-            try {
-                Stage actual = new Stage();
-                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
-                Parent root = cargador.load();
-                cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual);
-                Scene escena = new Scene(root, 410, 225);
-                actual.setScene(escena);
-                actual.setTitle("Código de recuperación");
-                actual.setResizable(false);
-                actual.initModality(Modality.APPLICATION_MODAL);
-                actual.show();
-                /*Cierra ventana actual*/
-                Node miNodo = (Node) event.getSource();
-                miNodo.getScene().getWindow().hide();
-            } catch (IOException e) {
+            Player jugador = connect4.getPlayer(campoUser.getText());
+            if (!jugador.getEmail().equals(campoCorreo.getText())) {
+                incorrecto.setText("Correo electrónico incorrecto.");
+            } else {
+                if (!incorrecto.getText().equals("")) {
+                    incorrecto.setText("");
+                }
+                /*Cambio a ventana de password olvidada*/
+                try {
+                    Stage actual = new Stage();
+                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
+                    Parent root = cargador.load();
+                    cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual);
+                    Scene escena = new Scene(root, 410, 225);
+                    actual.setScene(escena);
+                    actual.setTitle("Código de recuperación");
+                    actual.setResizable(false);
+                    actual.initModality(Modality.APPLICATION_MODAL);
+                    actual.show();
+                    /*Cierra ventana actual*/
+                    Node miNodo = (Node) event.getSource();
+                    miNodo.getScene().getWindow().hide();
+                } catch (IOException e) {
+                }
             }
         }
     }
@@ -90,9 +96,11 @@ public class VistaPsswdOlvidadaController implements Initializable {
      * Iniciador para usar en el cambio de ventana
      *
      * @param stage
+     * @param usuario
      */
-    public void initStage(Stage stage) {
+    public void initStage(Stage stage, String usuario) {
         ventanaActual = stage;
+        campoUser.setText(usuario);
     }
 
     @FXML

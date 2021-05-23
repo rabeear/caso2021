@@ -8,7 +8,6 @@ package javafxconnect4;
 import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +21,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -37,9 +38,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import model.Connect4;
 import model.DayRank;
-import model.Player;
 import model.Round;
 
 /**
@@ -81,10 +82,13 @@ public class VistaHistorialController implements Initializable {
     private ToggleButton perdidasButton;
     @FXML
     private ToggleButton numPartidasButton;
+    @FXML
+    private ToggleButton numJugadorButton;
 
     private Connect4 connect4;
     private final ObservableList<Round> dataList = FXCollections.observableArrayList();
     private String user;
+    private final Alert errorJugador = new Alert(Alert.AlertType.ERROR);
 
     /**
      * Initializes the controller class.
@@ -108,6 +112,7 @@ public class VistaHistorialController implements Initializable {
                 setDisable(item.isBefore(iniMinDate) || item.isAfter(iniMaxDate));
             }
         });
+
         // Para que no se pueda elegir una fecha anterior a la de incio.
         fin.setDayCellFactory(date -> new DateCell() {
             @Override
@@ -115,6 +120,15 @@ public class VistaHistorialController implements Initializable {
                 super.updateItem(item, empty);
                 setDisable(item.isAfter(iniMaxDate) || item.isBefore(inicio.getValue()));
             }
+        });
+
+        // Cuando se cambie la fecha, cambiar la tabla directamente.
+        inicio.valueProperty().addListener((observable, oldValue, newValue) -> {
+            buscar(null);
+        });
+
+        fin.valueProperty().addListener((observable, oldValue, newValue) -> {
+            buscar(null);
         });
 
         // Indicamos cómo queremos que se muestren los datos en las tablas.
@@ -126,6 +140,11 @@ public class VistaHistorialController implements Initializable {
                 -> new SimpleObjectProperty<String>(cellData.getValue().getWinner().getNickName()));
         perdedorCol.setCellValueFactory((cellData)
                 -> new SimpleObjectProperty<String>(cellData.getValue().getLoser().getNickName()));
+
+        // Inicializamos el diálogo del error para mostrarlo cuando sea necesario.
+        errorJugador.setTitle("ERROR");
+        errorJugador.setHeaderText("Jugador incorrecto.");
+        errorJugador.setContentText("Por favor, introduzca un nickname correcto.");
 
         // Iniciamos la vista enseñando todas las partidas registradas en el sistema.
         partidasButton.setSelected(true);
@@ -144,15 +163,44 @@ public class VistaHistorialController implements Initializable {
         user = usr;
     }
 
-    @FXML
-    private void tablaPartidas(ActionEvent event) {
+    private void ponerTabla() {
         if (!borderPane.getCenter().equals(tabla)) {
             borderPane.setCenter(tabla);
         }
+    }
+
+    private List<Round> acotarPartidas(ArrayList<Round> datos) {
+        // Cojemos solo los datos en el intervalo de tiempo requerido.
+        int indiceIni = 0;
+        int indiceFin = datos.size() - 1;
+
+        if (datos.get(0).getLocalDate().compareTo(inicio.getValue()) < 0) {
+            for (Round ronda : datos) {
+                if (ronda.getLocalDate().compareTo(inicio.getValue()) >= 0) {
+                    indiceIni = datos.indexOf(ronda);
+                    break;
+                }
+            }
+        }
+
+        if (datos.get(datos.size() - 1).getLocalDate().compareTo(fin.getValue()) > 0) {
+            for (Round ronda : datos) {
+                if (ronda.getLocalDate().compareTo(fin.getValue()) >= 0) {
+                    indiceFin = datos.indexOf(ronda);
+                    break;
+                }
+            }
+        }
+        return datos.subList(indiceIni, indiceFin);
+    }
+
+    @FXML
+    private void tablaPartidas(ActionEvent event) {
+        ponerTabla();
         TreeMap<LocalDate, List<Round>> roundsPerDay = connect4.getRoundsPerDay();
         dataList.clear();
         jugador.setDisable(true);
-
+        // Añadir diferenciacion entre coger inicio/fin o el primero y el ultimo, yo me entiendo xd
         roundsPerDay.subMap(inicio.getValue(), fin.getValue().plusDays(1)).forEach(
                 (LocalDate date, List<Round> rounds) -> {
                     dataList.addAll(rounds);
@@ -162,79 +210,64 @@ public class VistaHistorialController implements Initializable {
 
     @FXML
     private void tablaRealizadas(ActionEvent event) {
-        if (!borderPane.getCenter().equals(tabla)) {
-            borderPane.setCenter(tabla);
+        if (jugador.getText().isEmpty() || jugador.getText().split(" ").length == 0) {
+            jugador.setText(user);
         }
-        jugador.setDisable(false);
-        jugador.setText(user);
         if (!connect4.exitsNickName(jugador.getText())) {
-            // Error jugador no existente (Enseñar alerta ERROR)
+            errorJugador.showAndWait();
+        } else {
+            ponerTabla();
+            jugador.setDisable(false);
+
+            ArrayList<Round> roundsPlayer = connect4.getRoundsPlayer(connect4.getPlayer(jugador.getText()));
+            dataList.clear();
+
+            dataList.addAll(acotarPartidas(roundsPlayer));
+            tabla.setItems(dataList);
         }
-        ArrayList<Round> roundsPlayer = connect4.getRoundsPlayer(connect4.getPlayer(jugador.getText()));
-        dataList.clear();
-
-        // Cojemos solo los datos en el intervalo de tiempo requerido.
-        int indiceIni = 0;
-        int indiceFin = roundsPlayer.size() - 1;
-
-        if (roundsPlayer.get(0).getLocalDate().compareTo(inicio.getValue()) < 0) {
-            for (Round ronda : roundsPlayer) {
-                if (ronda.getLocalDate().compareTo(inicio.getValue()) >= 0) {
-                    indiceIni = roundsPlayer.indexOf(ronda);
-                    break;
-                }
-            }
-        }
-
-        if (roundsPlayer.get(roundsPlayer.size() - 1).getLocalDate().compareTo(fin.getValue()) > 0) {
-            for (Round ronda : roundsPlayer) {
-                if (ronda.getLocalDate().compareTo(fin.getValue()) >= 0) {
-                    indiceFin = roundsPlayer.indexOf(ronda);
-                    break;
-                }
-            }
-        }
-
-        dataList.addAll(roundsPlayer.subList(indiceIni, indiceFin));
-        tabla.setItems(dataList);
     }
 
     @FXML
     private void tablaGanadas(ActionEvent event) {
-        if (!borderPane.getCenter().equals(tabla)) {
-            borderPane.setCenter(tabla);
+        if (jugador.getText().isEmpty() || jugador.getText().split(" ").length == 0) {
+            jugador.setText(user);
         }
-        jugador.setDisable(false);
-        jugador.setText(user);
         if (!connect4.exitsNickName(jugador.getText())) {
-            // Error jugador no existente.
+            errorJugador.showAndWait();
+        } else {
+            ponerTabla();
+            jugador.setDisable(false);
+            ArrayList<Round> roundsPlayer = connect4.getWinnedRoundsPlayer(connect4.getPlayer(jugador.getText()));
+            dataList.clear();
+
+            dataList.addAll(acotarPartidas(roundsPlayer));
+            tabla.setItems(dataList);
         }
-        ArrayList<Round> roundsPlayer = connect4.getWinnedRoundsPlayer(connect4.getPlayer(jugador.getText()));
-        dataList.clear();
-        // Falta que coja solo las rondas en el intervalo de tiempo requerido.
-        dataList.addAll(roundsPlayer);
-        tabla.setItems(dataList);
     }
 
     @FXML
     private void tablaPerdidas(ActionEvent event) {
-        if (!borderPane.getCenter().equals(tabla)) {
-            borderPane.setCenter(tabla);
+        if (jugador.getText().isEmpty() || jugador.getText().split(" ").length == 0) {
+            jugador.setText(user);
         }
-        jugador.setDisable(false);
-        jugador.setText(user);
         if (!connect4.exitsNickName(jugador.getText())) {
-            // Error jugador no existente.
+            errorJugador.showAndWait();
+        } else {
+            ponerTabla();
+            jugador.setDisable(false);
+            ArrayList<Round> roundsPlayer = connect4.getLostRoundsPlayer(connect4.getPlayer(jugador.getText()));
+            dataList.clear();
+
+            dataList.addAll(acotarPartidas(roundsPlayer));
+            tabla.setItems(dataList);
         }
-        ArrayList<Round> roundsPlayer = connect4.getLostRoundsPlayer(connect4.getPlayer(jugador.getText()));
-        dataList.clear();
-        // Falta que coja solo las rondas en el intervalo de tiempo requerido.
-        dataList.addAll(roundsPlayer);
-        tabla.setItems(dataList);
     }
 
     @FXML
     private void graficaPartidas(ActionEvent event) {
+        if (jugador.getText().isEmpty() || jugador.getText().split(" ").length == 0) {
+            jugador.setText(user);
+        }
         jugador.setDisable(true);
         TreeMap<LocalDate, Integer> numPartidas = connect4.getRoundCountsPerDay();
         CategoryAxis xAxis = new CategoryAxis();
@@ -256,13 +289,15 @@ public class VistaHistorialController implements Initializable {
         grafica.setTitle("Nº partidas totales");
         grafica.getData().add(serie);
         borderPane.setCenter(grafica);
-
     }
 
     @FXML
     private void graficaJugador(ActionEvent event) {
+        if (jugador.getText().isEmpty() || jugador.getText().split(" ").length == 0) {
+            jugador.setText(user);
+        }
         jugador.setDisable(false);
-        jugador.setText(user);
+        VBox fondo = new VBox();
         TreeMap<LocalDate, DayRank> dataPlayer = connect4.getDayRanksPlayer(connect4.getPlayer(user));
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
@@ -273,9 +308,25 @@ public class VistaHistorialController implements Initializable {
         // Gráfica de barras con el nº de jugadores diferentes a los que se ha
         // enfrentado el jugador cada día.
         BarChart<Number, String> jugadores = new BarChart<>(xAxis, yAxis);
+        fondo.setAlignment(Pos.CENTER);
+        fondo.setSpacing(10);
+        //fondo.getChildren().addAll(partidas, jugadores);
     }
 
     @FXML
     private void buscar(ActionEvent event) {
+        if (partidasButton.isSelected()) {
+            tablaPartidas(null);
+        } else if (realizadasButton.isSelected()) {
+            tablaRealizadas(null);
+        } else if (perdidasButton.isSelected()) {
+            tablaPartidas(null);
+        } else if (ganadasButton.isSelected()) {
+            tablaGanadas(null);
+        } else if (numPartidasButton.isSelected()) {
+            graficaPartidas(null);
+        } else if (numJugadorButton.isSelected()) {
+            graficaJugador(null);
+        }
     }
 }

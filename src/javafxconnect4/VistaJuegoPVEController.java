@@ -9,6 +9,8 @@ import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,14 +52,18 @@ public class VistaJuegoPVEController implements Initializable {
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
     private final int RADIUS = 32;
-    private final int PUNTOS = 20;
+    private Connect4 connect4;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            connect4 = Connect4.getSingletonConnect4();
+        } catch (Connect4DAOException ex) {
+            Logger.getLogger(VistaJuegoPVEController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -121,7 +127,7 @@ public class VistaJuegoPVEController implements Initializable {
 
         if (tableroIniciado.comprobacionJuego()) {
             // falta registrar la partida.
-            int n = Integer.parseInt(labelPuntuacion.getText()) + PUNTOS;
+            int n = Integer.parseInt(labelPuntuacion.getText()) + connect4.getPointsAlone();
             labelPuntuacion.setText("" + n);
             alertaVictoria(true);
             return; // Salir de la función.
@@ -272,7 +278,7 @@ public class VistaJuegoPVEController implements Initializable {
     public void sumaPuntos() throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
-        jugadorActual.plusPoints(PUNTOS);
+        jugadorActual.plusPoints(connect4.getPointsAlone());
         labelPuntuacion.setText("" + jugadorActual.getPoints());
     }
 }

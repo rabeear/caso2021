@@ -9,6 +9,7 @@ import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -38,12 +40,22 @@ public class VistaPrincipalController implements Initializable {
     private PasswordField passwd;
     @FXML
     private Label incorrecto;
+    @FXML
+    private Button loginButton;
 
     private Stage stagePrincipal;
     private final SimpleObjectProperty<Theme> currentTheme = new SimpleObjectProperty<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Si el campo del nickname o la contraseña están vacíos, deshabilitar el botón.
+        loginButton.disableProperty().bind(Bindings.or(
+                Bindings.createBooleanBinding(() -> {
+                    return user.getText().split(" ").length == 0
+                            && passwd.getText().split(" ").length == 0;
+                }, user.textProperty(), passwd.textProperty()),
+                Bindings.or(Bindings.isEmpty(user.textProperty()),
+                        Bindings.isEmpty(passwd.textProperty()))));
         // añadir listener para el togglebutton del theme.
     }
 
@@ -64,7 +76,7 @@ public class VistaPrincipalController implements Initializable {
     @FXML
     private void autentificacionEnter(KeyEvent event) throws Connect4DAOException, IOException {
         // Para poder iniciar sesión pulsando enter.
-        if (event.getCode().equals(KeyCode.ENTER)) {
+        if (event.getCode().equals(KeyCode.ENTER) && !loginButton.isDisabled()) {
             autentificacion();
         }
     }
@@ -102,7 +114,7 @@ public class VistaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual);
+        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual, user.getText());
         Scene escena = new Scene(root, 650, 375);
         actual.setScene(escena);
         actual.setTitle("Recuperación de contraseña");

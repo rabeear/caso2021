@@ -90,7 +90,7 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
 
     @FXML
     private void enterInicioJ2(KeyEvent event) throws Connect4DAOException {
-        if (event.getCode().equals(KeyCode.ENTER)) {
+        if (event.getCode().equals(KeyCode.ENTER) && !iniciarButton.isDisabled()) {
             inicioJ2();
         }
     }

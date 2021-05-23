@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -36,7 +37,7 @@
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin></PasswordField>
-            <Button id="botonInicio" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="72.0" prefWidth="60.0">
+            <Button id="botonInicio" fx:id="loginButton" mnemonicParsing="false" onAction="#autentificacionClick" prefHeight="72.0" prefWidth="60.0">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></Button>
@@ -65,7 +66,10 @@
          <children>
             <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView id="imagenTema" fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/luna_tema.png" />
+                     </image></ImageView>
                </graphic>
             </ToggleButton>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="¡Bienvenido!">
