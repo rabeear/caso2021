@@ -29,7 +29,7 @@ public class JavaFxConnect4 extends Application {
         stage.setScene(scene);
 
         VistaPrincipalController controladorPrincipal = cargador.<VistaPrincipalController>getController();
-        controladorPrincipal.initStage(stage);
+        controladorPrincipal.initStage(stage, null);
         stage.setScene(scene);
         stage.setMinHeight(480);
         stage.setMinWidth(635);

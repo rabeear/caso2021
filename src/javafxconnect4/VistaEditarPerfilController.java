@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,8 +33,6 @@ import model.Player;
  */
 public class VistaEditarPerfilController implements Initializable {
 
-    private Stage actualStage;
-    private Scene escenaActual;
     @FXML
     private Label labelUsuario;
     @FXML
@@ -42,11 +41,15 @@ public class VistaEditarPerfilController implements Initializable {
     private TextField cuadroPswd;
     @FXML
     private TextField cuadroMail;
-    private Player player;
     @FXML
     private Button btnConfirmar;
     @FXML
     private Label labelError;
+
+    private Stage actualStage;
+    private Scene escenaActual;
+    private Player player;
+    private SimpleObjectProperty<Theme> currentTheme;
 
     /**
      * Initializes the controller class.
@@ -55,9 +58,9 @@ public class VistaEditarPerfilController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         BooleanBinding noDatos = cuadroPswd.textProperty().isEmpty().and(cuadroMail.textProperty().isEmpty());
-        
+
         btnConfirmar.disableProperty().bind(noDatos);
-    }    
+    }
 
     @FXML
     private void clickCambiar(ActionEvent event) throws IOException {
@@ -68,20 +71,20 @@ public class VistaEditarPerfilController implements Initializable {
         Scene escena = new Scene(root);
         actual.setScene(escena);
         actual.show();
-        
+
         actualStage.close();
-        
+
     }
 
     @FXML
     private void clickConfirmar(ActionEvent event) throws Connect4DAOException {
         boolean pswd = false;
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        
+
         if (!cuadroPswd.getText().isEmpty()) {
             if (Player.checkPassword(cuadroPswd.getText())) {
                 player.setPassword(cuadroPswd.getText());
-            } else { 
+            } else {
                 labelError.setText("Contraseña no valida!");
                 pswd = true;
             }
@@ -90,8 +93,11 @@ public class VistaEditarPerfilController implements Initializable {
             if (Player.checkEmail(cuadroMail.getText())) {
                 player.setEmail(cuadroMail.getText());
             } else {
-                if (pswd) labelError.setText("Contraseña y correo no validos!");
-                else labelError.setText("Correo no valido!");
+                if (pswd) {
+                    labelError.setText("Contraseña y correo no validos!");
+                } else {
+                    labelError.setText("Correo no valido!");
+                }
             }
         }
     }
@@ -101,18 +107,18 @@ public class VistaEditarPerfilController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaSegundaPrincipalController>getController().initStage(actual, labelUsuario.getText());
+        cargador.<VistaSegundaPrincipalController>getController().initStage(actual, labelUsuario.getText(), currentTheme);
         Scene escena = new Scene(root, 800, 500);
         actual.setScene(escena);
         actual.initModality(Modality.APPLICATION_MODAL);
         actual.show();
-        
+
         actualStage.close();
     }
-    
+
     void initStage(Stage stage, String user) throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        
+
         actualStage = stage;
         escenaActual = stage.getScene();
         labelUsuario.setText(user);

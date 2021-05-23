@@ -25,13 +25,13 @@
                </font>
             </Text>
             <ImageView fx:id="imagenJ1" fitHeight="163.0" fitWidth="235.0" pickOnBounds="true" preserveRatio="true" />
-            <Line endX="100.0" startX="-100.0" />
+            <Line endX="100.0" startX="-100.0" styleClass="line" />
             <Label fx:id="userJ1" styleClass="text-id" text="User1">
                <font>
                   <Font name="HP Simplified Light" size="30.0" />
                </font>
             </Label>
-            <Line endX="100.0" startX="-100.0" />
+            <Line endX="100.0" startX="-100.0" styleClass="line" />
             <HBox alignment="CENTER" prefHeight="46.0" prefWidth="400.0" spacing="30.0">
                <children>
                   <Label styleClass="text-id" text="Puntos totales:">
@@ -48,7 +48,7 @@
             </HBox>
          </children>
       </VBox>
-      <Line endY="150.0" startX="1.7928931713104248" startY="-267.41864013671875" />
+      <Line endY="150.0" startX="1.7928931713104248" startY="-267.41864013671875" styleClass="line" />
       <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="400.0" spacing="10.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="JUGADOR 2">

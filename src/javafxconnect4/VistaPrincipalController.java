@@ -54,10 +54,11 @@ public class VistaPrincipalController implements Initializable {
     private ImageView imagenTema;
 
     private Stage stagePrincipal;
-    private final SimpleObjectProperty<Theme> currentTheme = new SimpleObjectProperty<>();
+    private SimpleObjectProperty<Theme> currentTheme;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        currentTheme = new SimpleObjectProperty<>();
         // Si el campo del nickname o la contraseña están vacíos, deshabilitar el botón.
         loginButton.disableProperty().bind(Bindings.or(
                 Bindings.createBooleanBinding(() -> {
@@ -80,15 +81,6 @@ public class VistaPrincipalController implements Initializable {
                 imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
             }
         });
-    }
-
-    /**
-     * Devuelve el modo de visualización actual.
-     *
-     * @return Tema actual de la aplicación.
-     */
-    public SimpleObjectProperty<Theme> getTheme() {
-        return currentTheme;
     }
 
     @FXML
@@ -121,7 +113,7 @@ public class VistaPrincipalController implements Initializable {
                 FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
                 Parent root = cargador.load();
                 VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-                ventana2.initStage(stagePrincipal, user.getText());
+                ventana2.initStage(stagePrincipal, user.getText(), currentTheme);
                 ventana2.nombreUsuario.setText(user.getText());
                 Scene scene = new Scene(root, 800, 500);
                 stagePrincipal.setScene(scene);
@@ -163,8 +155,22 @@ public class VistaPrincipalController implements Initializable {
      * Iniciador para usar en el cambio de ventana.
      *
      * @param stage
+     * @param theme
      */
-    public void initStage(Stage stage) {
+    public void initStage(Stage stage, SimpleObjectProperty<Theme> theme) {
         stagePrincipal = stage;
+        if (theme != null) {
+            currentTheme = theme;
+            switch (currentTheme.get()) {
+                case DARK_THEME:
+                    themeButton.setSelected(true);
+                    break;
+                case LIGTH_THEME:
+                    themeButton.setSelected(false);
+                    break;
+                default:
+                    throw new AssertionError(currentTheme.get().name());
+            }
+        }
     }
 }

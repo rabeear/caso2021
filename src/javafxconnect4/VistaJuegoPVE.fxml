@@ -28,7 +28,7 @@
                   <Font name="HP Simplified Light" size="24.0" />
                </font>
             </Label>
-            <Line endX="100.0" startX="-100.0" />
+            <Line endX="100.0" startX="-100.0" styleClass="line" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="TU PUNTUACIÓN" textAlignment="CENTER" wrappingWidth="160.205078125">
                <font>
                   <Font name="HP Simplified" size="24.0" />
@@ -39,7 +39,7 @@
                   <Font name="HP Simplified Light" size="24.0" />
                </font>
             </Label>
-            <Line endX="100.0" startX="-100.0" />
+            <Line endX="100.0" startX="-100.0" styleClass="line" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#clickReinicio" prefHeight="39.0" prefWidth="190.0" text="REINICIAR PARTIDA">

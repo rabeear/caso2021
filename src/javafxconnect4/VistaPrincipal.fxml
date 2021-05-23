@@ -57,7 +57,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
-      <Line endX="46.0" endY="415.0" startX="45.0">
+      <Line endX="46.0" endY="415.0" startX="45.0" styleClass="line">
          <HBox.margin>
             <Insets bottom="30.0" top="30.0" />
          </HBox.margin>

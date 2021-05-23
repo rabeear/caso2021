@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,7 @@ public class VistaJuegoPVPController implements Initializable {
     private final int COL = 8;
     private final int RADIUS = 32;
     private Connect4 connect4;
+    private SimpleObjectProperty<Theme> currentTheme;
 
     /**
      * Initializes the controller class.
@@ -97,7 +99,7 @@ public class VistaJuegoPVPController implements Initializable {
             Parent root = cargador.load();
 
             VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-            ventana2.initStage(stageActual, j1.getNickName());
+            ventana2.initStage(stageActual, j1.getNickName(), currentTheme);
             ventana2.nombreUsuario.setText(j1.getNickName());
             Scene scene = new Scene(root, 800, 500);
             stageActual.setScene(scene);
