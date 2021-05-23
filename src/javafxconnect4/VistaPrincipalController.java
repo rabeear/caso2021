@@ -21,8 +21,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
@@ -42,6 +46,12 @@ public class VistaPrincipalController implements Initializable {
     private Label incorrecto;
     @FXML
     private Button loginButton;
+    @FXML
+    private ToggleButton themeButton;
+    @FXML
+    private HBox contenedorRaiz;
+    @FXML
+    private ImageView imagenTema;
 
     private Stage stagePrincipal;
     private final SimpleObjectProperty<Theme> currentTheme = new SimpleObjectProperty<>();
@@ -57,6 +67,19 @@ public class VistaPrincipalController implements Initializable {
                 Bindings.or(Bindings.isEmpty(user.textProperty()),
                         Bindings.isEmpty(passwd.textProperty()))));
         // añadir listener para el togglebutton del theme.
+        themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (themeButton.isSelected()) {
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                currentTheme.set(Theme.DARK_THEME);
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+            } else {
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                currentTheme.set(Theme.LIGTH_THEME);
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+            }
+        });
     }
 
     /**

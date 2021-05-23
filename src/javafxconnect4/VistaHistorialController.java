@@ -297,20 +297,53 @@ public class VistaHistorialController implements Initializable {
             jugador.setText(user);
         }
         jugador.setDisable(false);
-        VBox fondo = new VBox();
         TreeMap<LocalDate, DayRank> dataPlayer = connect4.getDayRanksPlayer(connect4.getPlayer(user));
-        CategoryAxis yAxis = new CategoryAxis();
-        NumberAxis xAxis = new NumberAxis();
+
+        ObservableList<XYChart.Data<String, Number>> numGanadas = FXCollections.observableArrayList();
+        ObservableList<XYChart.Data<String, Number>> numPerdidas = FXCollections.observableArrayList();
+        ObservableList<XYChart.Data<String, Number>> numOponentes = FXCollections.observableArrayList();
+
+        // Creo que tambien hay que añadir lo de comprobar la fecha antes.
+        dataPlayer.subMap(inicio.getValue(), fin.getValue().plusDays(1)).forEach((date, rank) -> {
+            numGanadas.add(new XYChart.Data(date.toString(), rank.getWinnedGames()));
+            numPerdidas.add(new XYChart.Data(date.toString(), rank.getLostGames()));
+            numOponentes.add(new XYChart.Data(date.toString(), rank.getOponents()));
+        });
 
         // Gráfica de barras apiladas con las partidas ganadas y perdidas de cada día.
-        StackedBarChart<Number, Number> partidas;
+        CategoryAxis xAxisPartidas = new CategoryAxis();
+        NumberAxis yAxisPartidas = new NumberAxis();
+        xAxisPartidas.setLabel("Fecha");
+        yAxisPartidas.setLabel("Número partidas");
+        StackedBarChart<String, Number> partidas = new StackedBarChart<>(xAxisPartidas, yAxisPartidas);
+
+        // algo esta falando
+        XYChart.Series serieGanadas = new XYChart.Series(numGanadas);
+        serieGanadas.setName("Partidas ganadas");
+
+        XYChart.Series seriePerdidas = new XYChart.Series(numPerdidas);
+        seriePerdidas.setName("Partidas perdidas");
+
+        partidas.getData().addAll(serieGanadas, seriePerdidas);
 
         // Gráfica de barras con el nº de jugadores diferentes a los que se ha
         // enfrentado el jugador cada día.
-        BarChart<Number, String> jugadores = new BarChart<>(xAxis, yAxis);
+        CategoryAxis xAxisJugadores = new CategoryAxis();
+        NumberAxis yAxisJugadores = new NumberAxis();
+        xAxisJugadores.setLabel("Fecha");
+        yAxisJugadores.setLabel("Número partidas");
+        BarChart<String, Number> jugadores = new BarChart<>(xAxisJugadores, yAxisJugadores);
+
+        XYChart.Series serieOponentes = new XYChart.Series(numOponentes);
+        serieOponentes.setName("Oponentes");
+
+        jugadores.getData().addAll(serieOponentes);
+
+        VBox fondo = new VBox();
         fondo.setAlignment(Pos.CENTER);
         fondo.setSpacing(10);
-        //fondo.getChildren().addAll(partidas, jugadores);
+        fondo.getChildren().addAll(partidas, jugadores);
+        borderPane.setCenter(fondo);
     }
 
     @FXML

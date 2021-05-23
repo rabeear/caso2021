@@ -14,16 +14,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="480.0" prefWidth="635.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
+<HBox fx:id="contenedorRaiz" prefHeight="480.0" prefWidth="635.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaPrincipalController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="480.0" prefWidth="280.0" spacing="10.0" HBox.hgrow="SOMETIMES">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Conecta4">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Conecta4">
                <font>
                   <Font name="HP Simplified" size="42.0" />
                </font>
             </Text>
-            <Text id="inicioSesion" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar sesión" textAlignment="CENTER" wrappingWidth="227.205078125">
+            <Text id="inicioSesion" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Iniciar sesión" textAlignment="CENTER" wrappingWidth="227.205078125">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
                </VBox.margin>
@@ -64,15 +64,15 @@
       </Line>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
          <children>
-            <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+            <ToggleButton fx:id="themeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
                <graphic>
-                  <ImageView id="imagenTema" fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="imagenTema" fx:id="imagenTema" fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../imagenes/luna_tema.png" />
                      </image></ImageView>
                </graphic>
             </ToggleButton>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="¡Bienvenido!">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="¡Bienvenido!">
                <font>
                   <Font name="HP Simplified Light" size="34.0" />
                </font>
@@ -80,12 +80,12 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="¿Es la primera vez que juegas y no tienes cuenta aún?" textAlignment="CENTER" wrappingWidth="180.73336791992188">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="¿Es la primera vez que juegas y no tienes cuenta aún?" textAlignment="CENTER" wrappingWidth="180.73336791992188">
                <font>
                   <Font name="HP Simplified Light" size="15.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="¡Regístrate!">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="¡Regístrate!">
                <font>
                   <Font name="HP Simplified Light" size="16.0" />
                </font>

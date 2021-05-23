@@ -11,7 +11,12 @@ and open the template in the editor.
 .root {
     -fx-clr-primary: #51b8e1;
     -fx-clr-secondary: #92d3ed;
+    -fx-clr-tertiary: #2196c4;
     -fx-background-color: skyblue;
+}
+
+.text-id {
+    -fx-fill: black;
 }
 
 .button, .toggle-button {
@@ -29,7 +34,7 @@ and open the template in the editor.
 }
 
 .toggle-button:selected {
-    -fx-background-color: #2196c4;
+    -fx-background-color: -fx-clr-tertiary;
 }
 
 .text-field {
