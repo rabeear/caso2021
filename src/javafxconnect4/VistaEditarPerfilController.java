@@ -56,10 +56,13 @@ public class VistaEditarPerfilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         BooleanBinding noDatos = cuadroPswd.textProperty().isEmpty().and(cuadroMail.textProperty().isEmpty());
 
         btnConfirmar.disableProperty().bind(noDatos);
+
+        //Esto hay que cambiarlo.
+        currentTheme = new SimpleObjectProperty<>();
+        currentTheme.set(Theme.LIGTH_THEME);
     }
 
     @FXML

@@ -171,6 +171,8 @@ public class VistaPrincipalController implements Initializable {
                 default:
                     throw new AssertionError(currentTheme.get().name());
             }
+        } else {
+            currentTheme.set(Theme.LIGTH_THEME);
         }
     }
 }
