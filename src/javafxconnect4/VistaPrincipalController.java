@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +60,7 @@ public class VistaPrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentTheme = new SimpleObjectProperty<>();
+        currentTheme = new SimpleObjectProperty<>(Theme.LIGTH_THEME);
         // Si el campo del nickname o la contraseña están vacíos, deshabilitar el botón.
         loginButton.disableProperty().bind(Bindings.or(
                 Bindings.createBooleanBinding(() -> {
@@ -67,9 +69,24 @@ public class VistaPrincipalController implements Initializable {
                 }, user.textProperty(), passwd.textProperty()),
                 Bindings.or(Bindings.isEmpty(user.textProperty()),
                         Bindings.isEmpty(passwd.textProperty()))));
-        // añadir listener para el togglebutton del theme.
+        // Cuando se cabie el modo de vsualización en otra ventana, se cambará en todas.
+        currentTheme.addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(Theme.DARK_THEME)) {
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+                themeButton.setSelected(true);
+            } else {
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+                themeButton.setSelected(false);
+            }
+        });
+
+        // Cuando se pulse el botón, se cambia el modo de visualización.
         themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (themeButton.isSelected()) {
+            if (newValue) {
                 contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
                 contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
                 currentTheme.set(Theme.DARK_THEME);
@@ -129,7 +146,7 @@ public class VistaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual, user.getText());
+        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual, user.getText(), currentTheme);
         Scene escena = new Scene(root, 650, 375);
         actual.setScene(escena);
         actual.setTitle("Recuperación de contraseña");
@@ -143,7 +160,7 @@ public class VistaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaAñadirUsuarioController>getController().initStage(actual);
+        cargador.<VistaAñadirUsuarioController>getController().initStage(actual, currentTheme);
         Scene escena = new Scene(root, 340, 605);
         actual.setScene(escena);
         actual.initModality(Modality.APPLICATION_MODAL);
@@ -171,8 +188,6 @@ public class VistaPrincipalController implements Initializable {
                 default:
                     throw new AssertionError(currentTheme.get().name());
             }
-        } else {
-            currentTheme.set(Theme.LIGTH_THEME);
         }
     }
 }

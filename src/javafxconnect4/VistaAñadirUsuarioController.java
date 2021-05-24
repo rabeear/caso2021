@@ -11,6 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,8 +24,10 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -55,25 +58,29 @@ public class VistaAñadirUsuarioController implements Initializable {
     @FXML
     private Label emailError;
     @FXML
-    private Label hayFoto;
-    @FXML
     private DatePicker date;
     @FXML
     private Button regButton;
+    @FXML
+    private ImageView imagenAvatar;
+    @FXML
+    private VBox contenedorRaiz;
+    @FXML
+    private ToggleButton themeButton;
+    @FXML
+    private ImageView imagenTema;
 
     private Stage stageActual;
     private Scene escenaPrincipal;
     private Image auxiliarFoto;
-    @FXML
-    private ImageView imagenAvatar;
-    @FXML
-    private Text labelFoto;
+    private SimpleObjectProperty<Theme> currentTheme;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        currentTheme = new SimpleObjectProperty<>();
         // revisar esto porque algo esta fallando pero no se el que
         regButton.disableProperty().bind(Bindings.or(
                 Bindings.createBooleanBinding(() -> {
@@ -102,6 +109,21 @@ public class VistaAñadirUsuarioController implements Initializable {
                 }
             };
         });
+
+        // Cuando se pulse el botón, se cambia el modo de visualización.
+        themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                currentTheme.set(Theme.DARK_THEME);
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+            } else {
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                currentTheme.set(Theme.LIGTH_THEME);
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+            }
+        });
     }
 
     @FXML
@@ -124,12 +146,32 @@ public class VistaAñadirUsuarioController implements Initializable {
     /**
      * Iniciador para usar en el cambio de ventana.
      *
-     * @param stage: ventana actual
+     * @param stage Stage de la ventana actual.
+     * @param theme Propiedad del modo de visualización de la ventana anterior.
      */
-    public void initStage(Stage stage) {
+    public void initStage(Stage stage, SimpleObjectProperty<Theme> theme) {
         stageActual = stage;
         escenaPrincipal = stage.getScene();
         Image avatar = new Image("/avatars/default.png");
+        auxiliarFoto = avatar;
+        imagenAvatar.imageProperty().setValue(avatar);
+        currentTheme = theme;
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                themeButton.setSelected(true);
+                break;
+            case LIGTH_THEME:
+                themeButton.setSelected(false);
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
+    }
+
+    public void initStage(Stage stage, String foto) {
+        stageActual = stage;
+        escenaPrincipal = stage.getScene();
+        Image avatar = new Image(foto);
         auxiliarFoto = avatar;
         imagenAvatar.imageProperty().setValue(avatar);
     }
@@ -159,7 +201,7 @@ public class VistaAñadirUsuarioController implements Initializable {
         // Si no ha habido ningún error en los datos introducidos, entonces registramos al jugador.
         if (registrar) {
             // Falta añadir foto elegida o por defecto.
-            connect4.registerPlayer(user.getText(), email.getText(), psswd.getText(),auxiliarFoto ,date.getValue(), 0);
+            connect4.registerPlayer(user.getText(), email.getText(), psswd.getText(), auxiliarFoto, date.getValue(), 0);
             // Cerramos la ventana y volvemos a enseñar la anteior.
             Node miNodo = (Node) event.getSource();
             miNodo.getScene().getWindow().hide();
@@ -171,14 +213,5 @@ public class VistaAñadirUsuarioController implements Initializable {
         // Cerramos la ventana y volvemos a enseñar la anteior.
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
-    }
-    
-    void initStage(Stage stage, String foto) { 
-     stageActual = stage;
-     escenaPrincipal = stage.getScene();
-     Image avatar = new Image(foto);
-     auxiliarFoto = avatar;
-     imagenAvatar.imageProperty().setValue(avatar);
-     
     }
 }
