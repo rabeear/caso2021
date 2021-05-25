@@ -57,6 +57,9 @@ public class VistaPsswdOlvidadaController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -86,7 +89,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
     }
 
     @FXML
-    private void enviarCorreo(ActionEvent event) throws Connect4DAOException {
+    private void enviarCorreo(ActionEvent event) throws Connect4DAOException, IOException {
         // Compobamos si el nombre de usuario es correcto.
         Connect4 connect4 = Connect4.getSingletonConnect4();
         if (!connect4.exitsNickName(campoUser.getText())) {
@@ -100,22 +103,19 @@ public class VistaPsswdOlvidadaController implements Initializable {
                     incorrecto.setText("");
                 }
                 /*Cambio a ventana de password olvidada*/
-                try {
-                    Stage actual = new Stage();
-                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
-                    Parent root = cargador.load();
-                    cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual);
-                    Scene escena = new Scene(root, 410, 225);
-                    actual.setScene(escena);
-                    actual.setTitle("Código de recuperación");
-                    actual.setResizable(false);
-                    actual.initModality(Modality.APPLICATION_MODAL);
-                    actual.show();
-                    /*Cierra ventana actual*/
-                    Node miNodo = (Node) event.getSource();
-                    miNodo.getScene().getWindow().hide();
-                } catch (IOException e) {
-                }
+                Stage actual = new Stage();
+                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
+                Parent root = cargador.load();
+                cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual, currentTheme);
+                Scene escena = new Scene(root, 410, 225);
+                actual.setScene(escena);
+                actual.setTitle("Código de recuperación");
+                actual.setResizable(false);
+                actual.initModality(Modality.APPLICATION_MODAL);
+                actual.show();
+                /*Cierra ventana actual*/
+                Node miNodo = (Node) event.getSource();
+                miNodo.getScene().getWindow().hide();
             }
         }
     }

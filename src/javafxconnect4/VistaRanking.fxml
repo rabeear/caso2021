@@ -5,11 +5,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="345.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaRankingController">
+<VBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="345.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaRankingController">
     <children>
       <HBox alignment="BOTTOM_LEFT" prefHeight="18.0" prefWidth="325.0" spacing="20.0">
          <children>
@@ -23,6 +26,15 @@
                       <Font name="HP Simplified Light" size="12.0" />
                   </font>
               </TextField>
+            <ToggleButton fx:id="themeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+               <graphic>
+                  <ImageView id="imagenTema" fx:id="imagenTema" fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/luna_tema.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
          </children>
       </HBox>
       <TableView fx:id="tabla" prefHeight="343.0" prefWidth="452.0">

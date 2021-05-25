@@ -49,9 +49,14 @@ public class VistaSegundaPrincipalController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        currentTheme = new SimpleObjectProperty<>();
+
         // Cuando se pulse el botón del cambio de visualización, cambiamos el estilo de la vista.
         themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (themeButton.isSelected()) {
@@ -138,6 +143,7 @@ public class VistaSegundaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaRanking.fxml"));
         Parent root = cargador.load();
+        cargador.<VistaRankingController>getController().setTheme(currentTheme);
         Scene escena = new Scene(root, 345, 400);
         actual.setResizable(false);
         actual.setScene(escena);
@@ -151,7 +157,7 @@ public class VistaSegundaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaHistorial.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaHistorialController>getController().initStage(user);
+        cargador.<VistaHistorialController>getController().initStage(user, currentTheme);
         Scene escena = new Scene(root);
         actual.setResizable(false);
         actual.setScene(escena);

@@ -37,6 +37,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import model.Connect4;
@@ -51,7 +53,7 @@ import model.Round;
 public class VistaHistorialController implements Initializable {
 
     @FXML
-    private BorderPane borderPane;
+    private BorderPane contenedorRaiz;
     @FXML
     private TextField jugador;
     @FXML
@@ -69,8 +71,6 @@ public class VistaHistorialController implements Initializable {
     @FXML
     private TableColumn<Round, String> horaCol;
     @FXML
-    private Button buscarButton;
-    @FXML
     private ToggleGroup botones;
     @FXML
     private ToggleButton partidasButton;
@@ -84,17 +84,39 @@ public class VistaHistorialController implements Initializable {
     private ToggleButton numPartidasButton;
     @FXML
     private ToggleButton numJugadorButton;
+    @FXML
+    private ToggleButton themeButton;
+    @FXML
+    private ImageView imagenTema;
 
     private Connect4 connect4;
     private final ObservableList<Round> dataList = FXCollections.observableArrayList();
     private String user;
     private final Alert errorJugador = new Alert(Alert.AlertType.ERROR);
+    private SimpleObjectProperty<Theme> currentTheme;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        currentTheme = new SimpleObjectProperty<>();
+
+        // Cuando se pulse el botón del cambio de visualización, cambiamos el estilo de la vista.
+        themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (themeButton.isSelected()) {
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                currentTheme.set(Theme.DARK_THEME);
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+            } else {
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                currentTheme.set(Theme.LIGTH_THEME);
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+            }
+        });
+
         try {
             connect4 = Connect4.getSingletonConnect4();
         } catch (Connect4DAOException ex) {
@@ -122,6 +144,10 @@ public class VistaHistorialController implements Initializable {
             }
         });
 
+        fin.setValue(LocalDate.now());
+        inicio.setValue(LocalDate.of(fin.getValue().getYear(),
+                fin.getValue().getMonthValue() - 1, fin.getValue().getDayOfMonth()));
+
         // Cuando se cambie la fecha, cambiar la tabla directamente.
         inicio.valueProperty().addListener((observable, oldValue, newValue) -> {
             buscar(null);
@@ -148,9 +174,6 @@ public class VistaHistorialController implements Initializable {
 
         // Iniciamos la vista enseñando todas las partidas registradas en el sistema.
         partidasButton.setSelected(true);
-        fin.setValue(LocalDate.now());
-        inicio.setValue(LocalDate.of(fin.getValue().getYear(),
-                fin.getValue().getMonthValue() - 1, fin.getValue().getDayOfMonth()));
         tablaPartidas(null);
     }
 
@@ -158,14 +181,26 @@ public class VistaHistorialController implements Initializable {
      * Iniciador para usar en el cambio de ventana.
      *
      * @param usr: nombre del usuario que ha iniciado sesión.
+     * @param theme
      */
-    public void initStage(String usr) {
+    public void initStage(String usr, SimpleObjectProperty<Theme> theme) {
         user = usr;
+        currentTheme = theme;
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                themeButton.setSelected(true);
+                break;
+            case LIGTH_THEME:
+                themeButton.setSelected(false);
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
     }
 
     private void ponerTabla() {
-        if (!borderPane.getCenter().equals(tabla)) {
-            borderPane.setCenter(tabla);
+        if (!contenedorRaiz.getCenter().equals(tabla)) {
+            contenedorRaiz.setCenter(tabla);
         }
     }
 
@@ -289,7 +324,7 @@ public class VistaHistorialController implements Initializable {
         LineChart<String, Number> grafica = new LineChart<>(xAxis, yAxis);
         grafica.setTitle("Nº partidas totales");
         grafica.getData().add(serie);
-        borderPane.setCenter(grafica);
+        contenedorRaiz.setCenter(grafica);
     }
 
     @FXML
@@ -343,7 +378,7 @@ public class VistaHistorialController implements Initializable {
         fondo.setAlignment(Pos.CENTER);
         fondo.setSpacing(10);
         fondo.getChildren().addAll(partidas, jugadores);
-        borderPane.setCenter(fondo);
+        contenedorRaiz.setCenter(fondo);
     }
 
     @FXML

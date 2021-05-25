@@ -67,7 +67,8 @@ public class VistaPrincipalController implements Initializable {
                 }, user.textProperty(), passwd.textProperty()),
                 Bindings.or(Bindings.isEmpty(user.textProperty()),
                         Bindings.isEmpty(passwd.textProperty()))));
-        // Cuando se cabie el modo de vsualización en otra ventana, se cambará en todas.
+
+        // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
         currentTheme.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(Theme.DARK_THEME)) {
                 contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());

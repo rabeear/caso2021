@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="600.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaHistorialController">
+<BorderPane fx:id="contenedorRaiz" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="632.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaHistorialController">
     <top>
         <HBox alignment="CENTER" prefHeight="92.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
             <children>
@@ -48,10 +50,19 @@
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Label>
                 <TextField fx:id="jugador" />
-                <Button fx:id="buscarButton" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="68.0" text="Buscar">
+                <Button mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="68.0" text="Buscar">
                <font>
                   <Font name="HP Simplified Light" size="12.0" />
                </font></Button>
+            <ToggleButton fx:id="themeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0">
+               <graphic>
+                  <ImageView fx:id="imagenTema" fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/luna_tema.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
             </children>
         </HBox>
     </top>
@@ -72,7 +83,7 @@
         </TableView>
     </center>
     <left>
-        <VBox alignment="CENTER" prefHeight="427.0" prefWidth="154.0" spacing="10.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="427.0" prefWidth="163.0" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <ToggleButton fx:id="partidasButton" mnemonicParsing="false" onAction="#tablaPartidas" prefHeight="50.0" prefWidth="160.0" text="Partidas realizadas en el sistema" textAlignment="CENTER" wrapText="true">
                     <font>
@@ -109,7 +120,7 @@
                 </ToggleButton>
             </children>
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
             </padding>
         </VBox>
     </left>
