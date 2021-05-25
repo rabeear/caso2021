@@ -284,6 +284,7 @@ public class VistaHistorialController implements Initializable {
 
         // Rellenar la serie con la ObservableList creada anteriormente.
         XYChart.Series serie = new XYChart.Series(lineChartData);
+        serie.setName("Partidas diarias");
 
         LineChart<String, Number> grafica = new LineChart<>(xAxis, yAxis);
         grafica.setTitle("Nº partidas totales");
