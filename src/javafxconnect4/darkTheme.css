@@ -181,3 +181,12 @@ and open the template in the editor.
     -fx-background-repeat: no-repeat;
     -fx-background-fills: true;
 }
+
+#buttonHelp {
+    -fx-background-image: url('../imagenes/help_dark.png');
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-fills: true;
+    -fx-background-color: none;
+    -fx-border-color: none;
+}

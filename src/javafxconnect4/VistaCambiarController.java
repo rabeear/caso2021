@@ -9,6 +9,7 @@ import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Player;
 
@@ -27,19 +29,22 @@ import model.Player;
  */
 public class VistaCambiarController implements Initializable {
 
-    
+    @FXML
+    private VBox contenedorRaiz;
+
     private Stage actualStage;
-    private Scene actualScene;
     private Player player;
-    Image img;
+    private Image img;
     private boolean anterior; //Si true vistaAñadirUser / false -> VistaEditarPerfil
+    private SimpleObjectProperty<Theme> currentTheme;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        currentTheme = new SimpleObjectProperty<>();
+    }
 
     @FXML
     private void clickImg1(ActionEvent event) throws IOException, Connect4DAOException {
@@ -102,64 +107,75 @@ public class VistaCambiarController implements Initializable {
         nodo.getScene().getWindow().hide();
     }
 
-    void initStage(Stage actual, Player j1) {
+    public void initStage(Stage actual, Player j1) {
         actualStage = actual;
-        actualScene = actual.getScene();
         player = j1;
         anterior = false;
         actualStage.setResizable(false);
     }
 
-    void initStage(Stage actual) {
+    public void initStage(Stage actual, SimpleObjectProperty<Theme> theme) {
         actualStage = actual;
-        actualScene = actual.getScene();
         anterior = true;
         actualStage.setResizable(false);
+        currentTheme = theme;
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            case LIGTH_THEME:
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+
+        }
     }
-    
-    void devolver(ActionEvent event, int numeroDeFoto) throws IOException {
+
+    private void devolver(ActionEvent event, int numeroDeFoto) throws IOException {
         Stage actual = new Stage();
-        String img = "";
+        String image = "";
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
         Parent root = cargador.load();
-        
+
         switch (numeroDeFoto) {
             case 1:
-                img = "/avatars/avatar1.png";
+                image = "/avatars/avatar1.png";
                 break;
             case 2:
-                img = "/avatars/avatar2.png";
+                image = "/avatars/avatar2.png";
                 break;
             case 3:
-                img = "/avatars/avatar3.png";
+                image = "/avatars/avatar3.png";
                 break;
             case 4:
-                img = "/avatars/avatar4.png";
+                image = "/avatars/avatar4.png";
                 break;
             case 5:
-                img = "/avatars/default.png";
+                image = "/avatars/default.png";
                 break;
             default:
                 break;
         }
-        cargador.<VistaAñadirUsuarioController>getController().initStage(actual, img);
+        cargador.<VistaAñadirUsuarioController>getController().initStage(actual, image);
         Scene escena = new Scene(root);
         actual.setScene(escena);
         actual.show();
-        
+
         actualStage.close();
     }
-    
-    void volver() throws IOException, Connect4DAOException {
+
+    private void volver() throws IOException, Connect4DAOException {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
         Parent root = cargador.load();
         cargador.<VistaEditarPerfilController>getController().initStage(actual, player.getNickName());
-        Scene escena = new Scene(root);
+        Scene escena = new Scene(root, 340, 620);
         actual.setScene(escena);
         actual.show();
-        
+
         actualStage.close();
-        
     }
 }

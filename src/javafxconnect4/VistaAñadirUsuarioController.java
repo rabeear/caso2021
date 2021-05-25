@@ -28,7 +28,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
@@ -71,7 +70,6 @@ public class VistaAñadirUsuarioController implements Initializable {
     private ImageView imagenTema;
 
     private Stage stageActual;
-    private Scene escenaPrincipal;
     private Image auxiliarFoto;
     private SimpleObjectProperty<Theme> currentTheme;
 
@@ -133,7 +131,7 @@ public class VistaAñadirUsuarioController implements Initializable {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
             Parent root = cargador.load();
-            cargador.<VistaCambiarController>getController().initStage(actual);
+            cargador.<VistaCambiarController>getController().initStage(actual, currentTheme);
             Scene escena = new Scene(root, 650, 375);
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);
@@ -151,7 +149,6 @@ public class VistaAñadirUsuarioController implements Initializable {
      */
     public void initStage(Stage stage, SimpleObjectProperty<Theme> theme) {
         stageActual = stage;
-        escenaPrincipal = stage.getScene();
         Image avatar = new Image("/avatars/default.png");
         auxiliarFoto = avatar;
         imagenAvatar.imageProperty().setValue(avatar);
@@ -170,7 +167,6 @@ public class VistaAñadirUsuarioController implements Initializable {
 
     public void initStage(Stage stage, String foto) {
         stageActual = stage;
-        escenaPrincipal = stage.getScene();
         Image avatar = new Image(foto);
         auxiliarFoto = avatar;
         imagenAvatar.imageProperty().setValue(avatar);

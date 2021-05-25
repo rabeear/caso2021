@@ -182,7 +182,7 @@ and open the template in the editor.
 }
 
 #buttonHelp {
-    -fx-background-image: url('../imagenes/help.png');
+    -fx-background-image: url('../imagenes/help_ligth.png');
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-fills: true;
