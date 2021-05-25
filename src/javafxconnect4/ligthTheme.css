@@ -103,5 +103,13 @@ and open the template in the editor.
     -fx-background-image: url('../avatars/default.png');
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
+}
+
+#buttonHelp {
+    -fx-background-image: url('../imagenes/help.png');
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
     -fx-background-fills: true;
+    -fx-background-color: none;
+    -fx-border-color: none;
 }
