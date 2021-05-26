@@ -143,8 +143,8 @@ public class VistaAñadirUsuarioController implements Initializable {
             Scene escena = new Scene(root, 650, 375);
             actual.setScene(escena);
             actual.initModality(Modality.APPLICATION_MODAL);
+            stageActual.hide();
             actual.showAndWait();
-            stageActual.close();
         } catch (IOException e) {
         }
     }

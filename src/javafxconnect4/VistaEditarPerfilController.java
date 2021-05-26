@@ -96,9 +96,10 @@ public class VistaEditarPerfilController implements Initializable {
         cargador.<VistaCambiarController>getController().initStage(actual, player);
         Scene escena = new Scene(root);
         actual.setScene(escena);
-        actual.show();
-
-        actualStage.close();
+        actualStage.hide();
+        actual.showAndWait();
+        actualStage.show();
+        
 
     }
 
