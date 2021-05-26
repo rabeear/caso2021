@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -72,12 +73,26 @@ public class VistaAñadirUsuarioController implements Initializable {
     private Stage stageActual;
     private Image auxiliarFoto;
     private SimpleObjectProperty<Theme> currentTheme;
+    @FXML
+    private Label labelAyuda;
+    @FXML
+    private Button ayuda;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        ayuda.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                labelAyuda.setText("hay que ver como lo hacemos");
+            } else {
+                labelAyuda.setText("");
+            }
+            
+        });
+        
         // revisar esto porque algo esta fallando pero no se el que
         regButton.disableProperty().bind(Bindings.or(
                 Bindings.createBooleanBinding(() -> {
@@ -225,4 +240,5 @@ public class VistaAñadirUsuarioController implements Initializable {
         Node miNodo = (Node) event.getSource();
         miNodo.getScene().getWindow().hide();
     }
+
 }
