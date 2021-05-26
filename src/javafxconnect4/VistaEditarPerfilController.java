@@ -9,6 +9,8 @@ import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -20,7 +22,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connect4;
@@ -45,11 +50,18 @@ public class VistaEditarPerfilController implements Initializable {
     private Button btnConfirmar;
     @FXML
     private Label labelError;
+    @FXML
+    private HBox contenedorRaiz;
+    @FXML
+    private ToggleButton themeButton;
+    @FXML
+    private ImageView imagenTema;
 
     private Stage actualStage;
     private Scene escenaActual;
     private Player player;
     private SimpleObjectProperty<Theme> currentTheme;
+    private Connect4 connect4;
 
     /**
      * Initializes the controller class.
@@ -60,9 +72,20 @@ public class VistaEditarPerfilController implements Initializable {
 
         btnConfirmar.disableProperty().bind(noDatos);
 
-        //Esto hay que cambiarlo.
-        currentTheme = new SimpleObjectProperty<>();
-        currentTheme.set(Theme.LIGTH_THEME);
+        // Cuando se pulse el botón, se cambia el modo de visualización.
+        themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                currentTheme.set(Theme.DARK_THEME);
+            } else {
+                currentTheme.set(Theme.LIGTH_THEME);
+            }
+        });
+
+        try {
+            connect4 = Connect4.getSingletonConnect4();
+        } catch (Connect4DAOException ex) {
+            Logger.getLogger(VistaEditarPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -82,7 +105,6 @@ public class VistaEditarPerfilController implements Initializable {
     @FXML
     private void clickConfirmar(ActionEvent event) throws Connect4DAOException {
         boolean pswd = false;
-        Connect4 connect4 = Connect4.getSingletonConnect4();
 
         if (!cuadroPswd.getText().isEmpty()) {
             if (Player.checkPassword(cuadroPswd.getText())) {
@@ -119,9 +141,7 @@ public class VistaEditarPerfilController implements Initializable {
         actualStage.close();
     }
 
-    void initStage(Stage stage, String user) throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
-
+    void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
         actualStage = stage;
         escenaActual = stage.getScene();
         labelUsuario.setText(user);
@@ -129,5 +149,41 @@ public class VistaEditarPerfilController implements Initializable {
         imgAvatar.imageProperty().setValue(player.getAvatar());
         cuadroPswd.setPromptText(player.getPassword());
         cuadroMail.setPromptText(player.getEmail());
+        currentTheme = theme;
+        setTheme();
+    }
+
+    private void setTheme() {
+        // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
+        currentTheme.addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(Theme.DARK_THEME)) {
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+                themeButton.setSelected(true);
+            } else {
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+                themeButton.setSelected(false);
+            }
+        });
+
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+                themeButton.setSelected(true);
+                break;
+            case LIGTH_THEME:
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+                themeButton.setSelected(false);
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
     }
 }

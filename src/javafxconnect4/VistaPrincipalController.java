@@ -86,15 +86,9 @@ public class VistaPrincipalController implements Initializable {
         // Cuando se pulse el botón, se cambia el modo de visualización.
         themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
                 currentTheme.set(Theme.DARK_THEME);
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
             } else {
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
                 currentTheme.set(Theme.LIGTH_THEME);
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
             }
         });
     }
@@ -179,9 +173,15 @@ public class VistaPrincipalController implements Initializable {
             currentTheme = theme;
             switch (currentTheme.get()) {
                 case DARK_THEME:
+                    contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                    contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                    imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
                     themeButton.setSelected(true);
                     break;
                 case LIGTH_THEME:
+                    contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                    contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                    imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
                     themeButton.setSelected(false);
                     break;
                 default:

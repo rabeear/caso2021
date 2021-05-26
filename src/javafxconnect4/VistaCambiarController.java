@@ -43,7 +43,7 @@ public class VistaCambiarController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentTheme = new SimpleObjectProperty<>();
+        //TODO
     }
 
     @FXML
@@ -130,7 +130,6 @@ public class VistaCambiarController implements Initializable {
                 break;
             default:
                 throw new AssertionError(currentTheme.get().name());
-
         }
     }
 
@@ -171,7 +170,7 @@ public class VistaCambiarController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaEditarPerfilController>getController().initStage(actual, player.getNickName());
+        cargador.<VistaEditarPerfilController>getController().initStage(actual, player.getNickName(), currentTheme);
         Scene escena = new Scene(root, 340, 620);
         actual.setScene(escena);
         actual.show();

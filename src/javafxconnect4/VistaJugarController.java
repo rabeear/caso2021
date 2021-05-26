@@ -9,6 +9,7 @@ import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Connect4;
 import model.Player;
@@ -28,20 +30,40 @@ import model.Player;
  */
 public class VistaJugarController implements Initializable {
 
+    @FXML
+    private VBox contenedorRaiz;
+
     private Stage ventanaInicio;
     private String user;
+    private SimpleObjectProperty<Theme> currentTheme;
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
-    public void initStage(Stage actual, String usuario) {
+    public void initStage(Stage actual, String usuario, SimpleObjectProperty<Theme> theme) {
         ventanaInicio = actual;
         user = usuario;
+        currentTheme = theme;
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            case LIGTH_THEME:
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
     }
 
     @FXML
@@ -51,7 +73,7 @@ public class VistaJugarController implements Initializable {
         Pane root = (Pane) cargador.load();
         Player actualPlayer = connect4.getPlayer(user);
         VistaJuegoPVEController ventanaJuegoPVE = cargador.<VistaJuegoPVEController>getController();
-        ventanaJuegoPVE.initStage(ventanaInicio, actualPlayer);
+        ventanaJuegoPVE.initStage(ventanaInicio, actualPlayer, currentTheme);
         Scene scene = new Scene(root, 800, 500);
         ventanaInicio.setScene(scene);
         ventanaInicio.show();
@@ -66,7 +88,7 @@ public class VistaJugarController implements Initializable {
         HBox root = (HBox) cargador.load();
         Player actualPlayer = connect4.getPlayer(user);
         VistaInicioSesionSegundoJugadorController ventanaIni = cargador.<VistaInicioSesionSegundoJugadorController>getController();
-        ventanaIni.initStage(ventanaInicio, actualPlayer);
+        ventanaIni.initStage(ventanaInicio, actualPlayer, currentTheme);
         Scene scene = new Scene(root, 800, 500);
         ventanaInicio.setScene(scene);
         ventanaInicio.show();

@@ -64,22 +64,18 @@ public class VistaRankingController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentTheme = new SimpleObjectProperty<>();
-        // Cuando se pulse el botón del cambio de visualización, cambiamos el estilo de la vista.
+        // Cuando se pulse el botón, se cambia el modo de visualización.
         themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (themeButton.isSelected()) {
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+            if (newValue) {
                 currentTheme.set(Theme.DARK_THEME);
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
             } else {
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
                 currentTheme.set(Theme.LIGTH_THEME);
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
             }
         });
 
@@ -145,11 +141,33 @@ public class VistaRankingController implements Initializable {
 
     public void setTheme(SimpleObjectProperty<Theme> theme) {
         currentTheme = theme;
+
+        // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
+        currentTheme.addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(Theme.DARK_THEME)) {
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+                themeButton.setSelected(true);
+            } else {
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+                themeButton.setSelected(false);
+            }
+        });
+
         switch (currentTheme.get()) {
             case DARK_THEME:
+                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
                 themeButton.setSelected(true);
                 break;
             case LIGTH_THEME:
+                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
                 themeButton.setSelected(false);
                 break;
             default:

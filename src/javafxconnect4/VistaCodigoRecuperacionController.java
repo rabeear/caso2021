@@ -54,7 +54,6 @@ public class VistaCodigoRecuperacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentTheme = new SimpleObjectProperty<>();
         // Si no hay nada escrito en ambos campos o son espacios desabilitamos el botón de enviar.
         enviarButton.disableProperty().bind(Bindings.or(
                 Bindings.createBooleanBinding(() -> {
