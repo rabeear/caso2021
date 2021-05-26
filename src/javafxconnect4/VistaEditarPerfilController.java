@@ -142,13 +142,12 @@ public class VistaEditarPerfilController implements Initializable {
         actualStage.close();
     }
 
-    void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
+    public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
         actualStage = stage;
         escenaActual = stage.getScene();
         labelUsuario.setText(user);
         player = connect4.getPlayer(user);
         imgAvatar.imageProperty().setValue(player.getAvatar());
-        cuadroPswd.setPromptText(player.getPassword());
         cuadroMail.setPromptText(player.getEmail());
         currentTheme = theme;
         setTheme();

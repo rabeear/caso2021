@@ -65,6 +65,8 @@ public class VistaJuegoPVEController implements Initializable {
     private final int RADIUS = 32;
     private Connect4 connect4;
     private SimpleObjectProperty<Theme> currentTheme;
+    @FXML
+    private Circle circleFichaLeyenda;
 
     /**
      * Initializes the controller class.
@@ -195,6 +197,7 @@ public class VistaJuegoPVEController implements Initializable {
         }
 
         labelJugador.setText("ordenador");
+        circleFichaLeyenda.setFill(javafx.scene.paint.Color.YELLOW);
         int[] pos = juegaMaquina();
         ponerFichas(pos[0], pos[1]);
         Circle ficha = fichaActual();
@@ -205,6 +208,7 @@ public class VistaJuegoPVEController implements Initializable {
         });
 
         labelJugador.setText(jugadorActual.getNickName());
+        circleFichaLeyenda.setFill(javafx.scene.paint.Color.RED);
         if (tableroIniciado.comprobacionJuego()) {
             alertaVictoria(false);
             return; // Salir de la función.

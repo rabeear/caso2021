@@ -157,7 +157,7 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     private void inicioJ2() throws Connect4DAOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         // Comprobamos si el nombrede usuario introducido existe.
-        if (!connect4.exitsNickName(userCuadro.getText())) {
+        if (!connect4.exitsNickName(userCuadro.getText()) || userCuadro.getText().equals(player1.getNickName())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
         } else {
             Player login = connect4.getPlayer(userCuadro.getText());

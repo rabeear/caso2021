@@ -70,6 +70,8 @@ public class VistaJuegoPVPController implements Initializable {
     private final int RADIUS = 32;
     private Connect4 connect4;
     private SimpleObjectProperty<Theme> currentTheme;
+    @FXML
+    private Circle circleFichaLeyenda;
 
     /**
      * Initializes the controller class.
@@ -175,6 +177,7 @@ public class VistaJuegoPVPController implements Initializable {
         añadirCirculos();
         turno = true;
         labelJugador.setText(j1.getNickName());
+        circleFichaLeyenda.setFill(javafx.scene.paint.Color.RED);
     }
 
     private void añadirCirculos() {
@@ -207,8 +210,10 @@ public class VistaJuegoPVPController implements Initializable {
 
         if (turno) { // Jugador 1.
             labelJugador.setText(j2.getNickName());
+            circleFichaLeyenda.setFill(javafx.scene.paint.Color.YELLOW);
         } else { // Jugador 2.
             labelJugador.setText(j1.getNickName());
+            circleFichaLeyenda.setFill(javafx.scene.paint.Color.RED);
         }
 
         // Animamos la ficha.
