@@ -185,34 +185,36 @@ public class VistaHistorialController implements Initializable {
         // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
         currentTheme.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(Theme.DARK_THEME)) {
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
-                themeButton.setSelected(true);
+                setDark();
             } else {
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
-                themeButton.setSelected(false);
+                setLigth();
             }
         });
 
         switch (currentTheme.get()) {
             case DARK_THEME:
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
-                themeButton.setSelected(true);
+                setDark();
                 break;
             case LIGTH_THEME:
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
-                themeButton.setSelected(false);
+                setLigth();
                 break;
             default:
                 throw new AssertionError(currentTheme.get().name());
         }
+    }
+
+    private void setLigth() {
+        contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+        contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+        imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+        themeButton.setSelected(false);
+    }
+
+    private void setDark() {
+        contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+        contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+        imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+        themeButton.setSelected(true);
     }
 
     private void ponerTabla() {
@@ -339,6 +341,7 @@ public class VistaHistorialController implements Initializable {
 
         LineChart<String, Number> grafica = new LineChart<>(xAxis, yAxis);
         grafica.setTitle("Nº partidas totales");
+        grafica.setLegendVisible(false);
         grafica.getData().add(serie);
         contenedorRaiz.setCenter(grafica);
     }
@@ -367,6 +370,7 @@ public class VistaHistorialController implements Initializable {
         NumberAxis yAxisPartidas = new NumberAxis();
         yAxisPartidas.setLabel("Número partidas");
         StackedBarChart<String, Number> partidas = new StackedBarChart<>(xAxisPartidas, yAxisPartidas);
+        //partidas.setCategoryGap(20);
 
         XYChart.Series serieGanadas = new XYChart.Series(numGanadas);
         serieGanadas.setName("Partidas ganadas");
@@ -382,6 +386,8 @@ public class VistaHistorialController implements Initializable {
         NumberAxis yAxisJugadores = new NumberAxis();
         yAxisJugadores.setLabel("Número partidas");
         BarChart<String, Number> jugadores = new BarChart<>(xAxisJugadores, yAxisJugadores);
+        jugadores.setLegendVisible(false);
+        //jugadores.setBarGap(40);
 
         XYChart.Series serieOponentes = new XYChart.Series(numOponentes);
         serieOponentes.setName("Oponentes");

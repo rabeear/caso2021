@@ -169,6 +169,12 @@ and open the template in the editor.
     -fx-font-size: 0.8em;
 }
 
+/*******************************************************************************
+ *                                                                             *
+ * Images                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+
 #imagenPantallaPrincipal {
     -fx-background-image: url('../imagenes/prueba.png');
     -fx-background-size: 110%;

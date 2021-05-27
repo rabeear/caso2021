@@ -159,33 +159,35 @@ public class VistaEditarPerfilController implements Initializable {
         // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
         currentTheme.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(Theme.DARK_THEME)) {
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
-                themeButton.setSelected(true);
+                setDark();
             } else {
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
-                themeButton.setSelected(false);
+                setLigth();
             }
         });
 
         switch (currentTheme.get()) {
             case DARK_THEME:
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
-                themeButton.setSelected(true);
+                setDark();
                 break;
             case LIGTH_THEME:
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
-                themeButton.setSelected(false);
+                setLigth();
                 break;
             default:
                 throw new AssertionError(currentTheme.get().name());
         }
+    }
+
+    private void setLigth() {
+        contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+        contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+        imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+        themeButton.setSelected(false);
+    }
+
+    private void setDark() {
+        contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+        contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+        imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+        themeButton.setSelected(true);
     }
 }

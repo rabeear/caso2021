@@ -58,20 +58,20 @@ public class VistaJuegoPVPController implements Initializable {
     private ToggleButton themeButton;
     @FXML
     private ImageView imagenTema;
+    @FXML
+    private Circle circleFichaLeyenda;
 
     private MatrizDeTablero tableroIniciado;
     private Stage stageActual;
     private Scene escenaActual;
     private Player j1, j2;
+    private Connect4 connect4;
+    private SimpleObjectProperty<Theme> currentTheme;
     private static boolean turno = true; //Controlar el turno, true -> j1, false -> j2
     private final double TRANSLATE_Y = 68.5;
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
     private final int RADIUS = 32;
-    private Connect4 connect4;
-    private SimpleObjectProperty<Theme> currentTheme;
-    @FXML
-    private Circle circleFichaLeyenda;
 
     /**
      * Initializes the controller class.
@@ -122,34 +122,36 @@ public class VistaJuegoPVPController implements Initializable {
         // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
         currentTheme.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(Theme.DARK_THEME)) {
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
-                themeButton.setSelected(true);
+                setDark();
             } else {
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
-                themeButton.setSelected(false);
+                setLigth();
             }
         });
 
         switch (currentTheme.get()) {
             case DARK_THEME:
-                contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
-                themeButton.setSelected(true);
+                setDark();
                 break;
             case LIGTH_THEME:
-                contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
-                contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
-                imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
-                themeButton.setSelected(false);
+                setLigth();
                 break;
             default:
                 throw new AssertionError(currentTheme.get().name());
         }
+    }
+
+    private void setLigth() {
+        contenedorRaiz.getStylesheets().remove(getClass().getResource("darkTheme.css").toExternalForm());
+        contenedorRaiz.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+        imagenTema.setImage(new Image("/imagenes/luna_tema.png", 21, 24, true, true));
+        themeButton.setSelected(false);
+    }
+
+    private void setDark() {
+        contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+        contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
+        imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
+        themeButton.setSelected(true);
     }
 
     @FXML
