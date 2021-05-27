@@ -49,7 +49,11 @@
                 </VBox>
             </children>
         </HBox>
-      <Label fx:id="labelAyuda" styleClass="text-id" />
+      <Label fx:id="labelAyuda" styleClass="text-id">
+         <font>
+            <Font name="HP Simplified Light" size="12.0" />
+         </font>
+      </Label>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" spacing="20.0">
          <children>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
@@ -130,8 +134,14 @@
       </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
             <children>
-                <Button fx:id="regButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registrar" prefHeight="30.0" prefWidth="80.0" text="Registrarse" />
-                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="80.0" text="Cancelar" />
+                <Button fx:id="regButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registrar" prefHeight="30.0" prefWidth="80.0" text="Registrarse">
+               <font>
+                  <Font name="HP Simplified Light" size="13.0" />
+               </font></Button>
+                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="80.0" text="Cancelar">
+               <font>
+                  <Font name="HP Simplified Light" size="13.0" />
+               </font></Button>
             </children>
         </HBox>
     </children>
