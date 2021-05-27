@@ -8,6 +8,7 @@ package javafxconnect4;
 import DBAccess.Connect4DAOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,10 +90,10 @@ public class VistaHistorialController implements Initializable {
     private ImageView imagenTema;
 
     private Connect4 connect4;
-    private final ObservableList<Round> dataList = FXCollections.observableArrayList();
     private String user;
-    private final Alert errorJugador = new Alert(Alert.AlertType.ERROR);
     private SimpleObjectProperty<Theme> currentTheme;
+    private final ObservableList<Round> dataList = FXCollections.observableArrayList();
+    private final Alert errorJugador = new Alert(Alert.AlertType.ERROR);
 
     /**
      * Initializes the controller class.
@@ -323,14 +324,13 @@ public class VistaHistorialController implements Initializable {
         TreeMap<LocalDate, Integer> numPartidas = connect4.getRoundCountsPerDay();
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Fecha");
         yAxis.setLabel("Número partidas");
 
         ObservableList<XYChart.Data<String, Number>> lineChartData
                 = FXCollections.observableArrayList();
         numPartidas.subMap(inicio.getValue(), fin.getValue().plusDays(1)).forEach(
                 (date, rounds) -> {
-                    lineChartData.add(new XYChart.Data(date.toString(), rounds));
+                    lineChartData.add(new XYChart.Data(date.getDayOfMonth() + "-" + date.getMonthValue(), rounds));
                 });
 
         // Rellenar la serie con la ObservableList creada anteriormente.
@@ -357,15 +357,14 @@ public class VistaHistorialController implements Initializable {
 
         // Creo que tambien hay que añadir lo de comprobar la fecha antes.
         dataPlayer.subMap(inicio.getValue(), fin.getValue().plusDays(1)).forEach((date, rank) -> {
-            numGanadas.add(new XYChart.Data(date.toString(), rank.getWinnedGames()));
-            numPerdidas.add(new XYChart.Data(date.toString(), rank.getLostGames()));
-            numOponentes.add(new XYChart.Data(date.toString(), rank.getOponents()));
+            numGanadas.add(new XYChart.Data(date.getDayOfMonth() + "-" + date.getMonthValue(), rank.getWinnedGames()));
+            numPerdidas.add(new XYChart.Data(date.getDayOfMonth() + "-" + date.getMonthValue(), rank.getLostGames()));
+            numOponentes.add(new XYChart.Data(date.getDayOfMonth() + "-" + date.getMonthValue(), rank.getOponents()));
         });
 
         // Gráfica de barras apiladas con las partidas ganadas y perdidas de cada día.
         CategoryAxis xAxisPartidas = new CategoryAxis();
         NumberAxis yAxisPartidas = new NumberAxis();
-        xAxisPartidas.setLabel("Fecha");
         yAxisPartidas.setLabel("Número partidas");
         StackedBarChart<String, Number> partidas = new StackedBarChart<>(xAxisPartidas, yAxisPartidas);
 
@@ -381,7 +380,6 @@ public class VistaHistorialController implements Initializable {
         // enfrentado el jugador cada día.
         CategoryAxis xAxisJugadores = new CategoryAxis();
         NumberAxis yAxisJugadores = new NumberAxis();
-        xAxisJugadores.setLabel("Fecha");
         yAxisJugadores.setLabel("Número partidas");
         BarChart<String, Number> jugadores = new BarChart<>(xAxisJugadores, yAxisJugadores);
 

@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -46,11 +47,7 @@ public class VistaAñadirUsuarioController implements Initializable {
     @FXML
     private Label userError;
     @FXML
-    private TextField psswd;
-    @FXML
     private Label psswdError;
-    @FXML
-    private TextField psswd2;
     @FXML
     private Label psswd2Error;
     @FXML
@@ -69,30 +66,39 @@ public class VistaAñadirUsuarioController implements Initializable {
     private ToggleButton themeButton;
     @FXML
     private ImageView imagenTema;
-
-    private Stage stageActual;
-    private Image auxiliarFoto;
-    private SimpleObjectProperty<Theme> currentTheme;
     @FXML
     private Label labelAyuda;
     @FXML
     private Button ayuda;
+    @FXML
+    private Label dateError;
+    @FXML
+    private PasswordField psswd;
+    @FXML
+    private PasswordField psswd2;
+
+    private Stage stageActual;
+    private Image auxiliarFoto;
+    private SimpleObjectProperty<Theme> currentTheme;
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         ayuda.hoverProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 labelAyuda.setText("hay que ver como lo hacemos");
             } else {
                 labelAyuda.setText("");
             }
-            
+
         });
-        
+
         // revisar esto porque algo esta fallando pero no se el que
         regButton.disableProperty().bind(Bindings.or(
                 Bindings.createBooleanBinding(() -> {
@@ -161,7 +167,10 @@ public class VistaAñadirUsuarioController implements Initializable {
         auxiliarFoto = avatar;
         imagenAvatar.imageProperty().setValue(avatar);
         currentTheme = theme;
+        setTheme();
+    }
 
+    private void setTheme() {
         // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
         currentTheme.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(Theme.DARK_THEME)) {
@@ -216,12 +225,16 @@ public class VistaAñadirUsuarioController implements Initializable {
         if (!Player.checkPassword(psswd.getText())) { // Comprobamos si la contraseña es válida.
             psswdError.setText("Contaseña no válida.");
             registrar = false;
-        } else if (!psswd.getText().equals(psswd2.getText())) { // Comprobamos si se ha confirmado de manera correcta la contraseña
+        } else if (!psswd.getText().equals(psswd2.getText())) { // Comprobamos si se ha confirmado de manera correcta la contraseña.
             psswd2Error.setText("Las contraseñas no coinciden.");
             registrar = false;
         }
         if (!Player.checkEmail(email.getText())) { // Comprobamos si el email introducido es válido.
             emailError.setText("Correo electónico no válido.");
+            registrar = false;
+        }
+        if (date.getValue().minusYears(12).compareTo(LocalDate.now()) < 0) { // Comprobamos si tiene más de 12 años.
+            dateError.setText("Es necesario tener 12 años mínimo");
             registrar = false;
         }
         // Si no ha habido ningún error en los datos introducidos, entonces registramos al jugador.

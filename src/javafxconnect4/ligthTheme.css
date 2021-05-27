@@ -49,6 +49,15 @@ and open the template in the editor.
     -fx-stroke: black;
 }
 
+.circle {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
+
+.grid-pane {
+    -fx-background-color: blue;
+}
+
 /*******************************************************************************
  *                                                                             *
  * TableView                                                                   *
@@ -142,6 +151,22 @@ and open the template in the editor.
 .date-picker > .arrow-button {
     -fx-background-color: -fx-clr-primary;
     -fx-border-color: black;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Chart                                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+.chart {
+    -fx-font-family: 'HP Simplified Light';
+    -fx-text-fill: black;
+    -fx-padding: 1px;
+}
+
+.chart-legend {
+    -fx-font-size: 0.8em;
 }
 
 #imagenPantallaPrincipal {

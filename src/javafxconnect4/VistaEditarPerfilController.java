@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -56,6 +57,8 @@ public class VistaEditarPerfilController implements Initializable {
     private ToggleButton themeButton;
     @FXML
     private ImageView imagenTema;
+    @FXML
+    private DatePicker birthday;
 
     private Stage actualStage;
     private Scene escenaActual;
@@ -99,8 +102,6 @@ public class VistaEditarPerfilController implements Initializable {
         actualStage.hide();
         actual.showAndWait();
         actualStage.show();
-        
-
     }
 
     @FXML
@@ -149,6 +150,7 @@ public class VistaEditarPerfilController implements Initializable {
         player = connect4.getPlayer(user);
         imgAvatar.imageProperty().setValue(player.getAvatar());
         cuadroMail.setPromptText(player.getEmail());
+        birthday.setPromptText(player.getBirthdate().toString());
         currentTheme = theme;
         setTheme();
     }

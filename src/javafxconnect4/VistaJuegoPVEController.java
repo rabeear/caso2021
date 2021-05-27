@@ -70,6 +70,9 @@ public class VistaJuegoPVEController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -161,7 +164,8 @@ public class VistaJuegoPVEController implements Initializable {
         for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
             for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
                 Circle circulo = new Circle();
-                circulo.setFill(javafx.scene.paint.Color.WHITE);
+                circulo.getStyleClass().add("circle");
+                //circulo.setFill(javafx.scene.paint.Color.WHITE);
                 circulo.setRadius(RADIUS - 1);
                 circulo.setVisible(true);
                 tableroGrid.add(circulo, c, r);

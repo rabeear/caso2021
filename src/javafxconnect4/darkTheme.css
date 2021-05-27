@@ -12,6 +12,7 @@ and open the template in the editor.
     -fx-clr-primary: #808080;
     -fx-clr-secondary: #bfbfbf;
     -fx-clr-tertiary: #595959;
+    -fx-clr-gridpane: #000099;
     -fx-background-color: #0d0d0d;
 }
 
@@ -44,8 +45,18 @@ and open the template in the editor.
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+
 .line {
     -fx-stroke: white;
+}
+
+.circle {
+    -fx-fill: black;
+    -fx-stroke: black;
+}
+
+.grid-pane {
+    -fx-background-color: -fx-clr-gridpane;
 }
 
 /*******************************************************************************
@@ -149,6 +160,21 @@ and open the template in the editor.
 .date-picker > .arrow-button {
     -fx-background-color: -fx-clr-primary;
     -fx-border-color: white;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Chart                                                                       *
+ *                                                                             *
+ ******************************************************************************/
+
+.chart {
+    -fx-font-family: 'HP Simplified Light';
+    -fx-text-fill: white;
+}
+
+.chart-legend {
+    -fx-font-size: 0.8em;
 }
 
 #imagenPantallaPrincipal {

@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
@@ -19,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="contenedorRaiz" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="620.0" prefWidth="340.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
+<VBox fx:id="contenedorRaiz" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="520.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
     <children>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="CREA TU CUENTA" textAlignment="CENTER" wrappingWidth="309.205078125">
             <VBox.margin>
@@ -46,84 +41,93 @@
                             <VBox.margin>
                                 <Insets bottom="10.0" top="5.0" />
                             </VBox.margin>
+                     <font>
+                        <Font name="HP Simplified Light" size="13.0" />
+                     </font>
                         </Button>
                     </children>
                 </VBox>
             </children>
         </HBox>
-        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="320.0" spacing="20.0">
-            <children>
-                <Button id="buttonHelp" fx:id="ayuda" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0" />
-                <ToggleButton fx:id="themeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0">
-                    <graphic>
-                        <ImageView id="imagenTema" fx:id="imagenTema" fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../imagenes/luna_tema.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </ToggleButton>
-            </children>
-        </HBox>
-      <Label fx:id="labelAyuda" />
-        <TextField fx:id="user" promptText="Nombre de usuario">
-            <VBox.margin>
-                <Insets left="20.0" right="20.0" />
-            </VBox.margin>
-            <font>
-                <Font name="HP Simplified Light" size="12.0" />
-            </font>
-        </TextField>
-        <Label fx:id="userError" prefHeight="17.0" prefWidth="299.0" textAlignment="CENTER" textFill="#eb0000">
-            <font>
-                <Font name="HP Simplified" size="12.0" />
-            </font>
-        </Label>
-        <TextField fx:id="psswd" promptText="Contraseña">
-            <VBox.margin>
-                <Insets left="20.0" right="20.0" />
-            </VBox.margin>
-            <font>
-                <Font name="HP Simplified Light" size="12.0" />
-            </font>
-        </TextField>
-        <Label fx:id="psswdError" prefHeight="17.0" prefWidth="298.0" textAlignment="CENTER" textFill="#eb0000">
-            <font>
-                <Font name="HP Simplified" size="12.0" />
-            </font>
-        </Label>
-        <TextField fx:id="psswd2" promptText="Confirme contraseña">
-            <VBox.margin>
-                <Insets left="20.0" right="20.0" />
-            </VBox.margin>
-            <font>
-                <Font name="HP Simplified Light" size="12.0" />
-            </font>
-        </TextField>
-        <Label fx:id="psswd2Error" prefHeight="17.0" prefWidth="296.0" textAlignment="CENTER" textFill="#eb0000">
-            <font>
-                <Font name="HP Simplified" size="12.0" />
-            </font>
-        </Label>
-        <TextField fx:id="email" promptText="Correo">
-            <VBox.margin>
-                <Insets left="20.0" right="20.0" />
-            </VBox.margin>
-            <font>
-                <Font name="HP Simplified Light" size="12.0" />
-            </font>
-        </TextField>
-        <Label fx:id="emailError" prefHeight="17.0" prefWidth="279.0" textFill="RED">
-            <font>
-                <Font name="HP Simplified" size="12.0" />
-            </font>
-        </Label>
-        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Fecha de nacimiento:" wrappingWidth="277.1770935058594">
-            <font>
-                <Font name="HP Simplified Light" size="12.0" />
-            </font>
-        </Text>
-        <DatePicker fx:id="date" prefHeight="25.0" prefWidth="279.0" />
+      <Label fx:id="labelAyuda" styleClass="text-id" />
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" spacing="20.0">
+         <children>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
+               <children>
+                    <TextField fx:id="user" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="230.0" promptText="Nombre de usuario">
+                        <VBox.margin>
+                            <Insets />
+                        </VBox.margin>
+                        <font>
+                            <Font name="HP Simplified Light" size="12.0" />
+                        </font>
+                    </TextField>
+                    <Label fx:id="userError" prefHeight="17.0" prefWidth="299.0" textAlignment="CENTER" textFill="#eb0000">
+                        <font>
+                            <Font name="HP Simplified" size="12.0" />
+                        </font>
+                    </Label>
+                  <PasswordField fx:id="psswd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="230.0" promptText="Contraseña">
+                     <font>
+                        <Font name="HP Simplified Light" size="12.0" />
+                     </font>
+                  </PasswordField>
+                    <Label fx:id="psswdError" prefHeight="17.0" prefWidth="298.0" textAlignment="CENTER" textFill="#eb0000">
+                        <font>
+                            <Font name="HP Simplified" size="12.0" />
+                        </font>
+                    </Label>
+                  <PasswordField fx:id="psswd2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="230.0" promptText="Confirme Contraseña">
+                     <font>
+                        <Font name="HP Simplified Light" size="12.0" />
+                     </font>
+                  </PasswordField>
+                    <Label fx:id="psswd2Error" prefHeight="17.0" prefWidth="296.0" textAlignment="CENTER" textFill="#eb0000">
+                        <font>
+                            <Font name="HP Simplified" size="12.0" />
+                        </font>
+                    </Label>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
+               <children>
+                    <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="230.0" promptText="Correo">
+                        <VBox.margin>
+                            <Insets />
+                        </VBox.margin>
+                        <font>
+                            <Font name="HP Simplified Light" size="12.0" />
+                        </font>
+                    </TextField>
+                    <Label fx:id="emailError" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="230.0" textFill="RED">
+                        <font>
+                            <Font name="HP Simplified" size="12.0" />
+                        </font>
+                    </Label>
+                    <DatePicker fx:id="date" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="230.0" promptText="Fecha de nacimiento" />
+                  <Label fx:id="dateError" prefHeight="17.0" prefWidth="277.0" textFill="RED">
+                     <font>
+                        <Font name="HP Simplified" size="12.0" />
+                     </font>
+                  </Label>
+                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="230.0" spacing="20.0">
+                        <children>
+                            <Button id="buttonHelp" fx:id="ayuda" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0" />
+                            <ToggleButton fx:id="themeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0">
+                                <graphic>
+                                    <ImageView id="imagenTema" fx:id="imagenTema" fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../imagenes/luna_tema.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </ToggleButton>
+                        </children>
+                    </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
             <children>
                 <Button fx:id="regButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registrar" prefHeight="30.0" prefWidth="80.0" text="Registrarse" />
