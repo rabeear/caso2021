@@ -107,11 +107,13 @@ public class VistaCambiarController implements Initializable {
         nodo.getScene().getWindow().hide();
     }
 
-    public void initStage(Stage actual, Player j1) {
+    public void initStage(Stage actual, Player j1, SimpleObjectProperty<Theme> theme) {
         actualStage = actual;
         player = j1;
         anterior = false;
         actualStage.setResizable(false);
+        currentTheme = theme;
+        setTheme();
     }
 
     public void initStage(Stage actual, SimpleObjectProperty<Theme> theme) {
@@ -119,6 +121,10 @@ public class VistaCambiarController implements Initializable {
         anterior = true;
         actualStage.setResizable(false);
         currentTheme = theme;
+        setTheme();
+    }
+
+    private void setTheme() {
         switch (currentTheme.get()) {
             case DARK_THEME:
                 contenedorRaiz.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());

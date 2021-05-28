@@ -96,7 +96,7 @@ public class VistaEditarPerfilController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaCambiarController>getController().initStage(actual, player);
+        cargador.<VistaCambiarController>getController().initStage(actual, player, currentTheme);
         Scene escena = new Scene(root);
         actual.setScene(escena);
         actualStage.hide();
