@@ -167,6 +167,12 @@ and open the template in the editor.
 
 .chart-legend {
     -fx-font-size: 0.8em;
+    -fx-background-color: -fx-clr-primary;
+    -fx-text-fill: black;
+}
+
+.axis {
+    -fx-tick-label-fill: black;
 }
 
 /*******************************************************************************

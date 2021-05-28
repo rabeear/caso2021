@@ -370,7 +370,6 @@ public class VistaHistorialController implements Initializable {
         NumberAxis yAxisPartidas = new NumberAxis();
         yAxisPartidas.setLabel("Número partidas");
         StackedBarChart<String, Number> partidas = new StackedBarChart<>(xAxisPartidas, yAxisPartidas);
-        //partidas.setCategoryGap(20);
 
         XYChart.Series serieGanadas = new XYChart.Series(numGanadas);
         serieGanadas.setName("Partidas ganadas");
@@ -387,7 +386,6 @@ public class VistaHistorialController implements Initializable {
         yAxisJugadores.setLabel("Número partidas");
         BarChart<String, Number> jugadores = new BarChart<>(xAxisJugadores, yAxisJugadores);
         jugadores.setLegendVisible(false);
-        //jugadores.setBarGap(40);
 
         XYChart.Series serieOponentes = new XYChart.Series(numOponentes);
         serieOponentes.setName("Oponentes");

@@ -178,7 +178,8 @@ public class VistaSegundaPrincipalController implements Initializable {
         Parent root = cargador.load();
         cargador.<VistaHistorialController>getController().initStage(user, currentTheme);
         Scene escena = new Scene(root);
-        actual.setResizable(false);
+        actual.setMinWidth(632);
+        actual.setMinHeight(520);
         actual.setScene(escena);
         actual.setTitle("Historial");
         actual.initModality(Modality.APPLICATION_MODAL);
