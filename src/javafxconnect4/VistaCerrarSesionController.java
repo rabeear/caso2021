@@ -39,6 +39,9 @@ public class VistaCerrarSesionController implements Initializable {
     public void initStage(Stage stage, Player j1, Player j2) {
         btn1.setText(j1.getNickName());
         btn2.setText(j2.getNickName());
+        stageActual = stage;
+        escenaActual = stage.getScene();
+        stageActual.setResizable(false);
     }
     
 }
