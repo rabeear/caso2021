@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -211,5 +212,17 @@ public class VistaPrincipalController implements Initializable {
         contenedorRaiz.getStylesheets().remove(getClass().getResource("ligthTheme.css").toExternalForm());
         imagenTema.setImage(new Image("/imagenes/sol_tema.png", 21, 24, true, true));
         themeButton.setSelected(true);
+    }
+
+    @FXML
+    private void escribiendoPswd(KeyEvent event) {
+        Node n = (Node) event.getSource();
+        String field = n.getId();
+        
+        if (field.equals("passwd")) {
+            psswdVisible.setText(passwd.getText());
+        } else {
+            passwd.setText(psswdVisible.getText());
+        }
     }
 }
