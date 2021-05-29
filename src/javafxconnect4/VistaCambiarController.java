@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -103,8 +102,7 @@ public class VistaCambiarController implements Initializable {
 
     @FXML
     private void clickCancelar(ActionEvent event) {
-        Node nodo = (Node) event.getSource();
-        nodo.getScene().getWindow().hide();
+        actualStage.close();
     }
 
     public void initStage(Stage actual, Player j1, SimpleObjectProperty<Theme> theme) {

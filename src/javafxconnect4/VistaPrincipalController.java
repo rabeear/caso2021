@@ -53,13 +53,13 @@ public class VistaPrincipalController implements Initializable {
     private HBox contenedorRaiz;
     @FXML
     private ImageView imagenTema;
-
-    private Stage stagePrincipal;
-    private SimpleObjectProperty<Theme> currentTheme;
     @FXML
     private ToggleButton visibleButton;
     @FXML
     private TextField psswdVisible;
+
+    private Stage stagePrincipal;
+    private SimpleObjectProperty<Theme> currentTheme;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,8 +90,8 @@ public class VistaPrincipalController implements Initializable {
                 currentTheme.set(Theme.LIGTH_THEME);
             }
         });
-        
-        visibleButton.selectedProperty().addListener((observable, oldValue, newValue) ->{
+
+        visibleButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 //cuando vuelva lo haago
                 System.out.println("hola");
@@ -104,7 +104,7 @@ public class VistaPrincipalController implements Initializable {
                 passwd.setVisible(true);
             }
         });
-        
+
     }
 
     @FXML
@@ -122,7 +122,7 @@ public class VistaPrincipalController implements Initializable {
 
     private void autentificacion() throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        
+
         // Comprobamos que exista el nombre de usuario introducido.
         if (!connect4.exitsNickName(user.getText())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");
@@ -218,7 +218,7 @@ public class VistaPrincipalController implements Initializable {
     private void escribiendoPswd(KeyEvent event) {
         Node n = (Node) event.getSource();
         String field = n.getId();
-        
+
         if (field.equals("passwd")) {
             psswdVisible.setText(passwd.getText());
         } else {

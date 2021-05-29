@@ -26,7 +26,6 @@ public class JavaFxConnect4 extends Application {
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
         Parent root = cargador.load();
         Scene scene = new Scene(root);
-        stage.setScene(scene);
 
         VistaPrincipalController controladorPrincipal = cargador.<VistaPrincipalController>getController();
         controladorPrincipal.initStage(stage, null);

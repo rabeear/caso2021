@@ -28,7 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -236,7 +235,7 @@ public class VistaAñadirUsuarioController implements Initializable {
             registrar = false;
         }
         if (date.getValue().minusYears(12).compareTo(LocalDate.now()) < 0) { // Comprobamos si tiene más de 12 años.
-            dateError.setText("Es necesario tener 12 años mínimo");
+            dateError.setText("Es necesario tener 12 años mínimo.");
             registrar = false;
         }
         // Si no ha habido ningún error en los datos introducidos, entonces registramos al jugador.
@@ -252,7 +251,6 @@ public class VistaAñadirUsuarioController implements Initializable {
     @FXML
     private void cancelar(ActionEvent event) {
         // Cerramos la ventana y volvemos a enseñar la anteior.
-        Node miNodo = (Node) event.getSource();
-        miNodo.getScene().getWindow().hide();
+        stageActual.close();
     }
 }

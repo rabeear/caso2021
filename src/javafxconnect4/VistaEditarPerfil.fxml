@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaEditarPerfilController">
+<HBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="600.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaEditarPerfilController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" spacing="20.0">
          <children>
@@ -27,25 +28,44 @@
          </children>
       </VBox>
       <Line endY="100.0" startY="-100.0" styleClass="line" />
-      <VBox alignment="CENTER_LEFT" prefHeight="400.0" prefWidth="300.0" spacing="20.0">
+      <VBox alignment="CENTER_LEFT" prefHeight="400.0" prefWidth="300.0" spacing="15.0">
          <children>
             <Label styleClass="text-id" text="Contraseña">
                <font>
                   <Font name="HP Simplified Light" size="14.0" />
                </font></Label>
-            <TextField fx:id="cuadroPswd" />
+            <PasswordField fx:id="cuadroPswd" />
+            <PasswordField fx:id="confirmarPsswd" promptText="Confirmar Contraseña">
+               <font>
+                  <Font name="HP Simplified Light" size="12.0" />
+               </font>
+            </PasswordField>
+            <Label fx:id="psswdError" prefHeight="17.0" prefWidth="333.0" textFill="RED">
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font>
+            </Label>
             <Label styleClass="text-id" text="Correo">
                <font>
                   <Font name="HP Simplified Light" size="14.0" />
                </font></Label>
             <TextField fx:id="cuadroMail" />
+            <Label fx:id="emailError" prefHeight="17.0" prefWidth="333.0" textFill="RED">
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font>
+            </Label>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Fecha de nacimiento">
                <font>
                   <Font name="HP Simplified Light" size="14.0" />
                </font>
             </Text>
-            <DatePicker fx:id="birthday" />
-            <Label fx:id="labelError" />
+            <DatePicker fx:id="date" />
+            <Label fx:id="dateError" prefHeight="17.0" prefWidth="333.0" textFill="RED">
+               <font>
+                  <Font name="HP Simplified" size="12.0" />
+               </font>
+            </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Button fx:id="btnConfirmar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickConfirmar" prefHeight="26.0" prefWidth="72.0" text="Confirmar" />

@@ -8,6 +8,7 @@ package javafxconnect4;
 import DBAccess.Connect4DAOException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -50,24 +52,32 @@ public class VistaEditarPerfilController implements Initializable {
     @FXML
     private Button btnConfirmar;
     @FXML
-    private Label labelError;
-    @FXML
     private HBox contenedorRaiz;
     @FXML
     private ToggleButton themeButton;
     @FXML
     private ImageView imagenTema;
     @FXML
-    private DatePicker birthday;
+    private DatePicker date;
+    @FXML
+    private Label psswdError;
+    @FXML
+    private Label emailError;
+    @FXML
+    private Label dateError;
+    @FXML
+    private PasswordField confirmarPsswd;
 
     private Stage actualStage;
-    private Scene escenaActual;
     private Player player;
     private SimpleObjectProperty<Theme> currentTheme;
     private Connect4 connect4;
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,25 +116,36 @@ public class VistaEditarPerfilController implements Initializable {
 
     @FXML
     private void clickConfirmar(ActionEvent event) throws Connect4DAOException {
-        boolean pswd = false;
-
+        psswdError.setText("");
+        emailError.setText("");
+        dateError.setText("");
+        boolean cambiar = true;
         if (!cuadroPswd.getText().isEmpty()) {
-            if (Player.checkPassword(cuadroPswd.getText())) {
-                player.setPassword(cuadroPswd.getText());
+            if (!Player.checkPassword(cuadroPswd.getText())) {
+                psswdError.setText("Contaseña no válida.");
+                cambiar = false;
+            } else if (!cuadroPswd.getText().equals(confirmarPsswd.getText())) {
+                psswdError.setText("Las contraseñas no coinciden.");
+                cambiar = false;
             } else {
-                labelError.setText("Contraseña no valida!");
-                pswd = true;
+                player.setPassword(cuadroPswd.getText());
             }
         }
+
         if (!cuadroMail.getText().isEmpty()) {
-            if (Player.checkEmail(cuadroMail.getText())) {
-                player.setEmail(cuadroMail.getText());
-            } else {
-                if (pswd) {
-                    labelError.setText("Contraseña y correo no validos!");
-                } else {
-                    labelError.setText("Correo no valido!");
-                }
+            if (!Player.checkEmail(cuadroMail.getText())) {
+                emailError.setText("Correo electónico no válido.");
+                cambiar = false;
+            } else if (cambiar) {
+                player.setPassword(cuadroPswd.getText());
+            }
+        }
+
+        if (!date.getValue().toString().isEmpty() || date.getValue().toString().split(" ").length != 0) {
+            if (date.getValue().minusYears(12).compareTo(LocalDate.now()) < 0) {
+                dateError.setText("Es necesario tener 12 años mínimo.");
+            } else if (cambiar) {
+                player.setBirthdate(date.getValue());
             }
         }
     }
@@ -145,12 +166,11 @@ public class VistaEditarPerfilController implements Initializable {
 
     public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
         actualStage = stage;
-        escenaActual = stage.getScene();
         labelUsuario.setText(user);
         player = connect4.getPlayer(user);
         imgAvatar.imageProperty().setValue(player.getAvatar());
         cuadroMail.setPromptText(player.getEmail());
-        birthday.setPromptText(player.getBirthdate().toString());
+        date.setPromptText(player.getBirthdate().toString());
         currentTheme = theme;
         setTheme();
     }
