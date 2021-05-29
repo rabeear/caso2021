@@ -55,6 +55,8 @@ public class VistaPrincipalController implements Initializable {
 
     private Stage stagePrincipal;
     private SimpleObjectProperty<Theme> currentTheme;
+    @FXML
+    private ToggleButton visibleButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -83,6 +85,14 @@ public class VistaPrincipalController implements Initializable {
                 currentTheme.set(Theme.DARK_THEME);
             } else {
                 currentTheme.set(Theme.LIGTH_THEME);
+            }
+        });
+        
+        visibleButton.selectedProperty().addListener((observable, oldValue, newValue) ->{
+            if (newValue) {
+                //cuando vuelva lo haago
+            } else {
+                //currentTheme.set(Theme.LIGTH_THEME);
             }
         });
     }
