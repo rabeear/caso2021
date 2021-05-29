@@ -242,3 +242,10 @@ and open the template in the editor.
     -fx-background-color: none;
     -fx-border-color: none;
 }
+
+#visibleButton {
+    -fx-background-image: url('../imagenes/visible_dark.png');
+    -fx-background-position: center;
+    -fx-background-color: none;
+    -fx-border-color: none;
+}
