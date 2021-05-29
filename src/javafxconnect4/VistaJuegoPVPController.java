@@ -155,9 +155,18 @@ public class VistaJuegoPVPController implements Initializable {
     }
 
     @FXML
-    private void clickSalir(ActionEvent event) {
+    private void clickSalir(ActionEvent event) throws IOException {
         turno = true;
-        try {
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCerrarSesion.fxml"));
+        Parent root = cargador.load();
+        
+        VistaCerrarSesionController ventana = cargador.<VistaCerrarSesionController>getController();
+        ventana.initStage(stageActual, j1,j2);
+        Scene scene = new Scene(root, 420, 190);
+        stageActual.setScene(scene);
+        stageActual.setResizable(false);
+        stageActual.show();
+        /*try {
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
             Parent root = cargador.load();
 
@@ -168,7 +177,7 @@ public class VistaJuegoPVPController implements Initializable {
             stageActual.setScene(scene);
             stageActual.show();
         } catch (Connect4DAOException | IOException e) {
-        }
+        }*/
     }
 
     @FXML
