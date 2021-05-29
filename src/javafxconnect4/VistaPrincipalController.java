@@ -57,6 +57,8 @@ public class VistaPrincipalController implements Initializable {
     private SimpleObjectProperty<Theme> currentTheme;
     @FXML
     private ToggleButton visibleButton;
+    @FXML
+    private TextField psswdVisible;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,10 +93,17 @@ public class VistaPrincipalController implements Initializable {
         visibleButton.selectedProperty().addListener((observable, oldValue, newValue) ->{
             if (newValue) {
                 //cuando vuelva lo haago
+                System.out.println("hola");
+                psswdVisible.setText(passwd.getText());
+                passwd.setVisible(false);
             } else {
                 //currentTheme.set(Theme.LIGTH_THEME);
+                System.out.println("No");
+                passwd.setText(psswdVisible.getText());
+                passwd.setVisible(true);
             }
         });
+        
     }
 
     @FXML
@@ -112,6 +121,7 @@ public class VistaPrincipalController implements Initializable {
 
     private void autentificacion() throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
+        
         // Comprobamos que exista el nombre de usuario introducido.
         if (!connect4.exitsNickName(user.getText())) {
             incorrecto.setText("Nombre de usuario o contraseña incorrectos.");

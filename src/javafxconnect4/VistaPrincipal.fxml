@@ -42,6 +42,7 @@
             <TextField fx:id="user" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#autentificacionEnter" prefHeight="28.0" prefWidth="225.0" promptText="Usuario" />
             <AnchorPane maxHeight="28.0" maxWidth="225.0" minHeight="28.0" minWidth="225.0" prefHeight="28.0" prefWidth="200.0">
                <children>
+                  <TextField fx:id="psswdVisible" maxHeight="28.0" maxWidth="225.0" minHeight="28.0" minWidth="225.0" prefHeight="28.0" prefWidth="225.0" />
                   <PasswordField fx:id="passwd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#autentificacionEnter" prefHeight="28.0" prefWidth="225.0" promptText="Contraseña" />
                   <ToggleButton id="visibleButton" fx:id="visibleButton" layoutX="197.0" maxHeight="28.0" maxWidth="28.0" minHeight="28.0" minWidth="28.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="28.0" AnchorPane.rightAnchor="0.0" />
                </children>
