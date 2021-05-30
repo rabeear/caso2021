@@ -46,6 +46,7 @@ public class VistaSegundaPrincipalController implements Initializable {
     private Stage actualStage;
     private String user;
     private SimpleObjectProperty<Theme> currentTheme;
+    private VistaSegundaPrincipalController thisController;
 
     /**
      * Initializes the controller class.
@@ -73,11 +74,12 @@ public class VistaSegundaPrincipalController implements Initializable {
      * @param theme
      * @throws Connect4DAOException
      */
-    public void initStage(Stage stage, String usr, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
+    public void initStage(Stage stage, String usr, SimpleObjectProperty<Theme> theme, VistaSegundaPrincipalController controller) throws Connect4DAOException {
         actualStage = stage;
         user = usr;
         Connect4 connect4 = Connect4.getSingletonConnect4();
         foto.imageProperty().setValue(connect4.getPlayer(user).getAvatar());
+        thisController = controller;
         currentTheme = theme;
         setTheme();
     }
@@ -148,14 +150,18 @@ public class VistaSegundaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaEditarPerfilController>getController().initStage(actual, user, currentTheme);
+        VistaEditarPerfilController controller = cargador.<VistaEditarPerfilController>getController();
+        controller.initStage(actual, user, currentTheme, controller, thisController);
         Scene escena = new Scene(root, 600, 454);
         actual.setScene(escena);
         actual.setTitle("Editar perfil");
         actual.initModality(Modality.APPLICATION_MODAL);
         actual.setResizable(false);
         actual.show();
-        actualStage.close();
+    }
+
+    public void setImage(Image avatar) {
+        foto.setImage(avatar);
     }
 
     @FXML

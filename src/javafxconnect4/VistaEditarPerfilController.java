@@ -12,7 +12,9 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,6 +74,9 @@ public class VistaEditarPerfilController implements Initializable {
     private Player player;
     private SimpleObjectProperty<Theme> currentTheme;
     private Connect4 connect4;
+    private VistaEditarPerfilController controllerActual;
+    private VistaSegundaPrincipalController controllerVentanaAnt;
+    private boolean avatarChanged;
 
     /**
      * Initializes the controller class.
@@ -81,9 +86,8 @@ public class VistaEditarPerfilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        BooleanBinding noDatos = cuadroPswd.textProperty().isEmpty().and(cuadroMail.textProperty().isEmpty());
 
-        btnConfirmar.disableProperty().bind(noDatos);
+        avatarChanged = false;
 
         // Cuando se pulse el botón, se cambia el modo de visualización.
         themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -106,12 +110,12 @@ public class VistaEditarPerfilController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaCambiarController>getController().initStage(actual, player, currentTheme);
+        cargador.<VistaCambiarController>getController().initStageEditar(actual, player, currentTheme, controllerActual);
         Scene escena = new Scene(root);
+        actual.setResizable(false);
+        actual.initModality(Modality.APPLICATION_MODAL);
         actual.setScene(escena);
-        actualStage.hide();
-        actual.showAndWait();
-        actualStage.show();
+        actual.show();
     }
 
     @FXML
@@ -119,14 +123,14 @@ public class VistaEditarPerfilController implements Initializable {
         psswdError.setText("");
         emailError.setText("");
         dateError.setText("");
-        boolean cambiar = true;
+        boolean datosOK = true;
         if (!cuadroPswd.getText().isEmpty()) {
             if (!Player.checkPassword(cuadroPswd.getText())) {
                 psswdError.setText("Contaseña no válida.");
-                cambiar = false;
+                datosOK = false;
             } else if (!cuadroPswd.getText().equals(confirmarPsswd.getText())) {
                 psswdError.setText("Las contraseñas no coinciden.");
-                cambiar = false;
+                datosOK = false;
             } else {
                 player.setPassword(cuadroPswd.getText());
             }
@@ -135,44 +139,59 @@ public class VistaEditarPerfilController implements Initializable {
         if (!cuadroMail.getText().isEmpty()) {
             if (!Player.checkEmail(cuadroMail.getText())) {
                 emailError.setText("Correo electónico no válido.");
-                cambiar = false;
-            } else if (cambiar) {
+                datosOK = false;
+            } else if (datosOK) {
                 player.setPassword(cuadroPswd.getText());
             }
         }
 
-        if (!date.getValue().toString().isEmpty() || date.getValue().toString().split(" ").length != 0) {
-            if (date.getValue().minusYears(12).compareTo(LocalDate.now()) < 0) {
+        if (!date.getValue().equals(player.getBirthdate())) {
+            if (date.getValue().plusYears(12).isAfter(LocalDate.now())) {
                 dateError.setText("Es necesario tener 12 años mínimo.");
-            } else if (cambiar) {
+                datosOK = false;
+            } else if (datosOK) {
                 player.setBirthdate(date.getValue());
             }
+        }
+
+        if (datosOK) {
+            if (avatarChanged) {
+                player.setAvatar(imgAvatar.getImage());
+                controllerVentanaAnt.setImage(imgAvatar.getImage());
+            }
+            actualStage.close();
         }
     }
 
     @FXML
     private void clickCancelar(ActionEvent event) throws IOException, Connect4DAOException {
-        Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
-        Parent root = cargador.load();
-        cargador.<VistaSegundaPrincipalController>getController().initStage(actual, labelUsuario.getText(), currentTheme);
-        Scene escena = new Scene(root, 800, 500);
-        actual.setScene(escena);
-        actual.initModality(Modality.APPLICATION_MODAL);
-        actual.show();
-
         actualStage.close();
     }
 
-    public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
+    public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme, VistaEditarPerfilController controller, VistaSegundaPrincipalController controllerAnt) throws Connect4DAOException {
         actualStage = stage;
         labelUsuario.setText(user);
         player = connect4.getPlayer(user);
         imgAvatar.imageProperty().setValue(player.getAvatar());
         cuadroMail.setPromptText(player.getEmail());
-        date.setPromptText(player.getBirthdate().toString());
+        date.setValue(player.getBirthdate());
+
+        // no consigo que se pueda confirmar solo cambiando la foto
+        BooleanBinding noChanges = cuadroPswd.textProperty().isEmpty().and(
+                cuadroMail.textProperty().isEmpty()).and(
+                Bindings.createBooleanBinding(() -> date.getValue().equals(player.getBirthdate()),
+                        date.valueProperty()));
+        btnConfirmar.disableProperty().bind(noChanges);
+
+        controllerActual = controller;
+        controllerVentanaAnt = controllerAnt;
         currentTheme = theme;
         setTheme();
+    }
+
+    public void setImage(Image avatar) {
+        avatarChanged = true;
+        imgAvatar.setImage(avatar);
     }
 
     private void setTheme() {

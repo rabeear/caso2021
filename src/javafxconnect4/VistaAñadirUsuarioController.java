@@ -79,6 +79,7 @@ public class VistaAñadirUsuarioController implements Initializable {
     private Stage stageActual;
     private Image auxiliarFoto;
     private SimpleObjectProperty<Theme> currentTheme;
+    private VistaAñadirUsuarioController thisController;
 
     /**
      * Initializes the controller class.
@@ -144,14 +145,18 @@ public class VistaAñadirUsuarioController implements Initializable {
             Stage actual = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
             Parent root = cargador.load();
-            cargador.<VistaCambiarController>getController().initStage(actual, currentTheme);
+            cargador.<VistaCambiarController>getController().initStageAñadir(actual, currentTheme, thisController);
             Scene escena = new Scene(root, 650, 375);
             actual.setScene(escena);
+            actual.setResizable(false);
             actual.initModality(Modality.APPLICATION_MODAL);
-            stageActual.hide();
-            actual.showAndWait();
+            actual.show();
         } catch (IOException e) {
         }
+    }
+
+    public void setImage(Image avatar) {
+        imagenAvatar.setImage(avatar);
     }
 
     /**
@@ -160,11 +165,12 @@ public class VistaAñadirUsuarioController implements Initializable {
      * @param stage Stage de la ventana actual.
      * @param theme Propiedad del modo de visualización de la ventana anterior.
      */
-    public void initStage(Stage stage, SimpleObjectProperty<Theme> theme) {
+    public void initStage(Stage stage, SimpleObjectProperty<Theme> theme, VistaAñadirUsuarioController controller) {
         stageActual = stage;
         Image avatar = new Image("/avatars/default.png");
         auxiliarFoto = avatar;
         imagenAvatar.imageProperty().setValue(avatar);
+        thisController = controller;
         currentTheme = theme;
         setTheme();
     }
@@ -234,7 +240,7 @@ public class VistaAñadirUsuarioController implements Initializable {
             emailError.setText("Correo electónico no válido.");
             registrar = false;
         }
-        if (date.getValue().minusYears(12).compareTo(LocalDate.now()) < 0) { // Comprobamos si tiene más de 12 años.
+        if (date.getValue().plusYears(12).isAfter(LocalDate.now())) { // Comprobamos si tiene más de 12 años.
             dateError.setText("Es necesario tener 12 años mínimo.");
             registrar = false;
         }

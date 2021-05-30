@@ -138,7 +138,7 @@ public class VistaPrincipalController implements Initializable {
                 FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
                 Parent root = cargador.load();
                 VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-                ventana2.initStage(stagePrincipal, user.getText(), currentTheme);
+                ventana2.initStage(stagePrincipal, user.getText(), currentTheme, ventana2);
                 ventana2.nombreUsuario.setText(user.getText());
                 Scene scene = new Scene(root, 800, 500);
                 stagePrincipal.setScene(scene);
@@ -168,7 +168,8 @@ public class VistaPrincipalController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaAñadirUsuarioController>getController().initStage(actual, currentTheme);
+        VistaAñadirUsuarioController controller = cargador.<VistaAñadirUsuarioController>getController();
+        controller.initStage(actual, currentTheme, controller);
         Scene escena = new Scene(root, 520, 540);
         actual.setScene(escena);
         actual.initModality(Modality.APPLICATION_MODAL);
