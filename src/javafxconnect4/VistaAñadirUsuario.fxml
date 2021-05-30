@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -14,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="contenedorRaiz" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="520.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
+<VBox fx:id="contenedorRaiz" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="520.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
     <children>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="CREA TU CUENTA" textAlignment="CENTER" wrappingWidth="309.205078125">
             <VBox.margin>
@@ -114,6 +120,15 @@
                         <Font name="HP Simplified" size="12.0" />
                      </font>
                   </Label>
+                  <AnchorPane prefHeight="3.0" prefWidth="230.0">
+                     <children>
+                        <AnchorPane id="paneAyuda" fx:id="ayudaPane" layoutX="-172.0" layoutY="-288.0" prefHeight="288.0" prefWidth="261.0">
+                           <children>
+                              <TextArea id="panelHelp" layoutX="14.0" layoutY="11.0" prefHeight="261.0" prefWidth="230.0" text="La contraseña tiene que&#10;tener entre 8-20 caracteres &#10;de los cuales mínimo:&#10;-1 mayúscula, 1 minúscula.&#10;-1 Digito.&#10;-1 carácter especial.&#10;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
                     <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="230.0" spacing="20.0">
                         <children>
                             <Button id="buttonHelp" fx:id="ayuda" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0" />

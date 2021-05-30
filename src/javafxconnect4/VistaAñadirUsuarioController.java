@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -80,6 +81,8 @@ public class VistaAñadirUsuarioController implements Initializable {
     private Image auxiliarFoto;
     private SimpleObjectProperty<Theme> currentTheme;
     private VistaAñadirUsuarioController thisController;
+    @FXML
+    private AnchorPane ayudaPane;
 
     /**
      * Initializes the controller class.
@@ -89,12 +92,12 @@ public class VistaAñadirUsuarioController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        ayudaPane.setVisible(false);
         ayuda.hoverProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                labelAyuda.setText("hay que ver como lo hacemos");
+                ayudaPane.setVisible(true);
             } else {
-                labelAyuda.setText("");
+                ayudaPane.setVisible(false);
             }
 
         });
