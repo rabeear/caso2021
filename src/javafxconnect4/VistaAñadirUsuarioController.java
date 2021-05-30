@@ -67,8 +67,6 @@ public class VistaAñadirUsuarioController implements Initializable {
     @FXML
     private ImageView imagenTema;
     @FXML
-    private Label labelAyuda;
-    @FXML
     private Button ayuda;
     @FXML
     private Label dateError;
@@ -76,13 +74,12 @@ public class VistaAñadirUsuarioController implements Initializable {
     private PasswordField psswd;
     @FXML
     private PasswordField psswd2;
+    @FXML
+    private AnchorPane ayudaPane;
 
     private Stage stageActual;
     private Image auxiliarFoto;
     private SimpleObjectProperty<Theme> currentTheme;
-    private VistaAñadirUsuarioController thisController;
-    @FXML
-    private AnchorPane ayudaPane;
 
     /**
      * Initializes the controller class.
@@ -92,15 +89,7 @@ public class VistaAñadirUsuarioController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ayudaPane.setVisible(false);
-        ayuda.hoverProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                ayudaPane.setVisible(true);
-            } else {
-                ayudaPane.setVisible(false);
-            }
-
-        });
+        ayudaPane.visibleProperty().bind(ayuda.hoverProperty());
 
         // revisar esto porque algo esta fallando pero no se el que
         regButton.disableProperty().bind(Bindings.or(
@@ -142,20 +131,17 @@ public class VistaAñadirUsuarioController implements Initializable {
     }
 
     @FXML
-    private void clickAvatar(ActionEvent event) {
-        // Llevar a zona de cambio de avatar.
-        try {
-            Stage actual = new Stage();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
-            Parent root = cargador.load();
-            cargador.<VistaCambiarController>getController().initStageAñadir(actual, currentTheme, thisController);
-            Scene escena = new Scene(root, 650, 375);
-            actual.setScene(escena);
-            actual.setResizable(false);
-            actual.initModality(Modality.APPLICATION_MODAL);
-            actual.show();
-        } catch (IOException e) {
-        }
+    private void clickAvatar(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
+        Parent root = cargador.load();
+        cargador.<VistaCambiarController>getController().initStageAñadir(actual, currentTheme, this);
+        Scene escena = new Scene(root, 800, 400);
+        actual.setScene(escena);
+        actual.setResizable(false);
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.setTitle("Avatar");
+        actual.show();
     }
 
     public void setImage(Image avatar) {
@@ -168,12 +154,11 @@ public class VistaAñadirUsuarioController implements Initializable {
      * @param stage Stage de la ventana actual.
      * @param theme Propiedad del modo de visualización de la ventana anterior.
      */
-    public void initStage(Stage stage, SimpleObjectProperty<Theme> theme, VistaAñadirUsuarioController controller) {
+    public void initStage(Stage stage, SimpleObjectProperty<Theme> theme) {
         stageActual = stage;
         Image avatar = new Image("/avatars/default.png");
         auxiliarFoto = avatar;
         imagenAvatar.imageProperty().setValue(avatar);
-        thisController = controller;
         currentTheme = theme;
         setTheme();
     }

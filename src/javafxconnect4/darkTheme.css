@@ -13,6 +13,7 @@ and open the template in the editor.
     -fx-clr-secondary: #bfbfbf;
     -fx-clr-tertiary: #595959;
     -fx-clr-gridpane: #000099;
+    -fx-clr-chart: #e6e6e6;
     -fx-background-color: #0d0d0d;
 }
 
@@ -173,15 +174,44 @@ and open the template in the editor.
     -fx-text-fill: white;
 }
 
+.chart-legend .label {
+    -fx-text-fill: white;
+}
+
 .chart-legend {
     -fx-font-size: 0.8em;
     -fx-background-color: -fx-clr-primary;
-    -fx-text-fill: white;
 }
 
 .axis {
     -fx-tick-label-fill: white;
 }
+
+.axis-label {
+    -fx-text-fill: white;
+}
+
+
+/*******************************************************************************
+ *                                                                             *
+ * TextArea                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+
+.text-area {
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+.text-area .content {
+    -fx-background-color: black;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Images                                                                      *
+ *                                                                             *
+ ******************************************************************************/
 
 #imagenPantallaPrincipal {
     -fx-background-image: url('../imagenes/prueba.png');

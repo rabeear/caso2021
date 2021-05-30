@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="contenedorRaiz" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="520.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
+<VBox fx:id="contenedorRaiz" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="540.0" prefWidth="520.0" spacing="10.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaAñadirUsuarioController">
     <children>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="CREA TU CUENTA" textAlignment="CENTER" wrappingWidth="309.205078125">
             <VBox.margin>
@@ -55,14 +51,9 @@
                 </VBox>
             </children>
         </HBox>
-      <Label fx:id="labelAyuda" styleClass="text-id">
-         <font>
-            <Font name="HP Simplified Light" size="12.0" />
-         </font>
-      </Label>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" spacing="20.0">
          <children>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
                <children>
                     <TextField fx:id="user" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="230.0" promptText="Nombre de usuario">
                         <VBox.margin>
@@ -82,7 +73,7 @@
                         <Font name="HP Simplified Light" size="12.0" />
                      </font>
                   </PasswordField>
-                    <Label fx:id="psswdError" prefHeight="17.0" prefWidth="298.0" textAlignment="CENTER" textFill="#eb0000">
+                    <Label fx:id="psswdError" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="231.0" textAlignment="CENTER" textFill="#eb0000">
                         <font>
                             <Font name="HP Simplified" size="12.0" />
                         </font>
@@ -99,7 +90,7 @@
                     </Label>
                </children>
             </VBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0">
                <children>
                     <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="230.0" promptText="Correo">
                         <VBox.margin>
@@ -109,27 +100,37 @@
                             <Font name="HP Simplified Light" size="12.0" />
                         </font>
                     </TextField>
-                    <Label fx:id="emailError" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="230.0" textFill="RED">
+                    <Label fx:id="emailError" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="230.0" textAlignment="CENTER" textFill="RED">
                         <font>
                             <Font name="HP Simplified" size="12.0" />
                         </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                     </Label>
-                    <DatePicker fx:id="date" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="230.0" promptText="Fecha de nacimiento" />
-                  <Label fx:id="dateError" prefHeight="17.0" prefWidth="277.0" textFill="RED">
+                    <DatePicker fx:id="date" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="230.0" promptText="Fecha de nacimiento">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></DatePicker>
+                  <Label fx:id="dateError" prefHeight="17.0" prefWidth="277.0" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font name="HP Simplified" size="12.0" />
                      </font>
                   </Label>
                   <AnchorPane prefHeight="3.0" prefWidth="230.0">
                      <children>
-                        <AnchorPane id="paneAyuda" fx:id="ayudaPane" layoutX="-172.0" layoutY="-288.0" prefHeight="288.0" prefWidth="261.0">
+                        <AnchorPane id="paneAyuda" fx:id="ayudaPane" layoutX="-141.0" layoutY="-228.0" prefHeight="230.0" prefWidth="230.0">
                            <children>
-                              <TextArea id="panelHelp" layoutX="14.0" layoutY="11.0" prefHeight="261.0" prefWidth="230.0" text="La contraseña tiene que&#10;tener entre 8-20 caracteres &#10;de los cuales mínimo:&#10;-1 mayúscula, 1 minúscula.&#10;-1 Digito.&#10;-1 carácter especial.&#10;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TextArea layoutX="1.0" layoutY="-12.0" prefHeight="258.0" prefWidth="231.0" text="El nombre de usuario debe contener entre 6-15 caracteres o dígitos sin espacios (se aceptan guiones o subguiones).&#10;&#10;La contraseña debe cumplir los siguientes requisitos:&#10; - 8-20 caracteres.&#10;- Mínimo 1 mayúscula  y1 minúscula.&#10;- Mínimo 1 digito.&#10;- Mínimo 1 carácter especial (!@#$%&amp;*()-+=).&#10;&#10;Es necesario tener más de 12 años.&#10;" wrapText="true" AnchorPane.bottomAnchor="-16.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-12.0">
+                                 <font>
+                                    <Font name="HP Simplified Light" size="12.0" />
+                                 </font>
+                              </TextArea>
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="230.0" spacing="20.0">
+                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="230.0" spacing="20.0">
                         <children>
                             <Button id="buttonHelp" fx:id="ayuda" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0" />
                             <ToggleButton fx:id="themeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="31.0">
@@ -142,6 +143,9 @@
                                 </graphic>
                             </ToggleButton>
                         </children>
+                     <VBox.margin>
+                        <Insets top="12.0" />
+                     </VBox.margin>
                     </HBox>
                </children>
             </VBox>

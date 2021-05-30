@@ -91,6 +91,7 @@ public class VistaHistorialController implements Initializable {
     private Connect4 connect4;
     private String user;
     private SimpleObjectProperty<Theme> currentTheme;
+    private TreeMap<LocalDate, List<Round>> roundsPerDay;
     private final ObservableList<Round> dataList = FXCollections.observableArrayList();
     private final Alert errorJugador = new Alert(Alert.AlertType.ERROR);
 
@@ -113,11 +114,12 @@ public class VistaHistorialController implements Initializable {
         } catch (Connect4DAOException ex) {
             Logger.getLogger(VistaHistorialController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Como los usuarios creados como demo data se crean haciendo que hayan
-        // jugado durante un mes hacemos que no se pueda elegir una fecha anterior
-        // a un mes.
-        LocalDate iniMaxDate = LocalDate.now();
-        LocalDate iniMinDate = iniMaxDate.minusMonths(1);
+        // Programamos el calendario de manera que no se pueda elegir una fecha
+        // fuera del rango de la fecha de la primera y útima partidas realizadas
+        // en el sistema.
+        roundsPerDay = connect4.getRoundsPerDay();
+        LocalDate iniMaxDate = roundsPerDay.firstKey();
+        LocalDate iniMinDate = roundsPerDay.lastKey().minusMonths(1);
         inicio.setDayCellFactory(date -> new DateCell() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
@@ -250,7 +252,7 @@ public class VistaHistorialController implements Initializable {
     @FXML
     private void tablaPartidas(ActionEvent event) {
         ponerTabla();
-        TreeMap<LocalDate, List<Round>> roundsPerDay = connect4.getRoundsPerDay();
+        // Ya tenemos creado el TreeMap con los datos
         dataList.clear();
         jugador.setDisable(true);
         // Añadir diferenciacion entre coger inicio/fin o el primero y el ultimo, yo me entiendo xd

@@ -159,9 +159,9 @@ public class VistaJuegoPVPController implements Initializable {
         turno = true;
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCerrarSesion.fxml"));
         Parent root = cargador.load();
-        
+
         VistaCerrarSesionController ventana = cargador.<VistaCerrarSesionController>getController();
-        ventana.initStage(stageActual, j1,j2);
+        ventana.initStage(stageActual, j1, j2, currentTheme);
         Scene scene = new Scene(root, 420, 190);
         stageActual.setScene(scene);
         stageActual.setResizable(false);

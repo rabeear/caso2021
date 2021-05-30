@@ -169,7 +169,7 @@ public class VistaPrincipalController implements Initializable {
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
         Parent root = cargador.load();
         VistaAñadirUsuarioController controller = cargador.<VistaAñadirUsuarioController>getController();
-        controller.initStage(actual, currentTheme, controller);
+        controller.initStage(actual, currentTheme);
         Scene escena = new Scene(root, 520, 540);
         actual.setScene(escena);
         actual.initModality(Modality.APPLICATION_MODAL);

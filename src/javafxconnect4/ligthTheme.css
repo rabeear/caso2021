@@ -162,17 +162,38 @@ and open the template in the editor.
 .chart {
     -fx-font-family: 'HP Simplified Light';
     -fx-text-fill: black;
-    -fx-padding: 1px;
+}
+
+.chart-legend .label {
+    -fx-text-fill: black;
 }
 
 .chart-legend {
     -fx-font-size: 0.8em;
     -fx-background-color: -fx-clr-primary;
-    -fx-text-fill: black;
 }
 
 .axis {
     -fx-tick-label-fill: black;
+}
+
+.axis-label {
+    -fx-text-fill: black;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * TextArea                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+
+.text-area {
+    -fx-border-color: black;
+    -fx-text-fill: black;
+}
+
+.text-area .content {
+    -fx-background-color: white;
 }
 
 /*******************************************************************************

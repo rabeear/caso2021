@@ -74,9 +74,8 @@ public class VistaEditarPerfilController implements Initializable {
     private Player player;
     private SimpleObjectProperty<Theme> currentTheme;
     private Connect4 connect4;
-    private VistaEditarPerfilController controllerActual;
     private VistaSegundaPrincipalController controllerVentanaAnt;
-    private boolean avatarChanged;
+    private SimpleBooleanProperty avatarChanged;
 
     /**
      * Initializes the controller class.
@@ -86,8 +85,7 @@ public class VistaEditarPerfilController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        avatarChanged = false;
+        avatarChanged = new SimpleBooleanProperty(false);
 
         // Cuando se pulse el botón, se cambia el modo de visualización.
         themeButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -110,10 +108,11 @@ public class VistaEditarPerfilController implements Initializable {
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaCambiarController>getController().initStageEditar(actual, player, currentTheme, controllerActual);
-        Scene escena = new Scene(root);
+        cargador.<VistaCambiarController>getController().initStageEditar(actual, player, currentTheme, this);
+        Scene escena = new Scene(root, 800, 400);
         actual.setResizable(false);
         actual.initModality(Modality.APPLICATION_MODAL);
+        actual.setTitle("Avatar");
         actual.setScene(escena);
         actual.show();
     }
@@ -155,7 +154,7 @@ public class VistaEditarPerfilController implements Initializable {
         }
 
         if (datosOK) {
-            if (avatarChanged) {
+            if (avatarChanged.get()) {
                 player.setAvatar(imgAvatar.getImage());
                 controllerVentanaAnt.setImage(imgAvatar.getImage());
             }
@@ -168,7 +167,7 @@ public class VistaEditarPerfilController implements Initializable {
         actualStage.close();
     }
 
-    public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme, VistaEditarPerfilController controller, VistaSegundaPrincipalController controllerAnt) throws Connect4DAOException {
+    public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme, VistaSegundaPrincipalController controllerAnt) throws Connect4DAOException {
         actualStage = stage;
         labelUsuario.setText(user);
         player = connect4.getPlayer(user);
@@ -180,17 +179,15 @@ public class VistaEditarPerfilController implements Initializable {
         BooleanBinding noChanges = cuadroPswd.textProperty().isEmpty().and(
                 cuadroMail.textProperty().isEmpty()).and(
                 Bindings.createBooleanBinding(() -> date.getValue().equals(player.getBirthdate()),
-                        date.valueProperty()));
+                        date.valueProperty()).and(Bindings.not(avatarChanged)));
         btnConfirmar.disableProperty().bind(noChanges);
-
-        controllerActual = controller;
         controllerVentanaAnt = controllerAnt;
         currentTheme = theme;
         setTheme();
     }
 
     public void setImage(Image avatar) {
-        avatarChanged = true;
+        avatarChanged.set(true);
         imgAvatar.setImage(avatar);
     }
 

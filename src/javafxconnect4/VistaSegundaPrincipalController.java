@@ -151,7 +151,7 @@ public class VistaSegundaPrincipalController implements Initializable {
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
         Parent root = cargador.load();
         VistaEditarPerfilController controller = cargador.<VistaEditarPerfilController>getController();
-        controller.initStage(actual, user, currentTheme, controller, thisController);
+        controller.initStage(actual, user, currentTheme, this);
         Scene escena = new Scene(root, 600, 454);
         actual.setScene(escena);
         actual.setTitle("Editar perfil");
