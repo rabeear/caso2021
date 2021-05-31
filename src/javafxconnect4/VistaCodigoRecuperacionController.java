@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -86,6 +87,19 @@ public class VistaCodigoRecuperacionController implements Initializable {
             alert.setTitle("Contraseña");
             alert.setHeaderText("Su contraseña");
             alert.setContentText(player.getPassword());
+
+            // Le ponemos el modo de visualización correcto.
+            DialogPane dialog = alert.getDialogPane();
+            switch (currentTheme.get()) {
+                case DARK_THEME:
+                    dialog.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                    break;
+                case LIGTH_THEME:
+                    dialog.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                    break;
+                default:
+                    throw new AssertionError(currentTheme.get().name());
+            }
 
             // Cerramos ventana actual.
             Node miNodo = (Node) event.getSource();

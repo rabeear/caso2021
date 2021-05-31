@@ -24,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -330,6 +331,18 @@ public class VistaJuegoPVPController implements Initializable {
             j = j2;
         }
 
+        DialogPane dialog = alerta.getDialogPane();
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                dialog.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                break;
+            case LIGTH_THEME:
+                dialog.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
+
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             sumaPuntos(j);
@@ -350,6 +363,19 @@ public class VistaJuegoPVPController implements Initializable {
         alerta.setTitle("¡Empate!");
         alerta.setHeaderText("¡Habéis empatado!");
         alerta.setContentText("¿Quieres volver a jugar?");
+
+        DialogPane dialog = alerta.getDialogPane();
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                dialog.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                break;
+            case LIGTH_THEME:
+                dialog.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
+
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             tableroIniciado.clear();

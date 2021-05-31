@@ -209,6 +209,33 @@ and open the template in the editor.
 
 /*******************************************************************************
  *                                                                             *
+ * DialogPane                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+
+.dialog-pane {
+    -fx-background-color: #262626;
+}
+
+.dialog-pane .label {
+    -fx-font-family: 'HP Simplified Ligth';
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #0d0d0d;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-font-family: 'HP Simplified';
+    -fx-font-size: 18px;
+}
+
+
+
+/*******************************************************************************
+ *                                                                             *
  * Images                                                                      *
  *                                                                             *
  ******************************************************************************/

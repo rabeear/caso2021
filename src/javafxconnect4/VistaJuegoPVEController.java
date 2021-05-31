@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -308,6 +309,18 @@ public class VistaJuegoPVEController implements Initializable {
             alerta.setContentText("¿Quieres volver a jugar?");
         }
 
+        DialogPane dialog = alerta.getDialogPane();
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                dialog.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                break;
+            case LIGTH_THEME:
+                dialog.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
+
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             sumaPuntos();
@@ -327,6 +340,19 @@ public class VistaJuegoPVEController implements Initializable {
         alerta.setTitle("¡Empate!");
         alerta.setHeaderText("¡Habéis empatado!");
         alerta.setContentText("¿Quieres volver a jugar?");
+
+        DialogPane dialog = alerta.getDialogPane();
+        switch (currentTheme.get()) {
+            case DARK_THEME:
+                dialog.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+                break;
+            case LIGTH_THEME:
+                dialog.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
+                break;
+            default:
+                throw new AssertionError(currentTheme.get().name());
+        }
+
         Optional<ButtonType> resultado = alerta.showAndWait();
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
             tableroIniciado.clear();
@@ -344,7 +370,6 @@ public class VistaJuegoPVEController implements Initializable {
      * @throws Connect4DAOException
      */
     public void sumaPuntos() throws Connect4DAOException {
-        Connect4 connect4 = Connect4.getSingletonConnect4();
         jugadorActual = connect4.loginPlayer(jugadorActual.getNickName(), jugadorActual.getPassword());
         jugadorActual.plusPoints(connect4.getPointsAlone());
         labelPuntuacion.setText("" + jugadorActual.getPoints());
