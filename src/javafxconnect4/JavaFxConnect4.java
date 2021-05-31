@@ -43,10 +43,9 @@ public class JavaFxConnect4 extends Application {
         try {
             Connect4 connect4 = Connect4.getSingletonConnect4();
             connect4.removeAllData();
-            connect4.createDemoData(5, 4, 30);
-            connect4.createDemoData(5, 3, 30);
-            connect4.createDemoData(5, 6, 30);
-            connect4.createDemoData(5, 1, 30);
+            connect4.createDemoData(50, 4, 30);
+            connect4.createDemoData(5, 4, 10);
+            connect4.createDemoData(10, 5, 15);
         } catch (Connect4DAOException ex) {
             Logger.getLogger(JavaFxConnect4.class.getName()).log(Level.SEVERE, null, ex);
         }

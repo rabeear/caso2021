@@ -93,13 +93,9 @@ public class VistaPrincipalController implements Initializable {
 
         visibleButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                //cuando vuelva lo haago
-                System.out.println("hola");
                 psswdVisible.setText(passwd.getText());
                 passwd.setVisible(false);
             } else {
-                //currentTheme.set(Theme.LIGTH_THEME);
-                System.out.println("No");
                 passwd.setText(psswdVisible.getText());
                 passwd.setVisible(true);
             }

@@ -30,7 +30,7 @@
       <Line endY="100.0" startY="-100.0" styleClass="line" />
       <VBox alignment="CENTER_LEFT" prefHeight="400.0" prefWidth="300.0" spacing="15.0">
          <children>
-            <Label styleClass="text-id" text="Contraseña">
+            <Label styleClass="text-id" text="Cambiar contraseña">
                <font>
                   <Font name="HP Simplified Light" size="14.0" />
                </font></Label>
