@@ -5,27 +5,21 @@
  */
 package javafxconnect4;
 
-import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.DialogPane;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Connect4;
-import model.Player;
 
 /**
  * FXML Controller class
@@ -36,12 +30,6 @@ public class CodRecuperacionController implements Initializable {
 
     @FXML
     private Label textoCodigo;
-    @FXML
-    private TextField codigo;
-    @FXML
-    private Button enviarButton;
-    @FXML
-    private Label incorrecto;
     @FXML
     private VBox contenedorRaiz;
 
@@ -58,67 +46,11 @@ public class CodRecuperacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Si no hay nada escrito en ambos campos o son espacios desabilitamos el botón de enviar.
-        enviarButton.disableProperty().bind(Bindings.or(
-                Bindings.createBooleanBinding(() -> {
-                    return codigo.getText().split(" ").length == 0;
-                }, codigo.textProperty()),
-                Bindings.isEmpty(codigo.textProperty())));
         // Generamos un númeo de 4 cifras aleatorio para que sea el código de recuperación.
         int min = 1000;
         int max = 9999;
         int random = (int) Math.floor(Math.random() * (max - min + 1) + min);
         textoCodigo.setText(random + "");
-    }
-
-    @FXML
-    private void mostrarContraseña(ActionEvent event) throws Connect4DAOException {
-        // Comprobamos que el código introducido sea el correcto.
-        if (!codigo.getText().equals(textoCodigo.getText())) {
-            incorrecto.setText("Código de recuperación incorrecto.");
-        } else {
-            // Limpiamos la etiqueta si tiene algo escrito.
-            if (!incorrecto.getText().equals("")) {
-                incorrecto.setText("");
-            }
-            // Guardamos la contraseña del usuario
-            Connect4 connect4 = Connect4.getSingletonConnect4();
-            Player player = connect4.getPlayer(user);
-
-            // Abrimos ventana con la contraseña solicitada usando un diálogo de información.
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Contraseña");
-            alert.setHeaderText("Su contraseña");
-            alert.setContentText(player.getPassword());
-
-            // Le ponemos el modo de visualización correcto.
-            DialogPane dialog = alert.getDialogPane();
-            switch (currentTheme.get()) {
-                case DARK_THEME:
-                    dialog.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
-                    break;
-                case LIGTH_THEME:
-                    dialog.getStylesheets().add(getClass().getResource("ligthTheme.css").toExternalForm());
-                    break;
-                default:
-                    throw new AssertionError(currentTheme.get().name());
-            }
-
-            // Cerramos ventana actual.
-            ventanaActual.close();
-
-            // Mostramos diálogo.
-            alert.showAndWait();
-
-            ventanaAnt.close();
-        }
-    }
-
-    @FXML
-    private void mostrarContraseñaEnter(KeyEvent event) throws Connect4DAOException {
-        if (event.getCode().equals(KeyCode.ENTER) && !enviarButton.isDisabled()) {
-            mostrarContraseña(null);
-        }
     }
 
     @FXML
@@ -154,5 +86,26 @@ public class CodRecuperacionController implements Initializable {
             default:
                 throw new AssertionError(currentTheme.get().name());
         }
+    }
+
+    @FXML
+    private void introducir(ActionEvent event) throws IOException {
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("InsertarCod.fxml"));
+        Parent root = cargador.load();
+        cargador.<InsertarCodController>getController().initStage(user, ventanaAnt, ventanaActual, actual, currentTheme, textoCodigo.getText());
+        Scene escena = new Scene(root, 352, 222);
+        actual.setScene(escena);
+        actual.setTitle("Recuperar Contraseña");
+        actual.setResizable(false);
+
+        // Colocamos las ventanas de manera que una no tape a la otra y el usuario
+        // pueda ver el código de recuperación como si estuviera leyendo el correo.
+        ventanaActual.setX(ventanaActual.getX() - ventanaActual.getX() / 2);
+        actual.setX(ventanaActual.getX() * 3);
+        actual.setY(ventanaActual.getY());
+
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.show();
     }
 }

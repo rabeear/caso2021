@@ -97,7 +97,7 @@ public class PsswdOlvidadaController implements Initializable {
                 if (!incorrecto.getText().equals("")) {
                     incorrecto.setText("");
                 }
-                /*Cambio a ventana de password olvidada*/
+                // Enseñamos código.
                 Stage actual = new Stage();
                 FXMLLoader cargador = new FXMLLoader(getClass().getResource("CodRecuperacion.fxml"));
                 Parent root = cargador.load();
