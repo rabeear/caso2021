@@ -39,7 +39,7 @@ import model.Player;
  *
  * @author Raquel
  */
-public class VistaRankingController implements Initializable {
+public class RankingController implements Initializable {
 
     @FXML
     private TableView<Player> tabla;
@@ -84,7 +84,7 @@ public class VistaRankingController implements Initializable {
             Connect4 connect4 = Connect4.getSingletonConnect4();
             ranking = connect4.getConnect4Ranking();
         } catch (Connect4DAOException ex) {
-            Logger.getLogger(VistaRankingController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RankingController.class.getName()).log(Level.SEVERE, null, ex);
         }
         dataList.addAll(ranking);
         // Rellenamos la tabla con dicha lista.

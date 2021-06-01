@@ -20,7 +20,7 @@ import model.Player;
  *
  * @author belen
  */
-public class VistaCerrarSesionController implements Initializable {
+public class CerrarSesionController implements Initializable {
 
     @FXML
     private Button btn1;

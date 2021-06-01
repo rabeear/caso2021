@@ -32,7 +32,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaCodigoRecuperacionController implements Initializable {
+public class CodRecuperacionController implements Initializable {
 
     @FXML
     private Label textoCodigo;
@@ -135,6 +135,7 @@ public class VistaCodigoRecuperacionController implements Initializable {
      * @param usuario
      * @param ant
      * @param theme
+     * @param actual
      */
     public void initStage(String usuario, Stage ant, SimpleObjectProperty<Theme> theme, Stage actual) {
         user = usuario;

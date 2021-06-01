@@ -23,15 +23,15 @@ import model.Player;
  *
  * @author belen
  */
-public class VistaCambiarController implements Initializable {
+public class NuevoAvatarController implements Initializable {
 
     @FXML
     private VBox contenedorRaiz;
 
     private Stage actualStage;
     private SimpleObjectProperty<Theme> currentTheme;
-    private VistaEditarPerfilController editarController;
-    private VistaAñadirUsuarioController añadirController;
+    private EditarPerfilController editarController;
+    private RegistroController añadirController;
     private boolean añadir; // true -> vistaAñadirUser / false -> VistaEditarPerfil
 
     /**
@@ -100,7 +100,7 @@ public class VistaCambiarController implements Initializable {
         actualStage.close();
     }
 
-    public void initStageEditar(Stage actual, Player j1, SimpleObjectProperty<Theme> theme, VistaEditarPerfilController controller) {
+    public void initStageEditar(Stage actual, Player j1, SimpleObjectProperty<Theme> theme, EditarPerfilController controller) {
         actualStage = actual;
         añadir = false;
         editarController = controller;
@@ -108,7 +108,7 @@ public class VistaCambiarController implements Initializable {
         setTheme();
     }
 
-    public void initStageAñadir(Stage actual, SimpleObjectProperty<Theme> theme, VistaAñadirUsuarioController controller) {
+    public void initStageAñadir(Stage actual, SimpleObjectProperty<Theme> theme, RegistroController controller) {
         actualStage = actual;
         añadir = true;
         currentTheme = theme;

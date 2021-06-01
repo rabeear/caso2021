@@ -55,7 +55,7 @@ import model.Round;
  *
  * @author Raquel
  */
-public class VistaHistorialController implements Initializable {
+public class HistorialController implements Initializable {
 
     @FXML
     private BorderPane contenedorRaiz;
@@ -124,7 +124,7 @@ public class VistaHistorialController implements Initializable {
         try {
             connect4 = Connect4.getSingletonConnect4();
         } catch (Connect4DAOException ex) {
-            Logger.getLogger(VistaHistorialController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HistorialController.class.getName()).log(Level.SEVERE, null, ex);
         }
         // Programamos el calendario de manera que no se pueda elegir una fecha
         // fuera del rango de la fecha de la primera y útima partidas realizadas

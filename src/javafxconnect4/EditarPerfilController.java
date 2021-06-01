@@ -41,7 +41,7 @@ import model.Player;
  *
  * @author belen
  */
-public class VistaEditarPerfilController implements Initializable {
+public class EditarPerfilController implements Initializable {
 
     @FXML
     private Label labelUsuario;
@@ -74,7 +74,7 @@ public class VistaEditarPerfilController implements Initializable {
     private Player player;
     private SimpleObjectProperty<Theme> currentTheme;
     private Connect4 connect4;
-    private VistaSegundaPrincipalController controllerVentanaAnt;
+    private PrincipalController controllerVentanaAnt;
     private SimpleBooleanProperty avatarChanged;
 
     /**
@@ -99,16 +99,16 @@ public class VistaEditarPerfilController implements Initializable {
         try {
             connect4 = Connect4.getSingletonConnect4();
         } catch (Connect4DAOException ex) {
-            Logger.getLogger(VistaEditarPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditarPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
     private void clickCambiar(ActionEvent event) throws IOException {
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("NuevoAvatar.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaCambiarController>getController().initStageEditar(actual, player, currentTheme, this);
+        cargador.<NuevoAvatarController>getController().initStageEditar(actual, player, currentTheme, this);
         Scene escena = new Scene(root, 800, 400);
         actual.setResizable(false);
         actual.initModality(Modality.APPLICATION_MODAL);
@@ -167,7 +167,7 @@ public class VistaEditarPerfilController implements Initializable {
         actualStage.close();
     }
 
-    public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme, VistaSegundaPrincipalController controllerAnt) throws Connect4DAOException {
+    public void initStage(Stage stage, String user, SimpleObjectProperty<Theme> theme, PrincipalController controllerAnt) throws Connect4DAOException {
         actualStage = stage;
         labelUsuario.setText(user);
         player = connect4.getPlayer(user);

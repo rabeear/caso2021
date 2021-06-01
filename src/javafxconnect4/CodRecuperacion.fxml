@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="410.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.VistaCodigoRecuperacionController">
+<VBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="410.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.CodRecuperacionController">
     <children>
         <Label contentDisplay="CENTER" styleClass="text-id" text="CÓDIGO DE RECUPERACIÓN" textAlignment="CENTER">
             <font>
@@ -26,21 +26,22 @@
                 <Insets bottom="10.0" top="15.0" />
             </VBox.margin>
         </Label>
-      <Label fx:id="incorrecto" textFill="RED" />
+        <Label fx:id="incorrecto" textFill="RED" />
         <HBox alignment="CENTER" prefHeight="61.0" prefWidth="412.0">
             <children>
                 <Label prefHeight="34.0" prefWidth="146.0" styleClass="text-id" text="Introduzca el código de recuperación" textAlignment="CENTER" wrapText="true">
                     <HBox.margin>
                         <Insets right="10.0" />
                     </HBox.margin>
-               <font>
-                  <Font name="HP Simplified Light" size="13.0" />
-               </font>
+                    <font>
+                        <Font name="HP Simplified Light" size="13.0" />
+                    </font>
                 </Label>
                 <TextField fx:id="codigo" onKeyPressed="#mostrarContraseñaEnter" promptText="Código">
-               <font>
-                  <Font name="HP Simplified Light" size="12.0" />
-               </font></TextField>
+                    <font>
+                        <Font name="HP Simplified Light" size="12.0" />
+                    </font>
+                </TextField>
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="68.0" prefWidth="412.0">
@@ -49,14 +50,15 @@
                     <HBox.margin>
                         <Insets right="20.0" />
                     </HBox.margin>
-               <font>
-                  <Font name="HP Simplified" size="12.0" />
-               </font>
+                    <font>
+                        <Font name="HP Simplified" size="12.0" />
+                    </font>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
-               <font>
-                  <Font name="HP Simplified" size="12.0" />
-               </font></Button>
+                    <font>
+                        <Font name="HP Simplified" size="12.0" />
+                    </font>
+                </Button>
             </children>
         </HBox>
     </children>

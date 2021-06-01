@@ -28,7 +28,7 @@ import model.Player;
  *
  * @author Raquel
  */
-public class VistaJugarController implements Initializable {
+public class ModoJuegoController implements Initializable {
 
     @FXML
     private VBox contenedorRaiz;
@@ -69,10 +69,10 @@ public class VistaJugarController implements Initializable {
     @FXML
     private void jugarPVE(ActionEvent event) throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVE.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("JuegoPVE.fxml"));
         Pane root = (Pane) cargador.load();
         Player actualPlayer = connect4.getPlayer(user);
-        VistaJuegoPVEController ventanaJuegoPVE = cargador.<VistaJuegoPVEController>getController();
+        JuegoPVEController ventanaJuegoPVE = cargador.<JuegoPVEController>getController();
         ventanaJuegoPVE.initStage(ventanaInicio, actualPlayer, currentTheme);
         Scene scene = new Scene(root, 800, 500);
         ventanaInicio.setScene(scene);
@@ -84,10 +84,10 @@ public class VistaJugarController implements Initializable {
     @FXML
     private void jugarPVP(ActionEvent event) throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaInicioSesionSegundoJugador.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("LoginPlayer2.fxml"));
         HBox root = (HBox) cargador.load();
         Player actualPlayer = connect4.getPlayer(user);
-        VistaInicioSesionSegundoJugadorController ventanaIni = cargador.<VistaInicioSesionSegundoJugadorController>getController();
+        LoginPlayer2Controller ventanaIni = cargador.<LoginPlayer2Controller>getController();
         ventanaIni.initStage(ventanaInicio, actualPlayer, currentTheme);
         Scene scene = new Scene(root, 800, 500);
         ventanaInicio.setScene(scene);

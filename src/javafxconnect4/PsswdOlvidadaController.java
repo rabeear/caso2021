@@ -15,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,7 +36,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaPsswdOlvidadaController implements Initializable {
+public class PsswdOlvidadaController implements Initializable {
 
     @FXML
     private TextField campoCorreo;
@@ -56,7 +55,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
 
     private Stage ventanaActual;
     private SimpleObjectProperty<Theme> currentTheme;
-    private VistaPrincipalController principalController;
+    private LoginController principalController;
 
     /**
      * Initializes the controller class.
@@ -100,9 +99,9 @@ public class VistaPsswdOlvidadaController implements Initializable {
                 }
                 /*Cambio a ventana de password olvidada*/
                 Stage actual = new Stage();
-                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
+                FXMLLoader cargador = new FXMLLoader(getClass().getResource("CodRecuperacion.fxml"));
                 Parent root = cargador.load();
-                cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual, currentTheme, actual);
+                cargador.<CodRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual, currentTheme, actual);
                 Scene escena = new Scene(root, 410, 225);
                 actual.setScene(escena);
                 actual.setTitle("Código de recuperación");
@@ -133,7 +132,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
      * @param theme
      * @param controller
      */
-    public void initStage(Stage stage, String usuario, SimpleObjectProperty<Theme> theme, VistaPrincipalController controller) {
+    public void initStage(Stage stage, String usuario, SimpleObjectProperty<Theme> theme, LoginController controller) {
         ventanaActual = stage;
         campoUser.setText(usuario);
         principalController = controller;
@@ -179,8 +178,6 @@ public class VistaPsswdOlvidadaController implements Initializable {
 
     @FXML
     private void cerrar(ActionEvent event) {
-        // Cierra ventana actual
-        Node miNodo = (Node) event.getSource();
-        ((Stage) miNodo.getScene().getWindow()).close();
+        ventanaActual.close();
     }
 }

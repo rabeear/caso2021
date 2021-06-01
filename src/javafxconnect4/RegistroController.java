@@ -41,7 +41,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaAñadirUsuarioController implements Initializable {
+public class RegistroController implements Initializable {
 
     @FXML
     private TextField user;
@@ -131,9 +131,9 @@ public class VistaAñadirUsuarioController implements Initializable {
     @FXML
     private void clickAvatar(ActionEvent event) throws IOException {
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCambiar.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("NuevoAvatar.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaCambiarController>getController().initStageAñadir(actual, currentTheme, this);
+        cargador.<NuevoAvatarController>getController().initStageAñadir(actual, currentTheme, this);
         Scene escena = new Scene(root, 800, 400);
         actual.setScene(escena);
         actual.setResizable(false);
@@ -232,17 +232,13 @@ public class VistaAñadirUsuarioController implements Initializable {
         }
         // Si no ha habido ningún error en los datos introducidos, entonces registramos al jugador.
         if (registrar) {
-            // Falta añadir foto elegida o por defecto.
             connect4.registerPlayer(user.getText(), email.getText(), psswd.getText(), auxiliarFoto, date.getValue(), 0);
-            // Cerramos la ventana y volvemos a enseñar la anteior.
-            Node miNodo = (Node) event.getSource();
-            miNodo.getScene().getWindow().hide();
+            stageActual.close();
         }
     }
 
     @FXML
     private void cancelar(ActionEvent event) {
-        // Cerramos la ventana y volvemos a enseñar la anteior.
         stageActual.close();
     }
 }

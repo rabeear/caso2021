@@ -37,7 +37,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaPrincipalController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField user;
@@ -118,10 +118,10 @@ public class VistaPrincipalController implements Initializable {
                 if (!incorrecto.getText().equals("")) {
                     incorrecto.setText("");
                 }
-                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
+                FXMLLoader cargador = new FXMLLoader(getClass().getResource("Principal.fxml"));
                 Parent root = cargador.load();
-                VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
-                ventana2.initStage(stagePrincipal, user.getText(), currentTheme, ventana2);
+                PrincipalController ventana2 = cargador.<PrincipalController>getController();
+                ventana2.initStage(stagePrincipal, user.getText(), currentTheme);
                 ventana2.nombreUsuario.setText(user.getText());
                 Scene scene = new Scene(root, 800, 500);
                 stagePrincipal.setScene(scene);
@@ -143,9 +143,9 @@ public class VistaPrincipalController implements Initializable {
     private void passwdOlvidada(ActionEvent event) throws IOException {
         // Cambio a ventana de password olvidada.
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("PsswdOlvidada.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual, user.getText(), currentTheme, this);
+        cargador.<PsswdOlvidadaController>getController().initStage(actual, user.getText(), currentTheme, this);
         Scene escena = new Scene(root, 650, 375);
         actual.setScene(escena);
         actual.setTitle("Recuperación de contraseña");
@@ -157,9 +157,9 @@ public class VistaPrincipalController implements Initializable {
     @FXML
     private void irCrearCuenta(ActionEvent event) throws IOException {
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaAñadirUsuario.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("Registro.fxml"));
         Parent root = cargador.load();
-        VistaAñadirUsuarioController controller = cargador.<VistaAñadirUsuarioController>getController();
+        RegistroController controller = cargador.<RegistroController>getController();
         controller.initStage(actual, currentTheme);
         Scene escena = new Scene(root, 520, 540);
         actual.setScene(escena);

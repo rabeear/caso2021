@@ -43,7 +43,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaJuegoPVPController implements Initializable {
+public class JuegoPVPController implements Initializable {
 
     @FXML
     private Label labelJugador;
@@ -85,7 +85,7 @@ public class VistaJuegoPVPController implements Initializable {
         try {
             connect4 = Connect4.getSingletonConnect4();
         } catch (Connect4DAOException ex) {
-            Logger.getLogger(VistaJuegoPVEController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JuegoPVEController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // Cuando se pulse el botón, se cambia el modo de visualización.
@@ -158,20 +158,20 @@ public class VistaJuegoPVPController implements Initializable {
     @FXML
     private void clickSalir(ActionEvent event) throws IOException {
         turno = true;
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCerrarSesion.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("CerrarSesion.fxml"));
         Parent root = cargador.load();
 
-        VistaCerrarSesionController ventana = cargador.<VistaCerrarSesionController>getController();
+        CerrarSesionController ventana = cargador.<CerrarSesionController>getController();
         ventana.initStage(stageActual, j1, j2, currentTheme);
         Scene scene = new Scene(root, 420, 190);
         stageActual.setScene(scene);
         stageActual.setResizable(false);
         stageActual.show();
         /*try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaSegundaPrincipal.fxml"));
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("Principal.fxml"));
             Parent root = cargador.load();
 
-            VistaSegundaPrincipalController ventana2 = cargador.<VistaSegundaPrincipalController>getController();
+            PrincipalController ventana2 = cargador.<rincipalController>getController();
             ventana2.initStage(stageActual, j1.getNickName(), currentTheme);
             ventana2.nombreUsuario.setText(j1.getNickName());
             Scene scene = new Scene(root, 800, 500);
@@ -352,7 +352,11 @@ public class VistaJuegoPVPController implements Initializable {
             añadirCirculos();
             labelJugador.setText(j1.getNickName());
         } else {
-            stageActual.setScene(escenaActual);
+            try {
+                clickSalir(null);
+            } catch (IOException ex) {
+                Logger.getLogger(JuegoPVPController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             sumaPuntos(j);
         }
         turno = true;
@@ -383,7 +387,11 @@ public class VistaJuegoPVPController implements Initializable {
             añadirCirculos();
             labelJugador.setText(j1.getNickName());
         } else {
-            stageActual.setScene(escenaActual);
+            try {
+                clickSalir(null);
+            } catch (IOException ex) {
+                Logger.getLogger(JuegoPVPController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         turno = true;
     }

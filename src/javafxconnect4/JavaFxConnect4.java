@@ -23,11 +23,11 @@ public class JavaFxConnect4 extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = cargador.load();
         Scene scene = new Scene(root);
 
-        VistaPrincipalController controladorPrincipal = cargador.<VistaPrincipalController>getController();
+        LoginController controladorPrincipal = cargador.<LoginController>getController();
         controladorPrincipal.initStage(stage, null);
         stage.setScene(scene);
         stage.setMinHeight(480);

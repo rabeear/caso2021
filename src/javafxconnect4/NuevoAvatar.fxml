@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" spacing="25.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.NuevoAvatarController">
+    <children>
+        <Label styleClass="text-id" text="FOTO DE PERFIL">
+            <font>
+                <Font name="HP Simplified" size="35.0" />
+            </font>
+        </Label>
+        <HBox alignment="CENTER" prefHeight="230.0" prefWidth="600.0" spacing="8.0">
+            <children>
+                <Button id="img1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickImg1" prefHeight="230.0" prefWidth="150.0" stylesheets="@ligthTheme.css" />
+                <Button id="img2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickImg2" prefHeight="230.0" prefWidth="150.0" />
+                <Button id="img3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickImg3" prefHeight="230.0" prefWidth="150.0" />
+                <Button id="img4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickImg4" prefHeight="230.0" prefWidth="150.0" />
+                <Button id="img5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clickImg5" prefHeight="230.0" prefWidth="150.0" />
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" onAction="#clickCancelar" prefHeight="27.0" prefWidth="71.0" text="Cancelar">
+            <font>
+                <Font name="HP Simplified Light" size="13.0" />
+            </font>
+        </Button>
+    </children>
+</VBox>

@@ -40,7 +40,7 @@ import model.Player;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaJuegoPVEController implements Initializable {
+public class JuegoPVEController implements Initializable {
 
     @FXML
     private GridPane tableroGrid;
@@ -80,7 +80,7 @@ public class VistaJuegoPVEController implements Initializable {
         try {
             connect4 = Connect4.getSingletonConnect4();
         } catch (Connect4DAOException ex) {
-            Logger.getLogger(VistaJuegoPVEController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JuegoPVEController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // Cuando se pulse el botón, se cambia el modo de visualización.

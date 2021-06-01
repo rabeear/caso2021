@@ -30,7 +30,7 @@ import model.Connect4;
  *
  * @author Rafa BA, Raquel RR
  */
-public class VistaSegundaPrincipalController implements Initializable {
+public class PrincipalController implements Initializable {
 
     @FXML
     public Label nombreUsuario;
@@ -46,7 +46,6 @@ public class VistaSegundaPrincipalController implements Initializable {
     private Stage actualStage;
     private String user;
     private SimpleObjectProperty<Theme> currentTheme;
-    private VistaSegundaPrincipalController thisController;
 
     /**
      * Initializes the controller class.
@@ -74,12 +73,11 @@ public class VistaSegundaPrincipalController implements Initializable {
      * @param theme
      * @throws Connect4DAOException
      */
-    public void initStage(Stage stage, String usr, SimpleObjectProperty<Theme> theme, VistaSegundaPrincipalController controller) throws Connect4DAOException {
+    public void initStage(Stage stage, String usr, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
         actualStage = stage;
         user = usr;
         Connect4 connect4 = Connect4.getSingletonConnect4();
         foto.imageProperty().setValue(connect4.getPlayer(user).getAvatar());
-        thisController = controller;
         currentTheme = theme;
         setTheme();
     }
@@ -122,9 +120,9 @@ public class VistaSegundaPrincipalController implements Initializable {
 
     @FXML
     private void clickCerrarSesion(ActionEvent event) throws IOException {
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPrincipal.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent root = cargador.load();
-        VistaPrincipalController ventanaIni = cargador.<VistaPrincipalController>getController();
+        LoginController ventanaIni = cargador.<LoginController>getController();
         ventanaIni.initStage(actualStage, currentTheme);
         Scene scene = new Scene(root, 800, 500);
         actualStage.setScene(scene);
@@ -134,9 +132,9 @@ public class VistaSegundaPrincipalController implements Initializable {
     @FXML
     private void jugar(ActionEvent event) throws IOException {
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJugar.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("ModoJuego.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaJugarController>getController().initStage(actualStage, user, currentTheme);
+        cargador.<ModoJuegoController>getController().initStage(actualStage, user, currentTheme);
         Scene escena = new Scene(root, 420, 190);
         actual.setScene(escena);
         actual.setTitle("Oponente");
@@ -148,9 +146,9 @@ public class VistaSegundaPrincipalController implements Initializable {
     @FXML
     private void editarPerfil(ActionEvent event) throws IOException, Connect4DAOException {
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaEditarPerfil.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("EditarPerfil.fxml"));
         Parent root = cargador.load();
-        VistaEditarPerfilController controller = cargador.<VistaEditarPerfilController>getController();
+        EditarPerfilController controller = cargador.<EditarPerfilController>getController();
         controller.initStage(actual, user, currentTheme, this);
         Scene escena = new Scene(root, 600, 454);
         actual.setScene(escena);
@@ -167,9 +165,9 @@ public class VistaSegundaPrincipalController implements Initializable {
     @FXML
     private void verRanking(ActionEvent event) throws IOException {
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaRanking.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("Ranking.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaRankingController>getController().setTheme(currentTheme);
+        cargador.<RankingController>getController().setTheme(currentTheme);
         Scene escena = new Scene(root, 345, 400);
         actual.setResizable(false);
         actual.setScene(escena);
@@ -181,9 +179,9 @@ public class VistaSegundaPrincipalController implements Initializable {
     @FXML
     private void verHistorial(ActionEvent event) throws IOException {
         Stage actual = new Stage();
-        FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaHistorial.fxml"));
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("Historial.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaHistorialController>getController().initStage(user, currentTheme);
+        cargador.<HistorialController>getController().initStage(user, currentTheme);
         Scene escena = new Scene(root);
         actual.setMinWidth(632);
         actual.setMinHeight(520);
