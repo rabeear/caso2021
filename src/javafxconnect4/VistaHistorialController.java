@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -30,10 +31,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -42,6 +41,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -255,7 +256,11 @@ public class VistaHistorialController implements Initializable {
                 }
             }
         }
-        return datos.subList(indiceIni, indiceFin + 1);
+
+        // Cambiamos el orden de la lista para que aparezcan las partidas más recientes antes.
+        List<Round> lista = datos.subList(indiceIni, indiceFin + 1);
+        Collections.reverse(lista);
+        return lista;
     }
 
     @FXML
@@ -264,8 +269,9 @@ public class VistaHistorialController implements Initializable {
         // Ya tenemos creado el TreeMap con los datos
         dataList.clear();
         jugador.setDisable(true);
-        // Añadir diferenciacion entre coger inicio/fin o el primero y el ultimo, yo me entiendo xd
-        roundsPerDay.subMap(inicio.getValue(), fin.getValue().plusDays(1)).forEach(
+        // Invertimos el mapa para que aparezcan las partidas más recientes primero
+        // y acotamos el mapa a las fechas indicadas.
+        roundsPerDay.descendingMap().subMap(fin.getValue(), inicio.getValue().plusDays(1)).forEach(
                 (LocalDate date, List<Round> rounds) -> {
                     dataList.addAll(rounds);
                 });
@@ -419,7 +425,7 @@ public class VistaHistorialController implements Initializable {
 
     @FXML
     private void buscar(ActionEvent event) {
-        if (!connect4.exitsNickName(jugador.getText())) {
+        if (!connect4.exitsNickName(jugador.getText()) && !jugador.isDisabled()) {
             errorBusqueda.setText("El usuario no existe");
             errorEscrito = true;
         } else if (partidasButton.isSelected()) {
@@ -434,6 +440,13 @@ public class VistaHistorialController implements Initializable {
             graficaPartidas(null);
         } else if (numJugadorButton.isSelected()) {
             graficaJugador(null);
+        }
+    }
+
+    @FXML
+    private void buscarEnter(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER)) {
+            buscar(null);
         }
     }
 

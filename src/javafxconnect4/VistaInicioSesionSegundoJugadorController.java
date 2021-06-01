@@ -145,18 +145,7 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
     }
 
     @FXML
-    private void clickInicioJ2(ActionEvent event) throws Connect4DAOException {
-        inicioJ2();
-    }
-
-    @FXML
-    private void enterInicioJ2(KeyEvent event) throws Connect4DAOException {
-        if (event.getCode().equals(KeyCode.ENTER) && !iniciarButton.isDisabled()) {
-            inicioJ2();
-        }
-    }
-
-    private void inicioJ2() throws Connect4DAOException {
+    private void clickInicioJ2(ActionEvent event) throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         // Comprobamos si el nombrede usuario introducido existe.
         if (!connect4.exitsNickName(userCuadro.getText()) || userCuadro.getText().equals(player1.getNickName())) {
@@ -173,17 +162,21 @@ public class VistaInicioSesionSegundoJugadorController implements Initializable 
                 }
                 player2 = login;
                 // Cargamos la ventana del juego.
-                try {
-                    FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
-                    Parent root = cargador.load();
-                    VistaJuegoPVPController ventanaIni = cargador.<VistaJuegoPVPController>getController();
-                    ventanaIni.initStage(actualStage, player1, player2, currentTheme);
-                    Scene scene = new Scene(root, 800, 500);
-                    actualStage.setScene(scene);
-                    actualStage.show();
-                } catch (IOException e) {
-                }
+                FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaJuegoPVP.fxml"));
+                Parent root = cargador.load();
+                VistaJuegoPVPController ventanaIni = cargador.<VistaJuegoPVPController>getController();
+                ventanaIni.initStage(actualStage, player1, player2, currentTheme);
+                Scene scene = new Scene(root, 800, 500);
+                actualStage.setScene(scene);
+                actualStage.show();
             }
+        }
+    }
+
+    @FXML
+    private void enterInicioJ2(KeyEvent event) throws Connect4DAOException, IOException {
+        if (event.getCode().equals(KeyCode.ENTER) && !iniciarButton.isDisabled()) {
+            clickInicioJ2(null);
         }
     }
 

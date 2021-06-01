@@ -11,6 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,21 +93,18 @@ public class VistaAñadirUsuarioController implements Initializable {
         ayudaPane.visibleProperty().bind(ayuda.hoverProperty());
 
         // revisar esto porque algo esta fallando pero no se el que
-        regButton.disableProperty().bind(Bindings.or(
-                Bindings.createBooleanBinding(() -> {
-                    return user.getText().split(" ").length == 0
-                            && psswd.getText().split(" ").length == 0
-                            && psswd2.getText().split(" ").length == 0
-                            && email.getText().split(" ").length == 0
-                            && date.getValue().toString().split(" ").length == 0;
-                }, user.textProperty(), psswd.textProperty(), psswd2.textProperty(), email.textProperty()),
-                Bindings.createBooleanBinding(() -> {
-                    return user.getText().isEmpty()
-                            || psswd.getText().isEmpty()
-                            || psswd2.getText().isEmpty()
-                            || email.getText().isEmpty()
-                            || date.getValue().toString().isEmpty();
-                }, user.textProperty(), psswd.textProperty(), psswd2.textProperty(), email.textProperty())));
+        BooleanBinding vacios = user.textProperty().isEmpty().or(
+                psswd.textProperty().isEmpty()).or(psswd2.textProperty().isEmpty()).or(
+                email.textProperty().isEmpty());
+
+        BooleanBinding espacios = Bindings.createBooleanBinding(() -> {
+            return user.getText().split(" ").length == 0
+                    && psswd.getText().split(" ").length == 0
+                    && psswd2.getText().split(" ").length == 0
+                    && email.getText().split(" ").length == 0;
+        }, user.textProperty(), psswd.textProperty(), psswd2.textProperty(), email.textProperty());
+
+        regButton.disableProperty().bind(Bindings.or(espacios, vacios));
 
         // Nos aseguramos de que la fecha de nacimiento no pueda ser mayor a la fecha actual.
         date.setDayCellFactory((DatePicker picker) -> {

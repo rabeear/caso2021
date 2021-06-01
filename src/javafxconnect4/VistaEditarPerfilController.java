@@ -175,7 +175,6 @@ public class VistaEditarPerfilController implements Initializable {
         cuadroMail.setPromptText(player.getEmail());
         date.setValue(player.getBirthdate());
 
-        // no consigo que se pueda confirmar solo cambiando la foto
         BooleanBinding noChanges = cuadroPswd.textProperty().isEmpty().and(
                 cuadroMail.textProperty().isEmpty()).and(
                 Bindings.createBooleanBinding(() -> date.getValue().equals(player.getBirthdate()),
@@ -192,7 +191,7 @@ public class VistaEditarPerfilController implements Initializable {
     }
 
     private void setTheme() {
-        // Cuando se cabie el modo de vsualización en otra ventana, se cambará en esta también.
+        // Cuando se cambie el modo de vsualización en otra ventana, se cambará en esta también.
         currentTheme.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(Theme.DARK_THEME)) {
                 setDark();

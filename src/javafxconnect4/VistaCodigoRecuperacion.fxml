@@ -37,9 +37,9 @@
                   <Font name="HP Simplified Light" size="13.0" />
                </font>
                 </Label>
-                <TextField fx:id="codigo" promptText="Código">
+                <TextField fx:id="codigo" onKeyPressed="#mostrarContraseñaEnter" promptText="Código">
                <font>
-                  <Font name="HP Simplified Italic" size="12.0" />
+                  <Font name="HP Simplified Light" size="12.0" />
                </font></TextField>
             </children>
         </HBox>

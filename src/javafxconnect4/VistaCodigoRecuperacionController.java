@@ -20,6 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Connect4;
@@ -44,6 +46,7 @@ public class VistaCodigoRecuperacionController implements Initializable {
     private VBox contenedorRaiz;
 
     private Stage ventanaAnt;
+    private Stage ventanaActual;
     private String user;
     private SimpleObjectProperty<Theme> currentTheme;
 
@@ -102,13 +105,19 @@ public class VistaCodigoRecuperacionController implements Initializable {
             }
 
             // Cerramos ventana actual.
-            Node miNodo = (Node) event.getSource();
-            ((Stage) miNodo.getScene().getWindow()).close();
+            ventanaActual.close();
 
             // Mostramos diálogo.
             alert.showAndWait();
 
             ventanaAnt.close();
+        }
+    }
+
+    @FXML
+    private void mostrarContraseñaEnter(KeyEvent event) throws Connect4DAOException {
+        if (event.getCode().equals(KeyCode.ENTER) && !enviarButton.isDisabled()) {
+            mostrarContraseña(null);
         }
     }
 
@@ -127,9 +136,10 @@ public class VistaCodigoRecuperacionController implements Initializable {
      * @param ant
      * @param theme
      */
-    public void initStage(String usuario, Stage ant, SimpleObjectProperty<Theme> theme) {
+    public void initStage(String usuario, Stage ant, SimpleObjectProperty<Theme> theme, Stage actual) {
         user = usuario;
         ventanaAnt = ant;
+        ventanaActual = actual;
         currentTheme = theme;
         switch (currentTheme.get()) {
             case DARK_THEME:

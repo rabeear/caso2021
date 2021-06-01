@@ -100,23 +100,10 @@ public class VistaPrincipalController implements Initializable {
                 passwd.setVisible(true);
             }
         });
-
     }
 
     @FXML
     private void autentificacionClick(ActionEvent event) throws Connect4DAOException, IOException {
-        autentificacion();
-    }
-
-    @FXML
-    private void autentificacionEnter(KeyEvent event) throws Connect4DAOException, IOException {
-        // Para poder iniciar sesión pulsando enter.
-        if (event.getCode().equals(KeyCode.ENTER) && !loginButton.isDisabled()) {
-            autentificacion();
-        }
-    }
-
-    private void autentificacion() throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
 
         // Comprobamos que exista el nombre de usuario introducido.
@@ -145,12 +132,20 @@ public class VistaPrincipalController implements Initializable {
     }
 
     @FXML
+    private void autentificacionEnter(KeyEvent event) throws Connect4DAOException, IOException {
+        // Para poder iniciar sesión pulsando enter.
+        if (event.getCode().equals(KeyCode.ENTER) && !loginButton.isDisabled()) {
+            autentificacionClick(null);
+        }
+    }
+
+    @FXML
     private void passwdOlvidada(ActionEvent event) throws IOException {
         // Cambio a ventana de password olvidada.
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaPsswdOlvidada.fxml"));
         Parent root = cargador.load();
-        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual, user.getText(), currentTheme);
+        cargador.<VistaPsswdOlvidadaController>getController().initStage(actual, user.getText(), currentTheme, this);
         Scene escena = new Scene(root, 650, 375);
         actual.setScene(escena);
         actual.setTitle("Recuperación de contraseña");
@@ -221,5 +216,9 @@ public class VistaPrincipalController implements Initializable {
         } else {
             passwd.setText(psswdVisible.getText());
         }
+    }
+
+    public void setNickname(String nickName) {
+        user.setText(nickName);
     }
 }

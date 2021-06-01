@@ -24,6 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,6 +56,7 @@ public class VistaPsswdOlvidadaController implements Initializable {
 
     private Stage ventanaActual;
     private SimpleObjectProperty<Theme> currentTheme;
+    private VistaPrincipalController principalController;
 
     /**
      * Initializes the controller class.
@@ -99,17 +102,26 @@ public class VistaPsswdOlvidadaController implements Initializable {
                 Stage actual = new Stage();
                 FXMLLoader cargador = new FXMLLoader(getClass().getResource("VistaCodigoRecuperacion.fxml"));
                 Parent root = cargador.load();
-                cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual, currentTheme);
+                cargador.<VistaCodigoRecuperacionController>getController().initStage(campoUser.getText(), ventanaActual, currentTheme, actual);
                 Scene escena = new Scene(root, 410, 225);
                 actual.setScene(escena);
                 actual.setTitle("Código de recuperación");
                 actual.setResizable(false);
                 actual.initModality(Modality.APPLICATION_MODAL);
                 actual.show();
+
+                principalController.setNickname(campoUser.getText());
+
                 /*Cierra ventana actual*/
-                Node miNodo = (Node) event.getSource();
-                miNodo.getScene().getWindow().hide();
+                ventanaActual.hide();
             }
+        }
+    }
+
+    @FXML
+    private void enviarCorreoEnter(KeyEvent event) throws Connect4DAOException, IOException {
+        if (event.getCode().equals(KeyCode.ENTER) && !btnEnviar.isDisabled()) {
+            enviarCorreo(null);
         }
     }
 
@@ -119,10 +131,12 @@ public class VistaPsswdOlvidadaController implements Initializable {
      * @param stage
      * @param usuario
      * @param theme
+     * @param controller
      */
-    public void initStage(Stage stage, String usuario, SimpleObjectProperty<Theme> theme) {
+    public void initStage(Stage stage, String usuario, SimpleObjectProperty<Theme> theme, VistaPrincipalController controller) {
         ventanaActual = stage;
         campoUser.setText(usuario);
+        principalController = controller;
         currentTheme = theme;
         setTheme();
     }
