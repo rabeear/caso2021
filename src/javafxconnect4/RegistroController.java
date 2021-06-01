@@ -205,7 +205,7 @@ public class RegistroController implements Initializable {
     }
 
     @FXML
-    private void registrar(ActionEvent event) throws Connect4DAOException {
+    private void registrar(ActionEvent event) throws Connect4DAOException, IOException {
         Connect4 connect4 = Connect4.getSingletonConnect4();
         boolean registrar = true;
         if (connect4.exitsNickName(user.getText())) { // Comprobamos si el usuario ya existe.
@@ -233,6 +233,18 @@ public class RegistroController implements Initializable {
         // Si no ha habido ningún error en los datos introducidos, entonces registramos al jugador.
         if (registrar) {
             connect4.registerPlayer(user.getText(), email.getText(), psswd.getText(), auxiliarFoto, date.getValue(), 0);
+
+            Stage actual = new Stage();
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("CuentaCreada.fxml"));
+            Parent root = cargador.load();
+            cargador.<CuentaCreadaController>getController().setTheme(currentTheme);
+            Scene escena = new Scene(root, 300, 340);
+            actual.setScene(escena);
+            actual.setTitle("Cuenta Creada");
+            actual.setResizable(false);
+            actual.initModality(Modality.APPLICATION_MODAL);
+            actual.show();
+
             stageActual.close();
         }
     }
