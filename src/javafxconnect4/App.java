@@ -19,7 +19,7 @@ import model.Connect4;
  *
  * @author Rafa BA, Raquel RR
  */
-public class JavaFxConnect4 extends Application {
+public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,7 +47,7 @@ public class JavaFxConnect4 extends Application {
             connect4.createDemoData(5, 4, 10);
             connect4.createDemoData(10, 5, 15);
         } catch (Connect4DAOException ex) {
-            Logger.getLogger(JavaFxConnect4.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
         launch(args);
     }
