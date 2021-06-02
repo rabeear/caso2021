@@ -75,6 +75,7 @@ public class PrincipalController implements Initializable {
      */
     public void initStage(Stage stage, String usr, SimpleObjectProperty<Theme> theme) throws Connect4DAOException {
         actualStage = stage;
+        nombreUsuario.setText(usr);
         user = usr;
         Connect4 connect4 = Connect4.getSingletonConnect4();
         foto.imageProperty().setValue(connect4.getPlayer(user).getAvatar());

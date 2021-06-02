@@ -5,14 +5,23 @@
  */
 package javafxconnect4;
 
+import DBAccess.Connect4DAOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Connect4;
 import model.Player;
 
 /**
@@ -60,5 +69,28 @@ public class CerrarSesionController implements Initializable {
             default:
                 throw new AssertionError(currentTheme.get().name());
         }
+    }
+
+    @FXML
+    private void clickBoton(ActionEvent event) throws IOException, Connect4DAOException {
+        Node n = (Node) event.getSource();
+        String id = n.getId();
+        Connect4 connect4 = Connect4.getSingletonConnect4();
+        Stage actual = new Stage();
+        FXMLLoader cargador = new FXMLLoader(getClass().getResource("Principal.fxml"));
+        Parent root = cargador.load();
+        
+        if (id.equals("btn1")) {
+            cargador.<PrincipalController>getController().initStage(actual, btn1.getText(), currentTheme);
+        } else {
+            cargador.<PrincipalController>getController().initStage(actual, btn2.getText(), currentTheme);
+        }
+        
+        Scene escena = new Scene(root);
+        actual.setScene(escena);
+        actual.initModality(Modality.APPLICATION_MODAL);
+        actual.show();
+        stageActual.hide();
+        
     }
 }
