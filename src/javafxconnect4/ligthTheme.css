@@ -12,6 +12,8 @@ and open the template in the editor.
     -fx-clr-primary: #bfbfbf;
     -fx-clr-secondary: #d9d9d9;
     -fx-clr-tertiary: #999999;
+    -fx-clr-chart1: #ff0066;
+    -fx-clr-chart2: #7733ff;
     -fx-background-color: #f2f2f2;
 }
 
@@ -163,6 +165,18 @@ and open the template in the editor.
     -fx-font-family: 'HP Simplified Light';
     -fx-text-fill: black;
 }
+
+.chart-line-symbol {
+    -fx-background-color: -fx-clr-chart1, white;
+    -fx-stroke-width: 2px;
+    -fx-padding: 4.5px;
+}
+
+.default-color0.chart-series-line { -fx-stroke: -fx-clr-chart1; }
+
+.default-color0.chart-bar { -fx-bar-fill: -fx-clr-chart1; }
+
+.default-color1.chart-bar { -fx-bar-fill: -fx-clr-chart2; }
 
 .chart-legend .label {
     -fx-text-fill: black;
