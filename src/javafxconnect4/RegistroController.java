@@ -95,14 +95,14 @@ public class RegistroController implements Initializable {
         // revisar esto porque algo esta fallando pero no se el que
         BooleanBinding vacios = user.textProperty().isEmpty().or(
                 psswd.textProperty().isEmpty()).or(psswd2.textProperty().isEmpty()).or(
-                email.textProperty().isEmpty());
+                email.textProperty().isEmpty()).or(date.valueProperty().isNull());
 
-        BooleanBinding espacios = Bindings.createBooleanBinding(() -> {
-            return user.getText().split(" ").length == 0
-                    && psswd.getText().split(" ").length == 0
-                    && psswd2.getText().split(" ").length == 0
-                    && email.getText().split(" ").length == 0;
-        }, user.textProperty(), psswd.textProperty(), psswd2.textProperty(), email.textProperty());
+        BooleanBinding espacios = Bindings.createBooleanBinding(()
+                -> user.getText().split(" ").length == 0
+                || psswd.getText().split(" ").length == 0
+                || psswd2.getText().split(" ").length == 0
+                || email.getText().split(" ").length == 0,
+                user.textProperty(), psswd.textProperty(), psswd2.textProperty(), email.textProperty());
 
         regButton.disableProperty().bind(Bindings.or(espacios, vacios));
 

@@ -230,7 +230,7 @@ public class HistorialController implements Initializable {
         }
     }
 
-    private List<Round> acotarPartidas(ArrayList<Round> datos) {
+    private List<Round> acotarPartidas(List<Round> datos) {
         // Cojemos solo los datos en el intervalo de tiempo requerido.
         int indiceIni = 0;
         int indiceFin = datos.size() - 1;

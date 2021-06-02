@@ -66,10 +66,10 @@ public class LoginController implements Initializable {
         currentTheme = new SimpleObjectProperty<>(Theme.LIGTH_THEME);
         // Si el campo del nickname o la contraseña están vacíos, deshabilitar el botón.
         loginButton.disableProperty().bind(Bindings.or(
-                Bindings.createBooleanBinding(() -> {
-                    return user.getText().split(" ").length == 0
-                            && passwd.getText().split(" ").length == 0;
-                }, user.textProperty(), passwd.textProperty()),
+                Bindings.createBooleanBinding(()
+                        -> user.getText().split(" ").length == 0
+                || passwd.getText().split(" ").length == 0,
+                        user.textProperty(), passwd.textProperty()),
                 Bindings.or(Bindings.isEmpty(user.textProperty()),
                         Bindings.isEmpty(passwd.textProperty()))));
 

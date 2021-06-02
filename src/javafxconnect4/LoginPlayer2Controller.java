@@ -73,10 +73,10 @@ public class LoginPlayer2Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         iniciarButton.disableProperty().bind(Bindings.or(
-                Bindings.createBooleanBinding(() -> {
-                    return userCuadro.getText().split(" ").length == 0
-                            && psswdCuadro.getText().split(" ").length == 0;
-                }, userCuadro.textProperty(), psswdCuadro.textProperty()),
+                Bindings.createBooleanBinding(()
+                        -> userCuadro.getText().split(" ").length == 0
+                || psswdCuadro.getText().split(" ").length == 0,
+                         userCuadro.textProperty(), psswdCuadro.textProperty()),
                 Bindings.or(Bindings.isEmpty(userCuadro.textProperty()),
                         Bindings.isEmpty(psswdCuadro.textProperty()))));
 
