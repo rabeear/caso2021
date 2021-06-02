@@ -21,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Connect4;
 import model.Player;
 
 /**
@@ -73,24 +72,22 @@ public class CerrarSesionController implements Initializable {
 
     @FXML
     private void clickBoton(ActionEvent event) throws IOException, Connect4DAOException {
-        Node n = (Node) event.getSource();
-        String id = n.getId();
-        Connect4 connect4 = Connect4.getSingletonConnect4();
+        Node button = (Node) event.getSource();
+        String id = button.getId();
         Stage actual = new Stage();
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("Principal.fxml"));
         Parent root = cargador.load();
-        
+
         if (id.equals("btn2")) {
             cargador.<PrincipalController>getController().initStage(actual, btn1.getText(), currentTheme);
         } else {
             cargador.<PrincipalController>getController().initStage(actual, btn2.getText(), currentTheme);
         }
-        
+
         Scene escena = new Scene(root);
         actual.setScene(escena);
         actual.initModality(Modality.APPLICATION_MODAL);
         actual.show();
-        stageActual.hide();
-        
+        stageActual.close();
     }
 }

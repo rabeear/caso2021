@@ -168,7 +168,6 @@ public class JuegoPVEController implements Initializable {
             for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
                 Circle circulo = new Circle();
                 circulo.getStyleClass().add("circle");
-                //circulo.setFill(javafx.scene.paint.Color.WHITE);
                 circulo.setRadius(RADIUS - 1);
                 circulo.setVisible(true);
                 tableroGrid.add(circulo, c, r);

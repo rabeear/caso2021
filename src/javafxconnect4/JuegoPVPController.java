@@ -64,11 +64,10 @@ public class JuegoPVPController implements Initializable {
 
     private MatrizDeTablero tableroIniciado;
     private Stage stageActual;
-    private Scene escenaActual;
     private Player j1, j2;
     private Connect4 connect4;
     private SimpleObjectProperty<Theme> currentTheme;
-    private static boolean turno = true; //Controlar el turno, true -> j1, false -> j2
+    private static boolean turnoJ1 = true; //Controlar el turno, true -> j1, false -> j2
     private final double TRANSLATE_Y = 68.5;
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
@@ -108,7 +107,6 @@ public class JuegoPVPController implements Initializable {
      */
     public void initStage(Stage actualStage, Player player1, Player player2, SimpleObjectProperty<Theme> theme) {
         stageActual = actualStage;
-        escenaActual = actualStage.getScene();
         j1 = player1;
         j2 = player2;
         labelPuntuacion.setText("" + j1.getPoints());
@@ -157,28 +155,17 @@ public class JuegoPVPController implements Initializable {
 
     @FXML
     private void clickSalir(ActionEvent event) throws IOException {
-        turno = true;
+        turnoJ1 = true;
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("CerrarSesion.fxml"));
         Parent root = cargador.load();
-
+        Stage actual = new Stage();
         CerrarSesionController ventana = cargador.<CerrarSesionController>getController();
-        ventana.initStage(stageActual, j1, j2, currentTheme);
+        ventana.initStage(actual, j1, j2, currentTheme);
         Scene scene = new Scene(root, 420, 190);
-        stageActual.setScene(scene);
-        stageActual.setResizable(false);
-        stageActual.show();
-        /*try {
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("Principal.fxml"));
-            Parent root = cargador.load();
-
-            PrincipalController ventana2 = cargador.<rincipalController>getController();
-            ventana2.initStage(stageActual, j1.getNickName(), currentTheme);
-            ventana2.nombreUsuario.setText(j1.getNickName());
-            Scene scene = new Scene(root, 800, 500);
-            stageActual.setScene(scene);
-            stageActual.show();
-        } catch (Connect4DAOException | IOException e) {
-        }*/
+        actual.setScene(scene);
+        actual.setResizable(false);
+        actual.show();
+        stageActual.close();
     }
 
     @FXML
@@ -187,7 +174,7 @@ public class JuegoPVPController implements Initializable {
         tableroIniciado.clear();
         tableroGrid.getChildren().clear();
         añadirCirculos();
-        turno = true;
+        turnoJ1 = true;
         labelJugador.setText(j1.getNickName());
         circleFichaLeyenda.setFill(javafx.scene.paint.Color.RED);
     }
@@ -197,7 +184,6 @@ public class JuegoPVPController implements Initializable {
         for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
             for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
                 Circle circulo = new Circle();
-                circulo.setFill(javafx.scene.paint.Color.WHITE);
                 circulo.setRadius(RADIUS - 1);
                 circulo.setVisible(true);
                 tableroGrid.add(circulo, c, r);
@@ -206,8 +192,8 @@ public class JuegoPVPController implements Initializable {
     }
 
     private boolean switcherTurno() {
-        turno = !turno;
-        return turno;
+        turnoJ1 = !turnoJ1;
+        return turnoJ1;
     }
 
     @FXML
@@ -218,9 +204,9 @@ public class JuegoPVPController implements Initializable {
         int posicionY = tableroIniciado.ultimaFicha(posicionX);
 
         // Añadimos la ficha a la matriz tablero.
-        tableroIniciado.setNumero(posicionX, posicionY, turno);
+        tableroIniciado.setNumero(posicionX, posicionY, turnoJ1);
 
-        if (turno) { // Jugador 1.
+        if (turnoJ1) { // Jugador 1.
             labelJugador.setText(j2.getNickName());
             circleFichaLeyenda.setFill(javafx.scene.paint.Color.YELLOW);
         } else { // Jugador 2.
@@ -246,7 +232,7 @@ public class JuegoPVPController implements Initializable {
             LocalDateTime time = LocalDateTime.now();
             int n;
 
-            if (turno) {
+            if (turnoJ1) {
                 n = Integer.parseInt(labelPuntuacion.getText()) + connect4.getPointsRound();
                 labelPuntuacion.setText("" + n);
             } else {
@@ -254,7 +240,7 @@ public class JuegoPVPController implements Initializable {
                 labelPuntuacion2.setText("" + n);
             }
             connect4.regiterRound(time, j1, j2);
-            alertaVictoria(turno);
+            alertaVictoria(turnoJ1);
             return true;
         } else if (tableroIniciado.empate()) {
             alertaEmpate();
@@ -266,7 +252,7 @@ public class JuegoPVPController implements Initializable {
     private Circle fichaActual() {
         // Creamos la ficha dependiendo del turno.
         Circle ficha = new Circle();
-        if (turno) {
+        if (turnoJ1) {
             ficha.setFill(javafx.scene.paint.Color.RED);
         } else {
             ficha.setFill(javafx.scene.paint.Color.YELLOW);
@@ -359,7 +345,7 @@ public class JuegoPVPController implements Initializable {
             }
             sumaPuntos(j);
         }
-        turno = true;
+        turnoJ1 = true;
     }
 
     private void alertaEmpate() throws Connect4DAOException {
@@ -393,7 +379,7 @@ public class JuegoPVPController implements Initializable {
                 Logger.getLogger(JuegoPVPController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        turno = true;
+        turnoJ1 = true;
     }
 
     public void sumaPuntos(Player jugadorActual) throws Connect4DAOException {

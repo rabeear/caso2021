@@ -59,15 +59,15 @@ public class LoginPlayer2Controller implements Initializable {
     private ImageView imagenTema;
     @FXML
     private HBox contenedorRaiz;
+    @FXML
+    private TextField passwdVisible;
+    @FXML
+    private ToggleButton visibleButton;
 
     private Stage actualStage;
     private Scene escenaActual;
     private Player player1, player2;
     private SimpleObjectProperty<Theme> currentTheme;
-    @FXML
-    private TextField passwdVisible;
-    @FXML
-    private ToggleButton visibleButton;
 
     /**
      * Initializes the controller class.
@@ -81,7 +81,7 @@ public class LoginPlayer2Controller implements Initializable {
                 Bindings.createBooleanBinding(()
                         -> userCuadro.getText().split(" ").length == 0
                 || psswdCuadro.getText().split(" ").length == 0,
-                         userCuadro.textProperty(), psswdCuadro.textProperty()),
+                        userCuadro.textProperty(), psswdCuadro.textProperty()),
                 Bindings.or(Bindings.isEmpty(userCuadro.textProperty()),
                         Bindings.isEmpty(psswdCuadro.textProperty()))));
 
@@ -93,7 +93,7 @@ public class LoginPlayer2Controller implements Initializable {
                 currentTheme.set(Theme.LIGTH_THEME);
             }
         });
-        
+
         visibleButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 passwdVisible.setText(psswdCuadro.getText());
@@ -113,7 +113,7 @@ public class LoginPlayer2Controller implements Initializable {
      * @param theme
      */
     public void initStage(Stage stage, Player player, SimpleObjectProperty<Theme> theme) {
-        
+
         actualStage = stage;
         escenaActual = stage.getScene();
         player1 = player;
@@ -200,7 +200,7 @@ public class LoginPlayer2Controller implements Initializable {
     private void cancelarInicio(ActionEvent event) {
         actualStage.setScene(escenaActual);
     }
-    
+
     @FXML
     private void escribiendoPswd(KeyEvent event) {
         Node n = (Node) event.getSource();
