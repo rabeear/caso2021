@@ -38,6 +38,7 @@ public class CerrarSesionController implements Initializable {
     private VBox contenedorRaiz;
 
     private Stage stageActual;
+    private Stage stageJuego;
     private SimpleObjectProperty<Theme> currentTheme;
 
     /**
@@ -51,7 +52,7 @@ public class CerrarSesionController implements Initializable {
         // TODO
     }
 
-    public void initStage(Stage stage, Player j1, Player j2, SimpleObjectProperty<Theme> theme) {
+    public void initStage(Stage stage, Player j1, Player j2, SimpleObjectProperty<Theme> theme, Stage juego) {
         btn1.setText(j1.getNickName());
         btn2.setText(j2.getNickName());
         stageActual = stage;
@@ -68,6 +69,7 @@ public class CerrarSesionController implements Initializable {
             default:
                 throw new AssertionError(currentTheme.get().name());
         }
+        stageJuego = juego;
     }
 
     @FXML
@@ -88,6 +90,12 @@ public class CerrarSesionController implements Initializable {
         actual.setScene(escena);
         actual.initModality(Modality.APPLICATION_MODAL);
         actual.show();
+        stageActual.close();
+        stageJuego.close();
+    }
+
+    @FXML
+    private void cancelar(ActionEvent event) {
         stageActual.close();
     }
 }

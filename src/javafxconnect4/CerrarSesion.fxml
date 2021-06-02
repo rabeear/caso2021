@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="190.0" maxWidth="420.0" minHeight="168.0" minWidth="420.0" prefHeight="168.0" prefWidth="420.0" spacing="30.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.CerrarSesionController">
+<VBox fx:id="contenedorRaiz" alignment="CENTER" maxHeight="190.0" maxWidth="420.0" minHeight="168.0" minWidth="346.0" prefHeight="168.0" prefWidth="346.0" spacing="20.0" stylesheets="@ligthTheme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxconnect4.CerrarSesionController">
     <children>
         <Label styleClass="text-id" text="¿Quién quiere cerrar sesión?">
             <font>
@@ -26,6 +26,11 @@
                </font></Button>
             </children>
         </HBox>
+      <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar">
+         <font>
+            <Font name="HP Simplified" size="14.0" />
+         </font>
+      </Button>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

@@ -33,6 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Connect4;
@@ -67,7 +68,7 @@ public class JuegoPVPController implements Initializable {
     private Player j1, j2;
     private Connect4 connect4;
     private SimpleObjectProperty<Theme> currentTheme;
-    private static boolean turnoJ1 = true; //Controlar el turno, true -> j1, false -> j2
+    private boolean turnoJ1; //Controlar el turno, true -> j1, false -> j2
     private final double TRANSLATE_Y = 68.5;
     private final double TRANSLATE_X = 66;
     private final int COL = 8;
@@ -81,6 +82,7 @@ public class JuegoPVPController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        turnoJ1 = true; // Empieza J1
         try {
             connect4 = Connect4.getSingletonConnect4();
         } catch (Connect4DAOException ex) {
@@ -155,17 +157,16 @@ public class JuegoPVPController implements Initializable {
 
     @FXML
     private void clickSalir(ActionEvent event) throws IOException {
-        turnoJ1 = true;
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("CerrarSesion.fxml"));
         Parent root = cargador.load();
         Stage actual = new Stage();
         CerrarSesionController ventana = cargador.<CerrarSesionController>getController();
-        ventana.initStage(actual, j1, j2, currentTheme);
-        Scene scene = new Scene(root, 420, 190);
+        ventana.initStage(actual, j1, j2, currentTheme, stageActual);
+        Scene scene = new Scene(root, 346, 168);
+        actual.initModality(Modality.APPLICATION_MODAL);
         actual.setScene(scene);
         actual.setResizable(false);
         actual.show();
-        stageActual.close();
     }
 
     @FXML
@@ -184,6 +185,7 @@ public class JuegoPVPController implements Initializable {
         for (int r = 0; r < tableroGrid.getRowConstraints().size(); r++) {
             for (int c = 0; c < tableroGrid.getColumnConstraints().size(); c++) {
                 Circle circulo = new Circle();
+                circulo.getStyleClass().add("circle");
                 circulo.setRadius(RADIUS - 1);
                 circulo.setVisible(true);
                 tableroGrid.add(circulo, c, r);
