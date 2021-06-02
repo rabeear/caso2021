@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -63,6 +64,10 @@ public class LoginPlayer2Controller implements Initializable {
     private Scene escenaActual;
     private Player player1, player2;
     private SimpleObjectProperty<Theme> currentTheme;
+    @FXML
+    private TextField passwdVisible;
+    @FXML
+    private ToggleButton visibleButton;
 
     /**
      * Initializes the controller class.
@@ -88,6 +93,16 @@ public class LoginPlayer2Controller implements Initializable {
                 currentTheme.set(Theme.LIGTH_THEME);
             }
         });
+        
+        visibleButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                passwdVisible.setText(psswdCuadro.getText());
+                psswdCuadro.setVisible(false);
+            } else {
+                psswdCuadro.setText(passwdVisible.getText());
+                psswdCuadro.setVisible(true);
+            }
+        });
     }
 
     /**
@@ -98,6 +113,7 @@ public class LoginPlayer2Controller implements Initializable {
      * @param theme
      */
     public void initStage(Stage stage, Player player, SimpleObjectProperty<Theme> theme) {
+        
         actualStage = stage;
         escenaActual = stage.getScene();
         player1 = player;
@@ -183,5 +199,17 @@ public class LoginPlayer2Controller implements Initializable {
     @FXML
     private void cancelarInicio(ActionEvent event) {
         actualStage.setScene(escenaActual);
+    }
+    
+    @FXML
+    private void escribiendoPswd(KeyEvent event) {
+        Node n = (Node) event.getSource();
+        String field = n.getId();
+
+        if (field.equals("psswdCuadro")) {
+            passwdVisible.setText(psswdCuadro.getText());
+        } else {
+            psswdCuadro.setText(passwdVisible.getText());
+        }
     }
 }
