@@ -80,7 +80,7 @@ public class CerrarSesionController implements Initializable {
         FXMLLoader cargador = new FXMLLoader(getClass().getResource("Principal.fxml"));
         Parent root = cargador.load();
         
-        if (id.equals("btn1")) {
+        if (id.equals("btn2")) {
             cargador.<PrincipalController>getController().initStage(actual, btn1.getText(), currentTheme);
         } else {
             cargador.<PrincipalController>getController().initStage(actual, btn2.getText(), currentTheme);
